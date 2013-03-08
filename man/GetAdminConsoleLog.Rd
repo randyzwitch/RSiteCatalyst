@@ -39,4 +39,3 @@ admin_console <- GetAdminConsoleLog("2012-01-01", "2013-02-20",report_suites$rsi
     
 }
 \keyword{admin}
-\note{}

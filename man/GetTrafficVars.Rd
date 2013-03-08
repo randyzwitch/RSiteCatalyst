@@ -28,4 +28,3 @@
     
 }
 \keyword{prop}
-\note{}

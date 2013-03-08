@@ -56,4 +56,3 @@ http://microsite.omniture.com/t2/help/en_US/home/index.html#kb-determining-data-
     
 }
 \keyword{authentication}
-\note{}

@@ -77,4 +77,3 @@ QueueTrended("keystonerandy", "2013-02-13", "2013-02-19", "hour",
    
 }
 \keyword{QueueTrended}
-\note{}

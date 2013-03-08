@@ -28,4 +28,3 @@
     
 }
 \keyword{eVar}
-\note{}

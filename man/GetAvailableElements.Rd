@@ -32,4 +32,3 @@ Official Adobe Documentation about Elements list\cr
 https://developer.omniture.com/en_US/documentation/sitecatalyst-reporting/r-elements-1
 }
 \keyword{elements}
-\note{}

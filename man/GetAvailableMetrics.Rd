@@ -32,4 +32,3 @@ Official Adobe Documentation about Metrics list\cr
 https://developer.omniture.com/en_US/documentation/sitecatalyst-reporting/r-metrics-1
 }
 \keyword{metrics}
-\note{}

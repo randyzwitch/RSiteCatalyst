@@ -26,4 +26,3 @@
     
 }
 \keyword{suite}
-\note{}

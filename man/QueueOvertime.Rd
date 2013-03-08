@@ -63,4 +63,3 @@ QueueOvertime("keystonerandy", "2013-02-01", "2013-02-28", "pageviews")
    
 }
 \keyword{QueueOvertime}
-\note{}

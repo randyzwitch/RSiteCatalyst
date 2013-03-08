@@ -28,4 +28,3 @@
     
 }
 \keyword{segments}
-\note{}

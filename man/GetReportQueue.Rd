@@ -30,4 +30,3 @@
     
 }
 \keyword{report queue}
-\note{}

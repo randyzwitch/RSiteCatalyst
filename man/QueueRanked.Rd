@@ -74,4 +74,3 @@ selected = c("http://randyzwitch.com", "http://randyzwitch.com/about"))
    
 }
 \keyword{QueueRanked}
-\note{}
