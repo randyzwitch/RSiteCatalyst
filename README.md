@@ -27,7 +27,8 @@ And then run the `install_github` command:
 
 	install_github("RSiteCatalyst", "randyzwitch")
 	library(RSiteCatalyst)
-  
+
+When loading the package using the `devtools` method, none of the package dependencies are loaded automatically like they would be if this package were loaded from [CRAN](http://cran.r-project.org/). Thus, depending on your current R environment, you may need to install digest, RCurl, httr, rjson, plyr, or stringr before installing RSiteCatalyst.
 
 ##Authentication
 
