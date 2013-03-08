@@ -1,0 +1,32 @@
+\name{RSiteCatalyst}
+\alias{RSiteCatalyst}
+\docType{package}
+\title{
+Adobe (Omniture) SiteCatalyst Reporting API
+}
+\description{
+This package contains an "analyst's toolbox" of functions for accessing the Adobe (Omniture) SiteCatalyst Reporting API. These functions allow the user to authenticate, get metadata about report suites (eVars, props, events, segments, etc.), and create reports using SiteCatalyst data. 
+
+This package is not intended for SiteCatalyst Administration.
+}
+\details{
+\tabular{ll}{
+Package: \tab RSiteCatalyst\cr
+Type: \tab Package\cr
+Version: \tab 0.06\cr
+Date: \tab 2013-02-19\cr
+License: \tab GPL-2 or later\cr
+}
+}
+\author{
+Randy Zwitch & Jowanza Joseph
+
+Maintainer: Randy Zwitch <rzwitch@keystonesolutions.com>
+
+}
+\references{
+Official Adobe (Omniture) SiteCatalyst API documentation: \cr \cr
+https://developer.omniture.com/en_US/documentation
+}
+
+\keyword{ package }
