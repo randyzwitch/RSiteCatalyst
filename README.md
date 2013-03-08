@@ -20,7 +20,7 @@ Since this package has not yet been submitted to CRAN, you will need to load thi
 
 Install the [devtools](https://github.com/hadley/devtools) package:
 
-  install.packages("devtools")
+  	install.packages("devtools")
 	library(devtools)
 
 And then run the `install_github` command:
@@ -31,3 +31,18 @@ And then run the `install_github` command:
 
 ##Authentication
 
+The Adobe Reporting API uses a "username/shared secret" method for authentication. This is done via the `SCAuth` function:
+
+	SCAuth("username:company", "shared_secret", datacenter)
+	
+To obtain your username and shared secret, you need to be in the "Web Services Access" group for the SiteCatalyst Report Suite you are trying to access. This can be done via the SiteCatalyst Admin panel.
+
+In order to figure out which data center you need for the third argument, there are several approaches. The fastest approach is likely just to substitute a value of "1" into the `SCAuth` function, then call the `GetTokenCount` function:
+
+	SCAuth("username:company", "shared_secret", 1)
+	GetTokenCount()
+	
+If using a value of "1" then calling the `GetTokenCount` function returns an answer, then that's your data center. If not, repeat using values of "2", "3", or "4" until `GetTokenCount` returns an answer.
+
+If you have the desire to be more elegant in finding your data center, you can access the [Adobe documentation](http://microsite.omniture.com/t2/help/en_US/home/index.html#kb-determining-data-center) or use the [Adobe API Explorer](https://developer.omniture.com/en_US/get-started/api-explorer).
+	
