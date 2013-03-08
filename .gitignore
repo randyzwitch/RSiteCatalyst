@@ -1,0 +1,8 @@
+# rstudio ide package management
+.Rbuildignore
+.Rhistory
+.Rproj.user
+
+.DS_store
+RSiteCatalyst.Rproj
+*.csv
