@@ -29,6 +29,6 @@
 }
 \references{
 Official Adobe Documentation about Elements list\cr
-\link{https://developer.omniture.com/en_US/documentation/sitecatalyst-reporting/r-elements-1}
+https://developer.omniture.com/en_US/documentation/sitecatalyst-reporting/r-elements-1
 }
 \keyword{elements}

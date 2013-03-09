@@ -26,7 +26,7 @@ Maintainer: Randy Zwitch <rzwitch@keystonesolutions.com>
 }
 \references{
 Official Adobe (Omniture) SiteCatalyst API documentation: \cr \cr
-\link{https://developer.omniture.com/en_US/documentation}
+https://developer.omniture.com/en_US/documentation
 }
 
 \keyword{ package }
