@@ -1,5 +1,7 @@
 #Store credentials as character vector for later usage
 
+utils::globalVariables("SCCredentials")
+
 #Create function defining a global variable to hold user_name and shared_secret
 SCAuth <- function(user_name, shared_secret, datacenter){
   error_flag = 0
