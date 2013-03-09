@@ -13,8 +13,8 @@ This package is not intended for SiteCatalyst Administration.
 \tabular{ll}{
 Package: \tab RSiteCatalyst\cr
 Type: \tab Package\cr
-Version: \tab 0.06\cr
-Date: \tab 2013-02-19\cr
+Version: \tab 0.2\cr
+Date: \tab 2013-03-08\cr
 License: \tab GPL-2\cr
 }
 }
