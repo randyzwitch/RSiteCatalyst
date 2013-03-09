@@ -25,7 +25,7 @@
     GetReportQueue()
     
     #Example Result
-    [1] "There are no reports in the Report Queue"
+    "There are no reports in the Report Queue"
     
     
 }

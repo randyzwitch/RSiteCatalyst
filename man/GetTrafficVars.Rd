@@ -5,7 +5,7 @@
     Get Traffic Variables (props) Associated with a Report Suite.
 }
 \usage{
-    GetTrafficVars("keystonejowanza")
+    GetTrafficVars(report_suites)
 }
 \arguments{
     \item{report_suites}{

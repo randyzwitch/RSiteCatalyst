@@ -5,7 +5,7 @@
     Get Success Events associated with one or more Report Suites.
 }
 \usage{
-    GetSuccessEvents("keystonejowanza")
+    GetSuccessEvents(report_suites)
 }
 \arguments{
     \item{report_suites}{

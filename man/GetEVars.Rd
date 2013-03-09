@@ -5,7 +5,7 @@
     Get Commerce Variables (eVars) Associated with a Report Suite.
 }
 \usage{
-    GetEVars("keystonerandy")
+    GetEVars(report_suites)
 }
 \arguments{
     \item{report_suites}{

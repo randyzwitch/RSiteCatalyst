@@ -28,7 +28,7 @@
     GetTokenCount()
     
     #Example Result
-    [1] "Your company has 9965 tokens remaining this month (99.7\% remaining)"
+    "Your company has 9965 tokens remaining this month (99.7\% remaining)"
     
     
 }

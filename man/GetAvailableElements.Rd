@@ -5,7 +5,7 @@
     Get All Available Elements for a given Report Suite. This list can be used to inform other functions having an "element" parameter.
 }
 \usage{
-    GetAvailableElements("keystonerandy")
+    GetAvailableElements(report_suites)
 }
 \arguments{
     \item{report_suites}{
@@ -29,6 +29,6 @@
 }
 \references{
 Official Adobe Documentation about Elements list\cr
-https://developer.omniture.com/en_US/documentation/sitecatalyst-reporting/r-elements-1
+\link{https://developer.omniture.com/en_US/documentation/sitecatalyst-reporting/r-elements-1}
 }
 \keyword{elements}

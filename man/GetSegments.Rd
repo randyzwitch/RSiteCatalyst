@@ -5,7 +5,7 @@
     Get Segments defined within a Report Suite. Segments include Data Warehouse segments, pre-defined segments, and user-defined segments
 }
 \usage{
-    GetSegments("keystonerandy")
+    GetSegments(report_suites)
 }
 \arguments{
     \item{report_suites}{

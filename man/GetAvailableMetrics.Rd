@@ -5,7 +5,7 @@
     Get All Available Metrics for a given Report Suite. This list can be used to inform other functions having a "metrics" parameter.
 }
 \usage{
-    GetAvailableMetrics("keystonerandy")
+    GetAvailableMetrics(report_suites)
 }
 \arguments{
     \item{report_suites}{
@@ -29,6 +29,6 @@
 }
 \references{
 Official Adobe Documentation about Metrics list\cr
-https://developer.omniture.com/en_US/documentation/sitecatalyst-reporting/r-metrics-1
+\link{https://developer.omniture.com/en_US/documentation/sitecatalyst-reporting/r-metrics-1}
 }
 \keyword{metrics}

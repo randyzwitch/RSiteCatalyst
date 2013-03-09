@@ -34,7 +34,7 @@ To validate credentials are set properly, call GetTokenCount function to see if 
 }
 \references{
 Official Adobe Documentation about Data Centers \cr
-http://microsite.omniture.com/t2/help/en_US/home/index.html#kb-determining-data-center
+\link{http://microsite.omniture.com/t2/help/en_US/home/index.html#kb-determining-data-center}
 }
 \seealso{
    \code{\link{GetTokenCount}}

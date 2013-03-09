@@ -15,7 +15,7 @@ Package: \tab RSiteCatalyst\cr
 Type: \tab Package\cr
 Version: \tab 0.06\cr
 Date: \tab 2013-02-19\cr
-License: \tab GPL-2 or later\cr
+License: \tab GPL-2\cr
 }
 }
 \author{
@@ -26,7 +26,7 @@ Maintainer: Randy Zwitch <rzwitch@keystonesolutions.com>
 }
 \references{
 Official Adobe (Omniture) SiteCatalyst API documentation: \cr \cr
-https://developer.omniture.com/en_US/documentation
+\link{https://developer.omniture.com/en_US/documentation}
 }
 
 \keyword{ package }

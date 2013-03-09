@@ -27,7 +27,7 @@
     CancelReport(12345678)
     
     #Example Result
-    [1] "Report 12345678 has been cancelled"
+    "Report 12345678 has been cancelled"
     
     
 }
