@@ -16,7 +16,7 @@ Initial upload
 
 ###Manually:
 
-Since this package has not yet been submitted to CRAN, you will need to load this package using the devtools
+Since this package has not yet been submitted to CRAN, you will need to load this package using the devtools package from Hadley Wickham.
 
 Install the [devtools](https://github.com/hadley/devtools) package:
 
