@@ -42,6 +42,8 @@ http://microsite.omniture.com/t2/help/en_US/home/index.html#kb-determining-data-
 }
 
 \examples{
+\dontrun{
+
     #San Jose datacenter
     SCAuth("username:company", "28fa10193b6006badb981f6d0c370688", 1)
     
@@ -53,6 +55,6 @@ http://microsite.omniture.com/t2/help/en_US/home/index.html#kb-determining-data-
     
     #Singapore datacenter
     SCAuth("username:company", "28fa10193b6006badb981f6d0c370688", 4)
-    
+    }
 }
 \keyword{authentication}

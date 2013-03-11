@@ -29,13 +29,14 @@
 }
 
 \examples{
-    
+\dontrun{
+
 admin_console <- GetAdminConsoleLog("2013-01-01", "2013-02-20",c("keystonerandy", "keystonejowanza", "keystonejoel"))
 
 #Be careful of 1000 limit when passing entire list of rsid's
 admin_console <- GetAdminConsoleLog("2012-01-01", "2013-02-20",report_suites$rsid)
 
-    
+   } 
     
 }
 \keyword{admin}

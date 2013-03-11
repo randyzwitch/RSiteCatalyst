@@ -1,7 +1,7 @@
 Package: RSiteCatalyst
 Type: Package
 Title: Adobe (Omniture) Reporting API
-Version: 0.21
+Version: 0.3
 Date: 2013-03-11
 Author: Randy Zwitch & Jowanza Joseph
 Maintainer: Randy Zwitch <rzwitch@keystonesolutions.com>

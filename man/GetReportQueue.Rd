@@ -21,12 +21,12 @@
 }
 
 \examples{
-  
+\dontrun{  
     GetReportQueue()
     
     #Example Result
     "There are no reports in the Report Queue"
-    
+    }
     
 }
 \keyword{report queue}

@@ -18,7 +18,7 @@ buildURL <- function(method){
     server <- "https://api3.omniture.com/admin/1.3/rest/?method="
   } else {
     server <- "https://api4.omniture.com/admin/1.3/rest/?method="
-  }
+  } 
   
   return(paste(server, method, sep=""))
 }

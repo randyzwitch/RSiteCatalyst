@@ -21,9 +21,11 @@
 }
 
 \examples{
+\dontrun{    
+    
     GetTrafficVars("keystonejowanza")
     GetTrafficVars(c("keystonejowanza", "keystonerandy", "keystonetraining"))
-    
+}    
     
     
 }

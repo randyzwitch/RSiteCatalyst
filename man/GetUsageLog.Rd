@@ -27,12 +27,13 @@
 }
 
 \examples{
-    
+\dontrun{
+
     #Timestamp in local time
     GetUsageLog("2013-01-01", "2013-02-13", TRUE)
     
     #UNIX time in seconds for timestamp
     GetUsageLog("2013-01-01", "2013-02-13")
-    
+ }   
 }
 \keyword{admin}

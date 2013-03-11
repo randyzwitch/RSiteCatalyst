@@ -24,12 +24,13 @@
      
 }
 \examples{
-  
+\dontrun{
+
     GetTokenCount()
     
     #Example Result
     "Your company has 9965 tokens remaining this month (99.7\% remaining)"
-    
+ }   
     
 }
 \keyword{tokens}

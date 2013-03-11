@@ -21,9 +21,11 @@
 }
 
 \examples{
+\dontrun{    
+    
     GetSegments("keystonejowanza")
     GetSegments(c("keystonejowanza", "keystonerandy", "keystonetraining"))
-    
+}    
     
     
 }

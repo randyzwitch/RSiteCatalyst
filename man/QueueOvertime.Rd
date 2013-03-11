@@ -23,7 +23,7 @@
         One or more metrics
     }
     \item{dateGranularity}{
-        Optional. "Day"", "Week"", "Month"", "Quarter"" or "Year"" (case-insensitive). If no granularity specified, a single row of data returned as sum of metrics for entire time period.
+        Optional. "Day", "Week", "Month", "Quarter" or "Year" (case-insensitive). If no granularity specified, a single row of data returned as sum of metrics for entire time period.
     }
     \item{segment_id}{
         Optional. If no segment_id is specified, metrics will be reported for all visitors.
@@ -44,6 +44,7 @@ Because of the Reporting API structure, this function first requests the report,
      
 }
 \examples{
+\dontrun{
 
 #Hourly granularity for Loyal_Visitors segment (all arguments used)
 loyal_visitors_feb_hourly <- 
@@ -60,6 +61,6 @@ metrics = c("pageviews", "visits", "event2"), "", "Loyal_Visitors")
 #Minimum number of arguments, single row containing sum of pageviews
 pageviews_feb <- 
 QueueOvertime("keystonerandy", "2013-02-01", "2013-02-28", "pageviews")
-   
+   }
 }
 \keyword{QueueOvertime}

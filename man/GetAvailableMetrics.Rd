@@ -21,8 +21,12 @@
 }
 
 \examples{
+\dontrun{
+
     GetAvailableMetrics("keystonejowanza")
     GetAvailableMetrics(c("keystonejowanza", "keystonerandy", "keystonetraining"))
+    
+    }
     
     
     

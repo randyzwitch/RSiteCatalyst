@@ -21,9 +21,11 @@
 }
 
 \examples{
+\dontrun{   
+
     GetAvailableElements("keystonejowanza")
     GetAvailableElements(c("keystonejowanza", "keystonerandy", "keystonetraining"))
-    
+    }
     
     
 }

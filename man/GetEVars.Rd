@@ -21,10 +21,12 @@
 }
 
 \examples{
+\dontrun{    
+    
     GetEVars("keystonejowanza")
     GetEVars(c("keystonejowanza", "keystonerandy", "keystonetraining"))
     
-    
+    }
     
 }
 \keyword{eVar}

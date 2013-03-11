@@ -18,9 +18,10 @@
 }
 
 \examples{
+\dontrun{    
     
     GetReportSuites()
-    
+    }
     
     
     

@@ -21,9 +21,11 @@
 }
 
 \examples{
+\dontrun{    
+    
     GetSuccessEvents("keystonejowanza")
     GetSuccessEvents(c("keystonejowanza", "keystonerandy", "keystonetraining"))
-    
+    }
     
     
 }

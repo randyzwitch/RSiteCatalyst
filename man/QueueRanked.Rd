@@ -59,6 +59,7 @@ Note: Because of the multiple argument type ("top" and "startingWith" OR "select
      
 }
 \examples{
+\dontrun{
 
 #Top 100 pages viewed/visits for Loyal_Visitors segment
 top100_pages <- 
@@ -71,6 +72,6 @@ single_pages <-
 QueueRanked("keystonerandy", "2013-02-13","2013-02-19", c("pageviews", "visits"),'page',
 selected = c("http://randyzwitch.com", "http://randyzwitch.com/about"))    
 
-   
+   }
 }
 \keyword{QueueRanked}

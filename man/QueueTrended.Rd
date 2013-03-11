@@ -61,6 +61,7 @@ Note: Because of the multiple argument type ("top" and "startingWith" OR "select
      
 }
 \examples{
+\dontrun{
 
 #Pageviews for the Top 100 pages by Day in the Loyal_Visitors segment
 pages_by_day <-  
@@ -74,6 +75,6 @@ QueueTrended("keystonerandy", "2013-02-13", "2013-02-19", "hour",
 "pageviews", "page", selected = c("http://randyzwitch.com", "http://randyzwitch.com/about"), segment_id = "Loyal_Visitors")
   
 )
-   
+   }
 }
 \keyword{QueueTrended}

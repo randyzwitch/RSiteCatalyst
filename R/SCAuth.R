@@ -19,7 +19,7 @@ SCAuth <- function(user_name, shared_secret, datacenter){
   }
   
   if(error_flag >0){
-    return(print("Object 'omtrCredentials' not created due to errors"))
+    return(print("Object 'SCCredentials' not created due to errors"))
   } else {
   
   assign("SCCredentials", c(user_name, shared_secret, datacenter), .GlobalEnv)

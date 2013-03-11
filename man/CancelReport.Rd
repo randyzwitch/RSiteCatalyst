@@ -24,11 +24,13 @@
 
 \examples{
   
+\dontrun{  
+  
     CancelReport(12345678)
     
     #Example Result
     "Report 12345678 has been cancelled"
     
-    
+          }
 }
 \keyword{cancel report}
