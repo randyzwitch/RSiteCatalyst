@@ -1,6 +1,6 @@
 #RSiteCatalyst
 
-R package to access Adobe (Omniture) SiteCatalyst Reporting API
+R package to access Adobe (Omniture) SiteCatalyst REST Reporting API. Requires R 2.15.2 or greater.
 
 This package is meant as an "analyst's toolbox" of functions to get digital analytics data from SiteCatalyst into R for more advanced reporting and analysis. While there are a few administrative functions that provide insight into Report Suite structure (such as available eVars/props/segments/etc), this package is not meant to be used for Report Suite Administration.
 
