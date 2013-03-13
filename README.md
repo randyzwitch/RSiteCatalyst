@@ -54,5 +54,5 @@ In order to figure out which data center you need for the third argument, there 
 	
 If using a value of "1" then calling the `GetTokenCount` function returns an answer, then that's your data center. If not, repeat using values of "2", "3", or "4" until `GetTokenCount` returns an answer.
 
-If you have the desire to be more elegant in finding your data center, you can access the [Adobe documentation](http://microsite.omniture.com/t2/help/en_US/home/index.html#kb-determining-data-center) or use the [Adobe API Explorer](https://developer.omniture.com/en_US/get-started/api-explorer).
+If you have the desire to be more elegant in finding your data center, you can access the [Adobe documentation](http://microsite.omniture.com/t2/help/en_US/home/index.html#kb-determining-data-center) or use the [Adobe API Explorer](https://developer.omniture.com/en_US/get-started/api-explorer#Company.GetEndpoint).
 	
