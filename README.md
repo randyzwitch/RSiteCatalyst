@@ -17,7 +17,7 @@ This package requires R 2.15.2 or greater. Also, due to the number of package de
 ##News
 
 
-2013-03-14:  Updated to version 0.4. Version change reflects move from "data center guessing" in the 'SCAuth' function to determining the proper datacenter/endpoint via the SiteCatalyst API automatically.
+2013-03-14:  Updated to version 0.4. Version change reflects move from "data center guessing" in the `SCAuth` function to determining the proper datacenter/endpoint via the SiteCatalyst API automatically.
 
 
 ##Installation
