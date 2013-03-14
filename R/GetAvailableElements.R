@@ -12,7 +12,7 @@ if(length(report_suites)>1){
 }
 
 #API request
-json <- postRequest("ReportSuite.GetAvailableElements",paste('{"return_datawarehouse_elements":"1","rsid_list":', report_suites , '}'))
+json <- postRequest("ReportSuite.GetAvailableElements",paste('{"return_datawarehouse_elements":"0","rsid_list":', report_suites , '}'))
 
 if(json$status == 200){
 #Convert JSON to list
