@@ -1,5 +1,5 @@
 #GetAvailableElements- Get all elements for a single or multiple report suites
-#This one could use minor cleanup, get DW elements hardcoded as "1" (yes)
+#This one could use minor cleanup, get DW elements hardcoded as "0" (no)
 
 GetAvailableElements <- function (report_suites) {
 

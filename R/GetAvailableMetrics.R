@@ -1,5 +1,5 @@
 #GetAvailableMetrics- Get all metrics for a single or multiple report suites
-#This one could use minor cleanup, get DW elements hardcoded as "1" (yes)
+#This one could use minor cleanup, get DW elements hardcoded as "0" (no)
 
 
 GetAvailableMetrics<- function (report_suites) {
@@ -13,7 +13,7 @@ if(length(report_suites)>1){
 }
 
 #API request
-json <- postRequest("ReportSuite.GetAvailableMetrics",paste('{"return_datawarehouse_elements":"1","rsid_list":', report_suites , '}'))
+json <- postRequest("ReportSuite.GetAvailableMetrics",paste('{"return_datawarehouse_elements":"0","rsid_list":', report_suites , '}'))
 
 if(json$status == 200){
 #Convert JSON to list
