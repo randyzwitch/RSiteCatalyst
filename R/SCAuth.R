@@ -4,6 +4,10 @@ utils::globalVariables("SCCredentials")
 
 #Create function defining a global variable to hold user_name and shared_secret
 SCAuth <- function(user_name, shared_secret, datacenter){
+  #Silence visible binding error
+  
+  SCCredentials <- ""
+  
   error_flag = 0
   if(str_count(user_name, ":") != 1){
     print("Error: Check User Name. Must have 'username:company' pattern")
@@ -13,15 +17,19 @@ SCAuth <- function(user_name, shared_secret, datacenter){
     print("Error: Shared Secret does not have valid number of characters (32)")
     error_flag = error_flag + 1
   }
-  if(!(datacenter %in% (1:4))){
-    print("Error: Data Center Values range from 1-4")
-    error_flag = error_flag + 1
-  }
   
   if(error_flag >0){
     return(print("Object 'SCCredentials' not created due to errors"))
   } else {
   
-  assign("SCCredentials", c(user_name, shared_secret, datacenter), .GlobalEnv)
+  company <- str_split_fixed(user_name, ":", 2)
+    
+  #Create SCCredentials object in Global Environment
+  SCCredentials <<- c(user_name, shared_secret)
+  
+  #Assign endpoint to 3rd position in credentials
+  SCCredentials[3] <<- GetEndpoint(company[2])
+
+  
   }
 } #End function bracket  

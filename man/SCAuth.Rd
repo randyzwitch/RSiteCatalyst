@@ -5,7 +5,7 @@
     Saves SiteCatalyst User Name and Shared Secret for use in authentication.
 }
 \usage{
-    SCAuth(user_name, shared_secret, datacenter)
+    SCAuth(user_name, shared_secret)
 }
 \arguments{
     \item{user_name}{
@@ -13,9 +13,6 @@
     }
     \item{shared_secret}{
         Shared Secret
-    }
-    \item{datacenter}{
-       1= San Jose Production, 2= Dallas Production, 3= London Production, 4= Singapore Production
     }
 }
 \details{
@@ -32,10 +29,6 @@ To validate credentials are set properly, call GetTokenCount function to see if 
 \value{
     List named "SCCredentials"
 }
-\references{
-Official Adobe Documentation about Data Centers \cr
-http://microsite.omniture.com/t2/help/en_US/home/index.html#kb-determining-data-center
-}
 \seealso{
    \code{\link{GetTokenCount}}
      
@@ -44,17 +37,9 @@ http://microsite.omniture.com/t2/help/en_US/home/index.html#kb-determining-data-
 \examples{
 \dontrun{
 
-    #San Jose datacenter
-    SCAuth("username:company", "28fa10193b6006badb981f6d0c370688", 1)
     
-    #Dallas datacenter
-    SCAuth("username:company", "bb41ba97f1350cba8487b253da46a992", 2)
+    SCAuth("username:company", "28fa10193b6006badb981f6d0c370688")
     
-    #London datacenter
-    SCAuth("username:company", "bb41ba97f1350cba8487b253da46a992", 3)
-    
-    #Singapore datacenter
-    SCAuth("username:company", "28fa10193b6006badb981f6d0c370688", 4)
     }
 }
 \keyword{authentication}
