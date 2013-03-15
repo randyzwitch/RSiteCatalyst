@@ -1,3 +1,4 @@
+Version 0.41: Changed DW flag in various functions to prevent Queue function errors
 Version 0.4:  Improved SCAuth function to remove need to guess at datacenter
 Version 0.3:  Passed all checks necessary for CRAN submission
 Version 0.21: Minor fix to description file
