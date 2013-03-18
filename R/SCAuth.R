@@ -3,7 +3,7 @@
 utils::globalVariables("SCCredentials")
 
 #Create function defining a global variable to hold user_name and shared_secret
-SCAuth <- function(user_name, shared_secret, datacenter){
+SCAuth <- function(user_name, shared_secret){
   #Silence visible binding error
   
   SCCredentials <- ""

@@ -3,7 +3,6 @@
 #(revenue, orders, views, and so forth) and element 
 #(product, category, page, and so forth).
 
-
 QueueTrended <- function(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top="", startingWith="", selected= "", segment_id="") {
 
   #Error check to see if function call using both parameters
@@ -25,13 +24,13 @@ if(top != "") {
      "elements" : [{"id":"%s", "top": "%s", "startingWith": "%s" }],
      "segment_id": "%s"
     }
-}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top="", startingWith="", segment_id="", selected="")
+}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top, startingWith, segment_id)
   
 }  else {
   
   #Build JSON request for selected elements
   
-  selected <- toJSON(selected)
+  selected <- toJSON(as.list(selected))
   
   json_request <- sprintf(
     '{"reportDescription":
@@ -46,10 +45,7 @@ if(top != "") {
 }', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, selected, segment_id)
   
 }
-  
-  
-  
-  
+
 #1.  Send API request to build report- QueueOvertime
 json_queue <- postRequest("Report.QueueTrended", json_request)
 
@@ -103,8 +99,8 @@ if(reportDone !="done"){
 data <- result[[5]]$data #Just the data portion of the JSON result
 
 #Returns total by element (e.g. pageviews by page)
-totals_by_element <- ldply(lapply(data, "[", c("name", "url", "counts")), quickdf)
-names(totals_by_element) <- c("name", "url", metric_requested) #add title to "counts"
+totals_by_element <- ldply(lapply(data, "[", c("name", "counts")), quickdf)
+names(totals_by_element) <- c("name", metric_requested) #add title to "counts"
 
 #Create a table by page by day
 breakdown <- lapply(data, "[[", "breakdown") #Just the in-page info
