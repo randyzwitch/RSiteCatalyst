@@ -17,7 +17,7 @@ This package requires R 2.15.2 or greater. Also, due to the number of package de
 ##News
 
 
-2013-03-14:  Updated to version 0.4. Version change reflects move from "data center guessing" in the `SCAuth` function to determining the proper datacenter/endpoint via the SiteCatalyst API automatically.
+2013-03-18:  Updated to version 0.5. Version change reflects logic change in `QueueTrended` function to remove bug that didn't allow for anything except 'page' element
 
 
 ##Installation
@@ -43,7 +43,7 @@ When loading the package using the `devtools` method, none of the package depend
 
 The Adobe Reporting API uses a "username/shared secret" method for authentication. This is done via the `SCAuth` function:
 
-	SCAuth("username:company", "shared_secret", datacenter)
+	SCAuth("username:company", "shared_secret")
 	
 To test that your credentials are working correctly, use the `GetTokenCount` function to see if an answer returns.
 
