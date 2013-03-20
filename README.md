@@ -46,3 +46,7 @@ The Adobe Reporting API uses a "username/shared secret" method for authenticatio
 To test that your credentials are working correctly, use the `GetTokenCount` function to see if an answer returns.
 
 	GetTokenCount()
+	
+##Package documentation
+
+A video has been created to explain the main functions of the RSiteCatalyst package. You can access this video at the [Keystone Solutions blog](http://www.keystonesolutions.com/index.php/keystoneblog/entry/rsitecatalyst-omniture-r-package).
