@@ -2,6 +2,7 @@
 .Rbuildignore
 .Rhistory
 .Rproj.user
+.RData
 
 .DS_store
 RSiteCatalyst.Rproj
