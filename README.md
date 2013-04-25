@@ -17,15 +17,18 @@ This package requires R 2.15.2 or greater. Also, due to the number of package de
 ##News
 
 
-2013-03-18:  Updated to version 0.5. Version change reflects logic change in `QueueTrended` function to remove bug that didn't allow for anything except 'page' element
+2013-04-25:  [RSiteCatalyst]((http://cran.r-project.org/web/packages/RSiteCatalyst/)) is now available on CRAN.
 
 
 ##Installation
 
+To install the stable version, use the standard package installation method
+
+	install.packages("RSiteCatalyst")
 
 ###Manually:
 
-Since this package has not yet been submitted to CRAN, you will need to load this package using the devtools package from Hadley Wickham.
+To load this package from GitHub, use the following commands. Note, this should only be done if you want to test development versions of the package.
 
 Install the [devtools](https://github.com/hadley/devtools) package:
 
