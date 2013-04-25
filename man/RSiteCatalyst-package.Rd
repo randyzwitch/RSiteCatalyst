@@ -13,15 +13,15 @@ This package is not intended for SiteCatalyst Administration.
 \tabular{ll}{
 Package: \tab RSiteCatalyst\cr
 Type: \tab Package\cr
-Version: \tab 0.5\cr
-Date: \tab 2013-03-18\cr
+Version: \tab 1.0\cr
+Date: \tab 2013-04-08\cr
 License: \tab GPL-2\cr
 }
 }
 \author{
 Randy Zwitch & Jowanza Joseph
 
-Maintainer: Randy Zwitch <rzwitch@keystonesolutions.com>
+Maintainer: Randy Zwitch <rzwitch+rsitecatalyst@gmail.com>
 
 }
 \references{

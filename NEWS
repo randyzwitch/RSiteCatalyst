@@ -1,3 +1,4 @@
+Version 1.0:  Package submitted to CRAN
 Version 0.5:  Fixed bug in QueueTrended function
 Version 0.41: Changed DW flag in various functions to prevent Queue function errors
 Version 0.4:  Improved SCAuth function to remove need to guess at datacenter
