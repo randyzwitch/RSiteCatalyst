@@ -8,3 +8,4 @@
 RSiteCatalyst.Rproj
 *.csv
 .DS_Store
+local_code.R
