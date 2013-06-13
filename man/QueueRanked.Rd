@@ -25,7 +25,7 @@ The QueueRanked report is analogous to pulling a "ranked" report within SiteCata
        The metric you want in the report.
     }
     \item{elements}{
-       The element (page, browser eVar, prop) for the report to be broken down by.
+       The element (page, browser, eVar, prop) for the report to be broken down by.
     }
     \item{top}{
        How many results you want trended. Used in combination with "startingWith". Not used if "selected" argument used.
