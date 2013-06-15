@@ -2,6 +2,15 @@
 #Corresponds to pulling a ranked report
 #This API method seems to be most complicated to return a valid result
 
+reportSuiteID = "keystonerandy"
+dateFrom = "2013-06-01"
+dateTo = "2013-06-14"
+metrics = c("visits", "instances")
+elements = c("page", "browser")
+top="100"
+startingWith="1"
+segment_id=""
+selected = c("http://randyzwitch.com", "http://randyzwitch.com/about")
 
 QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top="", startingWith="", segment_id="", selected=""){
   
@@ -24,8 +33,6 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   #Collapse the list into a proper comma separated string
   metrics_final <- paste(metrics_conv, collapse=", ") 
 
-  
-  
   
   if(top != "") {
     
@@ -72,7 +79,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     
   }  
   
-  
+  #Send post request to Omniture API
   json_queue <- postRequest("Report.QueueRanked", json_request)
   
   if(json_queue$status == 200) {
@@ -120,9 +127,12 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     segment_requested <- result[[5]][[5]] #get segment
     
   } #End of else statement testing reportDone = "done"
-  #Convert from JSON to data frame, not currently working for multiple metrics
-
+  
+  
+  #Convert from JSON to data frame
   data <- result[[5]]$data #Just the data portion of the JSON result
+  
+  if(length(elements) == 1){
   
   rows_df <- ldply(data, "[[", "name")  #get element as rows
   names(rows_df) <- elements_requested
@@ -132,5 +142,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   names(counts_df) <- metrics_requested
   
   return(cbind(rows_df, segment=segment_requested, counts_df)) #append rows info with counts
+  } #End JSON parsing for single element case
+  
   
 } #End function bracket
