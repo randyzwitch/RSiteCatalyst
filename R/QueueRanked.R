@@ -2,15 +2,6 @@
 #Corresponds to pulling a ranked report
 #This API method seems to be most complicated to return a valid result
 
-reportSuiteID = "keystonerandy"
-dateFrom = "2013-06-01"
-dateTo = "2013-06-14"
-metrics = c("visits", "instances")
-elements = c("page", "browser")
-top="100"
-startingWith="1"
-segment_id=""
-selected = c("http://randyzwitch.com", "http://randyzwitch.com/about")
 
 QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top="", startingWith="", segment_id="", selected=""){
   
@@ -18,14 +9,13 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   
   #Error check to see if function call using both parameters
   if(top!= "" && selected != "") {
-    
-    return(print("Error:  Use 'top' or 'startingWith' arguments, not both"))
+    stop("Use 'top' or 'startingWith' arguments, not both")
   }
   
   #Error check to see if elements list has more than two elements
   if(length(elements) > 2) {
     
-    return(print("Error:  API only supports a maximum of two elements"))
+    stop("API only supports a maximum of two elements")
   }
   
   #Loop over the metrics list, appending proper curly braces
@@ -41,7 +31,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
       if(length(elements) == 1) {
         elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}', elements,top, startingWith)
       } else {
-        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}, {"id":"%s"}', elements[1],top, startingWith, elements[2])
+        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}, {"id":"%s", "top":"1000"}', elements[1],top, startingWith, elements[2])
       }
     
   json_request <-sprintf(
@@ -63,7 +53,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     if(length(elements) == 1) {
       elements_list = sprintf('{"id":"%s", "selected":%s }', elements, selected)
     } else {
-      elements_list = sprintf('{"id":"%s", "selected":%s }, {"id":"%s"}', elements[1],selected, elements[2])
+      elements_list = sprintf('{"id":"%s", "selected":%s }, {"id":"%s", "top":"1000"}', elements[1],selected, elements[2])
     }
     
     json_request <- sprintf(
@@ -92,7 +82,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   #If response returns an error, return error message. Else, continue with
   #capturing report ID
   if(queue_resp[1] != "queued" ) {
-    return(print("Error: Likely a syntax error in arguments to QueueRanked function"))
+    stop("Error: Likely a syntax error in arguments to QueueRanked function")
   } else {
     reportID <- queue_resp[[3]] 
   }
@@ -103,7 +93,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   reportDone <- GetStatus(reportID)
   
   if(reportDone == "failed") {
-    return(print("Report Failed: Check for json_request syntax error"))
+    stop("Report Failed: Check for json_request syntax error")
   }
   
   num_tries <- 1
@@ -117,7 +107,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   
   #If reportDone still not done, return an error. Else, continue to GetReport
   if(reportDone !="done"){
-    return(print("Error: Number of Tries Exceeded"))
+    stop("Error: Number of Tries Exceeded")
   } else {
     
     #Write formatted JSON string to a 5-item list
@@ -141,8 +131,30 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   counts_df <- ldply(counts, quickdf) # counts as DF
   names(counts_df) <- metrics_requested
   
-  return(cbind(rows_df, segment=segment_requested, counts_df)) #append rows info with counts
-  } #End JSON parsing for single element case
+  return(cbind(rows_df, segment=segment_requested, counts_df)) #append rows info with counts, End JSON parsing for single element case 
+  } else {
+    
+  accumulator <- data.frame()
   
-  
+  for(i in 1:length(data)){
+  #Get outer element name
+      outer_element <- as.data.frame(data[[i]]["name"])
+      names(outer_element) <- elements_requested[1]
+  #Get all breakdowns for outer element    
+      inner_element <- ldply((data[[i]][["breakdown"]]), "[[", "name")
+      names(inner_element) <- elements_requested[2]
+  #Get metrics that go along with breakdown rows    
+      inner_metrics <- ldply((data[[i]][["breakdown"]]), "[[", "counts")
+    names(inner_metrics) <- metrics[1:ncol(inner_metrics)]     
+  #Join all datasets together horizontally
+      temp <- cbind(outer_element, inner_element, inner_metrics)
+  #Append vertically to accumulator    
+      accumulator <- rbind(accumulator, temp)
+      if(i == length(data) && ncol(inner_metrics) < length(metrics)){
+        warning("Number of metrics returned by API fewer than requested. Labels assigned in order of metrics list from function call.")
+      }
+      
+  } #End of for loop (don't hate me Hadley!)
+  return(accumulator)
+  } #End JSON parsing of two element case
 } #End function bracket
