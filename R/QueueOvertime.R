@@ -27,13 +27,13 @@ if(json_queue$status == 200) {
 #Convert JSON to list
 queue_resp <- content(json_queue)
 } else {
-  return(jsonResponseError(json_queue$status))
+  stop(jsonResponseError(json_queue$status)
 }
 
 #If response returns an error, return error message. Else, continue with
 #capturing report ID
 if(queue_resp[1] != "queued" ) {
-  return(print("Error: Likely a syntax error or missing required argument to QueueOvertime function"))
+  stop("Error: Likely a syntax error or missing required argument to QueueOvertime function")
 } else {
   reportID <- queue_resp[[3]] 
 }
@@ -44,7 +44,7 @@ print("Checking report status: Attempt Number 1")
 reportDone <- GetStatus(reportID)
 
 if(reportDone == "failed") {
-  return(print("Report Failed: Check for json_request syntax error"))
+  stop("Report Failed: Check for json_request syntax error")
 }
 
 num_tries <- 1
@@ -58,7 +58,7 @@ while(reportDone != "done" && num_tries < 10){
 
 #If reportDone still not done, return an error. Else, continue to GetReport
 if(reportDone !="done"){
-  return(print("Error: Number of Tries Exceeded"))
+ stop("Error: Number of Tries Exceeded")
 } else {
   
   #Write formatted JSON string to a 5-item list

@@ -20,7 +20,7 @@ if(json$status == 200) {
   
 } else {
   #Error checking function
-  return(jsonResponseError(json$status))
+  stop(jsonResponseError(json$status))
 }
 
 

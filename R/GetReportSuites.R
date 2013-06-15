@@ -20,7 +20,7 @@ GetReportSuites<-function(){
   return(temp)
   } else {
     
-    return(jsonResponseError(json$status))
+    stop(jsonResponseError(json$status))
   }
 
 }
