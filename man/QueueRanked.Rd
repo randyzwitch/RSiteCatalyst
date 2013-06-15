@@ -22,10 +22,14 @@ The QueueRanked report is analogous to pulling a "ranked" report within SiteCata
         Report End Date in "YYYY-MM-DD" format
     }
     \item{metrics}{
-       The metric you want in the report.
+       The metric(s) you want in the report
     }
     \item{elements}{
-       The element (page, browser eVar, prop) for the report to be broken down by.
+<<<<<<< HEAD
+       The element(s) (page, browser, eVar, prop) for the report to be broken down by
+=======
+       The element (page, browser, eVar, prop) for the report to be broken down by.
+>>>>>>> 1c09c88250808201a34d2fe710f00ff0e1664e33
     }
     \item{top}{
        How many results you want trended. Used in combination with "startingWith". Not used if "selected" argument used.

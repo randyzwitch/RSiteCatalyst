@@ -1,5 +1,5 @@
 #QueueRanked report
-#Corresponds to pulling a single ranked report, no correlation/subrelation
+#Corresponds to pulling a ranked report
 #This API method seems to be most complicated to return a valid result
 
 
@@ -13,26 +13,51 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     return(print("Error:  Use 'top' or 'startingWith' arguments, not both"))
   }
   
+  #Error check to see if elements list has more than two elements
+  if(length(elements) > 2) {
+    
+    return(print("Error:  API only supports a maximum of two elements"))
+  }
   
   #Loop over the metrics list, appending proper curly braces
   metrics_conv <- lapply(metrics, function(x) paste('{"id":', '"', x, '"', '}', sep=""))
   #Collapse the list into a proper comma separated string
   metrics_final <- paste(metrics_conv, collapse=", ") 
 
+  
+  
+  
   if(top != "") {
+    
+  #Modify element list based on whether it has one or two values   
+  
+      if(length(elements) == 1) {
+        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}', elements,top, startingWith)
+      } else {
+        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}, {"id":"%s"}', elements[1],top, startingWith, elements[2])
+      }
+    
   json_request <-sprintf(
     '{"reportDescription":
     {"reportSuiteID" :"%s",
      "dateFrom":"%s",
      "dateTo":"%s",
      "metrics": [%s],
-     "elements" : [{"id":"%s", "top": "%s", "startingWith":"%s"}],
+     "elements" : [%s],
      "segment_id": "%s"
     }
-}', reportSuiteID, dateFrom, dateTo, metrics_final, elements, top, startingWith, segment_id)
+}', reportSuiteID, dateFrom, dateTo, metrics_final, elements_list,segment_id)
   } else {
     
     selected <- toJSON(selected)
+    
+    #Modify element list based on whether it has one or two values   
+    
+    if(length(elements) == 1) {
+      elements_list = sprintf('{"id":"%s", "selected":%s }', elements, selected)
+    } else {
+      elements_list = sprintf('{"id":"%s", "selected":%s }, {"id":"%s"}', elements[1],selected, elements[2])
+    }
     
     json_request <- sprintf(
   '{"reportDescription":
@@ -40,10 +65,10 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
      "dateFrom":"%s",
      "dateTo":"%s",
      "metrics": [%s],
-     "elements" : [{"id":"%s", "selected":%s }],
+     "elements" : [%s],
      "segment_id": "%s"
     }
-}', reportSuiteID, dateFrom, dateTo, metrics_final, elements, selected, segment_id)
+}', reportSuiteID, dateFrom, dateTo, metrics_final, elements_list, segment_id)
     
   }  
   
