@@ -28,6 +28,7 @@ if(json_queue$status == 200) {
 queue_resp <- content(json_queue)
 } else {
   stop(jsonResponseError(json_queue$status))
+  
 }
 
 #If response returns an error, return error message. Else, continue with

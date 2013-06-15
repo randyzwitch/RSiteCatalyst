@@ -119,6 +119,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   } #End of else statement testing reportDone = "done"
   
   
+  
   #Convert from JSON to data frame
   data <- result[[5]]$data #Just the data portion of the JSON result
   
