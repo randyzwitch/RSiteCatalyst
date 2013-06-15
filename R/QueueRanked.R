@@ -76,7 +76,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     #Convert JSON to list
     queue_resp <- content(json_queue)
   } else {
-    return(jsonResponseError(json_queue$status))
+    stop(jsonResponseError(json_queue$status))
   }
   
   #If response returns an error, return error message. Else, continue with

@@ -8,6 +8,6 @@ cancelled<- content(postRequest("Report.CancelReport",paste('{"reportID":', toJS
 if(cancelled[1] == 1){
   print(paste("Report", reportID, "has been cancelled", sep= " "))
 } else {
-  print("Report may not be cancelled, this function not thoroughly tested")
+  warning("Report may not be cancelled, this function not thoroughly tested")
 }
 }
