@@ -6,7 +6,7 @@
 \description{
     A QueueRanked report is a report that shows the ranking of values for one or more elements relative to a metric, aggregated over the time period selected.
     
-The QueueRanked report is analogous to pulling a "ranked" report within SiteCatalyst. Currently, the QueueRanked function returns a data frame equivalent to pulling a Ranked report with no correlations (traffic breakdown) or subrelations (eVar breakdown) in SiteCatalyst.
+The QueueRanked report is analogous to pulling a "ranked" report within SiteCatalyst. The QueueRanked function returns a data frame equivalent to pulling a Ranked report in SiteCatalyst. Correlations & Sub-Relations are supported.
 }
 \usage{
     QueueRanked(reportSuiteID, dateFrom, dateTo, metrics, elements, top, startingWith, segment_id, selected)
@@ -25,11 +25,9 @@ The QueueRanked report is analogous to pulling a "ranked" report within SiteCata
        The metric(s) you want in the report
     }
     \item{elements}{
-<<<<<<< HEAD
-       The element(s) (page, browser, eVar, prop) for the report to be broken down by
-=======
-       The element (page, browser, eVar, prop) for the report to be broken down by.
->>>>>>> 1c09c88250808201a34d2fe710f00ff0e1664e33
+
+The element(s) (page, browser, eVar, prop) for the report to be broken down by.
+
     }
     \item{top}{
        How many results you want trended. Used in combination with "startingWith". Not used if "selected" argument used.
@@ -47,9 +45,9 @@ The QueueRanked report is analogous to pulling a "ranked" report within SiteCata
 \details{
 
 
-Because of the Reporting API structure, this function first requests the report, then checks the reporting queue to see if the report is completed, and when the report returns as "done" pulls the report from the API. This checking process can occur up to 10 times, with a 10 second delay between status checks. If the report does not return as "done" after 10 tries, the function returns an error.
+Because of the Reporting API structure, this function first requests the report, then checks the reporting queue to see if the report is completed, and when the report returns as "done" pulls the report from the API. This checking process can occur up to 30 times, with a 2 second delay between status checks. If the report does not return as "done" after 30 tries, the function returns an error.
 
-Note: Because of the multiple argument type ("top" and "startingWith" OR "selected"), keyword arguments are generally needed towards the end of the function call instead of just positional arguments.
+Note: Because of the multiple argument types ("top" and "startingWith" OR "selected"), keyword arguments are generally needed towards the end of the function call instead of just positional arguments.
    
 }
 \value{
@@ -65,9 +63,9 @@ Note: Because of the multiple argument type ("top" and "startingWith" OR "select
 \examples{
 \dontrun{
 
-#Top 100 pages viewed/visits for Loyal_Visitors segment
+#Top 100 pages viewed/visits for Loyal_Visitors segment, broken down by browser (correlation/subrelation)
 top100_pages <- 
-QueueRanked("keystonerandy", "2013-02-13","2013-02-28", c("pageviews", "visits"),'page',
+QueueRanked("keystonerandy", "2013-02-13","2013-02-28", c("pageviews"), c('page', 'browser'),
 top= "100", startingWith= "1", segment_id= "Loyal_Visitors")
 
 

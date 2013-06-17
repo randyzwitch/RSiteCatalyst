@@ -97,9 +97,9 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   }
   
   num_tries <- 1
-  while(reportDone != "done" && num_tries < 10){
+  while(reportDone != "done" && num_tries < 30){
     num_tries <- num_tries + 1
-    Sys.sleep(10)
+    Sys.sleep(2)
     print(paste("Checking report status: Attempt Number", num_tries))
     reportDone <- GetStatus(reportID)
     
@@ -152,7 +152,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   #Append vertically to accumulator    
       accumulator <- rbind(accumulator, temp)
       if(i == length(data) && ncol(inner_metrics) < length(metrics)){
-        warning("Number of metrics returned by API fewer than requested. Labels assigned in order of metrics list from function call.")
+        warning("Number of metrics returned by API fewer than requested. Labels assigned in order of metrics list, verify results for accuracy.")
       }
       
   } #End of for loop (don't hate me Hadley!)
