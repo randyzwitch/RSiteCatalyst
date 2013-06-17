@@ -16,6 +16,7 @@ This package requires R 2.15.2 or greater. Also, due to the number of package de
 
 ##News
 
+2013-06-17:  Version 1.1 in development to support correlations/sub-relations
 
 2013-04-25:  [RSiteCatalyst](http://cran.r-project.org/web/packages/RSiteCatalyst/) is now available on CRAN.
 
@@ -37,7 +38,7 @@ Install the [devtools](https://github.com/hadley/devtools) package:
 
 And then run the `install_github` command:
 
-	install_github("RSiteCatalyst", "randyzwitch")
+	install_github("RSiteCatalyst", "randyzwitch", ref = "add_correlations")
 	library(RSiteCatalyst)
 
 ##Authentication
