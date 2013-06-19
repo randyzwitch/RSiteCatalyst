@@ -38,7 +38,7 @@ Install the [devtools](https://github.com/hadley/devtools) package:
 
 And then run the `install_github` command:
 
-	install_github("RSiteCatalyst", "randyzwitch", ref = "add_correlations")
+	install_github("RSiteCatalyst", "randyzwitch", ref = "version_1_1")
 	library(RSiteCatalyst)
 
 ##Authentication
