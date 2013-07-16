@@ -5,7 +5,7 @@ GetUsageLog <- function(date_from=as.character(Sys.Date()-1), date_to=as.charact
 
 #Make sure dates are in right order
 if(date_from > date_to) {
-  return(print("Error:  'date_from' is more recent than 'date_to'"))
+  stop("'date_from' is more recent than 'date_to'")
 }
   
 #Make API call - Numerous parameters left out, this returns all info for all users, instead of single user
@@ -14,7 +14,7 @@ json <- postRequest("Logs.GetUsageLog", paste('{"date_from":', toJSON(date_from)
 
 #Validate that API answer is Success
 if(json$status != 200) {
-  return(jsonResponseError(json$status))
+  stop(jsonResponseError(json$status))
 } else {
   #Convert JSON raw into list
   results <- content(json)
@@ -32,7 +32,7 @@ if(length(results) > 0) {
 return(temp)
 
 } else {
-  return(print("There are no results for the timeperiod selected"))
+  warning("There are no results for the timeperiod selected")
 }
 
 

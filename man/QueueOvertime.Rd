@@ -31,7 +31,7 @@
 }
 \details{
 
-Because of the Reporting API structure, this function first requests the report, then checks the reporting queue to see if the report is completed, and when the report returns as "done" pulls the report from the API. This checking process can occur up to 10 times, with a 10 second delay between status checks. If the report does not return as "done" after 10 tries, the function returns an error.
+Because of the Reporting API structure, this function first requests the report, then checks the reporting queue to see if the report is completed, and when the report returns as "done" pulls the report from the API. This checking process can occur up to 30 times, with a 2 second delay between status checks. If the report does not return as "done" after 30 tries, the function returns an error.
    
 }
 \value{

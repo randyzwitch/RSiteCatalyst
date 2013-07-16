@@ -19,7 +19,7 @@ if(json$status == 200){
 #Convert JSON to list
 results <- content(json)
 } else {
-  return(jsonResponseError(json$status))
+  stop(jsonResponseError(json$status))
 }
 
 temp <- data.frame()

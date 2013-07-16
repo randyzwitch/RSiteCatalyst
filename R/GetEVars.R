@@ -17,7 +17,7 @@ if(json$status == 200) {
 #Convert JSON to list, clean through null values before list creation
 results <- fromJSON(str_replace_all(content(json, as="text"), "null", 0))
 } else {
-  return(jsonResponseError(json$status))
+  stop(jsonResponseError(json$status))
 }
 
 temp <- data.frame()

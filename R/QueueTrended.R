@@ -8,7 +8,7 @@ QueueTrended <- function(reportSuiteID, dateFrom, dateTo, dateGranularity, metri
   #Error check to see if function call using both parameters
 if(top!= "" && selected != "") {
   
-  return(print("Error:  Use 'top' or 'startingWith' arguments, not both"))
+  stop("Use 'top' or 'startingWith' arguments, not both")
 }
   
 #Build JSON request for "Top" functionality
@@ -53,13 +53,14 @@ if(json_queue$status == 200) {
   #Convert JSON to list
   queue_resp <- content(json_queue)
 } else {
-  return(jsonResponseError(json_queue$status))
+  stop(jsonResponseError(json_queue$status))
+  
 }
 
 #If response returns an error, return error message. Else, continue with
 #capturing report ID
 if(queue_resp[1] != "queued" ) {
-  return(print("Error: Likely a syntax error in arguments to QueueTrended function"))
+  stop("Likely a syntax error in arguments to QueueTrended function")
 } else {
   reportID <- queue_resp[[3]] 
 }
@@ -70,13 +71,13 @@ print("Checking report status: Attempt Number 1")
 reportDone <- GetStatus(reportID)
 
 if(reportDone == "failed") {
-  return(print("Report Failed: Check for json_request syntax error"))
+  stop("Report Failed: Check for json_request syntax error")
 }
 
 num_tries <- 1
-while(reportDone != "done" && num_tries < 10){
+while(reportDone != "done" && num_tries < 30){
   num_tries <- num_tries + 1
-  Sys.sleep(10)
+  Sys.sleep(2)
   print(paste("Checking report status: Attempt Number", num_tries))
   reportDone <- GetStatus(reportID)
   
@@ -84,7 +85,7 @@ while(reportDone != "done" && num_tries < 10){
 
 #If reportDone still not done, return an error. Else, continue to GetReport
 if(reportDone !="done"){
-  return(print("Error: Number of Tries Exceeded"))
+  stop("Error: Number of Tries Exceeded")
 } else {
   
   #Write formatted JSON string to a 5-item list
