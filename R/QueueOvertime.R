@@ -3,9 +3,12 @@
 #multiple metrics, and single segment
 
 QueueOvertime <- function(reportSuiteID, dateFrom, dateTo, metrics, dateGranularity="", segment_id="", anomalyDetection="") {
+<<<<<<< HEAD
   if(anomalyDetection == "1" & dateGranularity!="day") {
     stop("Error: Anomaly Detection only provided for day granularity")
   }
+=======
+>>>>>>> 76ba1034ee532cb4b1aad2ce9613615b023808fd
   
   #Loop over the metrics list, appending proper curly braces
   metrics_conv <- lapply(metrics, function(x) paste('{"id":', '"', x, '"', '}', sep=""))
@@ -89,7 +92,11 @@ counts_df <- ldply(counts, quickdf) # counts as DF
 names(counts_df) <- lapply(result[[5]]$metrics, "[[", "id") #assign names to counts_df
 
 #Parse anomalyDetection if requested  
+<<<<<<< HEAD
 if(anomalyDetection == "1" & dateGranularity == "day") {
+=======
+if(anomalyDetection = "1") {
+>>>>>>> 76ba1034ee532cb4b1aad2ce9613615b023808fd
   ub <- lapply(data, "[[", "upper_bounds") # Upper Bounds
   ub_df <- ldply(ub, quickdf) # upper bound as DF
   names(ub_df) <- lapply(lapply(result[[5]]$metrics, "[[", "id"), function(x) paste(x, "_upper", sep=""))
