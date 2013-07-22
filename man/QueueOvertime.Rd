@@ -7,7 +7,7 @@
     A QueueOvertime report is a report where the only granularity allowed is time. This report allows for a single report suite, time granularity, multiple metrics, and a single segment. It is similar to the "Key Metrics" report or a Custom Event report within the SiteCatalyst interface.
 }
 \usage{
-    QueueOvertime(reportSuiteID, dateFrom, dateTo, metrics, dateGranularity, segment_id)
+    QueueOvertime(reportSuiteID, dateFrom, dateTo, metrics, dateGranularity, segment_id, anomalyDetection)
 }
 \arguments{
     \item{reportSuiteID}{
@@ -17,7 +17,7 @@
         Report Start Date in "YYYY-MM-DD" format
     }
     \item{dateTo}{
-        Report End Date in "YYYY-MM-DD" format
+        Report End Date in "YYYY-MM-DD" format. Should be less than or equal to current date if using anomaly detection.
     }
     \item{metrics}{
         One or more metrics
@@ -27,6 +27,9 @@
     }
     \item{segment_id}{
         Optional. If no segment_id is specified, metrics will be reported for all visitors.
+    }
+    \item{anomalyDetection}{
+    Optional. Use value of "1" to get anomaly detection results. Results only returned by API for 'Day' granularity. 
     }
 }
 \details{
@@ -46,10 +49,10 @@ Because of the Reporting API structure, this function first requests the report,
 \examples{
 \dontrun{
 
-#Hourly granularity for Loyal_Visitors segment (all arguments used)
-loyal_visitors_feb_hourly <- 
-QueueOvertime("keystonerandy", "2013-02-01", "2013-02-28",
-metrics = c("pageviews", "visits", "event2"), "hour", "Loyal_Visitors")
+#Daily granularity for Loyal_Visitors segment (all arguments used)
+loyal_visitors_feb_daily <- 
+QueueOvertime("keystonerandy", "2013-02-01", "2013-07-28",
+metrics = c("pageviews", "visits", "event2"), "day", "Loyal_Visitors", "1")
 
 
 #No granularity using empty string in dateGranularity position
