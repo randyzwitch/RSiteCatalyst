@@ -11,6 +11,8 @@
     None
 }
 \details{
+    NOTE: There is no longer a token limit on the Adobe Analytics API. This function remains unchanged for historical purposes.
+    
     Returns the number of tokens remaining per month and provides percentage remaining.
     
     GetTokenCount can also be used as a test to validate credentials are properly specified when using the SCAuth function.
