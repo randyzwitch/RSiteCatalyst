@@ -56,9 +56,9 @@ if(reportDone == "failed") {
 }
 
 num_tries <- 1
-while(reportDone != "done" && num_tries < 30){
+while(reportDone != "done" && num_tries < 120){
   num_tries <- num_tries + 1
-  Sys.sleep(2)
+  Sys.sleep(5)
   print(paste("Checking report status: Attempt Number", num_tries))
   reportDone <- GetStatus(reportID)
   
