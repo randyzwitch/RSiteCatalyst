@@ -4,7 +4,7 @@
 #(product, category, page, and so forth).
 
 
-QueueTrended <- function(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top="", startingWith="", selected= "", segment_id="", anomalyDetection="") {
+QueueTrended <- function(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top="", startingWith="", selected= "", segment_id="", anomalyDetection="", currentData="") {
 
   #Error check to see if function call using both parameters
 if(top!= "" && selected != "") {
@@ -28,9 +28,10 @@ if(top != "") {
      "metrics": [{"id":"%s"}],
      "elements" : [{"id":"%s", "top": "%s", "startingWith": "%s" }],
      "segment_id": "%s",
-     "anomalyDetection": "%s"
+     "anomalyDetection": "%s",
+     "currentData": "%s"
     }
-}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top, startingWith, segment_id, anomalyDetection)
+}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top, startingWith, segment_id, anomalyDetection, currentData)
   
 }  else {
   
@@ -47,9 +48,10 @@ if(top != "") {
      "metrics": [{"id":"%s"}],
      "elements" : [{"id":"%s", "selected": %s }],
      "segment_id": "%s",
-     "anomalyDetection": "%s"
+     "anomalyDetection": "%s",
+     "currentData": "%s"
     }
-}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, selected, segment_id, anomalyDetection)
+}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, selected, segment_id, anomalyDetection, currentData)
   
 }
 

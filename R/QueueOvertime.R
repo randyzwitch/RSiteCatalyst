@@ -2,7 +2,7 @@
 #QueueOvertime supports one breakdown element with multiple element values, 
 #multiple metrics, and single segment
 
-QueueOvertime <- function(reportSuiteID, dateFrom, dateTo, metrics, dateGranularity="", segment_id="", anomalyDetection="") {
+QueueOvertime <- function(reportSuiteID, dateFrom, dateTo, metrics, dateGranularity="", segment_id="", anomalyDetection="", currentData="") {
 
   if(anomalyDetection == "1" & dateGranularity!="day") {
     stop("Error: Anomaly Detection only provided for day granularity")
@@ -23,9 +23,10 @@ QueueOvertime <- function(reportSuiteID, dateFrom, dateTo, metrics, dateGranular
     "dateGranularity":"%s",
     "metrics": [%s],
     "segment_id": "%s",
-    "anomalyDetection": "%s"
+    "anomalyDetection": "%s",
+    "currentData": "%s"
   }
-}', reportSuiteID, dateFrom, dateTo, dateGranularity, metrics_final, segment_id, anomalyDetection)
+}', reportSuiteID, dateFrom, dateTo, dateGranularity, metrics_final, segment_id, anomalyDetection, currentData)
 
 #1.  Send API request to build report- QueueOvertime
 json_queue <- postRequest("Report.QueueOvertime", json_request)
