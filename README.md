@@ -43,7 +43,7 @@ And then run the `install_github` command:
 
 ##Authentication
 
-The Adobe Reporting API uses a "username/shared secret" method for authentication. This is done via the `SCAuth` function:
+The Adobe Analytics Reporting API uses a "username/shared secret" method for authentication. This is done via the `SCAuth` function:
 
 	SCAuth("username:company", "shared_secret")
 	
