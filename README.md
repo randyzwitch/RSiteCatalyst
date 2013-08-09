@@ -47,9 +47,7 @@ The Adobe Reporting API uses a "username/shared secret" method for authenticatio
 
 	SCAuth("username:company", "shared_secret")
 	
-To test that your credentials are working correctly, use the `GetTokenCount` function to see if an answer returns.
-
-	GetTokenCount()
+If your authentication is successful, you will received a console message of "Authentication succeeded"
 	
 ##Package documentation
 

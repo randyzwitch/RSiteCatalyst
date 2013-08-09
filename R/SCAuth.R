@@ -22,6 +22,7 @@ SCAuth <- function(user_name, shared_secret){
     stop("Authentication failed due to errors")
   } else {
   
+    
   company <- str_split_fixed(user_name, ":", 2)
     
   #Create SCCredentials object in Global Environment
@@ -30,6 +31,6 @@ SCAuth <- function(user_name, shared_secret){
   #Assign endpoint to 3rd position in credentials
   SCCredentials[3] <<- GetEndpoint(company[2])
 
-  
+  print("Authentication succeeded")
   }
 } #End function bracket  
