@@ -41,6 +41,9 @@ The element(s) (page, browser, eVar, prop) for the report to be broken down by.
     \item{segment_id}{
         Optional. If no segment_id is specified, metrics will be reported for all visitors.
     }
+     \item{currentData}{
+    Optional. Use value of "1" to get current data results. Only needed when dateTo is greater than or equal to the current day.
+    }
 }
 \details{
 

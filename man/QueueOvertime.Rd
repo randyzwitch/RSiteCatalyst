@@ -31,6 +31,9 @@
     \item{anomalyDetection}{
     Optional. Use value of "1" to get anomaly detection results. Results only returned by API for 'Day' granularity. 
     }
+     \item{currentData}{
+    Optional. Use value of "1" to get current data results. Only needed when dateTo is greater than or equal to the current day.
+    }
 }
 \details{
 

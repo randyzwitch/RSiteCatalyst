@@ -22,7 +22,7 @@ Note that while the Shared Secret is input in plain text in the R script and sto
     
 In order to access Reporting API, user must be part of the "Web Service Access" group (under 'User Groups' in the SiteCatalyst Admin panel).
 
-To validate credentials are set properly, call GetTokenCount function to see if a valid result is returned.
+When credentials are set properly, a message of "Authentication succeeded" will be printed to the console.
 
 
 }
