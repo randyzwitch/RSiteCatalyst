@@ -20,7 +20,7 @@
     
 Note that while the Shared Secret is input in plain text in the R script and stored within an R session in a list, all user credentials are hashed using the SHA1 algorithm and converted to base64 as required by Adobe before making the API call.
     
-In order to access Reporting API, user must be part of the "Web Service Access" group (under 'User Groups' in the SiteCatalyst Admin panel).
+In order to access Reporting API, user must be part of the "Web Service Access" user group (This is set in the Admin panel).
 
 When credentials are set properly, a message of "Authentication succeeded" will be printed to the console.
 
