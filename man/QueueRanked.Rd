@@ -9,7 +9,7 @@
 The QueueRanked report is analogous to pulling a "ranked" report within SiteCatalyst. The QueueRanked function returns a data frame equivalent to pulling a Ranked report in SiteCatalyst. Correlations & Sub-Relations are supported.
 }
 \usage{
-    QueueRanked(reportSuiteID, dateFrom, dateTo, metrics, elements, top, startingWith, segment_id, selected)
+    QueueRanked(reportSuiteID, dateFrom, dateTo, metrics, elements, top, startingWith, segment_id, selected, currentData)
 }
 \arguments{
      \item{reportSuiteID}{

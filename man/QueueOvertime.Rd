@@ -7,7 +7,7 @@
     A QueueOvertime report is a report where the only granularity allowed is time. This report allows for a single report suite, time granularity, multiple metrics, and a single segment. It is similar to the "Key Metrics" report or a Custom Event report within the SiteCatalyst interface.
 }
 \usage{
-    QueueOvertime(reportSuiteID, dateFrom, dateTo, metrics, dateGranularity, segment_id, anomalyDetection)
+    QueueOvertime(reportSuiteID, dateFrom, dateTo, metrics, dateGranularity, segment_id, anomalyDetection, currentData)
 }
 \arguments{
     \item{reportSuiteID}{

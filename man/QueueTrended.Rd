@@ -9,7 +9,7 @@
 The QueueTrended report is analogous to pulling a "trended" report within SiteCatalyst, but without the limitation of only 5 elements as in the SiteCatalyst interface.
 }
 \usage{
-    QueueTrended(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top, startingWith, selected, segment_id)
+    QueueTrended(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top, startingWith, selected, segment_id, anomalyDetection, currentData)
 }
 \arguments{
     \item{reportSuiteID}{
