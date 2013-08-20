@@ -9,4 +9,4 @@ Depends: R (>= 2.15.2)
 Imports: digest, RCurl, httr, rjson, plyr, stringr
 Repository: CRAN
 Description: Functions for accessing the Adobe Analytics (Omniture SiteCatalyst) Reporting API
-License: MIT
+License: GPL-2
