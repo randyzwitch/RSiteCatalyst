@@ -79,7 +79,8 @@ QueueTrended("keystonerandy", "2013-02-13", "2013-02-19", "day",
 #Specifying two specific pages, trended by hour for pageviews in the Loyal_Visitors segment
 specific_pages_by_hour <-  
 QueueTrended("keystonerandy", "2013-02-13", "2013-02-19", "hour", 
-"pageviews", "page", selected = c("http://randyzwitch.com", "http://randyzwitch.com/about"), segment_id = "Loyal_Visitors")
+"pageviews", "page", selected = c("http://randyzwitch.com", 
+"http://randyzwitch.com/about"), segment_id = "Loyal_Visitors")
   
 )
    }
