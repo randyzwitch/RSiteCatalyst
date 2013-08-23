@@ -67,7 +67,8 @@ Note: Because of the multiple argument types ("top" and "startingWith" OR "selec
 \examples{
 \dontrun{
 
-#Top 100 pages viewed/visits for Loyal_Visitors segment, broken down by browser (correlation/subrelation)
+#Top 100 pages viewed/visits for Loyal_Visitors segment, broken down by browser 
+(correlation/subrelation)
 top100_pages <- 
 QueueRanked("keystonerandy", "2013-02-13","2013-02-28", c("pageviews"), c('page', 'browser'),
 top= "100", startingWith= "1", segment_id= "Loyal_Visitors")
