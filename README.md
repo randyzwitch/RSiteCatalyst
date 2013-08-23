@@ -53,7 +53,7 @@ The Adobe Analytics Reporting API uses a "username/shared secret" method for aut
 
 	SCAuth("username:company", "shared_secret")
 	
-If your authentication is successful, you will received a console message of "Authentication succeeded"
+If your authentication is successful, you will receive a console message of "Authentication succeeded"
 	
 ##Package documentation
 
