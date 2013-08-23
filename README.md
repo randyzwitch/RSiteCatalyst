@@ -16,7 +16,13 @@ This package requires R 2.15.2 or greater. Also, due to the number of package de
 
 ##News
 
-2013-08-11:  Version 1.1 in development to support correlations/sub-relations/anomaly detection
+2013-08-11:  Version 1.1 submitted to CRAN (master branch in sync with CRAN submission).
+
+Changes to version 1.1 include:
+- Support for correlations/sub-relations
+- Anomaly Detection
+- Current Data
+- Lower wait time between API calls/Extend number of API tries before report failure
 
 2013-04-25:  [RSiteCatalyst](http://cran.r-project.org/web/packages/RSiteCatalyst/) is now available on CRAN.
 
