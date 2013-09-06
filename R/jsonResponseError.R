@@ -10,6 +10,10 @@ jsonResponseError <- function(error_code) {
   
   return(print("401:Unauthorized, Probably a Credentials Issue or Misspelled Report Suite"))
   
+} else if(error_code == 400) {
+  
+  return(print("400:Bad Request, Probably a Credentials Issue or Misspelled Report Suite"))
+  
 } else {
   
   return(print("Unknown Error"))

@@ -1,4 +1,4 @@
-#exportPattern("^[[:alpha:]]+")
+exportPattern("^[[:alpha:]]+")
 export(CancelReport, GetAdminConsoleLog, GetAvailableElements, GetAvailableMetrics,
        GetEVars, GetReportQueue, GetReportSuites, GetSegments, GetSuccessEvents,
        GetTokenCount, GetTrafficVars, GetUsageLog, QueueOvertime, QueueRanked, 
@@ -12,3 +12,4 @@ importFrom("httr", add_headers, POST, content)
 importFrom("digest", digest)
 importFrom("rjson", toJSON, fromJSON)
 importFrom("base64enc", base64encode)
+
