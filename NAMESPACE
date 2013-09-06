@@ -4,6 +4,7 @@ export(CancelReport, GetAdminConsoleLog, GetAvailableElements, GetAvailableMetri
        GetTokenCount, GetTrafficVars, GetUsageLog, QueueOvertime, QueueRanked, 
        QueueTrended, SCAuth)
 
+
 #Import functions to please CRAN gods instead of using Depends
 importFrom("plyr", ldply, quickdf, rbind.fill)
 importFrom("stringr", str_replace_all, str_count, str_split_fixed)
