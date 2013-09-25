@@ -1,7 +1,8 @@
 #### GetRealTimeReport
 #https://developer.omniture.com/en_US/documentation/sitecatalyst-reporting/r-getrealtimereport#reference_15F98487006A4E529E6B83CA7652A1FC
 
-GetRealTimeReport <- function(report_suite, metrics, elements = "", periodMinutes = 1, periodCount = 15, periodOffset = 0, algorithm = "most popular", algorithmArgument= "linear", firstRankPeriod="0", floorSensitivity=.25) {
+GetRealTimeReport <- function(report_suite, metrics, elements = c(), periodMinutes = 1, periodCount = 15, periodOffset = 0, algorithm = "most popular", algorithmArgument= "linear", 
+                              firstRankPeriod="0", floorSensitivity=.25) {
 
   #Loop over the metrics list, appending proper curly braces
   metrics_conv <- lapply(metrics, function(x) paste('{"id":', '"', x, '"', '}', sep=""))
@@ -10,7 +11,7 @@ GetRealTimeReport <- function(report_suite, metrics, elements = "", periodMinute
   metrics_final <- paste(metrics_conv, collapse=", ") 
   
   #With no elements list, equivalent to requesting overtime report
-  if(elements == "") {
+  if(length(elements) == 0) {
   
   body <- sprintf('{
     "reportDescription": {
@@ -70,6 +71,6 @@ GetRealTimeReport <- function(report_suite, metrics, elements = "", periodMinute
   names(accum) <- c(elements, "name", "year", "month", "day", "hour", "minute", metrics_requested, paste(metrics_requested, "_total", sep=''))
   
   return(accum) #End if(length(element) == 1) logic
-}
+} 
   
 } #End function bracket
