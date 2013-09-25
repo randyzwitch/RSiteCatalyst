@@ -9,6 +9,7 @@ GetRealTimeReport <- function(report_suite, metrics, elements = "", periodMinute
   #Collapse the list into a proper comma separated string
   metrics_final <- paste(metrics_conv, collapse=", ") 
   
+  #With no elements list, equivalent to requesting overtime report
   if(elements == "") {
   
   body <- sprintf('{
@@ -32,9 +33,9 @@ GetRealTimeReport <- function(report_suite, metrics, elements = "", periodMinute
   
   return(ldply(result$data, quickdf)) #End if(element == "") logic
   
-} else {
-  
-#Element list passed
+} else if(length(elements) == 1) {
+ 
+#Element list of length 1 passed
   body <- sprintf('{
     "reportDescription": {
                           "reportSuiteID": "%s",
@@ -46,13 +47,29 @@ GetRealTimeReport <- function(report_suite, metrics, elements = "", periodMinute
                           "algorithmArgument":  "%s",
                           "firstRankPeriod": "%s",
                           "floorSensitivity": %s,
-                          "elements": [{ "id": "page" }]
+                          "elements": [{ "id": "%s" }]
                           }
-}', report_suite, metrics_final, periodMinutes, periodCount, periodOffset, algorithm, algorithmArgument, firstRankPeriod, floorSensitivity)
+}', report_suite, metrics_final, periodMinutes, periodCount, periodOffset, algorithm, algorithmArgument, firstRankPeriod, floorSensitivity, elements)
 
-} #End else bracket
+  #Make API request
+  json <- postRequest("Report.GetRealTimeReport", body)
+  #Get result from request
+  result <- content(json)[[1]]
+  
+  metrics_requested <- sapply(result[[4]], "[[", "id") #get metrics
+  elements_requested <- sapply(result[[3]], "[[", "name") #get elements
+  rows_df <- ldply(result$data, "[[", "name")  #get element as rows
+  
+  accum = data.frame()
+  for(i in 1:nrow(rows_df)){
+    temp <- ldply(result$data[[i]]$breakdown, quickdf)
+    temp <- cbind(rows_df[i,], temp)
+    accum <- rbind(accum, temp)
+  }
+  #Set names on accum data frame
+  names(accum) <- c(elements, "name", "year", "month", "day", "hour", "minute", metrics_requested, paste(metrics_requested, "_total", sep=''))
+  
+  return(accum) #End if(length(element) == 1) logic
+}
   
 } #End function bracket
-
-
-
