@@ -2,7 +2,7 @@
 export(CancelReport, GetAdminConsoleLog, GetAvailableElements, GetAvailableMetrics,
        GetEVars, GetReportQueue, GetReportSuites, GetSegments, GetSuccessEvents,
        GetTokenCount, GetTrafficVars, GetUsageLog, QueueOvertime, QueueRanked, 
-       QueueTrended, SCAuth)
+       QueueTrended, SCAuth, GetRealTimeConfiguration, SaveRealTimeConfiguration, GetRealTimeReport)
 
 
 #Import functions to please CRAN gods instead of using Depends
@@ -12,3 +12,4 @@ importFrom("httr", add_headers, POST, content)
 importFrom("digest", digest)
 importFrom("rjson", toJSON, fromJSON)
 importFrom("base64enc", base64encode)
+
