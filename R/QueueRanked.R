@@ -132,6 +132,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   
   counts <- lapply(data, "[[", "counts") # Just the "counts" column
   counts_df <- ldply(counts, quickdf) # counts as DF
+  counts_df <- as.data.frame(apply(counts_df, MARGIN=2, FUN= function(x) as.numeric(x))) #convert to numeric
   names(counts_df) <- metrics_requested
   
   return(cbind(rows_df, segment=segment_requested, counts_df)) #append rows info with counts, End JSON parsing for single element case 
@@ -148,7 +149,8 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
       names(inner_element) <- elements_requested[2]
   #Get metrics that go along with breakdown rows    
       inner_metrics <- ldply((data[[i]][["breakdown"]]), "[[", "counts")
-    names(inner_metrics) <- metrics[1:ncol(inner_metrics)]     
+      inner_metrics <- as.data.frame(apply(inner_metrics, MARGIN=2, FUN= function(x) as.numeric(x))) #convert to numeric
+      names(inner_metrics) <- metrics[1:ncol(inner_metrics)]     
   #Join all datasets together horizontally
       temp <- cbind(outer_element, inner_element, inner_metrics)
   #Append vertically to accumulator    
