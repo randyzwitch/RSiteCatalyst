@@ -8,7 +8,9 @@ Get real-time report
    
 }
 \usage{
-    GetRealTimeReport(report_suite, metrics, elements, periodMinutes, periodCount, periodOffset, algorithm, algorithmArgument, firstRankPeriod, floorSensitivity)
+    GetRealTimeReport(report_suite, metrics, elements, periodMinutes, 
+    periodCount, periodOffset, algorithm, algorithmArgument, firstRankPeriod, 
+    floorSensitivity)
 }
 \arguments{
     \item{report_suite}{
