@@ -26,14 +26,12 @@ GetRealTimeConfiguration<- function (report_suite) {
     element1 <- ""
     element2 <- ""
     element3 <- ""
-    element4 <- ""
     try(element1 <-results[[i]]$elements[1], silent = TRUE)
     try(element2 <-results[[i]]$elements[2], silent = TRUE)
     try(element3 <-results[[i]]$elements[3], silent = TRUE)
-    try(element4 <-results[[i]]$elements[4], silent = TRUE)
-    temp <- rbind(temp, cbind(paste(i), min_granularity, metric, element1, element2, element3, element4))
+    temp <- rbind(temp, cbind(paste(i), min_granularity, metric, element1, element2, element3))
   }
-  names(temp) <- c("report_number", "min_granularity", "metric", "element1", "element2", "element3", "element4")
+  names(temp) <- c("report_number", "min_granularity", "metric", "element1", "element2", "element3")
   
     
   return(temp)
