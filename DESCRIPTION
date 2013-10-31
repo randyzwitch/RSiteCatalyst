@@ -1,12 +1,12 @@
 Package: RSiteCatalyst
 Type: Package
-Title: Adobe Analytics (Omniture) Reporting API
+Title: Adobe Analytics Reporting API
 Version: 1.2
-Date: 2013-10-24
+Date: 2013-10-30
 Author: Randy Zwitch & Jowanza Joseph
 Maintainer: Randy Zwitch <rzwitch+rsitecatalyst@gmail.com>
 Depends: R (>= 2.15.2)
 Imports: digest, httr, rjson, plyr, stringr, base64enc
 Repository: CRAN
-Description: Functions for accessing the Adobe Analytics (Omniture SiteCatalyst) Reporting API
+Description: Functions for accessing the Adobe Analytics Reporting API
 License: GPL-2
