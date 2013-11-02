@@ -27,6 +27,9 @@ Maintainer: Randy Zwitch <rzwitch+rsitecatalyst@gmail.com>
 \references{
 Official Adobe Analytics API documentation: \cr \cr
 https://developer.omniture.com/en_US/documentation
+
+For support & bugs, please use GitHub repository: \cr \cr
+https://github.com/randyzwitch/RSiteCatalyst
 }
 
 \keyword{ package }
