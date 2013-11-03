@@ -2,7 +2,7 @@
 export(CancelReport, GetAdminConsoleLog, GetAvailableElements, GetAvailableMetrics,
        GetEVars, GetReportQueue, GetReportSuites, GetSegments, GetSuccessEvents,
        GetTokenCount, GetTrafficVars, GetUsageLog, QueueOvertime, QueueRanked, 
-       QueueTrended, SCAuth, GetRealTimeConfiguration, SaveRealTimeConfiguration, GetRealTimeReport)
+       QueueTrended, SCAuth)
 
 
 #Import functions to please CRAN gods instead of using Depends
