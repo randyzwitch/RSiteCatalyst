@@ -25,7 +25,7 @@ Changes in version 1.2 include
 - Fixed bug in GetEVars function
 - Added validate:true flag to API to improve error reporting
 
-Version 1.2 was developed on OSX Lion using R 3.0.2 & validated against OSX Lion, Ubuntu 12.04 LTS and Windows 7 64-bit SP1. Further validation against Windows 7 & Windows 8 is planned.
+Version 1.2 was developed on OSX Lion using R 3.0.2 & validated against OSX Lion, Ubuntu 12.04 LTS and Windows 7 64-bit SP1 and Windows 8.1 64-bit. Further validation against Windows 7 & Windows 8 is planned, but currently, there are no known issues with any operating system specifically, as there is no operating-system-specific code in this library.
 
 2013-08-11:  Version 1.1 submitted to CRAN (master branch in sync with CRAN submission).
 
