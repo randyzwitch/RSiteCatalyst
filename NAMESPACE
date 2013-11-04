@@ -4,10 +4,12 @@ export(CancelReport, GetAdminConsoleLog, GetAvailableElements, GetAvailableMetri
        GetTokenCount, GetTrafficVars, GetUsageLog, QueueOvertime, QueueRanked, 
        QueueTrended, SCAuth)
 
+
 #Import functions to please CRAN gods instead of using Depends
 importFrom("plyr", ldply, quickdf, rbind.fill)
 importFrom("stringr", str_replace_all, str_count, str_split_fixed)
 importFrom("httr", add_headers, POST, content)
 importFrom("digest", digest)
 importFrom("rjson", toJSON, fromJSON)
-importFrom("RCurl", base64)
+importFrom("base64enc", base64encode)
+

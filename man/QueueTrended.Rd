@@ -23,7 +23,7 @@ The QueueTrended report is analogous to pulling a "trended" report within SiteCa
         Report End Date in "YYYY-MM-DD" format
     }
     \item{dateGranularity}{
-        "Day"", "Week"", "Month"", "Quarter"" or "Year"" (case-insensitive).
+        "Day", "Week", "Month", "Quarter" or "Year" (case-insensitive).
     }
     \item{metric}{
        The metric you want to trend.

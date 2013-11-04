@@ -13,7 +13,7 @@ result <- content(json)
 }
 
 if(length(result) ==0) {
-  warning("There are no reports in the Report Queue")
+  return("There are no reports in the Report Queue")
 } else {
 return(result)
 }

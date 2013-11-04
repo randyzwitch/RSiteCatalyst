@@ -1,6 +1,6 @@
 #RSiteCatalyst
 
-R package to access Adobe Analytics (Omniture SiteCatalyst) REST Reporting API. 
+R package to access Adobe Analytics REST Reporting API. 
 
 This package is meant as an "analyst's toolbox" of functions to get digital analytics data from Adobe Analytics into R for more advanced reporting and analysis. While there are a few administrative functions that provide insight into Report Suite structure (such as available eVars/props/segments/etc), this package is not meant to be used for Report Suite Administration.
 
@@ -15,6 +15,17 @@ This package requires R 2.15.2 or greater. Also, due to the number of package de
 	stringr: 0.6.2
 
 ##News
+
+2013-11-04: Version 1.2 submitted to CRAN
+
+Changes in version 1.2 include
+- Removed RCurl package dependency
+- Changed argument order for GetAdminConsoleLog to avoid error when date not passed
+- Return proper numeric type for metric columns
+- Fixed bug in GetEVars function
+- Added validate:true flag to API to improve error reporting
+
+Version 1.2 was developed on OSX Lion using R 3.0.2 & validated against OSX Lion, Ubuntu 12.04 LTS. Further validation against Windows 7 & Windows 8 is planned.
 
 2013-08-11:  Version 1.1 submitted to CRAN (master branch in sync with CRAN submission).
 
@@ -39,12 +50,12 @@ To load this package from GitHub, use the following commands. Note, this should 
 
 Install the [devtools](https://github.com/hadley/devtools) package:
 
-  	install.packages("devtools")
+  install.packages("devtools")
 	library(devtools)
 
 And then run the `install_github` command:
 
-	install_github("RSiteCatalyst", "randyzwitch", ref = "master")
+	install_github("RSiteCatalyst", "randyzwitch", ref = "version_1_2")
 	library(RSiteCatalyst)
 
 ##Authentication

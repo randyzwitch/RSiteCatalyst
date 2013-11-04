@@ -24,7 +24,8 @@ QueueOvertime <- function(reportSuiteID, dateFrom, dateTo, metrics, dateGranular
     "metrics": [%s],
     "segment_id": "%s",
     "anomalyDetection": "%s",
-    "currentData": "%s"
+    "currentData": "%s",
+    "validate": true
   }
 }', reportSuiteID, dateFrom, dateTo, dateGranularity, metrics_final, segment_id, anomalyDetection, currentData)
 
@@ -90,6 +91,8 @@ rows_df <- cbind(rows_df, segment=result[[5]]$segment_id) #add segment to df
 
 counts <- lapply(data, "[[", "counts") # Just the "counts" column
 counts_df <- ldply(counts, quickdf) # counts as DF
+counts_df <- as.data.frame(apply(counts_df, MARGIN=2, FUN= function(x) as.numeric(x))) #convert to numeric
+  
 names(counts_df) <- lapply(result[[5]]$metrics, "[[", "id") #assign names to counts_df
 
 #Parse anomalyDetection if requested  
@@ -98,14 +101,17 @@ if(anomalyDetection == "1" & dateGranularity == "day") {
 
   ub <- lapply(data, "[[", "upper_bounds") # Upper Bounds
   ub_df <- ldply(ub, quickdf) # upper bound as DF
+  ub_df <- as.data.frame(apply(ub_df, MARGIN=2, FUN= function(x) as.numeric(x))) #convert to numeric
   names(ub_df) <- lapply(lapply(result[[5]]$metrics, "[[", "id"), function(x) paste(x, "_upper", sep=""))
   
   forecasts <- lapply(data, "[[", "forecasts") # forecasted value
   forecasts_df <- ldply(forecasts, quickdf) # forecast as DF
+  forecasts_df <- as.data.frame(apply(forecasts_df, MARGIN=2, FUN= function(x) as.numeric(x))) #convert to numeric
   names(forecasts_df) <- lapply(lapply(result[[5]]$metrics, "[[", "id"), function(x) paste(x, "_forecast", sep=""))
   
   lb <- lapply(data, "[[", "lower_bounds") # lower Bounds
   lb_df <- ldply(lb, quickdf) # lower bound as DF
+  lb_df <- as.data.frame(apply(lb_df, MARGIN=2, FUN= function(x) as.numeric(x))) #convert to numeric
   names(lb_df) <- lapply(lapply(result[[5]]$metrics, "[[", "id"), function(x) paste(x, "_lower", sep=""))
   
   return(cbind(rows_df, counts_df, ub_df, forecasts_df, lb_df)) #return after anomaly parsing

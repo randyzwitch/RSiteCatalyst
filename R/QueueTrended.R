@@ -29,7 +29,8 @@ if(top != "") {
      "elements" : [{"id":"%s", "top": "%s", "startingWith": "%s" }],
      "segment_id": "%s",
      "anomalyDetection": "%s",
-     "currentData": "%s"
+     "currentData": "%s",
+     "validate": true
     }
 }', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top, startingWith, segment_id, anomalyDetection, currentData)
   
@@ -49,7 +50,8 @@ if(top != "") {
      "elements" : [{"id":"%s", "selected": %s }],
      "segment_id": "%s",
      "anomalyDetection": "%s",
-     "currentData": "%s"
+     "currentData": "%s",
+     "validate": true
     }
 }', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, selected, segment_id, anomalyDetection, currentData)
   
@@ -110,6 +112,7 @@ data <- result[[5]]$data #Just the data portion of the JSON result
 
 #Returns total by element (e.g. pageviews by page)
 totals_by_element <- ldply(lapply(data, "[", c("name", "counts")), quickdf)
+totals_by_element$counts <- as.numeric(totals_by_element$counts)
 names(totals_by_element) <- c("name", metric_requested) #add title to "counts"
 
 #Create a table by page by day
@@ -123,14 +126,23 @@ for(element in 1:length(data)) {
     granular_table <- rbind(granular_table, temp) #append temp to results table
 }
 
+
 #Check to see if enough columns for hour
 if(anomalyDetection== 1){
-names(granular_table) <- c(element_requested, "name", "year", "month", "day",metric_requested, paste(metric_requested, "_upper", sep=""), paste(metric_requested, "_lower", sep=""), paste(metric_requested, "_forecast", sep=""), paste(metric_requested, "_forselectedelements", sep=""))  
-}
-else if(ncol(granular_table) == 8){
-names(granular_table) <- c(element_requested, "name", "year", "month", "day","hour", metric_requested, paste(metric_requested, "_forselectedelements", sep=""))
+  for(i in 6:10){
+    granular_table[[i]] <- as.numeric(granular_table[[i]])
+  }
+  names(granular_table) <- c(element_requested, "name", "year", "month", "day",metric_requested, paste(metric_requested, "_upper", sep=""), paste(metric_requested, "_lower", sep=""), paste(metric_requested, "_forecast", sep=""), paste(metric_requested, "_forselectedelements", sep=""))  
+} else if(ncol(granular_table) == 8){
+  for(i in 7:8){
+    granular_table[[i]] <- as.numeric(granular_table[[i]])
+  }  
+  names(granular_table) <- c(element_requested, "name", "year", "month", "day","hour", metric_requested, paste(metric_requested, "_forselectedelements", sep=""))
 } else {
-names(granular_table) <- c(element_requested, "name", "year", "month", "day", metric_requested, paste(metric_requested, "_forselectedelements", sep=""))
+  for(i in 6:7){
+    granular_table[[i]] <- as.numeric(granular_table[[i]])
+  }  
+    names(granular_table) <- c(element_requested, "name", "year", "month", "day", metric_requested, paste(metric_requested, "_forselectedelements", sep=""))
 }
 
 granular_table$segment <- segment_requested #append segment to data frame

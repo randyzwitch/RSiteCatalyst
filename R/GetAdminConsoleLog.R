@@ -1,7 +1,7 @@
 #GetAdminConsoleLog  - By report suite, get all admin actions for a period of time
 #There's a limit of 1000 records returned, so put in documentation to be careful
   
-GetAdminConsoleLog <- function(start_date=as.character(Sys.Date()-1), end_date=as.character(Sys.Date()), report_suites) {
+GetAdminConsoleLog <- function(report_suites, start_date=as.character(Sys.Date()-1), end_date=as.character(Sys.Date())) {
   #Make sure dates are in right order
   if(start_date > end_date) {
     stop("'start_date' is more recent than 'end_date'")

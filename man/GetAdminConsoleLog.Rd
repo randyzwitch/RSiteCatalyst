@@ -5,19 +5,19 @@
     Get all Report Suite actions made by Admins during a given time period.
 }
 \usage{
-    GetAdminConsoleLog(start_date, end_date, report_suites)
+    GetAdminConsoleLog(report_suites, start_date, end_date)
 }
 \arguments{
+    \item{report_suites}{
+        One or more Report Suites
+    }
     \item{start_date}{
         Optional: Start date of report, in "YYYY-MM-DD" format. If argument not set in function call, defaults to Sys.Date() - 1
     }
     \item{end_date}{
         Optional: End date of report, in "YYYY-MM-DD" format. If argument not set in function call, defaults to Sys.Date()
     }
-    \item{report_suites}{
-        One or more Report Suites
-    }
-   
+
 }
 \details{
     This report is administrative in nature, for users interested in understanding how changes have been made to the SiteCatalyst implementation.
@@ -31,11 +31,11 @@
 \examples{
 \dontrun{
 
-admin_console <- GetAdminConsoleLog("2013-01-01", "2013-02-20",c("keystonerandy", 
-"keystonejowanza", "keystonejoel"))
+admin_console <- GetAdminConsoleLog(c("keystonerandy", 
+"keystonejowanza", "keystonejoel"), "2013-01-01", "2013-02-20")
 
 #Be careful of 1000 limit when passing entire list of rsid's
-admin_console <- GetAdminConsoleLog("2012-01-01", "2013-02-20",report_suites$rsid)
+admin_console <- GetAdminConsoleLog(report_suites$rsid, "2012-01-01", "2013-02-20")
 
    } 
     
