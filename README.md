@@ -16,11 +16,14 @@ This package requires R 2.15.2 or greater. Also, due to the number of package de
 
 ##News
 
-2013-10-30: Version 1.2 changes thus far include:
+2013-11-04: Version 1.2 submitted to CRAN
+
+Changes in version 1.2 include
 - Removed RCurl package dependency
 - Changed argument order for GetAdminConsoleLog to avoid error when date not passed
 - Return proper numeric type for metric columns
-- Some support for real-time reports
+- Fixed bug in GetEVars function
+- Added validate:true flag to API to improve error reporting
 
 
 2013-08-11:  Version 1.1 submitted to CRAN (master branch in sync with CRAN submission).

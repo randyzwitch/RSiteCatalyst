@@ -14,7 +14,7 @@ This package is not intended for Adobe Analytics Administration.
 Package: \tab RSiteCatalyst\cr
 Type: \tab Package\cr
 Version: \tab 1.2\cr
-Date: \tab 2013-10-30\cr
+Date: \tab 2013-11-04\cr
 License: \tab GPL-2\cr
 }
 }
