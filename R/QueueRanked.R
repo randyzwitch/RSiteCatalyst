@@ -2,7 +2,6 @@
 #Corresponds to pulling a ranked report
 #This API method seems to be most complicated to return a valid result
 
-
 QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top="", startingWith="", segment_id="", selected="", currentData=""){
   
   #1.  Send API request to build report- QueueRanked
@@ -42,7 +41,8 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
      "metrics": [%s],
      "elements" : [%s],
      "segment_id": "%s",
-     "currentData": "%s"
+     "currentData": "%s",
+     "validate": true
     }
 }', reportSuiteID, dateFrom, dateTo, metrics_final, elements_list,segment_id, currentData)
   } else {
@@ -65,7 +65,8 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
      "metrics": [%s],
      "elements" : [%s],
      "segment_id": "%s",
-     "currentData": "%s"
+     "currentData": "%s",
+     "validate": true
     }
 }', reportSuiteID, dateFrom, dateTo, metrics_final, elements_list, segment_id, currentData)
     

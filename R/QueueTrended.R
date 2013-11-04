@@ -29,7 +29,8 @@ if(top != "") {
      "elements" : [{"id":"%s", "top": "%s", "startingWith": "%s" }],
      "segment_id": "%s",
      "anomalyDetection": "%s",
-     "currentData": "%s"
+     "currentData": "%s",
+     "validate": true
     }
 }', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top, startingWith, segment_id, anomalyDetection, currentData)
   
@@ -49,7 +50,8 @@ if(top != "") {
      "elements" : [{"id":"%s", "selected": %s }],
      "segment_id": "%s",
      "anomalyDetection": "%s",
-     "currentData": "%s"
+     "currentData": "%s",
+     "validate": true
     }
 }', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, selected, segment_id, anomalyDetection, currentData)
   
