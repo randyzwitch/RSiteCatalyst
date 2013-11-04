@@ -24,7 +24,8 @@ QueueOvertime <- function(reportSuiteID, dateFrom, dateTo, metrics, dateGranular
     "metrics": [%s],
     "segment_id": "%s",
     "anomalyDetection": "%s",
-    "currentData": "%s"
+    "currentData": "%s",
+    "validate": true
   }
 }', reportSuiteID, dateFrom, dateTo, dateGranularity, metrics_final, segment_id, anomalyDetection, currentData)
 
