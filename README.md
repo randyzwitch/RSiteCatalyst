@@ -25,7 +25,7 @@ Changes in version 1.2 include
 - Fixed bug in GetEVars function
 - Added validate:true flag to API to improve error reporting
 
-Version 1.2 was developed on OSX Lion using R 3.0.2 & validated against OSX Lion, Ubuntu 12.04 LTS. Further validation against Windows 7 & Windows 8 is planned.
+Version 1.2 was developed on OSX Lion using R 3.0.2 & validated against OSX Lion, Ubuntu 12.04 LTS and Windows 7 64-bit SP1. Further validation against Windows 7 & Windows 8 is planned.
 
 2013-08-11:  Version 1.1 submitted to CRAN (master branch in sync with CRAN submission).
 
@@ -50,7 +50,7 @@ To load this package from GitHub, use the following commands. Note, this should 
 
 Install the [devtools](https://github.com/hadley/devtools) package:
 
-  install.packages("devtools")
+  	install.packages("devtools")
 	library(devtools)
 
 And then run the `install_github` command:
