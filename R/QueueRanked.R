@@ -153,7 +153,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
       inner_metrics <- as.data.frame(apply(inner_metrics, MARGIN=2, FUN= function(x) as.numeric(x))) #convert to numeric
       names(inner_metrics) <- metrics[1:ncol(inner_metrics)]     
   #Join all datasets together horizontally
-      temp <- cbind(outer_element, inner_element, inner_metrics)
+      temp <- cbind(outer_element, inner_element, segment=segment_requested, inner_metrics)
   #Append vertically to accumulator    
       accumulator <- rbind(accumulator, temp)
       if(i == length(data) && ncol(inner_metrics) < length(metrics)){
