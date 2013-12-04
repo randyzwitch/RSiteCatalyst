@@ -10,7 +10,7 @@ The QueueRanked report is analogous to pulling a "ranked" report within SiteCata
 }
 \usage{
     QueueRanked(reportSuiteID, dateFrom, dateTo, metrics, elements, top, 
-    startingWith, segment_id, selected, currentData)
+    startingWith, segment_id, selected, currentData, maxTries, waitTime)
 }
 \arguments{
      \item{reportSuiteID}{
@@ -45,11 +45,19 @@ The element(s) (page, browser, eVar, prop) for the report to be broken down by.
      \item{currentData}{
     Optional. Use value of "1" to get current data results. Only needed when dateTo is greater than or equal to the current day.
     }
+    \item{maxTries}{
+    Optional. Provide integer value for the max number of API attempts you want
+    to try retrieve the report before function errors out. Defaults to 120.
+    }
+    \item{waitTime}{
+    Optional. Provide integer value for the number of seconds between tries to
+    API to try retrieve the report. Defaults to 5 seconds.
+    }
 }
 \details{
 
 
-Because of the Reporting API structure, this function first requests the report, then checks the reporting queue to see if the report is completed, and when the report returns as "done" pulls the report from the API. This checking process can occur up to 120 times, with a 5 second delay between status checks. If the report does not return as "done" after 10 minutes, the function returns an error.
+Because of the Reporting API structure, this function first requests the report, then checks the reporting queue to see if the report is completed, and when the report returns as "done" pulls the report from the API. This checking process will occur up to the specified number of times (default 120), with a delay between status checks (default 5 seconds). If the report does not return as "done" after the number of tries have completed, the function will return an error message.
 
 Note: Because of the multiple argument types ("top" and "startingWith" OR "selected"), keyword arguments are generally needed towards the end of the function call instead of just positional arguments.
    

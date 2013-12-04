@@ -2,7 +2,7 @@
 #QueueOvertime supports one breakdown element with multiple element values, 
 #multiple metrics, and single segment
 
-QueueOvertime <- function(reportSuiteID, dateFrom, dateTo, metrics, dateGranularity="", segment_id="", anomalyDetection="", currentData="") {
+QueueOvertime <- function(reportSuiteID, dateFrom, dateTo, metrics, dateGranularity="", segment_id="", anomalyDetection="", currentData="", maxTries= 120, waitTime= 5) {
 
   if(anomalyDetection == "1" & dateGranularity!="day") {
     stop("Error: Anomaly Detection only provided for day granularity")
@@ -49,7 +49,7 @@ if(queue_resp[1] != "queued" ) {
 }
 
 #Check to see whether report is done. while loop with 
-#Sys.sleep waits 10 seconds before trying again
+#Sys.sleep waits waitTime seconds before trying again
 print("Checking report status: Attempt Number 1")
 reportDone <- GetStatus(reportID)
 
@@ -58,9 +58,9 @@ if(reportDone == "failed") {
 }
 
 num_tries <- 1
-while(reportDone != "done" && num_tries < 120){
+while(reportDone != "done" && num_tries < maxTries){
   num_tries <- num_tries + 1
-  Sys.sleep(5)
+  Sys.sleep(waitTime)
   print(paste("Checking report status: Attempt Number", num_tries))
   reportDone <- GetStatus(reportID)
   
