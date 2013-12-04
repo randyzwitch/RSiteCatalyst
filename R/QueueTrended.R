@@ -4,7 +4,7 @@
 #(product, category, page, and so forth).
 
 
-QueueTrended <- function(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top="", startingWith="", selected= "", segment_id="", anomalyDetection="", currentData="") {
+QueueTrended <- function(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top="", startingWith="", selected= "", segment_id="", anomalyDetection="", currentData="", maxTries= 120, waitTime= 5) {
 
   #Error check to see if function call using both parameters
 if(top!= "" && selected != "") {
@@ -86,9 +86,9 @@ if(reportDone == "failed") {
 }
 
 num_tries <- 1
-while(reportDone != "done" && num_tries < 120){
+while(reportDone != "done" && num_tries < maxTries){
   num_tries <- num_tries + 1
-  Sys.sleep(5)
+  Sys.sleep(waitTime)
   print(paste("Checking report status: Attempt Number", num_tries))
   reportDone <- GetStatus(reportID)
   

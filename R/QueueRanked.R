@@ -2,7 +2,7 @@
 #Corresponds to pulling a ranked report
 #This API method seems to be most complicated to return a valid result
 
-QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top="", startingWith="", segment_id="", selected="", currentData=""){
+QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top="", startingWith="", segment_id="", selected="", currentData="", maxTries= 120, waitTime= 5){
   
   #1.  Send API request to build report- QueueRanked
   
@@ -91,7 +91,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   }
   
   #Check to see whether report is done. while loop with 
-  #Sys.sleep waits 10 seconds before trying again
+  #Sys.sleep waits waitTime seconds before trying again
   print("Checking report status: Attempt Number 1")
   reportDone <- GetStatus(reportID)
   
@@ -100,9 +100,9 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   }
   
   num_tries <- 1
-  while(reportDone != "done" && num_tries < 120){
+  while(reportDone != "done" && num_tries < maxTries){
     num_tries <- num_tries + 1
-    Sys.sleep(5)
+    Sys.sleep(waitTime)
     print(paste("Checking report status: Attempt Number", num_tries))
     reportDone <- GetStatus(reportID)
     
