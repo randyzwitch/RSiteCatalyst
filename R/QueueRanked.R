@@ -30,7 +30,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
       if(length(elements) == 1) {
         elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}', elements,top, startingWith)
       } else {
-        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}, {"id":"%s", "top":"1000"}', elements[1],top, startingWith, elements[2])
+        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}, {"id":"%s"}', elements[1],top, startingWith, elements[2])
       }
     
   json_request <-sprintf(
@@ -54,7 +54,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     if(length(elements) == 1) {
       elements_list = sprintf('{"id":"%s", "selected":%s }', elements, selected)
     } else {
-      elements_list = sprintf('{"id":"%s", "selected":%s }, {"id":"%s", "top":"1000"}', elements[1],selected, elements[2])
+      elements_list = sprintf('{"id":"%s", "selected":%s }, {"id":"%s"}', elements[1],selected, elements[2])
     }
     
     json_request <- sprintf(
