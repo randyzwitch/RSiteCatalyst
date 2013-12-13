@@ -3,8 +3,7 @@
 #(revenue, orders, views, and so forth) and element 
 #(product, category, page, and so forth).
 
-
-QueueTrended <- function(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top="", startingWith="", selected= "", segment_id="", anomalyDetection="", currentData="", maxTries= 120, waitTime= 5) {
+QueueTrended <- function(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top="", startingWith="", selected= "", segment_id="", anomalyDetection="", currentData="", searchType="", searchKW="", maxTries= 120, waitTime= 5) {
 
   #Error check to see if function call using both parameters
 if(top!= "" && selected != "") {
@@ -19,6 +18,18 @@ if(anomalyDetection == "1" & dateGranularity!="day") {
 #Build JSON request for "Top" functionality
 
 if(top != "") {
+  
+  #Add quotes around regexes
+  searchKW2 <- lapply(searchKW, function(x) paste('"', x, '"', sep=""))
+  #Create string from quoted list above
+  searchKW2 <- paste(searchKW2, collapse= ", ")
+  
+    elements_list = sprintf('{"id":"%s", 
+                                  "top": "%s", 
+                                  "startingWith":"%s",
+                                  "search":{"type":"%s", "keywords":[%s]}
+                                  }', element, top, startingWith, searchType, searchKW2)
+
   json_request <- sprintf(
     '{"reportDescription":
     {"reportSuiteID" :"%s",
@@ -26,13 +37,13 @@ if(top != "") {
      "dateTo":"%s",
      "dateGranularity":"%s",
      "metrics": [{"id":"%s"}],
-     "elements" : [{"id":"%s", "top": "%s", "startingWith": "%s" }],
+     "elements" : [%s],
      "segment_id": "%s",
      "anomalyDetection": "%s",
      "currentData": "%s",
      "validate": true
     }
-}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top, startingWith, segment_id, anomalyDetection, currentData)
+}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, elements_list, segment_id, anomalyDetection, currentData)
   
 }  else {
   

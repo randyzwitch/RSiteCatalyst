@@ -47,18 +47,10 @@ The element(s) (page, browser, eVar, prop) for the report to be broken down by.
     Optional. Use value of "1" to get current data results. Only needed when dateTo is greater than or equal to the current day.
     }
      \item{searchType}{
-<<<<<<< HEAD
     Optional. An enumerated list of boolean values used to link multiple search terms in a report search. Takes values of "AND", "OR" or "NOT".
     }
      \item{searchKW}{
     Optional. A list of keywords to include or exclude from the search, based on the searchType. Keyword values can also leverage the following special characters: '*' (Wild card), '^' (Starts With), '$' (Ends With).
-=======
-    Optional. Use "AND", "OR" or "NOT" to identify how multiple regex values 
-    should be applied when using regex search
-    }
-     \item{searchKW}{
-    Optional. Regex values passed in as character list
->>>>>>> 3aae9808c50fca3bb5aaf8341fea49243e4a7749
     }    
     
     \item{maxTries}{
