@@ -1,8 +1,8 @@
 #QueueRanked report
 #Corresponds to pulling a ranked report
 #This API method seems to be most complicated to return a valid result
-
-QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top="", startingWith="", segment_id="", selected="", currentData="", maxTries= 120, waitTime= 5){
+  
+QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top="", startingWith="", segment_id="", selected="", currentData="", searchType="", searchKW="", maxTries= 120, waitTime= 5){
   
   #1.  Send API request to build report- QueueRanked
   
@@ -27,10 +27,23 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     
   #Modify element list based on whether it has one or two values   
   
+    #Add quotes around regexes
+    searchKW2 <- lapply(searchKW, function(x) paste('"', x, '"', sep=""))
+    #Create string from quoted list above
+    searchKW2 <- paste(searchKW2, collapse= ", ")
+
       if(length(elements) == 1) {
-        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}', elements,top, startingWith)
+        elements_list = sprintf('{"id":"%s", 
+                                  "top": "%s", 
+                                  "startingWith":"%s",
+                                  "search":{"type":"%s", "keywords":[%s]}
+                                  }', elements, top, startingWith, searchType, searchKW2)
       } else {
-        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}, {"id":"%s"}', elements[1],top, startingWith, elements[2])
+        elements_list = sprintf('{"id":"%s", 
+                                  "top": "%s", 
+                                  "startingWith":"%s",
+                                  "search":{"type":"%s", "keywords":[%s]}},
+                                  {"id":"%s"}', elements[1],top, startingWith, searchType, searchKW2, elements[2])
       }
     
   json_request <-sprintf(
