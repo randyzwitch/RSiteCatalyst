@@ -10,7 +10,8 @@ The QueueRanked report is analogous to pulling a "ranked" report within SiteCata
 }
 \usage{
     QueueRanked(reportSuiteID, dateFrom, dateTo, metrics, elements, top, 
-    startingWith, segment_id, selected, currentData, maxTries, waitTime)
+    startingWith, segment_id, selected, currentData, searchType, searchKW,
+    maxTries, waitTime)
 }
 \arguments{
      \item{reportSuiteID}{
@@ -45,6 +46,13 @@ The element(s) (page, browser, eVar, prop) for the report to be broken down by.
      \item{currentData}{
     Optional. Use value of "1" to get current data results. Only needed when dateTo is greater than or equal to the current day.
     }
+     \item{searchType}{
+    Optional. An enumerated list of boolean values used to link multiple search terms in a report search. Takes values of "AND", "OR" or "NOT".
+    }
+     \item{searchKW}{
+    Optional. A list of keywords to include or exclude from the search, based on the searchType. Keyword values can also leverage the following special characters: '*' (Wild card), '^' (Starts With), '$' (Ends With).
+    }    
+    
     \item{maxTries}{
     Optional. Provide integer value for the max number of API attempts you want
     to try retrieve the report before function errors out. Defaults to 120.
