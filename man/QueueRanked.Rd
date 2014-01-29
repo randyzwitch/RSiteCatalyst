@@ -6,7 +6,7 @@
 \description{
     A QueueRanked report is a report that shows the ranking of values for one or more elements relative to a metric, aggregated over the time period selected.
     
-The QueueRanked report is analogous to pulling a "ranked" report within SiteCatalyst. The QueueRanked function returns a data frame equivalent to pulling a Ranked report in SiteCatalyst. Correlations & Sub-Relations are supported.
+The QueueRanked function returns a data frame equivalent to pulling a Ranked report in SiteCatalyst. Correlations & Sub-Relations are supported.
 }
 \usage{
     QueueRanked(reportSuiteID, dateFrom, dateTo, metrics, elements, top, 
