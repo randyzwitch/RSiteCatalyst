@@ -54,9 +54,8 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
      "metrics": [%s],
      "elements" : [%s],
      "segment_id": "%s",
-     "currentData": "%s",
-     "validate": true
-    }
+     "currentData": "%s"
+    },"validate": true
 }', reportSuiteID, dateFrom, dateTo, metrics_final, elements_list,segment_id, currentData)
   } else {
     
@@ -78,9 +77,8 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
      "metrics": [%s],
      "elements" : [%s],
      "segment_id": "%s",
-     "currentData": "%s",
-     "validate": true
-    }
+     "currentData": "%s"
+    }, "validate": true
 }', reportSuiteID, dateFrom, dateTo, metrics_final, elements_list, segment_id, currentData)
     
   }  

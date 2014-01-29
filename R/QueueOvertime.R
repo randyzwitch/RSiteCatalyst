@@ -24,9 +24,8 @@ QueueOvertime <- function(reportSuiteID, dateFrom, dateTo, metrics, dateGranular
     "metrics": [%s],
     "segment_id": "%s",
     "anomalyDetection": "%s",
-    "currentData": "%s",
-    "validate": true
-  }
+    "currentData": "%s"
+  }, "validate": true
 }', reportSuiteID, dateFrom, dateTo, dateGranularity, metrics_final, segment_id, anomalyDetection, currentData)
 
 #1.  Send API request to build report- QueueOvertime

@@ -40,9 +40,8 @@ if(top != "") {
      "elements" : [%s],
      "segment_id": "%s",
      "anomalyDetection": "%s",
-     "currentData": "%s",
-     "validate": true
-    }
+     "currentData": "%s"
+    }, "validate": true
 }', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, elements_list, segment_id, anomalyDetection, currentData)
   
 }  else {
@@ -61,9 +60,8 @@ if(top != "") {
      "elements" : [{"id":"%s", "selected": %s }],
      "segment_id": "%s",
      "anomalyDetection": "%s",
-     "currentData": "%s",
-     "validate": true
-    }
+     "currentData": "%s"
+    }, "validate": true
 }', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, selected, segment_id, anomalyDetection, currentData)
   
 }
