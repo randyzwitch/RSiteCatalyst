@@ -54,7 +54,7 @@ The QueueTrended report is analogous to pulling a "trended" report within SiteCa
     Optional. An enumerated list of boolean values used to link multiple search terms in a report search. Takes values of "AND", "OR" or "NOT".
     }
      \item{searchKW}{
-    Optional. A list of keywords to include or exclude from the search, based on the searchType. Keyword values can also leverage the following special characters: '*' (Wild card), '^' (Starts With), '$' (Ends With).
+    Optional. A list of keywords to include or exclude from the search, based on the searchType. Keyword values can also leverage the following special characters: '*' (Wild card), '^' (Starts With), '$' (Ends With). "Top" argument required when using regex functionality.
     }    
     \item{maxTries}{
     Optional. Provide integer value for the max number of API attempts you want

@@ -50,7 +50,7 @@ The element(s) (page, browser, eVar, prop) for the report to be broken down by.
     Optional. An enumerated list of boolean values used to link multiple search terms in a report search. Takes values of "AND", "OR" or "NOT".
     }
      \item{searchKW}{
-    Optional. A list of keywords to include or exclude from the search, based on the searchType. Keyword values can also leverage the following special characters: '*' (Wild card), '^' (Starts With), '$' (Ends With).
+    Optional. A list of keywords to include or exclude from the search, based on the searchType. Keyword values can also leverage the following special characters: '*' (Wild card), '^' (Starts With), '$' (Ends With). "Top" argument required when using regex functionality.
     }    
     
     \item{maxTries}{

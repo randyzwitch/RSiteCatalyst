@@ -17,6 +17,11 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     stop("API only supports a maximum of two elements")
   }
   
+  if(searchKW != "" && top == "") {
+    
+    stop("Top argument required when using searchKW")
+  }
+  
   #Loop over the metrics list, appending proper curly braces
   metrics_conv <- lapply(metrics, function(x) paste('{"id":', '"', x, '"', '}', sep=""))
   #Collapse the list into a proper comma separated string
@@ -39,11 +44,13 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
                                   "search":{"type":"%s", "keywords":[%s]}
                                   }', elements, top, startingWith, searchType, searchKW2)
       } else {
+        #Hard-coded value of 1000000 is to make sure "all" sub-relation values provided without needing another
+        #parameter in the function call
         elements_list = sprintf('{"id":"%s", 
                                   "top": "%s", 
                                   "startingWith":"%s",
                                   "search":{"type":"%s", "keywords":[%s]}},
-                                  {"id":"%s"}', elements[1],top, startingWith, searchType, searchKW2, elements[2])
+                                  {"id":"%s", "top":"1000000"}', elements[1],top, startingWith, searchType, searchKW2, elements[2])
       }
     
   json_request <-sprintf(
@@ -66,7 +73,11 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     if(length(elements) == 1) {
       elements_list = sprintf('{"id":"%s", "selected":%s }', elements, selected)
     } else {
-      elements_list = sprintf('{"id":"%s", "selected":%s }, {"id":"%s"}', elements[1],selected, elements[2])
+      
+      #Hard-coded value of 1000000 is to make sure "all" sub-relation values provided without needing another
+      #parameter in the function call
+      
+      elements_list = sprintf('{"id":"%s", "selected":%s }, {"id":"%s", "top":"1000000"}', elements[1],selected, elements[2])
     }
     
     json_request <- sprintf(

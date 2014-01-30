@@ -14,6 +14,11 @@ if(top!= "" && selected != "") {
 if(anomalyDetection == "1" & dateGranularity!="day") {
   stop("Error: Anomaly Detection only provided for day granularity")
 }
+
+if(searchKW != "" && top == "") {
+  
+  stop("Top argument required when using searchKW")
+}
   
 #Build JSON request for "Top" functionality
 
