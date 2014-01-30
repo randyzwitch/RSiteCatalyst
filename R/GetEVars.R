@@ -1,64 +1,30 @@
-#GetEVars- Get evars for a single or multiple report suites
-#This one could use minor cleanup
+#' GetEvars
+#'
+#' Gets available report suite evars
+#'
+#' @param reportsuite.ids report suite id (or list of report suite ids)
+#'
+#' @return List of valid evars
+#'
+#' @export
 
-GetEVars <- function (report_suites) {
+GetEvars <- function(reportsuite.ids) {
+  
+  report.description <- c()
+  report.description$rsid_list <- reportsuite.id
 
-#Converts report_suites to JSON
-if(length(report_suites)>1){
-  report_suites <- toJSON(report_suites)
-} else {
-  report_suites <- toJSON(list(report_suites))
+  valid.evars <- ApiRequest(body=toJSON(report.description),func.name="ReportSuite.GetEvars")
+
+  evars.formatted <- data.frame()
+  for (i in 1:length(valid.evars$rsid) ) {
+    valid.evars$evars[[i]]$report_suite <- valid.evars$rsid[[i]]
+    if(nrow(evars.formatted)==0) {
+      evars.formatted <- valid.evars$evars[[i]]
+    } else {
+      evars.formatted <- rbind(evars.formatted,valid.evars$evars[[i]])
+    }
+  }
+
+  return(evars.formatted)
+
 }
-
-#API request
-json <- postRequest("ReportSuite.GetEVars",paste('{"rsid_list":', report_suites , '}'))
-
-if(json$status == 200) {
-#Convert JSON to list, clean through null values before list creation
-results <- fromJSON(str_replace_all(content(json, as="text"), "null", 0))
-} else {
-  stop(jsonResponseError(json$status))
-}
-
-evar_df <- data.frame()
-#Loop over report suite level 
-for(report_suite in 1:length(results)){
-  
-  rsid_name <- results[[report_suite]]["rsid"]
-  
-  #Save each section of list into temp object
-  temp = results[[report_suite]]
-  
-  #Traverse down EVar section for each temp object to collapse structs
-  for(j in 1:length(temp$evars)){
-    for(k in 1:length(temp$evars[[j]])){
-      if(length(temp$evars[[j]][[k]]) > 1){
-        temp$evars[[j]][[k]] <- paste(temp$evars[[j]][[k]], collapse = ",")
-      } #End of if statement
-    } #End of k loop
-    
-  } #End of j loop
-  
-  #Create dataframe for each suite based on report suite name with suffix _eVars
-  evar_df <- rbind.fill(evar_df, cbind(rsid=rsid_name, ldply(temp$evars, quickdf)))
-  
-  
-  } #Ending bracket for report suite loop
-
-return(evar_df)
-} #Ending bracket for function
-
-  
-
-  
-
-
-
-
-
-
-
-
-
-
-

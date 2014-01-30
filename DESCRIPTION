@@ -1,12 +1,17 @@
-Package: RSiteCatalyst
+Package: RAA
 Type: Package
-Title: Adobe Analytics Reporting API
-Version: 1.2
-Date: 2013-11-04
-Author: Randy Zwitch & Jowanza Joseph
-Maintainer: Randy Zwitch <rzwitch+rsitecatalyst@gmail.com>
-Depends: R (>= 2.15.2)
-Imports: digest, httr, rjson, plyr, stringr, base64enc
-Repository: CRAN
-Description: Functions for accessing the Adobe Analytics Reporting API
-License: GPL-2
+Title: R Client for Adobe Analytics v1.4 API
+Version: 0.1
+Date: 2013-12-19
+Author: Willem Paling
+Maintainer: Willem Paling <willem.paling@gmail.com>
+Depends:
+    R (>= 3.0.2)
+Imports:
+    jsonlite,
+    httr,
+    plyr,
+    base64enc
+Description: R Client for Adobe Analytics v1.4 API, partly based on
+    RSiteCatalyst by Randy Zwitch
+License: GPL v2

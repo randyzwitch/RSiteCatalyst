@@ -1,29 +1,16 @@
 \name{GetReportSuites}
 \alias{GetReportSuites}
-\title{Get Report Suites Associated with a Specific User/Company}
-\description{
-    Get Report Suites Associated with a Specific User/Company
-}
+\title{GetReportSuites}
 \usage{
-    GetReportSuites()
-}
-\arguments{
-    None
-}
-\details{
-    Returns a data frame containing the Report Suite ID and Site Title
+GetReportSuites()
 }
 \value{
-    Data Frame
+List of valid reportsuites
+}
+\description{
+Gets all available report suites for the company.
+}
+\examples{
+reportsuites <- GetReportSuites()
 }
 
-\examples{
-\dontrun{    
-    
-    GetReportSuites()
-    }
-    
-    
-    
-}
-\keyword{suite}

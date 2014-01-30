@@ -1,71 +1,311 @@
-#RSiteCatalyst
+RSiteCatalyst
+===============
 
-R package to access Adobe Analytics REST Reporting API. 
+R client library for the Adobe Analytics 1.4 API, currently in beta, but due out in Feb 2014.
+Get in touch with me if you're interested in using it. It is functional, but has not been extensively tested.
 
-This package is meant as an "analyst's toolbox" of functions to get digital analytics data from Adobe Analytics into R for more advanced reporting and analysis. While there are a few administrative functions that provide insight into Report Suite structure (such as available eVars/props/segments/etc), this package is not meant to be used for Report Suite Administration.
+This library borrows from v_1_1 of [RSiteCatalyst](https://github.com/randyzwitch/RSiteCatalyst) package which provides access to the Adobe Analytics v1.3 API. This version of RSiteCatalyst is on CRAN, so if you're looking for something tried and tested, that may be a better option. Install using ```install.packages("RSiteCatalyst")```.
+## Installation
+RSiteCatalyst v1.4 is in development, and is not yet on CRAN. You will need to install directly from GitHub.
 
-This package requires R 2.15.2 or greater. Also, due to the number of package dependencies, it's probably best to update all packages before installing RSiteCatalyst.  Package development was done (at minimum) on:
+First, install and load [devtools](https://www.google.com):
 
-	R 2.15.3
-	digest: 0.6.3
-	RCurl: 1.95-3
-	httr: 0.2
-	rjson: 0.2.12
-	plyr: 1.8
-	stringr: 0.6.2
+```
+install.packages("devtools")
+library(devtools)
+```
+And then run ```install_github``` to install _RSiteCatalyst v1.4_.
 
-##News
+```
+install_github("RSiteCatalyst", "randyzwitch", ref="version_1_4")
+```
 
-2013-11-04: Version 1.2 submitted to CRAN
+And finally you are ready to load i t.
 
-Changes in version 1.2 include
-- Removed RCurl package dependency
-- Changed argument order for GetAdminConsoleLog to avoid error when date not passed
-- Return proper numeric type for metric columns
-- Fixed bug in GetEVars function
-- Added validate:true flag to API to improve error reporting
+```
+library(RSiteCatalyst)
+```
 
-Version 1.2 was developed on OSX Lion using R 3.0.2 & validated against OSX Lion, Ubuntu 12.04 LTS and Windows 7 64-bit SP1 and Windows 8.1 64-bit. Further validation against Windows 7 & Windows 8 is planned, but currently, there are no known issues with any operating system specifically, as there is no operating-system-specific code in this library.
+You may also need to install other packages that _RSiteCatalyst v1.4_ depends on.
 
-2013-08-11:  Version 1.1 submitted to CRAN (master branch in sync with CRAN submission).
+* [jsonlite](http://cran.r-project.org/web/packages/jsonlite/)
+* [plyr](http://cran.r-project.org/web/packages/plyr/)
+* [httr](http://cran.r-project.org/web/packages/httr/)
+* [stringr](http://cran.r-project.org/web/packages/stringr/)
 
-Changes to version 1.1 include:
-- Support for correlations/sub-relations
-- Anomaly Detection
-- Current Data
-- Lower wait time between API calls/Extend number of API tries before report failure
+If you want to use the OAUTH auth method, you'll also need:
 
-2013-04-25:  [RSiteCatalyst](http://cran.r-project.org/web/packages/RSiteCatalyst/) is now available on CRAN.
+* [Rook](http://cran.r-project.org/web/packages/Rook/)
+* [httpuv](http://cran.r-project.org/web/packages/httpuv/)
+* [httr - dev branch](https://github.com/hadley/httr) (requires the development version from Hadley's Github ```install_github('httr')```)
+
+For the legacy auth method (username/shared secret) you'll also need the following:
+
+* [digest](http://cran.r-project.org/web/packages/digest/) (only required for legacy auth method)
+* [base64enc](http://cran.r-project.org/web/packages/base64enc/) (only required for legacy auth method)
 
 
-##Installation
+```
+install.packages(c("jsonlite","plyr","httr","stringr","digest","base64enc,"httpuv","Rook"))
+```
 
-To install the stable version, use the standard package installation method
+And if you're installing the dev branch of HTTR:
 
-	install.packages("RSiteCatalyst")
+```
+library(devtools)
+install_github('httr')
+```
 
-###Manually:
+## Authorisation
+Authorisation can be done using the legacy auth method (username:company + shared secret), or using the newer OAUTH method.
+Either is fine, but ultimately you should move towards using the OAUTH method, as the legacy auth method is deprecated.
 
-To load this package from GitHub, use the following commands. Note, this should only be done if you want to test development versions of the package.
+##### Using OAUTH
+First you will need to create an application in the [Adobe Dev Center](https://developer.omniture.com/en_US/devcenter). The application name can be whatever you want. The redirect URI should be left blank.
 
-Install the [devtools](https://github.com/hadley/devtools) package:
+This will provide you with a identifier and secret that you can use to access the Adobe Analytics API.
 
-  	install.packages("devtools")
-	library(devtools)
+You currently need to specify your own endpoint. Once the 1.4 API is released, I'll update this to automatically retrieve your company endpoint.
 
-And then run the `install_github` command:
+```
+RAA_Auth("your_identifier", 
+         "your_secret", 
+         endpoint.url="https://your-endpoint.omniture.com/admin/1.4/rest/")
+```
 
-	install_github("RSiteCatalyst", "randyzwitch", ref = "master")
-	library(RSiteCatalyst)
+##### Using legacy auth (web service credentials)
+This auth method is pretty straight-forward, though much more fiddly involved under the hood, which is why it is deprecated.
 
-##Authentication
+You will simply need your username, and your shared secret, which you can retrieve from your account settings page in the Adobe Analytics web interface.
 
-The Adobe Analytics Reporting API uses a "username/shared secret" method for authentication. This is done via the `SCAuth` function:
+```
+RAA_Auth("your_username:your_company", 
+         "your_shared_secret", 
+         endpoint.url="https://your-endpoint.omniture.com/admin/1.4/", 
+         auth.method='legacy')
+```
 
-	SCAuth("username:company", "shared_secret")
-	
-If your authentication is successful, you will receive a console message of "Authentication succeeded"
-	
-##Package documentation
+## Running Reports
+Once you've authorised, reports can be queued and retrieved using the helper libraries for each report type, or by using raw JSON report definitions.
 
-A video has been created to explain the main functions of the RSiteCatalyst package. You can access this video at [randyzwitch.com](http://randyzwitch.com/rsitecatalyst/).
+#### Running a report using a JSON definition
+The following code defines a JSON report description, and runs it. As no date granularity is specified, it will return a ranked report.
+
+```
+report.desc <- '{ "reportDescription" : { 
+"dateFrom" : "2014-01-01", 
+"dateTo" : "2014-11-07", 
+"reportSuiteID" : "your_report_suite", 
+"metrics" : [ { "id" : "pageviews" } ], 
+"elements" : [ { "id" : "page" } ]
+} }'
+
+report.data <- JsonQueueReport(desc)
+```
+
+This is the same report description, but with daily date granularity, which will return a trended report.
+
+```
+report.desc <- '{ "reportDescription" : { 
+"dateFrom" : "2014-01-01", 
+"dateTo" : "2014-11-07", 
+"dateGranularity" : "day", 
+"reportSuiteID" : "your_report_suite", 
+"metrics" : [ { "id" : "pageviews" } ], 
+"elements" : [ { "id" : "page" } ]
+} }'
+
+report.data <- JsonQueueReport(desc)
+```
+
+#### Using the report helper functions
+RSiteCatalyst v1.4 has helper functions that make it easier to generate all report types (ranked, overtime, trended, pathing, fallout). These take parameters in R, convert them to JSON, then call JsonQueueReport. _RSiteCatalyst v1.4_ helper functions do not yet support inline segmentation or search, so if you want to use that functionality, you will need to use JsonQueueReport directly.
+
+#### QueueOvertime
+Returns an overtime report. This is similar to the key metrics report, in that the only granularity allowed is time. 
+
+QueueOvertime requires a start and end date, a reportsuite ID, and a character vector of metrics.
+
+```
+date.from <- "2014-01-01"
+date.to <- "2013-01-07"
+reportsuite.id <- "your_report_suite"
+metrics <- c("visits","uniquevisitors","pageviews")
+
+report.data <- QueueOvertime(reportsuite.id, date.from, date.to, metrics)
+```
+
+You may also wish to set any of the 5 optional named parameters.
+
+```
+date.from <- "2014-01-01"
+date.to <- "2014-01-07"
+reportsuite.id <- "your_report_suite"
+metrics <- c("visits","uniquevisitors","pageviews")
+date.granularity <- "hour"
+segment.id <- "Visit_Natural_Search"
+anomaly.detection <- TRUE
+data.current <- TRUE
+expedite <- TRUE
+
+report.data <- QueueOvertime(reportsuite.id, date.from, date.to, metrics,date.granularity=date.granularity,segment.id=segment.id,anomaly.detection=anomaly.detection,data.current=data.current,expedite=expedite)
+```
+
+#### QueueRanked
+Returns a ranked report. This is an ordered list of elements and associated metrics with no time granularity.
+
+QueueRanked requires a start and end date, a reportsuite ID, a character vector of elements and a character vector of metrics.
+
+```
+date.from <- "2014-01-01"
+date.to <- "2014-01-07"
+reportsuite.id <- "your_report_suite"
+metrics <- c("visits","uniquevisitors","pageviews","event10")
+elements <- c("page","geoCountry","geoCity")
+
+report.data <- QueueRanked(reportsuite.id, date.from, date.to, metrics, elements)
+```
+
+You may also wish to set any of the 6 optional named parameters. While you can specify more than one element with _selected_, at this point, the 1.4 API only supports this for the first element specified.
+
+```
+date.from <- "2014-01-01"
+date.to <- "2013-01-07"
+reportsuite.id <- "your_report_suite"
+metrics <- c("visits","uniquevisitors","pageviews","event10","event10")
+elements <- c("page","geoCountry","geoCity")
+top <- 100
+start <- 100
+selected <- list(page=c("Home","Search","About"))
+segment.id <- "dw:12345"
+data.current <- TRUE
+expedite <- TRUE
+
+report.data <- QueueRanked(reportsuite.id, date.from, date.to, metrics,elements,top=top,start=start,selected=selected,segment.id=segment.id,data.current=data.current,expedit=expedite)
+```
+
+#### QueueTrended
+Returns a trended report. This is an ordered list of elements and associated metrics with time granularity.
+
+QueueTrended requires a start and end date, a reportsuite ID, a character vector of elements and a character vector of metrics.
+
+```
+date.from <- "2014-01-01"
+date.to <- "2014-01-07"
+reportsuite.id <- "your_report_suite"
+metrics <- c("visits","uniquevisitors","pageviews","event10")
+elements <- c("page","geoCountry","geoCity")
+
+report.data <- QueueTrended(reportsuite.id, date.from, date.to, metrics, elements)
+```
+
+You may also wish to set any of the 7 optional named parameters. As with _QueueRanked_ the 1.4 API only supports _selected_ for the first element specified.
+
+```
+date.from <- "2014-01-01"
+date.to <- "2013-01-07"
+reportsuite.id <- "your_report_suite"
+metrics <- c("visits","uniquevisitors","pageviews","event10")
+elements <- c("page","geoCountry","geoCity")
+top <- 100
+start <- 100
+selected <- list(page=c("Home","Search","About"))
+date.granularity <- "hour"
+segment.id <- "dw:12345"
+data.current <- TRUE
+expedite <- TRUE
+
+report.data <- QueueTrended(reportsuite.id, date.from, date.to, metrics,elements,top=top,start=start,selected=selected,segment.id=segment.id,data.current=data.current,expedit=expedite)
+```
+
+#### QueuePathing
+Returns a pathing report. This is an ordered list of paths matching the specified pattern.
+
+QueuePathing requires a start and end date, a reportsuite ID, a single element, a single metric and a pattern of element values that defined the path.
+
+```
+date.from <- "2014-01-01"
+date.to <- "2014-01-07"
+reportsuite.id <- "your_report_suite"
+metric <- "pageviews"
+element <- "page"
+pattern <- c("Home",":::anything:::",":::anything:::")
+
+report.data <- QueuePathing(reportsuite.id, date.from, date.to, metric, element, pattern)
+```
+
+#### QueueFallout
+Returns a fallout report. This is a pathed list of elements, with fallout values for each.
+
+QueuePathing requires a start and end date, a reportsuite ID, a single element, a character vector of metrics and a character vector of element values that defined the checkpoints.
+
+```
+date.from <- "2014-01-01"
+date.to <- "2014-01-07"
+reportsuite.id <- "your_report_suite"
+metrics <- c("visits","uniquevisitors","pageviews","event10")
+element <- "page"
+checkpoints <- c("Home","Contact","ThankYou")
+
+report.data <- QueuePathing(reportsuite.id, date.from, date.to, metrics, element, checkpoints)
+```
+
+## Understanding the Available Data
+Using the API, you can retrieve the setup of your report suite and view definitions for evars and sprops, success events, report suites and segments.
+
+#### GetElements
+Gets valid elements for a report suite for the current user. This list is restricted by optionally specified existing elements, existing metrics and date granularity.
+
+```
+elements.valid <- GetElements("your_report_suite",metrics=c('visitors','pageviews'),elements=c('page','geoCountry'),date.granularity='day')
+```
+
+#### GetMetrics
+Gets valid metrics for a report suite for the current user. This list is restricted by optionally specified existing elements, existing metrics and date granularity.
+
+```
+metrics.valid <- GetMetrics("your_report_suite",metrics=c('visitors','pageviews'),elements=c('page','geoCountry'),date.granularity='day')
+```
+
+#### GetEvars
+Gets evar (conversion variable) definitions for the specified report suite(s). Useful to audit or document a report suite or company in Adobe Analytics.
+
+```
+evars <- GetEvars(c("your_prod_report_suite","your_dev_reportsuite"))
+```
+
+#### GetProps
+Gets sprop (traffic variable) definitions for the specified report suite(s). Useful to audit or document a report suite or company in Adobe Analytics.
+
+```
+props <- GetProps(c("your_prod_report_suite","your_dev_reportsuite"))
+```
+
+#### GetSuccessEvents
+Gets success event definitions for the specified report suite(s). Useful to audit or document a report suite or company in Adobe Analytics.
+
+```
+successevents <- GetSuccessEvents(c("your_prod_report_suite","your_dev_reportsuite"))
+```
+
+#### GetReportSuites
+Gets all report suites for the company.
+
+```
+reportsuites <- GetReportSuites()
+```
+
+#### GetSegments
+Gets a list of segments for the specified report suites. Useful to find segment IDs for use in reporting helper functions or JSON report definitions.
+
+```
+segments <- GetSegments(c("your_prod_report_suite","your_dev_reportsuite"))
+```
+
+
+## Debugging
+If you put the library into debug mode, it will return more verbose output, and save some responses to disk so that they can be loaded in the console for debugging.
+
+```
+RAA_SetDebug(TRUE)
+```

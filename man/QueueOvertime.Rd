@@ -1,82 +1,42 @@
 \name{QueueOvertime}
 \alias{QueueOvertime}
-\title{
-    Run a QueueOvertime Report
-}
-\description{
-    A QueueOvertime report is a report where the only granularity allowed is time. This report allows for a single report suite, time granularity, multiple metrics, and a single segment. It is similar to the "Key Metrics" report or a Custom Event report within the SiteCatalyst interface.
-}
+\title{QueueOvertime}
 \usage{
-    QueueOvertime(reportSuiteID, dateFrom, dateTo, metrics, dateGranularity, 
-                  segment_id, anomalyDetection, currentData)
+QueueOvertime(reportsuite.id, date.from, date.to, metrics,
+  date.granularity = "day", segment.id = "", segment.inline = "",
+  anomaly.detection = FALSE, data.current = FALSE, expedite = FALSE)
 }
 \arguments{
-    \item{reportSuiteID}{
-        Report Suite ID
-    }
-    \item{dateFrom}{
-        Report Start Date in "YYYY-MM-DD" format
-    }
-    \item{dateTo}{
-        Report End Date in "YYYY-MM-DD" format. Should be less than or equal to 
-        current date if using anomaly detection.
-    }
-    \item{metrics}{
-        One or more metrics
-    }
-    \item{dateGranularity}{
-        Optional. "Day", "Week", "Month", "Quarter" or "Year" (case-insensitive).
-        If no granularity specified, a single row of data returned as sum of metrics for entire time period.
-    }
-    \item{segment_id}{
-        Optional. If no segment_id is specified, metrics will be reported for 
-        all visitors.
-    }
-    \item{anomalyDetection}{
-    Optional. Use value of "1" to get anomaly detection results. Results only 
-    returned by API for 'Day' granularity. 
-    }
-     \item{currentData}{
-    Optional. Use value of "1" to get current data results. Only needed when 
-    dateTo is greater than or equal to the current day.
-    }
-}
-\details{
+  \item{reportsuite.id}{report suite id}
 
-Because of the Reporting API structure, this function first requests the report, 
-then checks the reporting queue to see if the report is completed, and when the 
-report returns as "done" pulls the report from the API. This checking process can
-occur up to 120 times, with a 5 second delay between status checks. If the report
-does not return as "done" after 10 minutes, the function returns an error.
-   
+  \item{date.from}{start date for the report (YYYY-MM-DD)}
+
+  \item{date.to}{end date for the report (YYYY-MM-DD)}
+
+  \item{metrics}{list of metrics to include in the report}
+
+  \item{date.granularity}{time granularity of the report
+  (year/month/week/day/hour), default to 'day'}
+
+  \item{segment.id}{id of Adobe Analytics segment to
+  retrieve the report for}
+
+  \item{segment.inline}{inline segment definition}
+
+  \item{anomaly.dection}{set to TRUE to include forecast
+  data (only valid for day granularity with small date
+  ranges)}
+
+  \item{data.current}{TRUE or FALSE - whether to include
+  current data for reports that include today's date}
+
+  \item{expedite}{set to TRUE to expedite the processing of
+  this report}
 }
 \value{
-    Data Frame
+Flat data frame containing datetimes and metric values
+}
+\description{
+Helper function to run an OverTime Report
 }
 
-\seealso{
-   \code{\link{GetAvailableMetrics}} \cr
-   \code{\link{GetSegments}} 
-     
-}
-\examples{
-\dontrun{
-
-#Daily granularity for Loyal_Visitors segment (all arguments used)
-loyal_visitors_feb_daily <- 
-QueueOvertime("keystonerandy", "2013-02-01", "2013-07-28",
-metrics = c("pageviews", "visits", "event2"), "day", "Loyal_Visitors", "1")
-
-
-#No granularity using empty string in dateGranularity position
-loyal_visitors_feb_overall <- 
-QueueOvertime("keystonerandy", "2013-02-01", "2013-02-28",
-metrics = c("pageviews", "visits", "event2"), "", "Loyal_Visitors")
-
-
-#Minimum number of arguments, single row containing sum of pageviews
-pageviews_feb <- 
-QueueOvertime("keystonerandy", "2013-02-01", "2013-02-28", "pageviews")
-   }
-}
-\keyword{QueueOvertime}

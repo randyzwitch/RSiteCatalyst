@@ -1,32 +1,22 @@
 \name{GetSuccessEvents}
 \alias{GetSuccessEvents}
-\title{Get Success Events Associated with a Report Suite}
-\description{
-    Get Success Events associated with one or more Report Suites.
-}
+\title{GetSuccessEvents}
 \usage{
-    GetSuccessEvents(report_suites)
+GetSuccessEvents(reportsuite.ids)
 }
 \arguments{
-    \item{report_suites}{
-        Character vector containing one or more valid Report Suite names
-    }
-  
-}
-\details{
-    This function requires having a character vector with one or more valid Report Suites specified. 
+  \item{reportsuite.ids}{report suite id (or list of report
+  suite ids)}
 }
 \value{
-    Data Frame
+List of valid successevents
+}
+\description{
+Gets success event definitions for the specified report
+suite(s). Useful to audit or document a report suite or
+company in Adobe Analytics.
+}
+\examples{
+successevents <- GetSuccessEvents(c("your_prod_report_suite","your_dev_reportsuite"))
 }
 
-\examples{
-\dontrun{    
-    
-    GetSuccessEvents("keystonejowanza")
-    GetSuccessEvents(c("keystonejowanza", "keystonerandy", "keystonetraining"))
-    }
-    
-    
-}
-\keyword{events}

@@ -1,28 +1,20 @@
-#Get Report Suites for the account belonging with the user/secret combo
+#' GetReportSuites
+#'
+#' Gets all available report suites for the company.
+#'
+#' @return List of valid reportsuites
+#'
+#' @export
+#'
+#' @examples
+#' reportsuites <- GetReportSuites()
+#'
 
-GetReportSuites<-function(){
-  
-  #Get Report Suites
-  json <- postRequest("Company.GetReportSuites")
 
-  
-  
-  if(json$status == 200){ 
-    
-  #Convert to list
-  result <- content(json)
-    
-  #Data Frame from list
-  temp <- as.data.frame(t(ldply(result, quickdf)))
-  temp <- temp[2:nrow(temp),]
-  names(temp) <- c("rsid", "site_title")
+GetReportSuites <- function() {
 
-  return(temp)
-  } else {
-    
-    stop(jsonResponseError(json$status))
-  }
+  reportsuites <- ApiRequest(func.name="Company.GetReportSuites")
+
+  return(reportsuites$report_suites)
 
 }
-
-

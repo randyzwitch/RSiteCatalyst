@@ -1,32 +1,17 @@
-\name{GetEVars}
-\alias{GetEVars}
-\title{Get Commerce Variables (eVars) Associated with a Report Suite}
-\description{
-    Get Commerce Variables (eVars) Associated with a Report Suite.
-}
+\name{GetEvars}
+\alias{GetEvars}
+\title{GetEvars}
 \usage{
-    GetEVars(report_suites)
+GetEvars(reportsuite.ids)
 }
 \arguments{
-    \item{report_suites}{
-        Character vector containing one or more valid Report Suite names
-    }
-  
-}
-\details{
-    This function requires having a character vector with one or more valid Report Suites specified.
+  \item{reportsuite.ids}{report suite id (or list of report
+  suite ids)}
 }
 \value{
-    Data Frame
+List of valid evars
+}
+\description{
+Gets available report suite evars
 }
 
-\examples{
-\dontrun{    
-    
-    GetEVars("keystonejowanza")
-    GetEVars(c("keystonejowanza", "keystonerandy", "keystonetraining"))
-    
-    }
-    
-}
-\keyword{eVar}

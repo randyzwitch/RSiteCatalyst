@@ -1,166 +1,80 @@
-#QueueRanked report
-#Corresponds to pulling a ranked report
-#This API method seems to be most complicated to return a valid result
+#' QueueRanked
+#'
+#' Helper function to run a Ranked Report
+#'
+#' @param reportsuite.id report suite id
+#' @param date.from start date for the report (YYYY-MM-DD)
+#' @param date.to end date for the report (YYYY-MM-DD)
+#' @param metrics list of metrics to include in the report
+#' @param elements list of elements to include in the report
+#' @param top number of elements to include (top X) - only applies to the first element.
+#' @param start start row if you do not want to start at #1 - only applies to the first element.
+#' @param selected list of specific items to include in the report - e.g. list(page=c("Home","Search","About")). 
+#' this only works for the first element (API limitation).
+#' @param segment.id id of Adobe Analytics segment to retrieve the report for
+#' @param segment.inline inline segment definition
+#' @param anomaly.dection  set to TRUE to include forecast data (only valid for day granularity with small date ranges)
+#' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
+#' @param expedite set to TRUE to expedite the processing of this report
+#'
+#' @return Flat data frame containing datetimes and metric values
+#'
+#' @export
 
-QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top="", startingWith="", segment_id="", selected="", currentData=""){
-  
-  #1.  Send API request to build report- QueueRanked
-  
-  #Error check to see if function call using both parameters
-  if(top!= "" && selected != "") {
-    stop("Use 'top' or 'startingWith' arguments, not both")
-  }
-  
-  #Error check to see if elements list has more than two elements
-  if(length(elements) > 2) {
-    
-    stop("API only supports a maximum of two elements")
-  }
-  
-  #Loop over the metrics list, appending proper curly braces
-  metrics_conv <- lapply(metrics, function(x) paste('{"id":', '"', x, '"', '}', sep=""))
-  #Collapse the list into a proper comma separated string
-  metrics_final <- paste(metrics_conv, collapse=", ") 
+QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
+                        top=0,start=0,selected=list(),
+                        segment.id='', segment.inline='', data.current=FALSE, expedite=FALSE) {
 
-  
-  if(top != "") {
-    
-  #Modify element list based on whether it has one or two values   
-  
-      if(length(elements) == 1) {
-        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}', elements,top, startingWith)
-      } else {
-        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}, {"id":"%s", "top":"1000"}', elements[1],top, startingWith, elements[2])
-      }
-    
-  json_request <-sprintf(
-    '{"reportDescription":
-    {"reportSuiteID" :"%s",
-     "dateFrom":"%s",
-     "dateTo":"%s",
-     "metrics": [%s],
-     "elements" : [%s],
-     "segment_id": "%s",
-     "currentData": "%s",
-     "validate": true
-    }
-}', reportSuiteID, dateFrom, dateTo, metrics_final, elements_list,segment_id, currentData)
-  } else {
-    
-    selected <- toJSON(selected)
-    
-    #Modify element list based on whether it has one or two values   
-    
-    if(length(elements) == 1) {
-      elements_list = sprintf('{"id":"%s", "selected":%s }', elements, selected)
+  # build JSON description
+  # we have to use jsonlite:::as.scalar to force jsonlist not put strings into single-element arrays
+  # new release of jsonlite will let us use jsonlite::singleton() (function is actually exported)
+  report.description <- c()
+  report.description$reportDescription <- c(data.frame(matrix(ncol=0, nrow=1)))
+  report.description$reportDescription$dateFrom <- jsonlite:::as.scalar(date.from)
+  report.description$reportDescription$dateTo <- jsonlite:::as.scalar(date.to)
+  report.description$reportDescription$reportSuiteID <- jsonlite:::as.scalar(reportsuite.id)
+  if(segment.inline!="") {
+    report.description$reportDescription$segments <- list(segment.inline)
+  }
+  if(start>0) { 
+    report.description$reportDescription$start <- jsonlite:::as.scalar(start) 
+  }
+  if(segment.id!="") { 
+    report.description$reportDescription$segment_id <- jsonlite:::as.scalar(segment.id) 
+  }
+  if(expedite==TRUE) { 
+    report.description$reportDescription$expedite <- jsonlite:::as.scalar(expedite)
+  }
+  report.description$reportDescription$metrics = data.frame(id = metrics)
+
+  elements.formatted <- list()
+  # build up each element with selections
+  i <- 0
+  for(element in elements) {
+    i <- i + 1
+    if(length(selected[element]) && i==1){
+      # put in top and startingWith for the first element only
+      working.element <- list(id = jsonlite:::as.scalar(element), 
+                                  top = jsonlite:::as.scalar(top), 
+                                  startingWith = jsonlite:::as.scalar(start), 
+                                  selected = selected[element][1][[1]])
     } else {
-      elements_list = sprintf('{"id":"%s", "selected":%s }, {"id":"%s", "top":"1000"}', elements[1],selected, elements[2])
+      working.element <- list(id = jsonlite:::as.scalar(element), 
+                              top = jsonlite:::as.scalar(top), 
+                              startingWith = jsonlite:::as.scalar(start),
+                              selected=NULL)
     }
-    
-    json_request <- sprintf(
-  '{"reportDescription":
-    {"reportSuiteID" :"%s",
-     "dateFrom":"%s",
-     "dateTo":"%s",
-     "metrics": [%s],
-     "elements" : [%s],
-     "segment_id": "%s",
-     "currentData": "%s",
-     "validate": true
+    if(length(elements.formatted)>0) {
+      elements.formatted <- rbind(elements.formatted,working.element)
+    } else {
+      elements.formatted <- working.element
     }
-}', reportSuiteID, dateFrom, dateTo, metrics_final, elements_list, segment_id, currentData)
-    
-  }  
-  
-  #Send post request to Omniture API
-  json_queue <- postRequest("Report.QueueRanked", json_request)
-  
-  if(json_queue$status == 200) {
-    #Convert JSON to list
-    queue_resp <- content(json_queue)
-  } else {
-    stop(jsonResponseError(json_queue$status))
   }
-  
-  #If response returns an error, return error message. Else, continue with
-  #capturing report ID
-  if(queue_resp[1] != "queued" ) {
-    stop("Error: Likely a syntax error in arguments to QueueRanked function")
-  } else {
-    reportID <- queue_resp[[3]] 
-  }
-  
-  #Check to see whether report is done. while loop with 
-  #Sys.sleep waits 10 seconds before trying again
-  print("Checking report status: Attempt Number 1")
-  reportDone <- GetStatus(reportID)
-  
-  if(reportDone == "failed") {
-    stop("Report Failed: Check for json_request syntax error")
-  }
-  
-  num_tries <- 1
-  while(reportDone != "done" && num_tries < 120){
-    num_tries <- num_tries + 1
-    Sys.sleep(5)
-    print(paste("Checking report status: Attempt Number", num_tries))
-    reportDone <- GetStatus(reportID)
-    
-  }
-  
-  #If reportDone still not done, return an error. Else, continue to GetReport
-  if(reportDone !="done"){
-    stop("Error: Number of Tries Exceeded")
-  } else {
-    
-    #Write formatted JSON string to a 5-item list
-    result <- getReport(reportID)
-    metrics_requested <- sapply(result[[5]][[4]], "[[", "id") #get metrics
-    elements_requested <- sapply(result[[5]][[3]], "[[", "name") #get elements
-    segment_requested <- result[[5]][[5]] #get segment
-    
-  } #End of else statement testing reportDone = "done"
-  
-  
-  
-  #Convert from JSON to data frame
-  data <- result[[5]]$data #Just the data portion of the JSON result
-  
-  if(length(elements) == 1){
-  
-  rows_df <- ldply(data, "[[", "name")  #get element as rows
-  names(rows_df) <- elements_requested
-  
-  counts <- lapply(data, "[[", "counts") # Just the "counts" column
-  counts_df <- ldply(counts, quickdf) # counts as DF
-  counts_df <- as.data.frame(apply(counts_df, MARGIN=2, FUN= function(x) as.numeric(x))) #convert to numeric
-  names(counts_df) <- metrics_requested
-  
-  return(cbind(rows_df, segment=segment_requested, counts_df)) #append rows info with counts, End JSON parsing for single element case 
-  } else {
-    
-  accumulator <- data.frame()
-  
-  for(i in 1:length(data)){
-  #Get outer element name
-      outer_element <- as.data.frame(data[[i]]["name"])
-      names(outer_element) <- elements_requested[1]
-  #Get all breakdowns for outer element    
-      inner_element <- ldply((data[[i]][["breakdown"]]), "[[", "name")
-      names(inner_element) <- elements_requested[2]
-  #Get metrics that go along with breakdown rows    
-      inner_metrics <- ldply((data[[i]][["breakdown"]]), "[[", "counts")
-      inner_metrics <- as.data.frame(apply(inner_metrics, MARGIN=2, FUN= function(x) as.numeric(x))) #convert to numeric
-      names(inner_metrics) <- metrics[1:ncol(inner_metrics)]     
-  #Join all datasets together horizontally
-      temp <- cbind(outer_element, inner_element, inner_metrics)
-  #Append vertically to accumulator    
-      accumulator <- rbind(accumulator, temp)
-      if(i == length(data) && ncol(inner_metrics) < length(metrics)){
-        warning("Number of metrics returned by API fewer than requested. Labels assigned in order of metrics list, verify results for accuracy.")
-      }
-      
-  } #End of for loop (don't hate me Hadley!)
-  return(accumulator)
-  } #End JSON parsing of two element case
-} #End function bracket
+
+  report.description$reportDescription$elements <- elements.formatted
+
+  report.data <- JsonQueueReport(toJSON(report.description))
+
+  return(report.data) 
+
+}  

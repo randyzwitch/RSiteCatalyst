@@ -1,153 +1,93 @@
-#QueueTrended report
-#Submits a Trended report request. Trended reports display trends for a single metric 
-#(revenue, orders, views, and so forth) and element 
-#(product, category, page, and so forth).
+#' QueueTrended
+#'
+#' Helper function to run a Trended Report
+#'
+#' @param reportsuite.id report suite id
+#' @param date.from start date for the report (YYYY-MM-DD)
+#' @param date.to end date for the report (YYYY-MM-DD)
+#' @param metrics list of metrics to include in the report
+#' @param elements list of elements to include in the report
+#' @param top number of rows to return
+#' @param start start row if you do not want to start at #1
+#' @param selected list of specific items to include in the report - e.g. list(page=c("Home","Search","About"))
+#' @param date.granularity time granularity of the report (year/month/week/day/hour), default to 'day'
+#' @param segment.id id of Adobe Analytics segment to retrieve the report for
+#' @param segment.inline inline segment definition
+#' @param anomaly.dection  set to TRUE to include forecast data (only valid for day granularity with small date ranges)
+#' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
+#' @param expedite set to TRUE to expedite the processing of this report
+#'
+#' @return Flat data frame containing datetimes and metric values
+#'
+#' @export
 
-
-QueueTrended <- function(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top="", startingWith="", selected= "", segment_id="", anomalyDetection="", currentData="") {
-
-  #Error check to see if function call using both parameters
-if(top!= "" && selected != "") {
+QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
+                        top=0,start=0,selected=list(),
+                        date.granularity='day', segment.id='', segment.inline='', anomaly.detection=FALSE,
+                        data.current=FALSE, expedite=FALSE) {
   
-  stop("Use 'top' or 'startingWith' arguments, not both")
-}
-
-if(anomalyDetection == "1" & dateGranularity!="day") {
-  stop("Error: Anomaly Detection only provided for day granularity")
-}
-  
-#Build JSON request for "Top" functionality
-
-if(top != "") {
-  json_request <- sprintf(
-    '{"reportDescription":
-    {"reportSuiteID" :"%s",
-     "dateFrom":"%s",
-     "dateTo":"%s",
-     "dateGranularity":"%s",
-     "metrics": [{"id":"%s"}],
-     "elements" : [{"id":"%s", "top": "%s", "startingWith": "%s" }],
-     "segment_id": "%s",
-     "anomalyDetection": "%s",
-     "currentData": "%s",
-     "validate": true
-    }
-}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top, startingWith, segment_id, anomalyDetection, currentData)
-  
-}  else {
-  
-  #Build JSON request for selected elements
-  
-  selected <- toJSON(as.list(selected))
-  
-  json_request <- sprintf(
-    '{"reportDescription":
-    {"reportSuiteID" :"%s",
-     "dateFrom":"%s",
-     "dateTo":"%s",
-     "dateGranularity":"%s",
-     "metrics": [{"id":"%s"}],
-     "elements" : [{"id":"%s", "selected": %s }],
-     "segment_id": "%s",
-     "anomalyDetection": "%s",
-     "currentData": "%s",
-     "validate": true
-    }
-}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, selected, segment_id, anomalyDetection, currentData)
-  
-}
-
-#1.  Send API request to build report- QueueOvertime
-json_queue <- postRequest("Report.QueueTrended", json_request)
-
-if(json_queue$status == 200) {
-  #Convert JSON to list
-  queue_resp <- content(json_queue)
-} else {
-  stop(jsonResponseError(json_queue$status))
-  
-}
-
-#If response returns an error, return error message. Else, continue with
-#capturing report ID
-if(queue_resp[1] != "queued" ) {
-  stop("Likely a syntax error in arguments to QueueTrended function")
-} else {
-  reportID <- queue_resp[[3]] 
-}
-
-#Check to see whether report is done. while loop with 
-#Sys.sleep waits 2 seconds before trying again
-print("Checking report status: Attempt Number 1")
-reportDone <- GetStatus(reportID)
-
-if(reportDone == "failed") {
-  stop("Report Failed: Check for json_request syntax error")
-}
-
-num_tries <- 1
-while(reportDone != "done" && num_tries < 120){
-  num_tries <- num_tries + 1
-  Sys.sleep(5)
-  print(paste("Checking report status: Attempt Number", num_tries))
-  reportDone <- GetStatus(reportID)
-  
-}
-
-#If reportDone still not done, return an error. Else, continue to GetReport
-if(reportDone !="done"){
-  stop("Error: Number of Tries Exceeded")
-} else {
-  
-  #Write formatted JSON string to a 5-item list
-  result <- getReport(reportID)
-  metric_requested <- result[[5]][[4]][[1]]$id
-  element_requested <- result[[5]][[3]][[1]]$id
-  segment_requested <- result[[5]][[5]]
-  
-} #End of else statement testing reportDone = "done"
-
-#Convert from JSON to list
-data <- result[[5]]$data #Just the data portion of the JSON result
-
-#Returns total by element (e.g. pageviews by page)
-totals_by_element <- ldply(lapply(data, "[", c("name", "counts")), quickdf)
-totals_by_element$counts <- as.numeric(totals_by_element$counts)
-names(totals_by_element) <- c("name", metric_requested) #add title to "counts"
-
-#Create a table by page by day
-breakdown <- lapply(data, "[[", "breakdown") #Just the in-page info
-
-#initialize empty data frame, loop through and create table
-granular_table <- data.frame()
-for(element in 1:length(data)) {
-    temp <- ldply(breakdown[[element]], quickdf)
-    temp <- cbind(totals_by_element[element,"name"], temp) #add element as row name
-    granular_table <- rbind(granular_table, temp) #append temp to results table
-}
-
-
-#Check to see if enough columns for hour
-if(anomalyDetection== 1){
-  for(i in 6:10){
-    granular_table[[i]] <- as.numeric(granular_table[[i]])
+  if(anomaly.detection==TRUE && length(elements)>1) {
+    print("Warning: Anomaly detection will not be used, as it only works for a single element.")
+    anomaly.detection <- FALSE
   }
-  names(granular_table) <- c(element_requested, "name", "year", "month", "day",metric_requested, paste(metric_requested, "_upper", sep=""), paste(metric_requested, "_lower", sep=""), paste(metric_requested, "_forecast", sep=""), paste(metric_requested, "_forselectedelements", sep=""))  
-} else if(ncol(granular_table) == 8){
-  for(i in 7:8){
-    granular_table[[i]] <- as.numeric(granular_table[[i]])
-  }  
-  names(granular_table) <- c(element_requested, "name", "year", "month", "day","hour", metric_requested, paste(metric_requested, "_forselectedelements", sep=""))
-} else {
-  for(i in 6:7){
-    granular_table[[i]] <- as.numeric(granular_table[[i]])
-  }  
-    names(granular_table) <- c(element_requested, "name", "year", "month", "day", metric_requested, paste(metric_requested, "_forselectedelements", sep=""))
-}
 
-granular_table$segment <- segment_requested #append segment to data frame
+  if(anomaly.detection==TRUE && date.granularity!='day') {
+    print("Warning: Anomaly detection will not be used, as it only works with 'day' date granularity.")
+    anomaly.detection <- FALSE
+  }
 
-return(granular_table) #return table
+  # build JSON description
+  # we have to use jsonlite:::as.scalar to force jsonlist not put strings into single-element arrays
+  report.description <- c()
+  report.description$reportDescription <- c(data.frame(matrix(ncol=0, nrow=1)))
+  report.description$reportDescription$dateFrom <- jsonlite:::as.scalar(date.from)
+  report.description$reportDescription$dateTo <- jsonlite:::as.scalar(date.to)
+  report.description$reportDescription$reportSuiteID <- jsonlite:::as.scalar(reportsuite.id)
+  report.description$reportDescription$dateGranularity <- jsonlite:::as.scalar(date.granularity)
+  if(segment.inline!="") {
+    report.description$reportDescription$segments <- list(segment.inline)
+  }
+  if(top>0) { 
+    report.description$reportDescription$top <- jsonlite:::as.scalar(top) 
+  }
+  if(start>0) { 
+    report.description$reportDescription$start <- jsonlite:::as.scalar(start) 
+  }
+  if(segment.id!="") { 
+    report.description$reportDescription$segment_id <- jsonlite:::as.scalar(segment.id) 
+  }
+  if(anomaly.detection==TRUE) { 
+    report.description$reportDescription$anomalyDetection <- jsonlite:::as.scalar(anomaly.detection) 
+  }
+  if(data.current==TRUE) { 
+    report.description$reportDescription$currentData <- jsonlite:::as.scalar(data.current) 
+  }
+  if(expedite==TRUE) { 
+    report.description$reportDescription$expedite <- jsonlite:::as.scalar(expedite)
+  }
+  report.description$reportDescription$metrics = data.frame(id = metrics)
 
-} #End function bracket
+  if(length(selected)>0) {
+    # build up each element with selections
+    elements.formatted <- list()
+    for(element in elements) {
+      if(length(selected[element])){
+        working.element <- list(id = jsonlite:::as.scalar(element), selected=selected[element][1][[1]])
+      }
+      if(length(elements.formatted)>0) {
+        elements.formatted <- rbind(elements.formatted,working.element)
+      } else {
+        elements.formatted <- working.element
+      }
+    }
+    report.description$reportDescription$elements <- list(elements.formatted)
+  } else {
+    # just plug in the elements
+    report.description$reportDescription$elements <- data.frame(id = elements)
+  }
 
+  report.data <- JsonQueueReport(toJSON(report.description))
+
+  return(report.data) 
+
+}  

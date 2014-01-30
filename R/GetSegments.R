@@ -1,54 +1,35 @@
-#GetSegments- Get segments for a single or multiple report suites
-#This one could use minor cleanup
+#' GetSegments
+#'
+#' Gets a list of segments for the specified report suites. 
+#' Useful to find segment IDs for use in reporting helper functions or JSON report definitions.
+#'
+#' @param reportsuite.ids report suite id (or list of report suite ids)
+#'
+#' @return List of valid segments
+#'
+#' @export
+#'
+#' @examples
+#' segments <- GetSegments(c("your_prod_report_suite","your_dev_reportsuite"))
+#'
 
-
-GetSegments <- function (report_suites) {
-
-#Converts report_suites to JSON
-if(length(report_suites)>1){
-  report_suites <- toJSON(report_suites)
-} else {
-  report_suites <- toJSON(list(report_suites))
-}
-
-#API request
-json <- postRequest("ReportSuite.GetSegments",paste('{"rsid_list":', report_suites , '}'))
-
-if(json$status== 200) {
-#Convert JSON to list, clean through null values before list creation
-results <- fromJSON(str_replace_all(content(json, as="text"), "null", 0))
-} else {
-  stop(jsonResponseError(json$status))
-}
-
-temp <- data.frame()
-#Loop over report suite level 
-for(report_suite in 1:length(results)){
+GetSegments <- function(reportsuite.ids) {
   
-  rsid_name <- results[[report_suite]]["rsid"]
+  request.body <- c()
+  request.body$rsid_list <- reportsuite.id
   
-  #If to check if there are segments in a report suite
-  if(nrow(ldply(results[[report_suite]]$sc_segments, quickdf)) > 0) {
-  #Create dataframe for each suite based on report suite name with suffix _eVars
-  temp <- rbind.fill(temp, cbind(rsid=rsid_name, ldply(results[[report_suite]]$sc_segments, quickdf)))
+  valid.segments <- ApiRequest(body=toJSON(request.body),func.name="ReportSuite.GetSegments")
+
+  segments.formatted <- data.frame()
+  for (i in 1:length(valid.segments$rsid) ) {
+    valid.segments$segments[[i]]$report_suite <- valid.segments$rsid[[i]]
+    if(nrow(segments.formatted)==0) {
+      segments.formatted <- valid.segments$segments[[i]]
+    } else {
+      segments.formatted <- rbind(segments.formatted,valid.segments$segments[[i]])
+    }
   }
-  
-  } #Ending bracket for report suite loop
 
-return(temp)
-} #Ending bracket for function
+  return(segments.formatted)
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
+}

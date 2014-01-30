@@ -1,32 +1,22 @@
 \name{GetSegments}
 \alias{GetSegments}
-\title{Get Segments Defined within a Report Suite}
-\description{
-    Get Segments defined within a Report Suite. Segments include Data Warehouse segments, pre-defined segments, and user-defined segments
-}
+\title{GetSegments}
 \usage{
-    GetSegments(report_suites)
+GetSegments(reportsuite.ids)
 }
 \arguments{
-    \item{report_suites}{
-        Character vector containing one or more valid Report Suite names
-    }
-  
-}
-\details{
-    This function requires having a character vector with one or more valid Report Suites specified.
+  \item{reportsuite.ids}{report suite id (or list of report
+  suite ids)}
 }
 \value{
-    Data Frame
+List of valid segments
+}
+\description{
+Gets a list of segments for the specified report suites.
+Useful to find segment IDs for use in reporting helper
+functions or JSON report definitions.
+}
+\examples{
+segments <- GetSegments(c("your_prod_report_suite","your_dev_reportsuite"))
 }
 
-\examples{
-\dontrun{    
-    
-    GetSegments("keystonejowanza")
-    GetSegments(c("keystonejowanza", "keystonerandy", "keystonetraining"))
-}    
-    
-    
-}
-\keyword{segments}

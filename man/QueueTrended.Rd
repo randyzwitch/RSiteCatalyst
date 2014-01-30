@@ -1,88 +1,53 @@
 \name{QueueTrended}
 \alias{QueueTrended}
-\title{
-    Run a QueueTrended Report
-}
-\description{
-    A QueueTrended report is a report where a single metric is retrieved, broken down by an element such as page, eVar, prop, etc. and with a time component. Within the 'element' list, either the "Top X" number of elements can be received or you can specify the specific elements you are interested in (such as 3 specific page names).
-    
-The QueueTrended report is analogous to pulling a "trended" report within SiteCatalyst, but without the limitation of only 5 elements as in the SiteCatalyst interface.
-}
+\title{QueueTrended}
 \usage{
-    QueueTrended(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element,
-    top, startingWith, selected, segment_id, anomalyDetection, currentData)
+QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
+  start = 0, selected = list(), date.granularity = "day",
+  segment.id = "", segment.inline = "", anomaly.detection = FALSE,
+  data.current = FALSE, expedite = FALSE)
 }
 \arguments{
-    \item{reportSuiteID}{
-        Report Suite ID
-    }
-    \item{dateFrom}{
-        Report Start Date in "YYYY-MM-DD" format
-    }
-    \item{dateTo}{
-        Report End Date in "YYYY-MM-DD" format
-    }
-    \item{dateGranularity}{
-        "Day", "Week", "Month", "Quarter" or "Year" (case-insensitive).
-    }
-    \item{metric}{
-       The metric you want to trend.
-    }
-    \item{element}{
-       The element (page, browser eVar, prop) for the report to be broken down by.
-    }
-    \item{top}{
-       How many results you want trended. Used in combination with "startingWith". Not used if "selected" argument used.
-    }
-    \item{startingWith}{
-       The first ranked number you want in the report. Used in combination with "top". Not used if "selected" argument used.
-    }
-    \item{selected}{
-       List of selected values, such as specific pages or eVar values. Not used if "top" and "startingWith" arguments are used
-    }
-    \item{segment_id}{
-        Optional. If no segment_id is specified, metrics will be reported for all visitors.
-    }
-     \item{anomalyDetection}{
-    Optional. Use value of "1" to get anomaly detection results. Results only returned by API for 'Day' granularity. 
-    }
-     \item{currentData}{
-    Optional. Use value of "1" to get current data results. Only needed when dateTo is greater than or equal to the current day.
-    }
-}
-\details{
+  \item{reportsuite.id}{report suite id}
 
-Because of the Reporting API structure, this function first requests the report, then checks the reporting queue to see if the report is completed, and when the report returns as "done" pulls the report from the API. This checking process can occur up to 120 times, with a 5 second delay between status checks. If the report does not return as "done" after 10 minutes, the function returns an error.
+  \item{date.from}{start date for the report (YYYY-MM-DD)}
 
-Note: Because of the multiple argument type ("top" and "startingWith" OR "selected"), keyword arguments are generally needed towards the end of the function call instead of just positional arguments.
-   
+  \item{date.to}{end date for the report (YYYY-MM-DD)}
+
+  \item{metrics}{list of metrics to include in the report}
+
+  \item{elements}{list of elements to include in the
+  report}
+
+  \item{top}{number of rows to return}
+
+  \item{start}{start row if you do not want to start at #1}
+
+  \item{selected}{list of specific items to include in the
+  report - e.g. list(page=c("Home","Search","About"))}
+
+  \item{date.granularity}{time granularity of the report
+  (year/month/week/day/hour), default to 'day'}
+
+  \item{segment.id}{id of Adobe Analytics segment to
+  retrieve the report for}
+
+  \item{segment.inline}{inline segment definition}
+
+  \item{anomaly.dection}{set to TRUE to include forecast
+  data (only valid for day granularity with small date
+  ranges)}
+
+  \item{data.current}{TRUE or FALSE - whether to include
+  current data for reports that include today's date}
+
+  \item{expedite}{set to TRUE to expedite the processing of
+  this report}
 }
 \value{
-    Data Frame
+Flat data frame containing datetimes and metric values
+}
+\description{
+Helper function to run a Trended Report
 }
 
-\seealso{
-   \code{\link{GetAvailableMetrics}} \cr
-   \code{\link{GetSegments}} \cr
-   \code{\link{GetAvailableElements}}
-     
-}
-\examples{
-\dontrun{
-
-#Pageviews for the Top 100 pages by Day in the Loyal_Visitors segment
-pages_by_day <-  
-QueueTrended("keystonerandy", "2013-02-13", "2013-02-19", "day", 
-"pageviews", "page", top="100", startingWith= "1", segment_id= "Loyal_Visitors")
-
-
-#Specifying two specific pages, trended by hour for pageviews in the Loyal_Visitors segment
-specific_pages_by_hour <-  
-QueueTrended("keystonerandy", "2013-02-13", "2013-02-19", "hour", 
-"pageviews", "page", selected = c("http://randyzwitch.com", 
-"http://randyzwitch.com/about"), segment_id = "Loyal_Visitors")
-  
-)
-   }
-}
-\keyword{QueueTrended}
