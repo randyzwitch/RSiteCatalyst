@@ -68,7 +68,7 @@ This will provide you with a identifier and secret that you can use to access th
 You currently need to specify your own endpoint. Once the 1.4 API is released, I'll update this to automatically retrieve your company endpoint.
 
 ```
-RAA_Auth("your_identifier", 
+SCAuth("your_identifier", 
          "your_secret", 
          endpoint.url="https://your-endpoint.omniture.com/admin/1.4/rest/")
 ```
@@ -79,7 +79,7 @@ This auth method is pretty straight-forward, though much more fiddly involved un
 You will simply need your username, and your shared secret, which you can retrieve from your account settings page in the Adobe Analytics web interface.
 
 ```
-RAA_Auth("your_username:your_company", 
+SCAuth("your_username:your_company", 
          "your_shared_secret", 
          endpoint.url="https://your-endpoint.omniture.com/admin/1.4/", 
          auth.method='legacy')
@@ -307,5 +307,5 @@ segments <- GetSegments(c("your_prod_report_suite","your_dev_reportsuite"))
 If you put the library into debug mode, it will return more verbose output, and save some responses to disk so that they can be loaded in the console for debugging.
 
 ```
-RAA_SetDebug(TRUE)
+SCSetDebug(TRUE)
 ```

@@ -1,4 +1,4 @@
-#' RAA_SetDebug
+#' SCSetDebug
 #'
 #' Sets a debug flag that saves output and prints out more information
 #'
@@ -6,9 +6,9 @@
 #'
 #' @export
 
-RAA_SetDebug <- function(debug.mode = TRUE){
-  RAA.Debug <<- debug.mode
-  if(RAA.Debug) {
+SCSetDebug <- function(debug.mode = TRUE){
+  SC.Debug <<- debug.mode
+  if(SC.Debug) {
     print(paste("DEBUG MODE: ",debug.mode))
   }
 }

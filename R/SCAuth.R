@@ -1,4 +1,4 @@
-#' RAA_Auth
+#' SCAuth
 #'
 #' Authorise and store credentials for the Adobe Analytics API
 #'
@@ -17,11 +17,11 @@
 #'
 #' @export
 
-RAA_Auth <- function(key, secret, endpoint.url="", token.file="", auth.method="OAUTH2"){
+SCAuth <- function(key, secret, endpoint.url="", token.file="", auth.method="OAUTH2"){
 
   #@TODO: Endpoint detection using Company.GetEndpoint
 
-  RAA.Credentials <<- ""
+  SC.Credentials <<- ""
 
   if(auth.method=="OAUTH2") {
     token.required = TRUE
@@ -29,7 +29,7 @@ RAA_Auth <- function(key, secret, endpoint.url="", token.file="", auth.method="O
     if(nchar(token.file)) {
       if(file.exists(token.file)) {
         load(token.file)
-        RAA.Credentials <<- RAA.storedcredentials
+        SC.Credentials <<- SC.storedcredentials
         #@TODO: check if token has expired, and whether the endpoint matches before deciding
         token.required = FALSE
       }
@@ -40,7 +40,7 @@ RAA_Auth <- function(key, secret, endpoint.url="", token.file="", auth.method="O
                             "https://marketing.adobe.com/authorize",
                             "https://api.omniture.com/token")
 
-      aa.app <- oauth_app("RAA", key, secret)
+      aa.app <- oauth_app("RSiteCatalyst", key, secret)
       aa.cred <- oauth2.0_token(aa.api, aa.app, scope="ReportSuite Report Company")
 
       if(!is.null(aa.cred$error)) {
@@ -48,7 +48,7 @@ RAA_Auth <- function(key, secret, endpoint.url="", token.file="", auth.method="O
         stop(aa.cred$error_description)
       }
 
-      RAA.Credentials <<- list(endpoint.url=endpoint.url,
+      SC.Credentials <<- list(endpoint.url=endpoint.url,
                                auth.method=auth.method,
                                access_token=aa.cred$access_token,
                                scope=aa.cred$scope,
@@ -57,8 +57,8 @@ RAA_Auth <- function(key, secret, endpoint.url="", token.file="", auth.method="O
                                )
 
       if(nchar(token.file)) {
-        RAA.storedcredentials <- RAA.Credentials
-        save(RAA.storedcredentials,file=token.file)
+        SC.storedcredentials <- SC.Credentials
+        save(SC.storedcredentials,file=token.file)
       }
     }
   } else if (auth.method=="legacy") {
@@ -82,8 +82,8 @@ RAA_Auth <- function(key, secret, endpoint.url="", token.file="", auth.method="O
     } else {
       company <- str_split_fixed(key, ":", 2)
       #Create SCCredentials object in Global Environment
-      RAA.Credentials <<- list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url)
-      save(RAA.Credentials,file="~/RAA.Credentials")
+      SC.Credentials <<- list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url)
+      save(SC.Credentials,file="~/SC.Credentials")
       #Assign endpoint to 3rd position in credentials
       print("Legacy Auth Stored: This method is deprecated. If possible, use OAUTH.")
     }

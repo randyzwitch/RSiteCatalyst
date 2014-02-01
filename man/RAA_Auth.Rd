@@ -1,8 +1,8 @@
-\name{RAA_Auth}
-\alias{RAA_Auth}
-\title{RAA_Auth}
+\name{SCAuth}
+\alias{SCAuth}
+\title{SCAuth}
 \usage{
-RAA_Auth(key, secret, endpoint.url = "", token.file = "",
+SCAuth(key, secret, endpoint.url = "", token.file = "",
   auth.method = "OAUTH2")
 }
 \arguments{

@@ -1,8 +1,8 @@
-\name{RAA_SetDebug}
-\alias{RAA_SetDebug}
-\title{RAA_SetDebug}
+\name{SCSetDebug}
+\alias{SCSetDebug}
+\title{SCSetDebug}
 \usage{
-RAA_SetDebug(debug.mode = TRUE)
+SCSetDebug(debug.mode = TRUE)
 }
 \arguments{
   \item{debug.mode}{set to TRUE to enable debug mode

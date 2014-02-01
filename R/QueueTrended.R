@@ -17,6 +17,8 @@
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
 #' @param expedite set to TRUE to expedite the processing of this report
 #'
+#' @importFrom jsonlite toJSON
+#'
 #' @return Flat data frame containing datetimes and metric values
 #'
 #' @export

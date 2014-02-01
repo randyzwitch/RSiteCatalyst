@@ -3,9 +3,9 @@
 .Rhistory
 .Rproj.user
 .RData
-
 .DS_store
-RSiteCatalyst.Rproj
+RSiteCatalyst_version_1_4.Rproj
 *.csv
 .DS_Store
 local_code.R
+.Rproj.user

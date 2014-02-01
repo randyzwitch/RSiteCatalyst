@@ -7,6 +7,8 @@
 #' @param elements list of existing elements you want to use in combination with an additional metric
 #' @param date.granularity granularity that you want to combine with an additional metric
 #'
+#' @importFrom jsonlite toJSON
+#'
 #' @return List of valid metrics
 #'
 #' @export

@@ -4,6 +4,8 @@
 #'
 #' @param reportsuite.ids report suite id (or list of report suite ids)
 #'
+#' @importFrom jsonlite toJSON
+#'
 #' @return List of valid evars
 #'
 #' @export

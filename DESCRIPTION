@@ -1,4 +1,4 @@
-Package: RAA
+Package: RSiteCatalyst
 Type: Package
 Title: R Client for Adobe Analytics v1.4 API
 Version: 0.1

@@ -11,6 +11,8 @@
 #' @param segment.id id of Adobe Analytics segment to retrieve the report for
 #' @param expedite set to TRUE to expedite the processing of this report
 #'
+#' @importFrom jsonlite toJSON
+#'
 #' @return Flat data frame containing checkpoints and metrics for each step
 #'
 #' @export
