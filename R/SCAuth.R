@@ -7,17 +7,14 @@
 #' @param endpoint.url your Adobe Analytics API endpoint
 #' @param token.file if you would like to save your OAUTH token and other auth details for use in 
 #' future sessions, specify a file here. The method checks for the existence of the file and uses that if available.
-#' @param auth.method defaults to OAUTH2, can be set to 'legacy' to use the older () username:company and shared secret method.
+#' @param auth.method defaults to legacy, can be set to 'OAUTH2' to use the newer OAUTH method.
 #'
-#' @importFrom httr oauth_app
-#' @importFrom httr oauth_endpoint
-#' @importFrom httr oauth2.0_token
-#' @importFrom stringr str_count
-#' @importFrom stringr str_split_fixed
+#' @importFrom httr oauth_app oauth_endpoint oauth2.0_token
+#' @importFrom stringr str_count str_split_fixed
 #'
 #' @export
 
-SCAuth <- function(key, secret, endpoint.url="", token.file="", auth.method="OAUTH2"){
+SCAuth <- function(key, secret, endpoint.url="", token.file="", auth.method="legacy"){
 
   #@TODO: Endpoint detection using Company.GetEndpoint
 

@@ -22,6 +22,6 @@ better option. Install using
 install.packages("RSiteCatalyst").
 }
 \author{
-Willem Paling \email{willem.paling
+Willem Paling, Randy Zwitch
 }
 

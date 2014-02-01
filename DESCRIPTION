@@ -13,5 +13,5 @@ Imports:
     plyr,
     base64enc
 Description: R Client for Adobe Analytics v1.4 API, partly based on
-    RSiteCatalyst by Randy Zwitch
+    RSiteCatalyst v1.2 by Randy Zwitch
 License: GPL v2

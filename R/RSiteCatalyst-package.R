@@ -12,10 +12,11 @@
 #' @name RSiteCatalyst
 #' @docType package
 #' @title R Client for Adobe Analytics v1.4 API
-#' @author Willem Paling \email{willem.paling@gmail.com}
-
-NULL
+#' @author Willem Paling, Randy Zwitch
+#'
 
 utils::globalVariables("SC.Credentials")
 utils::globalVariables("SC.Debug")
 SC.Debug <<- FALSE
+
+NULL
