@@ -20,6 +20,8 @@
 
 }
 \details{
+    DEPRECATED. This method removed by Adobe, with no replacement.
+    
     This report is administrative in nature, for users interested in understanding how changes have been made to the SiteCatalyst implementation.
     
     Note that this API is limited to returning 1000 results per call. This is important to remember when passing a list of report suites or long time periods.

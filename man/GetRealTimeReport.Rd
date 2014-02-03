@@ -17,12 +17,12 @@ Get real-time report
         Report Suite ID
     }
     \item{metrics}{
-        A list of the real time metrics to include in the report. A report must specify at least one metric, and each metric must be configured previously using ReportSuite.SaveRealTimeConfiguration. (Ranked/Overtime reports support one or more metrics. Trended reports support only one metric.) For example:metrics = [ {id = "pageviews"},{id = "visits"} ]
+        Metric to include in the Realtime report. The metric must be configured previously using SaveRealTimeConfiguration
     }
     \item{elements}{
-        A list of elements that breaks down (organizes) the metrics data in the report. Each element must be configured previously using ReportSuite.SaveRealTimeConfiguration.
+        A list of elements that breaks down (organizes) the metrics data in the report. Each element must be configured previously using SaveRealTimeConfiguration.
 
-If no elements are provided, an overtime report is generated for the provided metric(s).
+If no elements are provided, an overtime report is generated for the provided metric.
     }
     \item{periodMinutes}{
         Number of minutes for one period. Default is 1.
@@ -50,6 +50,8 @@ With this argument you can rank from the first period (0) to periodCount - 1 (mo
 \details{
 
 GetRealTimeReport returns a Data Frame with the results from the real-time report specified. To find out valid values for the inputs of this function, run GetRealTimeConfiguration to get the current report setup. To change the real-time report setup, use SaveRealTimeConfiguration.
+
+Currently, RSiteCatalyst only supports up to one element in a realtime report. This limitation will be removed in a future release.
    
 }
 \value{
