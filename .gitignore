@@ -9,3 +9,5 @@ RSiteCatalyst.Rproj
 *.csv
 .DS_Store
 local_code.R
+tests.R
+GetClassifications.R

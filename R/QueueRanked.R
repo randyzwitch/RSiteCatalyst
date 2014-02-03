@@ -1,8 +1,8 @@
 #QueueRanked report
 #Corresponds to pulling a ranked report
 #This API method seems to be most complicated to return a valid result
-
-QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top="", startingWith="", segment_id="", selected="", currentData=""){
+  
+QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top="", startingWith="", segment_id="", selected="", currentData="", searchType="", searchKW="", maxTries= 120, waitTime= 5){
   
   #1.  Send API request to build report- QueueRanked
   
@@ -17,6 +17,11 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     stop("API only supports a maximum of two elements")
   }
   
+  if(searchKW != "" && top == "") {
+    
+    stop("Top argument required when using searchKW")
+  }
+  
   #Loop over the metrics list, appending proper curly braces
   metrics_conv <- lapply(metrics, function(x) paste('{"id":', '"', x, '"', '}', sep=""))
   #Collapse the list into a proper comma separated string
@@ -27,10 +32,25 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     
   #Modify element list based on whether it has one or two values   
   
+    #Add quotes around regexes
+    searchKW2 <- lapply(searchKW, function(x) paste('"', x, '"', sep=""))
+    #Create string from quoted list above
+    searchKW2 <- paste(searchKW2, collapse= ", ")
+
       if(length(elements) == 1) {
-        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}', elements,top, startingWith)
+        elements_list = sprintf('{"id":"%s", 
+                                  "top": "%s", 
+                                  "startingWith":"%s",
+                                  "search":{"type":"%s", "keywords":[%s]}
+                                  }', elements, top, startingWith, searchType, searchKW2)
       } else {
-        elements_list = sprintf('{"id":"%s", "top": "%s", "startingWith":"%s"}, {"id":"%s", "top":"1000"}', elements[1],top, startingWith, elements[2])
+        #Hard-coded value of 1000000 is to make sure "all" sub-relation values provided without needing another
+        #parameter in the function call
+        elements_list = sprintf('{"id":"%s", 
+                                  "top": "%s", 
+                                  "startingWith":"%s",
+                                  "search":{"type":"%s", "keywords":[%s]}},
+                                  {"id":"%s", "top":"1000000"}', elements[1],top, startingWith, searchType, searchKW2, elements[2])
       }
     
   json_request <-sprintf(
@@ -41,9 +61,8 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
      "metrics": [%s],
      "elements" : [%s],
      "segment_id": "%s",
-     "currentData": "%s",
-     "validate": true
-    }
+     "currentData": "%s"
+    },"validate": true
 }', reportSuiteID, dateFrom, dateTo, metrics_final, elements_list,segment_id, currentData)
   } else {
     
@@ -54,7 +73,11 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
     if(length(elements) == 1) {
       elements_list = sprintf('{"id":"%s", "selected":%s }', elements, selected)
     } else {
-      elements_list = sprintf('{"id":"%s", "selected":%s }, {"id":"%s", "top":"1000"}', elements[1],selected, elements[2])
+      
+      #Hard-coded value of 1000000 is to make sure "all" sub-relation values provided without needing another
+      #parameter in the function call
+      
+      elements_list = sprintf('{"id":"%s", "selected":%s }, {"id":"%s", "top":"1000000"}', elements[1],selected, elements[2])
     }
     
     json_request <- sprintf(
@@ -65,9 +88,8 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
      "metrics": [%s],
      "elements" : [%s],
      "segment_id": "%s",
-     "currentData": "%s",
-     "validate": true
-    }
+     "currentData": "%s"
+    }, "validate": true
 }', reportSuiteID, dateFrom, dateTo, metrics_final, elements_list, segment_id, currentData)
     
   }  
@@ -91,7 +113,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   }
   
   #Check to see whether report is done. while loop with 
-  #Sys.sleep waits 10 seconds before trying again
+  #Sys.sleep waits waitTime seconds before trying again
   print("Checking report status: Attempt Number 1")
   reportDone <- GetStatus(reportID)
   
@@ -100,9 +122,9 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   }
   
   num_tries <- 1
-  while(reportDone != "done" && num_tries < 120){
+  while(reportDone != "done" && num_tries < maxTries){
     num_tries <- num_tries + 1
-    Sys.sleep(5)
+    Sys.sleep(waitTime)
     print(paste("Checking report status: Attempt Number", num_tries))
     reportDone <- GetStatus(reportID)
     
@@ -153,7 +175,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
       inner_metrics <- as.data.frame(apply(inner_metrics, MARGIN=2, FUN= function(x) as.numeric(x))) #convert to numeric
       names(inner_metrics) <- metrics[1:ncol(inner_metrics)]     
   #Join all datasets together horizontally
-      temp <- cbind(outer_element, inner_element, inner_metrics)
+      temp <- cbind(outer_element, inner_element, segment=segment_requested, inner_metrics)
   #Append vertically to accumulator    
       accumulator <- rbind(accumulator, temp)
       if(i == length(data) && ncol(inner_metrics) < length(metrics)){

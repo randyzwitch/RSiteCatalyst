@@ -3,8 +3,7 @@
 #(revenue, orders, views, and so forth) and element 
 #(product, category, page, and so forth).
 
-
-QueueTrended <- function(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top="", startingWith="", selected= "", segment_id="", anomalyDetection="", currentData="") {
+QueueTrended <- function(reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top="", startingWith="", selected= "", segment_id="", anomalyDetection="", currentData="", searchType="", searchKW="", maxTries= 120, waitTime= 5) {
 
   #Error check to see if function call using both parameters
 if(top!= "" && selected != "") {
@@ -15,10 +14,27 @@ if(top!= "" && selected != "") {
 if(anomalyDetection == "1" & dateGranularity!="day") {
   stop("Error: Anomaly Detection only provided for day granularity")
 }
+
+if(searchKW != "" && top == "") {
+  
+  stop("Top argument required when using searchKW")
+}
   
 #Build JSON request for "Top" functionality
 
 if(top != "") {
+  
+  #Add quotes around regexes
+  searchKW2 <- lapply(searchKW, function(x) paste('"', x, '"', sep=""))
+  #Create string from quoted list above
+  searchKW2 <- paste(searchKW2, collapse= ", ")
+  
+    elements_list = sprintf('{"id":"%s", 
+                                  "top": "%s", 
+                                  "startingWith":"%s",
+                                  "search":{"type":"%s", "keywords":[%s]}
+                                  }', element, top, startingWith, searchType, searchKW2)
+
   json_request <- sprintf(
     '{"reportDescription":
     {"reportSuiteID" :"%s",
@@ -26,13 +42,12 @@ if(top != "") {
      "dateTo":"%s",
      "dateGranularity":"%s",
      "metrics": [{"id":"%s"}],
-     "elements" : [{"id":"%s", "top": "%s", "startingWith": "%s" }],
+     "elements" : [%s],
      "segment_id": "%s",
      "anomalyDetection": "%s",
-     "currentData": "%s",
-     "validate": true
-    }
-}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, top, startingWith, segment_id, anomalyDetection, currentData)
+     "currentData": "%s"
+    }, "validate": true
+}', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, elements_list, segment_id, anomalyDetection, currentData)
   
 }  else {
   
@@ -50,9 +65,8 @@ if(top != "") {
      "elements" : [{"id":"%s", "selected": %s }],
      "segment_id": "%s",
      "anomalyDetection": "%s",
-     "currentData": "%s",
-     "validate": true
-    }
+     "currentData": "%s"
+    }, "validate": true
 }', reportSuiteID, dateFrom, dateTo, dateGranularity, metric, element, selected, segment_id, anomalyDetection, currentData)
   
 }
@@ -86,9 +100,9 @@ if(reportDone == "failed") {
 }
 
 num_tries <- 1
-while(reportDone != "done" && num_tries < 120){
+while(reportDone != "done" && num_tries < maxTries){
   num_tries <- num_tries + 1
-  Sys.sleep(5)
+  Sys.sleep(waitTime)
   print(paste("Checking report status: Attempt Number", num_tries))
   reportDone <- GetStatus(reportID)
   

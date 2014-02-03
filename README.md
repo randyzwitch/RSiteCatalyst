@@ -8,13 +8,22 @@ This package requires R 2.15.2 or greater. Also, due to the number of package de
 
 	R 2.15.3
 	digest: 0.6.3
-	RCurl: 1.95-3
+	base64enc: 0.1-1
 	httr: 0.2
 	rjson: 0.2.12
 	plyr: 1.8
 	stringr: 0.6.2
 
 ##News
+
+2014-02-03: Version 1.3 submitted to CRAN
+
+Changes in version 1.3 include
+- Fixed validate flag in JSON request to work correctly
+- Allow for variable API request timing in Queue functions
+- Search via regex functionality in QueueRanked/QueueTrended functions
+- Support for Realtime API reports: Overtime and one-element Ranked report
+- Deprecated GetAdminConsoleLog
 
 2013-11-04: Version 1.2 submitted to CRAN
 

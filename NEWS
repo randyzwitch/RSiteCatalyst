@@ -1,11 +1,43 @@
-Version 1.2:  Removed RCurl dependency, changed order of arguments for GetAdminConsoleLog to fix error when dates not passed, return proper numeric type for metric columns, remove references to Omniture, fix bug in GetEVars function, added validate: true argument to API call
-Version 1.1:  Added subrelations/correlations/anomaly detection, lowered Queue report checking delay, various bug fixes, current report data flag
-Version 1.0:  Package submitted to CRAN
-Version 0.5:  Fixed bug in QueueTrended function
-Version 0.41: Changed DW flag in various functions to prevent Queue function errors
-Version 0.4:  Improved SCAuth function to remove need to guess at datacenter
-Version 0.3:  Passed all checks necessary for CRAN submission
-Version 0.21: Minor fix to description file
-Version 0.2:  Fixed errors identified during 'Check' process for CRAN submission
-Version 0.1:  Preliminary release
+RSiteCatalyst 1.3
+=================
 
+* Bug fixes
+
+* Allow for variable API request timing in Queue functions
+
+* Search via regex functionality in QueueRanked/QueueTrended functions
+
+* Support for Realtime API reports: Overtime and one-element Ranked report
+
+RSiteCatalyst 1.2
+=================
+
+* Removed RCurl dependency
+
+* Changed order of arguments for GetAdminConsoleLog to fix error when dates not   passed
+
+* Return proper numeric type for metric columns
+
+* Remove references to Omniture 
+
+* Fixed bug in GetEVars function
+
+* Added `validate: true` argument to API call
+
+RSiteCatalyst 1.1
+=================
+
+*  Added subrelations/correlations
+
+*  Added anomaly detection
+
+*  Lowered Queue report checking delay
+
+*  Various bug fixes
+
+*  Added current report data flag to Queue functions
+
+RSiteCatalyst 1.0
+=================
+
+* Package submitted to CRAN
