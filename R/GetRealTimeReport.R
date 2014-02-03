@@ -32,7 +32,13 @@ GetRealTimeReport <- function(report_suite, metrics, elements = c(), periodMinut
   #Get result from simplest request
   result <- content(json)[[1]]
   
-  return(ldply(result$data, quickdf)) #End if(element == "") logic
+  #Convert results to DataFrame
+  result_parsed <- ldply(result$data, quickdf)
+  result_parsed$counts <- as.numeric(result_parsed$counts) #Convert to numeric
+  
+  names(result_parsed)[names(result_parsed) == 'counts'] <- metrics
+  
+  return(result_parsed) #End if(element == "") logic
   
 } else if(length(elements) == 1) {
  
@@ -69,8 +75,13 @@ GetRealTimeReport <- function(report_suite, metrics, elements = c(), periodMinut
   }
   #Set names on accum data frame
   names(accum) <- c(elements, "name", "year", "month", "day", "hour", "minute", metrics_requested, paste(metrics_requested, "_total", sep=''))
+  accum[[8]] <- as.numeric(accum[[8]]) #Convert to numeric from character
+  accum[[9]] <- as.numeric(accum[[9]]) #Convert to numeric from character
   
   return(accum) #End if(length(element) == 1) logic
-} 
+  
+} else if(length(elements) > 1) {
+  stop("Currently, only one element breakdown supported by RSiteCatalyst")
+}
   
 } #End function bracket
