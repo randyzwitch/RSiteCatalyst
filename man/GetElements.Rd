@@ -26,7 +26,9 @@ user. This list is restricted by optionally specified
 existing elements, existing metrics and date granularity.
 }
 \examples{
+\dontrun{
 elements.valid <- GetElements("your_report_suite",metrics=c('visitors','pageviews'),
 elements=c('page','geoCountry'),date.granularity='day')
+}
 }
 

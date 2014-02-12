@@ -4,7 +4,7 @@
 \usage{
 QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   start = 0, selected = list(), segment.id = "", segment.inline = "",
-  data.current = FALSE, expedite = FALSE)
+  anomaly.detection = FALSE, data.current = FALSE, expedite = FALSE)
 }
 \arguments{
   \item{reportsuite.id}{report suite id}
@@ -33,7 +33,7 @@ QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
 
   \item{segment.inline}{inline segment definition}
 
-  \item{anomaly.dection}{set to TRUE to include forecast
+  \item{anomaly.detection}{set to TRUE to include forecast
   data (only valid for day granularity with small date
   ranges)}
 

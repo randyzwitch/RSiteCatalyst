@@ -14,7 +14,7 @@
 #' @return list of available evars
 #'
 #' @family internal
-#'
+#' @keywords internal
 
 ApiRequest <- function(body="",func.name="",interval.seconds=2,max.attempts=1,print.attempts=FALSE) {
 

@@ -18,4 +18,5 @@ Other internal: \code{\link{ApiRequest}};
 \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
 \code{\link{ParseTrended}}
 }
+\keyword{internal}
 

@@ -16,7 +16,7 @@
 #' @return Flat data frame containing all key report data
 #'
 #' @family internal
-#'
+#' @keywords internal
 
 BuildInnerBreakdownsRecursively <- function(parent.element,elements,metrics,
                                             current.recursion.level,context,accumulator=data.frame(),

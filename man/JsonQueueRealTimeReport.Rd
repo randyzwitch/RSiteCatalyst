@@ -14,4 +14,5 @@ Formatted data frame
 Generic interface to validate, queue and retrieve a
 realtime report from the API
 }
+\keyword{internal}
 

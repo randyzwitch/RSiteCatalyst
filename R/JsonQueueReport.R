@@ -9,6 +9,7 @@
 #' @return Formatted data frame
 #'
 #' @export
+#' @keywords internal
 
 JsonQueueReport <- function(report.description) {
 

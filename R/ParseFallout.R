@@ -7,7 +7,7 @@
 #' @return Formatted data frame
 #'
 #' @family internal
-#'
+#' @keywords internal
 
 ParseFallout <- function(report.data) {
 

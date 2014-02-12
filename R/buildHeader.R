@@ -8,7 +8,7 @@
 #' @return Header string for the old API auth method.
 #'
 #' @family internal
-#'
+#' @keywords internal
 
 BuildHeader <- function() {
 
