@@ -12,8 +12,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' props <- GetProps(c("your_prod_report_suite","your_dev_reportsuite"))
-#'
+#' }
 
 GetProps <- function(reportsuite.ids) {
   

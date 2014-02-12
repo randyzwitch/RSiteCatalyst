@@ -17,6 +17,8 @@ Useful to find segment IDs for use in reporting helper
 functions or JSON report definitions.
 }
 \examples{
+\dontrun{
 segments <- GetSegments(c("your_prod_report_suite","your_dev_reportsuite"))
+}
 }
 

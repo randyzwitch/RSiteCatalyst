@@ -7,8 +7,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' reportsuites <- GetReportSuites()
-#'
+#' }
 
 
 GetReportSuites <- function() {

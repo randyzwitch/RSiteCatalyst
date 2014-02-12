@@ -17,6 +17,8 @@ report suite(s). Useful to audit or document a report suite
 or company in Adobe Analytics.
 }
 \examples{
+\dontrun{
 props <- GetProps(c("your_prod_report_suite","your_dev_reportsuite"))
+}
 }
 
