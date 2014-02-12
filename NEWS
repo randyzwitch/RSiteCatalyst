@@ -1,0 +1,50 @@
+RSiteCatalyst 1.4
+=================
+
+* Fixes to support new version of Adobe Analytics API
+
+* Converted authentication to support OAuth
+
+RSiteCatalyst 1.3
+=================
+
+* Bug fixes
+
+* Allow for variable API request timing in Queue functions
+
+* Search via regex functionality in QueueRanked/QueueTrended functions
+
+* Support for Realtime API reports: Overtime and one-element Ranked report
+
+RSiteCatalyst 1.2
+=================
+
+* Removed RCurl dependency
+
+* Changed order of arguments for GetAdminConsoleLog to fix error when dates not   passed
+
+* Return proper numeric type for metric columns
+
+* Remove references to Omniture 
+
+* Fixed bug in GetEVars function
+
+* Added `validate: true` argument to API call
+
+RSiteCatalyst 1.1
+=================
+
+*  Added subrelations/correlations
+
+*  Added anomaly detection
+
+*  Lowered Queue report checking delay
+
+*  Various bug fixes
+
+*  Added current report data flag to Queue functions
+
+RSiteCatalyst 1.0
+=================
+
+* Package submitted to CRAN

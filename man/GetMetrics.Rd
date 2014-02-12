@@ -25,6 +25,7 @@ Gets valid metrics for current user, valid with optionally
 specified existing metrics, elements and date granularity
 }
 \examples{
-metrics.valid <- GetMetrics("your_report_suite",metrics=c('visitors','pageviews'),elements=c('page','geoCountry'),date.granularity='day')
+metrics.valid <- GetMetrics("your_report_suite",metrics=c('visitors','pageviews'),
+elements=c('page','geoCountry'),date.granularity='day')
 }
 

@@ -9,3 +9,6 @@ RSiteCatalyst_version_1_4.Rproj
 .DS_Store
 local_code.R
 .Rproj.user
+tests.R
+RSiteCatalyst.Rproj
+.gitignore
