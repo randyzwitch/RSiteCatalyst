@@ -35,4 +35,5 @@ Other internal: \code{\link{BuildHeader}};
 \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
 \code{\link{ParseTrended}}
 }
+\keyword{internal}
 

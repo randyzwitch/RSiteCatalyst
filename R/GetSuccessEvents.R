@@ -12,8 +12,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' successevents <- GetSuccessEvents(c("your_prod_report_suite","your_dev_reportsuite"))
-#'
+#' }
 
 GetSuccessEvents <- function(reportsuite.ids) {
 

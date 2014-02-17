@@ -10,4 +10,10 @@ RSiteCatalyst.Rproj
 .DS_Store
 local_code.R
 .Rproj.user
+<<<<<<< HEAD
 tests.R
+=======
+tests.R
+RSiteCatalyst.Rproj
+.gitignore
+>>>>>>> v1_4_cranfixes

@@ -13,7 +13,7 @@
 #' this only works for the first element (API limitation).
 #' @param segment.id id of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline inline segment definition
-#' @param anomaly.dection  set to TRUE to include forecast data (only valid for day granularity with small date ranges)
+#' @param anomaly.detection  set to TRUE to include forecast data (only valid for day granularity with small date ranges)
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
 #' @param expedite set to TRUE to expedite the processing of this report
 #'
@@ -23,9 +23,11 @@
 #'
 #' @export
 
+#RZ: Added anomaly.detection argument to function call to silence CRAN check warning
+# Is anomaly detection a TODO?
 QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
                         top=0,start=0,selected=list(),
-                        segment.id='', segment.inline='', data.current=FALSE, expedite=FALSE) {
+                        segment.id='', segment.inline='', anomaly.detection=FALSE, data.current=FALSE, expedite=FALSE) {
 
   # build JSON description
   # we have to use jsonlite:::as.scalar to force jsonlist not put strings into single-element arrays

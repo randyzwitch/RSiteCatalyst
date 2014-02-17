@@ -9,7 +9,7 @@
 #' @return TRUE/FALSE depending on whether the report is valid or not
 #'
 #' @export
-#'
+#' @keywords internal
 
 ValidateReport <- function(report.description,interval.seconds=0,max.attempts=1) {
 

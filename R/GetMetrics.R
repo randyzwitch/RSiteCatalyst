@@ -14,8 +14,10 @@
 #' @export
 #'
 #' @examples
-#' metrics.valid <- GetMetrics("your_report_suite",metrics=c('visitors','pageviews'),elements=c('page','geoCountry'),date.granularity='day')
-#'
+#' \dontrun{
+#' metrics.valid <- GetMetrics("your_report_suite",metrics=c('visitors','pageviews'),
+#' elements=c('page','geoCountry'),date.granularity='day')
+#' }
 
 GetMetrics <- function(reportsuite.id, metrics=c(), elements=c(), date.granularity='') {
   

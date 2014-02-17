@@ -9,7 +9,7 @@
 #' @return Formatted data frame
 #'
 #' @family internal
-#'
+#' @keywords internal
 
 ParseTrended <- function(report.data) {
 

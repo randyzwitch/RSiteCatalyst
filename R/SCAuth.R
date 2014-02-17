@@ -15,7 +15,7 @@
 #' @export
 
 SCAuth <- function(key, secret, endpoint.url="", token.file="", auth.method="legacy"){
-
+  
   #@TODO: Endpoint detection using Company.GetEndpoint
 
   SC.Credentials <<- ""

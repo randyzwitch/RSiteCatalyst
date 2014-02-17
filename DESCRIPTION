@@ -1,17 +1,11 @@
 Package: RSiteCatalyst
 Type: Package
 Title: R Client for Adobe Analytics v1.4 API
-Version: 0.1
-Date: 2013-12-19
-Author: Willem Paling
-Maintainer: Willem Paling <willem.paling@gmail.com>
-Depends:
-    R (>= 3.0.2)
-Imports:
-    jsonlite,
-    httr,
-    plyr,
-    base64enc
-Description: R Client for Adobe Analytics v1.4 API, partly based on
-    RSiteCatalyst v1.2 by Randy Zwitch
-License: GPL v2
+Version: 1.4
+Date: 2014-03-01
+Author: Willem Paling, Randy Zwitch & Jowanza Joseph
+Maintainer: Randy Zwitch <rzwitch+rsitecatalyst@gmail.com>
+Depends: R (>= 3.0)
+Imports: jsonlite, httr, plyr, base64enc, digest, stringr
+Description: R Client for Adobe Analytics v1.4 API
+License: GPL-2

@@ -6,7 +6,7 @@ BuildClassificationValueSegment(element, search.keywords, classification = "",
   search.type = "OR")
 }
 \arguments{
-  \item{elements}{list of elements on which to vase the
+  \item{element}{list of elements on which to vase the
   segment}
 
   \item{search.keywords}{list of search keyword vectorsfor

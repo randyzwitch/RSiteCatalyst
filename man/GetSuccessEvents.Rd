@@ -17,6 +17,8 @@ suite(s). Useful to audit or document a report suite or
 company in Adobe Analytics.
 }
 \examples{
+\dontrun{
 successevents <- GetSuccessEvents(c("your_prod_report_suite","your_dev_reportsuite"))
+}
 }
 

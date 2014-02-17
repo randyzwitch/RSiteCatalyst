@@ -22,4 +22,5 @@ Other internal: \code{\link{ApiRequest}};
 \code{\link{ParseFallout}}; \code{\link{ParseOvertime}};
 \code{\link{ParseRanked}}; \code{\link{ParseTrended}}
 }
+\keyword{internal}
 

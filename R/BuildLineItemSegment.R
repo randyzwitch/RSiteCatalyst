@@ -9,6 +9,7 @@
 #' @return segment definition for use with Queue* helper functions
 #'
 #' @export
+#' @keywords internal
 
 BuildLineItemSegment <- function(element,selected=list()) {
   segment.definition <- list(id=jsonlite:::as.scalar(element),selected=selected)

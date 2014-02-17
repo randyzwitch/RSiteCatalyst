@@ -12,8 +12,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' segments <- GetSegments(c("your_prod_report_suite","your_dev_reportsuite"))
-#'
+#' }
 
 GetSegments <- function(reportsuite.ids) {
   

@@ -11,6 +11,8 @@ List of valid reportsuites
 Gets all available report suites for the company.
 }
 \examples{
+\dontrun{
 reportsuites <- GetReportSuites()
+}
 }
 

@@ -23,7 +23,7 @@ QueueOvertime(reportsuite.id, date.from, date.to, metrics,
 
   \item{segment.inline}{inline segment definition}
 
-  \item{anomaly.dection}{set to TRUE to include forecast
+  \item{anomaly.detection}{set to TRUE to include forecast
   data (only valid for day granularity with small date
   ranges)}
 
