@@ -11,6 +11,5 @@ RSiteCatalyst.Rproj
 local_code.R
 .Rproj.user
 tests.R
-.gitignore
 *.json
 
