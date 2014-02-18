@@ -6,6 +6,7 @@
 #' @param reportsuite.ids report suite id (or list of report suite ids)
 #'
 #' @importFrom jsonlite toJSON
+#' @importFrom plyr rbind.fill
 #'
 #' @return List of valid segments
 #'
@@ -19,7 +20,7 @@
 GetSegments <- function(reportsuite.ids) {
   
   request.body <- c()
-  request.body$rsid_list <- reportsuite.id
+  request.body$rsid_list <- reportsuite.ids
   
   valid.segments <- ApiRequest(body=toJSON(request.body),func.name="ReportSuite.GetSegments")
 
@@ -29,7 +30,7 @@ GetSegments <- function(reportsuite.ids) {
     if(nrow(segments.formatted)==0) {
       segments.formatted <- valid.segments$segments[[i]]
     } else {
-      segments.formatted <- rbind(segments.formatted,valid.segments$segments[[i]])
+      segments.formatted <- rbind.fill(segments.formatted,valid.segments$segments[[i]])
     }
   }
 
