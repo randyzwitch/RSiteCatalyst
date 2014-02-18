@@ -5,7 +5,7 @@
 #' @param reportsuite.ids report suite id (or list of report suite ids)
 #'
 #' @importFrom jsonlite toJSON
-#'
+#' @importFrom plyr rbind.fill
 #' @return List of valid evars
 #'
 #' @export
@@ -13,7 +13,7 @@
 GetEvars <- function(reportsuite.ids) {
   
   report.description <- c()
-  report.description$rsid_list <- reportsuite.id
+  report.description$rsid_list <- reportsuite.ids
 
   valid.evars <- ApiRequest(body=toJSON(report.description),func.name="ReportSuite.GetEvars")
 
@@ -23,7 +23,7 @@ GetEvars <- function(reportsuite.ids) {
     if(nrow(evars.formatted)==0) {
       evars.formatted <- valid.evars$evars[[i]]
     } else {
-      evars.formatted <- rbind(evars.formatted,valid.evars$evars[[i]])
+      evars.formatted <- rbind.fill(evars.formatted,valid.evars$evars[[i]])
     }
   }
 
