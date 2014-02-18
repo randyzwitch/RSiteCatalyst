@@ -15,7 +15,7 @@ BuildHeader <- function() {
   #Create nonce
   nonce <- as.character(as.numeric(Sys.time()))
   #Create timestamp
-  created.date <- format(Sys.time()-11*60*60, "%Y-%m-%dT%H:%M:%SZ")
+  created.date <- format(as.POSIXlt(Sys.time(), "GMT"), "%Y-%m-%dT%H:%M:%SZ")
   #Concatentate nonce, timestamp, shared secret, then sha1 then base64
   nonce.create.secret <- paste(nonce, created.date, SC.Credentials$secret, sep="")
   sha.object <- digest(nonce.create.secret, algo="sha1", serialize=FALSE)

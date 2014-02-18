@@ -19,8 +19,9 @@ the API
 Other internal: \code{\link{ApiRequest}};
 \code{\link{BuildHeader}};
 \code{\link{BuildInnerBreakdownsRecursively}};
-\code{\link{ParseOvertime}}; \code{\link{ParsePathing}};
-\code{\link{ParseRanked}}; \code{\link{ParseTrended}}
+\code{\link{GetEndpoint}}; \code{\link{ParseOvertime}};
+\code{\link{ParsePathing}}; \code{\link{ParseRanked}};
+\code{\link{ParseTrended}}
 }
 \keyword{internal}
 

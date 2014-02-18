@@ -4,7 +4,6 @@
 #'
 #' @param key client id from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API username (username:company)
 #' @param secret secret from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API shared secret
-#' @param endpoint.url your Adobe Analytics API endpoint
 #' @param token.file if you would like to save your OAUTH token and other auth details for use in 
 #' future sessions, specify a file here. The method checks for the existence of the file and uses that if available.
 #' @param auth.method defaults to legacy, can be set to 'OAUTH2' to use the newer OAUTH method.
@@ -14,11 +13,14 @@
 #'
 #' @export
 
-SCAuth <- function(key, secret, endpoint.url="", token.file="", auth.method="legacy"){
-  
-  #@TODO: Endpoint detection using Company.GetEndpoint
+SCAuth <- function(key, secret, token.file="", auth.method="legacy"){
 
-  SC.Credentials <<- ""
+  #Temporarily set SC.Credentials for GetEndpoint function call
+  SC.Credentials <<- list(key=key, secret=secret)
+  company <- str_split_fixed(key, ":", 2)
+  endpoint.url <- GetEndpoint(company)
+  
+  SC.Credentials <<- "" #This might be defensive overkill
 
   if(auth.method=="OAUTH2") {
     token.required = TRUE
