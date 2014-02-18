@@ -6,6 +6,7 @@
 #' @param reportsuite.ids report suite id (or list of report suite ids)
 #'
 #' @importFrom jsonlite toJSON
+#' @importFrom plyr rbind.fill
 #'
 #' @return List of valid successevents
 #'
@@ -19,7 +20,7 @@
 GetSuccessEvents <- function(reportsuite.ids) {
 
   request.body <- c()
-  request.body$rsid_list <- reportsuite.id
+  request.body$rsid_list <- reportsuite.ids
 
   valid.successevents <- ApiRequest(body=toJSON(request.body),func.name="ReportSuite.GetSuccessEvents")
 
@@ -31,7 +32,7 @@ GetSuccessEvents <- function(reportsuite.ids) {
     if(nrow(successevents.formatted)==0) {
       successevents.formatted <- valid.successevents$events[[i]]
     } else {
-      successevents.formatted <- rbind(successevents.formatted,valid.successevents$events[[i]])
+      successevents.formatted <- rbind.fill(successevents.formatted,valid.successevents$events[[i]])
     }
   }
 

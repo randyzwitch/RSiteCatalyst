@@ -6,6 +6,7 @@
 #' @param reportsuite.ids report suite id (or list of report suite ids)
 #'
 #' @importFrom jsonlite toJSON
+#' @importFrom plyr rbind.fill
 #'
 #' @return List of valid props
 #'
@@ -19,7 +20,7 @@
 GetProps <- function(reportsuite.ids) {
   
   request.body <- c()
-  request.body$rsid_list <- reportsuite.id
+  request.body$rsid_list <- reportsuite.ids
 
   valid.props <- ApiRequest(body=toJSON(request.body),func.name="ReportSuite.GetProps")
 
@@ -29,7 +30,7 @@ GetProps <- function(reportsuite.ids) {
     if(nrow(props.formatted)==0) {
       props.formatted <- valid.props$props[[i]]
     } else {
-      props.formatted <- rbind(props.formatted,valid.props$props[[i]])
+      props.formatted <- rbind.fill(props.formatted,valid.props$props[[i]])
     }
   }
 
