@@ -41,7 +41,7 @@ GetElements <- function(reportsuite.ids, metrics=c(), elements=c(), date.granula
     working.elements <- ApiRequest(body=toJSON(request.body),func.name="Report.GetElements")
     working.elements$rsid <- reportsuite.id
     if(length(valid.elements)){
-      valid.elements <- rbind(valid.elements,working.elements)
+      valid.elements <- rbind.fill(valid.elements,working.elements)
     } else {
       valid.elements <- working.elements
     }
