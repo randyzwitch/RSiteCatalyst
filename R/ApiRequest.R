@@ -25,7 +25,7 @@ ApiRequest <- function(body="",func.name="",interval.seconds=2,max.attempts=1,pr
     url <- paste(endpoint, "?method=",func.name, sep="")
   }
 
-  if(SC.Debug) {
+  if(exists("SC.Debug")&&SC.Debug==TRUE) {
     print(paste("Requesting URL: ",url))
     print(body)
   }
@@ -43,24 +43,26 @@ ApiRequest <- function(body="",func.name="",interval.seconds=2,max.attempts=1,pr
     } else if(SC.Credentials$auth.method=="legacy") {
       response <- POST(url, add_headers(BuildHeader()), body=body)
     }
-    if(response$status==200) {
+    if(response$status==200 || response$status==400) {
+      # we have a valid response or a bad request error
       result <- TRUE
     } else {
+      print(response$status)
       Sys.sleep(interval.seconds)
     }
   }
 
-  if(!result){
+  if(!result||response$status==400){
     response.content <- content(response)
-    if(nchar(response.content$error_description)) {
-      stop(paste("ERROR:",response.content$error_description))
+    if(response$status==400) {
+      print(paste("ERROR:",response.content$error_description))
     } else {
-      stop(paste("ERROR: max attempts exceeded for",url))
+      print(paste("ERROR: max attempts exceeded for",url))
     }
   }
 
   # If we are in debug mode, save the output
-  if(SC.Debug==TRUE) {
+  if(exists("SC.Debug")&&SC.Debug==TRUE) {
     filename <- paste("PostRequest_",sub(":","-",Sys.time()),".json",sep="")
     print(paste("DEBUG: saving output as",filename))
     sink(filename)
