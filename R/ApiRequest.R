@@ -45,7 +45,12 @@ ApiRequest <- function(body="",func.name="",interval.seconds=2,max.attempts=1,pr
     }
     if(response$status==200 || response$status==400) {
       # we have a valid response or a bad request error
-      result <- TRUE
+      response.content <- content(response)
+      if(response$status==400&&response.content$error=='report_not_ready') {
+        result <- FALSE
+      } else {
+        result <- TRUE
+      }
     } else {
       print(response$status)
       Sys.sleep(interval.seconds)
