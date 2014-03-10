@@ -11,7 +11,7 @@
 #' @export
 #'
 
-JsonQueueReport <- function(report.description) {
+JsonQueueReport <- function(report.description,interval.seconds=5,max.attempts=120) {
 
   if(!ValidateReport(report.description)) {
     stop("ERROR: Invalid report description.")
@@ -28,7 +28,7 @@ JsonQueueReport <- function(report.description) {
 
   request.body <- c()
   request.body$reportID <- unbox(report.id)
-  report.data <- ApiRequest(body=toJSON(request.body),func.name="Report.Get",interval.seconds=5,max.attempts=120,print.attempts=TRUE)
+  report.data <- ApiRequest(body=toJSON(request.body),func.name="Report.Get",interval.seconds=interval.seconds,max.attempts=max.attempts,print.attempts=TRUE)
 
   report.type <- report.data$report$type
   print(paste("Received",report.type,"report."))

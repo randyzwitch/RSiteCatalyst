@@ -21,7 +21,7 @@
 
 QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
                         date.granularity='day', segment.id='', segment.inline='', anomaly.detection=FALSE,
-                        data.current=FALSE, expedite=FALSE) {
+                        data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120) {
   
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
@@ -40,7 +40,7 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
   }
   report.description$reportDescription$metrics = data.frame(id = metrics)
 
-  report.data <- JsonQueueReport(toJSON(report.description))
+  report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 
   return(report.data) 
 

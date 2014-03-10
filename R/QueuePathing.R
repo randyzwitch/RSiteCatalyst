@@ -24,7 +24,7 @@
 
 QueuePathing <- function(reportsuite.id, date.from, date.to, metric, element, pattern,
                         top=1000, start=1,
-                        segment.id='', expedite=FALSE) {
+                        segment.id='', expedite=FALSE,interval.seconds=5,max.attempts=120) {
   
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
@@ -45,7 +45,7 @@ QueuePathing <- function(reportsuite.id, date.from, date.to, metric, element, pa
                                                             startingWith = unbox(start), 
                                                             pattern = as.list(pattern)))
 
-  report.data <- JsonQueueReport(toJSON(report.description))
+  report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 
   return(report.data) 
 
