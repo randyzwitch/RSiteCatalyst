@@ -13,6 +13,7 @@
 #' this only works for the first element (API limitation).
 #' @param search list of keywords for a specified element - e.g. list(page=c("contact","about","shop")). 
 #' search overrides anything specified using selected
+#' @param search.type string specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
 #' @param segment.id id of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline inline segment definition
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
@@ -25,7 +26,7 @@
 #' @export
 
 QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
-                        top=0,start=0,selected=list(), search=list(),
+                        top=0,start=0,selected=list(), search=list(),search.type='or',
                         segment.id='', segment.inline='', data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120) {
 
   # build JSON description
@@ -68,7 +69,7 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
                               selected=NULL)
     }
     if(length(search)!=0){
-      working.element[["search"]] <- list(type = unbox('or'), 
+      working.element[["search"]] <- list(type = unbox(search.type), 
                                   keywords = search[element][1][[1]])
     }
     if(length(elements.formatted)>0) {
