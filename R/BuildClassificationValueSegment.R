@@ -10,6 +10,8 @@
 #' @param classification optional classification breakdown name for the element (defaults to the element name)
 #' @param search.type how to combine the keywords list. This defaults to 'OR' if it is not specified.
 #'
+#' @importFrom jsonlite toJSON unbox
+#'
 #' @return segment definition for use with Queue* helper functions
 #'
 #' @export
@@ -20,8 +22,8 @@ BuildClassificationValueSegment <- function(element,search.keywords,classificati
     classification <- element
   }
   
-  search <- list(type=jsonlite:::as.scalar(search.type),keywords=search.keywords)
+  search <- list(type=unbox(search.type),keywords=search.keywords)
   
-  segment.definition <- list(id=jsonlite:::as.scalar(element),search=search)
+  segment.definition <- list(id=unbox(element),search=search)
   return(segment.definition) 
 }

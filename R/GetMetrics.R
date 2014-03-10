@@ -7,7 +7,7 @@
 #' @param elements list of existing elements you want to use in combination with an additional metric
 #' @param date.granularity granularity that you want to combine with an additional metric
 #'
-#' @importFrom jsonlite toJSON
+#' @importFrom jsonlite toJSON unbox
 #' @importFrom plyr rbind.fill
 #'
 #' @return List of valid metrics
@@ -27,7 +27,7 @@ GetMetrics <- function(reportsuite.ids, metrics=c(), elements=c(), date.granular
   for(reportsuite.id in reportsuite.ids) {
 
     request.body <- c()
-    request.body$reportSuiteID <- jsonlite:::as.scalar(reportsuite.id)
+    request.body$reportSuiteID <- unbox(reportsuite.id)
 
     if(length(metrics)>0) { 
       request.body$reportDescription$existingMetrics <- metrics
@@ -36,7 +36,7 @@ GetMetrics <- function(reportsuite.ids, metrics=c(), elements=c(), date.granular
       request.body$reportDescription$existingElements <- elements
     }
     if(nchar(date.granularity)>0) { 
-      request.body$reportDescription$dateGranularity <- jsonlite:::as.scalar(date.granularity) 
+      request.body$reportDescription$dateGranularity <- unbox(date.granularity) 
     }
 
     working.metrics <- ApiRequest(body=toJSON(request.body),func.name="Report.GetMetrics")

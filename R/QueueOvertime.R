@@ -13,7 +13,7 @@
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
 #' @param expedite set to TRUE to expedite the processing of this report
 #'
-#' @importFrom jsonlite toJSON
+#' @importFrom jsonlite toJSON unbox
 #'
 #' @return Flat data frame containing datetimes and metric values
 #'
@@ -24,17 +24,17 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
                         data.current=FALSE, expedite=FALSE) {
   
   # build JSON description
-  # we have to use jsonlite:::as.scalar to force jsonlist not put strings into single-element arrays
+  # we have to use unbox to force jsonlist not put strings into single-element arrays
   report.description <- c()
   report.description$reportDescription <- c(data.frame(matrix(ncol=0, nrow=1)))
-  report.description$reportDescription$dateFrom <- jsonlite:::as.scalar(date.from)
-  report.description$reportDescription$dateTo <- jsonlite:::as.scalar(date.to)
-  report.description$reportDescription$reportSuiteID <- jsonlite:::as.scalar(reportsuite.id)
-  report.description$reportDescription$dateGranularity <- jsonlite:::as.scalar(date.granularity)
-  report.description$reportDescription$segment_id <- jsonlite:::as.scalar(segment.id)
-  report.description$reportDescription$anomalyDetection <- jsonlite:::as.scalar(anomaly.detection)
-  report.description$reportDescription$currentData <- jsonlite:::as.scalar(data.current)
-  report.description$reportDescription$expedite <- jsonlite:::as.scalar(expedite)
+  report.description$reportDescription$dateFrom <- unbox(date.from)
+  report.description$reportDescription$dateTo <- unbox(date.to)
+  report.description$reportDescription$reportSuiteID <- unbox(reportsuite.id)
+  report.description$reportDescription$dateGranularity <- unbox(date.granularity)
+  report.description$reportDescription$segment_id <- unbox(segment.id)
+  report.description$reportDescription$anomalyDetection <- unbox(anomaly.detection)
+  report.description$reportDescription$currentData <- unbox(data.current)
+  report.description$reportDescription$expedite <- unbox(expedite)
   if(segment.inline!="") {
     report.description$reportDescription$segments <- list(segment.inline)
   }

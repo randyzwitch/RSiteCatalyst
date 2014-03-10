@@ -17,7 +17,7 @@
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
 #' @param expedite set to TRUE to expedite the processing of this report
 #'
-#' @importFrom jsonlite toJSON
+#' @importFrom jsonlite toJSON unbox
 #'
 #' @return Flat data frame containing datetimes and metric values
 #'
@@ -39,33 +39,33 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   }
 
   # build JSON description
-  # we have to use jsonlite:::as.scalar to force jsonlist not put strings into single-element arrays
+  # we have to use unbox to force jsonlist not put strings into single-element arrays
   report.description <- c()
   report.description$reportDescription <- c(data.frame(matrix(ncol=0, nrow=1)))
-  report.description$reportDescription$dateFrom <- jsonlite:::as.scalar(date.from)
-  report.description$reportDescription$dateTo <- jsonlite:::as.scalar(date.to)
-  report.description$reportDescription$reportSuiteID <- jsonlite:::as.scalar(reportsuite.id)
-  report.description$reportDescription$dateGranularity <- jsonlite:::as.scalar(date.granularity)
+  report.description$reportDescription$dateFrom <- unbox(date.from)
+  report.description$reportDescription$dateTo <- unbox(date.to)
+  report.description$reportDescription$reportSuiteID <- unbox(reportsuite.id)
+  report.description$reportDescription$dateGranularity <- unbox(date.granularity)
   if(segment.inline!="") {
     report.description$reportDescription$segments <- list(segment.inline)
   }
   if(top>0) { 
-    report.description$reportDescription$top <- jsonlite:::as.scalar(top) 
+    report.description$reportDescription$top <- unbox(top) 
   }
   if(start>0) { 
-    report.description$reportDescription$start <- jsonlite:::as.scalar(start) 
+    report.description$reportDescription$start <- unbox(start) 
   }
   if(segment.id!="") { 
-    report.description$reportDescription$segment_id <- jsonlite:::as.scalar(segment.id) 
+    report.description$reportDescription$segment_id <- unbox(segment.id) 
   }
   if(anomaly.detection==TRUE) { 
-    report.description$reportDescription$anomalyDetection <- jsonlite:::as.scalar(anomaly.detection) 
+    report.description$reportDescription$anomalyDetection <- unbox(anomaly.detection) 
   }
   if(data.current==TRUE) { 
-    report.description$reportDescription$currentData <- jsonlite:::as.scalar(data.current) 
+    report.description$reportDescription$currentData <- unbox(data.current) 
   }
   if(expedite==TRUE) { 
-    report.description$reportDescription$expedite <- jsonlite:::as.scalar(expedite)
+    report.description$reportDescription$expedite <- unbox(expedite)
   }
   report.description$reportDescription$metrics = data.frame(id = metrics)
 
@@ -74,7 +74,7 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
     elements.formatted <- list()
     for(element in elements) {
       if(length(selected[element])){
-        working.element <- list(id = jsonlite:::as.scalar(element), selected=selected[element][1][[1]])
+        working.element <- list(id = unbox(element), selected=selected[element][1][[1]])
       }
       if(length(elements.formatted)>0) {
         elements.formatted <- rbind(elements.formatted,working.element)

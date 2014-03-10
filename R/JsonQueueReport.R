@@ -4,7 +4,7 @@
 #'
 #' @param report.description JSON report description
 #'
-#' @importFrom jsonlite toJSON
+#' @importFrom jsonlite toJSON unbox
 #'
 #' @return Formatted data frame
 #'
@@ -27,7 +27,7 @@ JsonQueueReport <- function(report.description) {
   }
 
   request.body <- c()
-  request.body$reportID <- jsonlite:::as.scalar(report.id)
+  request.body$reportID <- unbox(report.id)
   report.data <- ApiRequest(body=toJSON(request.body),func.name="Report.Get",interval.seconds=5,max.attempts=120,print.attempts=TRUE)
 
   report.type <- report.data$report$type

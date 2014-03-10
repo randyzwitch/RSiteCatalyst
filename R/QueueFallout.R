@@ -11,7 +11,7 @@
 #' @param segment.id id of Adobe Analytics segment to retrieve the report for
 #' @param expedite set to TRUE to expedite the processing of this report
 #'
-#' @importFrom jsonlite toJSON
+#' @importFrom jsonlite toJSON unbox
 #'
 #' @return Flat data frame containing checkpoints and metrics for each step
 #'
@@ -21,20 +21,20 @@ QueueFallout <- function(reportsuite.id, date.from, date.to, metrics, element, c
                         segment.id='', expedite=FALSE) {
   
   # build JSON description
-  # we have to use jsonlite:::as.scalar to force jsonlist not put strings into single-element arrays
+  # we have to use unbox to force jsonlist not put strings into single-element arrays
   report.description <- c()
   report.description$reportDescription <- c(data.frame(matrix(ncol=0, nrow=1)))
-  report.description$reportDescription$dateFrom <- jsonlite:::as.scalar(date.from)
-  report.description$reportDescription$dateTo <- jsonlite:::as.scalar(date.to)
-  report.description$reportDescription$reportSuiteID <- jsonlite:::as.scalar(reportsuite.id)
+  report.description$reportDescription$dateFrom <- unbox(date.from)
+  report.description$reportDescription$dateTo <- unbox(date.to)
+  report.description$reportDescription$reportSuiteID <- unbox(reportsuite.id)
   if(segment.id!="") { 
-    report.description$reportDescription$segment_id <- jsonlite:::as.scalar(segment.id) 
+    report.description$reportDescription$segment_id <- unbox(segment.id) 
   }
   if(expedite!=FALSE) { 
-    report.description$reportDescription$expedite <- jsonlite:::as.scalar(expedite) 
+    report.description$reportDescription$expedite <- unbox(expedite) 
   }
   report.description$reportDescription$metrics = data.frame(id = metrics)
-  report.description$reportDescription$elements = list(list(id = jsonlite:::as.scalar(element), checkpoints = checkpoints))
+  report.description$reportDescription$elements = list(list(id = unbox(element), checkpoints = checkpoints))
 
   report.data <- JsonQueueReport(toJSON(report.description))
 

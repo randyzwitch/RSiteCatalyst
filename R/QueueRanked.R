@@ -17,7 +17,7 @@
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
 #' @param expedite set to TRUE to expedite the processing of this report
 #'
-#' @importFrom jsonlite toJSON
+#' @importFrom jsonlite toJSON unbox
 #'
 #' @return Flat data frame containing datetimes and metric values
 #'
@@ -30,24 +30,24 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
                         segment.id='', segment.inline='', anomaly.detection=FALSE, data.current=FALSE, expedite=FALSE) {
 
   # build JSON description
-  # we have to use jsonlite:::as.scalar to force jsonlist not put strings into single-element arrays
+  # we have to use unbox to force jsonlist not put strings into single-element arrays
   # new release of jsonlite will let us use jsonlite::singleton() (function is actually exported)
   report.description <- c()
   report.description$reportDescription <- c(data.frame(matrix(ncol=0, nrow=1)))
-  report.description$reportDescription$dateFrom <- jsonlite:::as.scalar(date.from)
-  report.description$reportDescription$dateTo <- jsonlite:::as.scalar(date.to)
-  report.description$reportDescription$reportSuiteID <- jsonlite:::as.scalar(reportsuite.id)
+  report.description$reportDescription$dateFrom <- unbox(date.from)
+  report.description$reportDescription$dateTo <- unbox(date.to)
+  report.description$reportDescription$reportSuiteID <- unbox(reportsuite.id)
   if(segment.inline!="") {
     report.description$reportDescription$segments <- list(segment.inline)
   }
   if(start>0) { 
-    report.description$reportDescription$start <- jsonlite:::as.scalar(start) 
+    report.description$reportDescription$start <- unbox(start) 
   }
   if(segment.id!="") { 
-    report.description$reportDescription$segment_id <- jsonlite:::as.scalar(segment.id) 
+    report.description$reportDescription$segment_id <- unbox(segment.id) 
   }
   if(expedite==TRUE) { 
-    report.description$reportDescription$expedite <- jsonlite:::as.scalar(expedite)
+    report.description$reportDescription$expedite <- unbox(expedite)
   }
   report.description$reportDescription$metrics = data.frame(id = metrics)
 
@@ -58,14 +58,14 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
     i <- i + 1
     if(length(selected[element]) && i==1){
       # put in top and startingWith for the first element only
-      working.element <- list(id = jsonlite:::as.scalar(element), 
-                                  top = jsonlite:::as.scalar(top), 
-                                  startingWith = jsonlite:::as.scalar(start), 
+      working.element <- list(id = unbox(element), 
+                                  top = unbox(top), 
+                                  startingWith = unbox(start), 
                                   selected = selected[element][1][[1]])
     } else {
-      working.element <- list(id = jsonlite:::as.scalar(element), 
-                              top = jsonlite:::as.scalar(top), 
-                              startingWith = jsonlite:::as.scalar(start),
+      working.element <- list(id = unbox(element), 
+                              top = unbox(top), 
+                              startingWith = unbox(start),
                               selected=NULL)
     }
     if(length(elements.formatted)>0) {
