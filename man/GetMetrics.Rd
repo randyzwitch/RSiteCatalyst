@@ -2,11 +2,12 @@
 \alias{GetMetrics}
 \title{GetMetrics}
 \usage{
-GetMetrics(reportsuite.id, metrics = c(), elements = c(),
+GetMetrics(reportsuite.ids, metrics = c(), elements = c(),
   date.granularity = "")
 }
 \arguments{
-  \item{reportsuite.id}{report suite id}
+  \item{reportsuite.ids}{single report suite id, or
+  character vector of report suite ids}
 
   \item{metrics}{list of existing metrics you want to use
   in combination with an additional metric}
