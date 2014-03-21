@@ -2,8 +2,10 @@
 
 GetEndpoint <- function(company) {
 
-return(content(POST("https://api.omniture.com/admin/1.3/rest/?method=Company.GetEndpoint", add_headers(buildHeader()), 
-sprintf('{"company": "%s"}',company))))
+response <- POST("https://api.omniture.com/admin/1.3/rest/?method=Company.GetEndpoint", add_headers(buildHeader()), 
+       body = sprintf('{"company": "%s"}',company))
 
+#Clean up response content
+return(rjson::fromJSON(content(response, "text")))  
 
 } #End function bracket
