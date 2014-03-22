@@ -17,7 +17,7 @@ This package requires R 2.15.2 or greater. Also, due to the number of package de
 ##News
 
 2014-03-2X:
-- Fixed issues with fromJSON error due to upgrading to httr 0.3
+- Fixed issues arising from upgrading to httr 0.3
 
 2014-02-20: Version 1.3.1 submitted to CRAN
 - Fixed NAMESPACE issue to export real-time functions

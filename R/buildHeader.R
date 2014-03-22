@@ -15,6 +15,6 @@ buildHeader <- function() {
   
 
 #Build & Return Header 
- return(paste('X-WSSE: UsernameToken Username=\"',SCCredentials[1], '\"', ',', ' PasswordDigest=\"',password_digest, '\"', ',', ' Nonce=\"', nonce, '\"', ',', ' Created=\"', created_date, '\"', sep=""))
+ return(paste('UsernameToken Username=\"',SCCredentials[1], '\"', ',', ' PasswordDigest=\"',password_digest, '\"', ',', ' Nonce=\"', nonce, '\"', ',', ' Created=\"', created_date, '\"', sep=""))
 
 }

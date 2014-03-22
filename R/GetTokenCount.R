@@ -11,7 +11,7 @@ json <-postRequest("Company.GetTokenCount")
 if(json$status == 200) {
   
   #Result returned answer
-  result <- unlist(content(json))
+  result <- fromJSON(content(json, "text"))
   
   pct <- result/10000 #pct remaining
   

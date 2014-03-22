@@ -3,6 +3,6 @@
 
 postRequest <- function(method,body=NULL){
   
-  return(POST(buildURL(method), add_headers(buildHeader()), body))
+  return(POST(buildURL(method), add_headers("X-WSSE" = buildHeader()), body = body))
   
 }
