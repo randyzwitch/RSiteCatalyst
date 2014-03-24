@@ -16,8 +16,8 @@ This package requires R 2.15.2 or greater. Also, due to the number of package de
 
 ##News
 
-2014-03-2X:
-- Fixed issues arising from upgrading to httr 0.3
+2014-03-23: Version 1.3.2 submitted to CRAN
+- Fixed issues arising from upgrading to httr 0.3. Package behavior should be identical using v0.2 or v0.3 of httr.
 
 2014-02-20: Version 1.3.1 submitted to CRAN
 - Fixed NAMESPACE issue to export real-time functions
