@@ -22,6 +22,11 @@ BuildHeader <- function() {
   password.digest <- base64encode(charToRaw(sha.object))
 
   #Build & Return Header 
-  return(paste('X-WSSE: UsernameToken Username=\"',SC.Credentials$key, '\"', ',', ' PasswordDigest=\"',password.digest, '\"', ',', ' Nonce=\"', nonce, '\"', ',', ' Created=\"', created.date, '\"', sep=""))
+  headers <- c('X-WSSE'=paste('UsernameToken Username=\"',SC.Credentials$key, '\"',sep=""),
+              'PasswordDigest'=password.digest,
+              'Nonce'=nonce,
+              'Created'=paste('"',created.date,'"',sep='')
+              )
+  return(headers)
   
 }

@@ -28,10 +28,10 @@ library(RSiteCatalyst)
 
 You may also need to install other packages that _RSiteCatalyst v1.4_ depends on.
 
-* [jsonlite](http://cran.r-project.org/web/packages/jsonlite/)
-* [plyr](http://cran.r-project.org/web/packages/plyr/)
-* [httr](http://cran.r-project.org/web/packages/httr/)
-* [stringr](http://cran.r-project.org/web/packages/stringr/)
+* [jsonlite](http://cran.r-project.org/web/packages/jsonlite/) (>=0.9.5)
+* [plyr](http://cran.r-project.org/web/packages/plyr/) (>=1.8.1)
+* [httr](http://cran.r-project.org/web/packages/httr/) (>= 0.3)
+* [stringr](http://cran.r-project.org/web/packages/stringr/) (>=0.6.2)
 
 If you want to use the OAUTH auth method, you'll also need:
 

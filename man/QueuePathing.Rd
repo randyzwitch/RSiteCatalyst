@@ -3,7 +3,8 @@
 \title{QueuePathing}
 \usage{
 QueuePathing(reportsuite.id, date.from, date.to, metric, element, pattern,
-  top = 1000, start = 1, segment.id = "", expedite = FALSE)
+  top = 1000, start = 1, segment.id = "", expedite = FALSE,
+  interval.seconds = 5, max.attempts = 120)
 }
 \arguments{
   \item{reportsuite.id}{report suite id}

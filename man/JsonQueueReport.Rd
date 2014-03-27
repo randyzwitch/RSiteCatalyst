@@ -2,7 +2,8 @@
 \alias{JsonQueueReport}
 \title{JsonQueueReport}
 \usage{
-JsonQueueReport(report.description)
+JsonQueueReport(report.description, interval.seconds = 5,
+  max.attempts = 120)
 }
 \arguments{
   \item{report.description}{JSON report description}
