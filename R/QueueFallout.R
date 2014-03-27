@@ -18,7 +18,7 @@
 #' @export
 
 QueueFallout <- function(reportsuite.id, date.from, date.to, metrics, element, checkpoints,
-                        segment.id='', expedite=FALSE) {
+                        segment.id='', expedite=FALSE,interval.seconds=5,max.attempts=120) {
   
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
@@ -36,7 +36,7 @@ QueueFallout <- function(reportsuite.id, date.from, date.to, metrics, element, c
   report.description$reportDescription$metrics = data.frame(id = metrics)
   report.description$reportDescription$elements = list(list(id = unbox(element), checkpoints = checkpoints))
 
-  report.data <- JsonQueueReport(toJSON(report.description))
+  report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 
   return(report.data) 
 

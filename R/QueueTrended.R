@@ -26,7 +26,7 @@
 QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
                         top=0,start=0,selected=list(),
                         date.granularity='day', segment.id='', segment.inline='', anomaly.detection=FALSE,
-                        data.current=FALSE, expedite=FALSE) {
+                        data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120) {
   
   if(anomaly.detection==TRUE && length(elements)>1) {
     print("Warning: Anomaly detection will not be used, as it only works for a single element.")
@@ -88,7 +88,7 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
     report.description$reportDescription$elements <- data.frame(id = elements)
   }
 
-  report.data <- JsonQueueReport(toJSON(report.description))
+  report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 
   return(report.data) 
 

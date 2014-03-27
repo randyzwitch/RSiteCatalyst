@@ -11,9 +11,11 @@
 #' @param start start row if you do not want to start at #1 - only applies to the first element.
 #' @param selected list of specific items to include in the report - e.g. list(page=c("Home","Search","About")). 
 #' this only works for the first element (API limitation).
+#' @param search list of keywords for a specified element - e.g. list(page=c("contact","about","shop")). 
+#' search overrides anything specified using selected
+#' @param search.type string specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
 #' @param segment.id id of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline inline segment definition
-#' @param anomaly.detection  set to TRUE to include forecast data (only valid for day granularity with small date ranges)
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
 #' @param expedite set to TRUE to expedite the processing of this report
 #'
@@ -23,11 +25,9 @@
 #'
 #' @export
 
-#RZ: Added anomaly.detection argument to function call to silence CRAN check warning
-# Is anomaly detection a TODO?
 QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
-                        top=0,start=0,selected=list(),
-                        segment.id='', segment.inline='', anomaly.detection=FALSE, data.current=FALSE, expedite=FALSE) {
+                        top=0,start=0,selected=list(), search=list(),search.type='or',
+                        segment.id='', segment.inline='', data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120) {
 
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
@@ -56,7 +56,7 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
   i <- 0
   for(element in elements) {
     i <- i + 1
-    if(length(selected[element]) && i==1){
+    if(length(selected[[element]])!=0 && i==1){
       # put in top and startingWith for the first element only
       working.element <- list(id = unbox(element), 
                                   top = unbox(top), 
@@ -68,6 +68,10 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
                               startingWith = unbox(start),
                               selected=NULL)
     }
+    if(length(search)!=0){
+      working.element[["search"]] <- list(type = unbox(search.type), 
+                                  keywords = search[element][1][[1]])
+    }
     if(length(elements.formatted)>0) {
       elements.formatted <- rbind(elements.formatted,working.element)
     } else {
@@ -75,9 +79,13 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
     }
   }
 
-  report.description$reportDescription$elements <- elements.formatted
+  if(length(elements)==1) {
+    report.description$reportDescription$elements <- list(elements.formatted)
+  } else {
+    report.description$reportDescription$elements <- elements.formatted
+  }
 
-  report.data <- JsonQueueReport(toJSON(report.description))
+  report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 
   return(report.data) 
 
