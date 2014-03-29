@@ -9,7 +9,7 @@
 #' @param elements list of elements to include in the report
 #' @param top number of rows to return
 #' @param start start row if you do not want to start at #1
-#' @param selected list of specific items to include in the report - e.g. list(page=c("Home","Search","About"))
+#' @param selected list of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about")
 #' @param date.granularity time granularity of the report (year/month/week/day/hour), default to 'day'
 #' @param segment.id id of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline inline segment definition
@@ -24,7 +24,7 @@
 #' @export
 
 QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
-                        top=0,start=0,selected=list(),
+                        top=0,start=0,selected=c(),
                         date.granularity='day', segment.id='', segment.inline='', anomaly.detection=FALSE,
                         data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120) {
   
@@ -72,9 +72,12 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   if(length(selected)>0) {
     # build up each element with selections
     elements.formatted <- list()
-    for(element in elements) {
-      if(length(selected[element])){
-        working.element <- list(id = unbox(element), selected=selected[element][1][[1]])
+    for(i in 1:length(elements)) {
+      element <- elements[[i]]
+      if(i==1){
+        working.element <- list(id = unbox(element), selected=selected)
+      } else {
+        working.element <- list(id = unbox(element))
       }
       if(length(elements.formatted)>0) {
         elements.formatted <- rbind(elements.formatted,working.element)

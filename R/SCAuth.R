@@ -41,24 +41,24 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy")
     }
     
     if(token.required) {
-      aa.api<- oauth_endpoint("https://marketing.adobe.com",
+      sc.api<- oauth_endpoint("https://marketing.adobe.com",
                             "https://marketing.adobe.com/authorize",
                             "https://api.omniture.com/token")
 
-      aa.app <- oauth_app("RSiteCatalyst", key, secret)
-      aa.cred <- oauth2.0_token(aa.api, aa.app, scope="ReportSuite Report Company")
+      sc.app <- oauth_app("RSiteCatalyst", key, secret)
+      sc.cred <- oauth2.0_token(sc.api, sc.app, scope="ReportSuite Report Company")
 
-      if(!is.null(aa.cred$error)) {
-        print(paste("ERROR:",aa.cred$error))
-        stop(aa.cred$error_description)
+      if(!is.null(sc.cred$error)) {
+        print(paste("ERROR:",sc.cred$error))
+        stop(sc.cred$error_description)
       }
 
       SC.Credentials <<- list(endpoint.url=endpoint.url,
                                auth.method=auth.method,
-                               access_token=aa.cred$access_token,
-                               scope=aa.cred$scope,
-                               client_id=aa.cred$client_id,
-                               expires=aa.cred$expires
+                               access_token=sc.cred$access_token,
+                               scope=sc.cred$scope,
+                               client_id=sc.cred$client_id,
+                               expires=sc.cred$expires
                                )
 
       if(nchar(token.file)) {

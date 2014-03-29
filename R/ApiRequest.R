@@ -58,9 +58,9 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
   }
 
   if(!result||response$status==400){
-    response.content <- content(response,'text')
+    response.content <- fromJSON(content(response,'text'))
     if(response$status==400) {
-      stop(paste('ERROR:',response.content$error_description))
+      stop(paste('ERROR:',response.content$error," - ",response.content$error_description))
     } else {
       stop(paste('ERROR: max attempts exceeded for',url))
     }

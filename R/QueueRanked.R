@@ -9,9 +9,9 @@
 #' @param elements list of elements to include in the report
 #' @param top number of elements to include (top X) - only applies to the first element.
 #' @param start start row if you do not want to start at #1 - only applies to the first element.
-#' @param selected list of specific items to include in the report - e.g. list(page=c("Home","Search","About")). 
+#' @param selected list of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about").
 #' this only works for the first element (API limitation).
-#' @param search list of keywords for a specified element - e.g. list(page=c("contact","about","shop")). 
+#' @param search list of keywords for the first specified element - e.g. c("contact","about","shop").
 #' search overrides anything specified using selected
 #' @param search.type string specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
 #' @param segment.id id of Adobe Analytics segment to retrieve the report for
@@ -20,6 +20,7 @@
 #' @param expedite set to TRUE to expedite the processing of this report
 #'
 #' @importFrom jsonlite toJSON unbox
+#' @importFrom plyr rbind.fill
 #'
 #' @return Flat data frame containing datetimes and metric values
 #'
@@ -56,24 +57,25 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
   i <- 0
   for(element in elements) {
     i <- i + 1
-    if(length(selected[[element]])!=0 && i==1){
-      # put in top and startingWith for the first element only
-      working.element <- list(id = unbox(element), 
-                                  top = unbox(top), 
-                                  startingWith = unbox(start), 
-                                  selected = selected[element][1][[1]])
-    } else {
+    # we only put selected, search, top and startingWith for the first element
+    if(i==1){
       working.element <- list(id = unbox(element), 
                               top = unbox(top), 
-                              startingWith = unbox(start),
-                              selected=NULL)
+                              startingWith = unbox(start))
+
+      if(length(selected)!=0){
+        working.element[["selected"]] <- selected
+      }
+      if(length(search)!=0){
+        working.element[["search"]] <- list(type = unbox(search.type), 
+                                            keywords = search)
+      }
+    } else {
+      working.element <- list(id = unbox(element))
     }
-    if(length(search)!=0){
-      working.element[["search"]] <- list(type = unbox(search.type), 
-                                  keywords = search[element][1][[1]])
-    }
+
     if(length(elements.formatted)>0) {
-      elements.formatted <- rbind(elements.formatted,working.element)
+      elements.formatted <- rbind.fill(elements.formatted,working.element)
     } else {
       elements.formatted <- working.element
     }
