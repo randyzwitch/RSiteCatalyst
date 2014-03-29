@@ -10,6 +10,9 @@
 #' @param top number of rows to return
 #' @param start start row if you do not want to start at #1
 #' @param selected list of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about")
+#' @param search list of keywords for the first specified element - e.g. c("contact","about","shop").
+#' search overrides anything specified using selected
+#' @param search.type string specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
 #' @param date.granularity time granularity of the report (year/month/week/day/hour), default to 'day'
 #' @param segment.id id of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline inline segment definition
@@ -24,7 +27,7 @@
 #' @export
 
 QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
-                        top=0,start=0,selected=c(),
+                        top=0,start=0,selected=c(),search=c(),search.type='or',
                         date.granularity='day', segment.id='', segment.inline='', anomaly.detection=FALSE,
                         data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120) {
   
@@ -39,7 +42,7 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   }
 
   # build JSON description
-  # we have to use unbox to force jsonlist not put strings into single-element arrays
+  # we have to use unbox to force jsonlite not put strings into single-element arrays
   report.description <- c()
   report.description$reportDescription <- c(data.frame(matrix(ncol=0, nrow=1)))
   report.description$reportDescription$dateFrom <- unbox(date.from)
@@ -67,10 +70,22 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   elements.formatted <- list()
   for(i in 1:length(elements)) {
     element <- elements[[i]]
-    if(length(selected)>0&&i==1){
-      working.element <- list(id = unbox(element), selected=selected,top=unbox(top),startingWith=unbox(start))
+
+    # we only put selected, search, top and startingWith for the first element
+    if(i==1){
+      working.element <- list(id = unbox(element), 
+                              top = unbox(top), 
+                              startingWith = unbox(start))
+
+      if(length(selected)!=0){
+        working.element[["selected"]] <- selected
+      }
+      if(length(search)!=0){
+        working.element[["search"]] <- list(type = unbox(search.type), 
+                                            keywords = search)
+      }
     } else {
-      working.element <- list(id = unbox(element),top=unbox(top),startingWith=unbox(start))
+      working.element <- list(id = unbox(element))
     }
     if(length(elements.formatted)>0) {
       elements.formatted <- rbind(elements.formatted,working.element)

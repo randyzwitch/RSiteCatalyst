@@ -1,5 +1,6 @@
 export(BuildClassificationValueSegment)
 export(BuildLineItemSegment)
+export(CancelReport)
 export(GetElements)
 export(GetEvars)
 export(GetMetrics)

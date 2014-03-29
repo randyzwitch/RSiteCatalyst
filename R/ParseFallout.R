@@ -6,6 +6,8 @@
 #'
 #' @return Formatted data frame
 #'
+#' @importFrom plyr rename
+#'
 #' @family internal
 #' @keywords internal
 
@@ -14,7 +16,7 @@ ParseFallout <- function(report.data) {
   # jsonlite puts this into a useful format
   # so just leave it as is, but rename the counts column to the metric
   data <- report.data$report$data
-  colnames(data)[colnames(data) == "counts"] <- as.numeric(report.data$report$metrics[1,1])
+  data <- rename(data, c("counts"=report.data$report$metrics$id))
   return(data)
 
 }
