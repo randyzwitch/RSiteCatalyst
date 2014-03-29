@@ -26,11 +26,13 @@ GetSegments <- function(reportsuite.ids) {
 
   segments.formatted <- data.frame()
   for (i in 1:length(valid.segments$rsid) ) {
-    valid.segments$segments[[i]]$report_suite <- valid.segments$rsid[[i]]
-    if(nrow(segments.formatted)==0) {
-      segments.formatted <- valid.segments$segments[[i]]
-    } else {
-      segments.formatted <- rbind.fill(segments.formatted,valid.segments$segments[[i]])
+    if(nrow(valid.segments$segments[[i]])>0) {
+      valid.segments$segments[[i]]$report_suite <- valid.segments$rsid[[i]]
+      if(nrow(segments.formatted)==0) {
+        segments.formatted <- valid.segments$segments[[i]]
+      } else {
+        segments.formatted <- rbind.fill(segments.formatted,valid.segments$segments[[i]])
+      }
     }
   }
 

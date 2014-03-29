@@ -48,6 +48,7 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
       response.content <- fromJSON(content(response,'text'))
       if(response$status==400&&response.content$error=='report_not_ready') {
         result <- FALSE
+        Sys.sleep(interval.seconds)
       } else {
         result <- TRUE
       }
@@ -59,10 +60,10 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
 
   if(!result||response$status==400){
     response.content <- fromJSON(content(response,'text'))
-    if(response$status==400) {
-      stop(paste('ERROR:',response.content$error," - ",response.content$error_description))
-    } else {
+    if(response.content$error=='report_not_ready') {
       stop(paste('ERROR: max attempts exceeded for',url))
+    } else {
+      stop(paste('ERROR:',response.content$error," - ",response.content$error_description))
     }
   }
 

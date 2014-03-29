@@ -49,12 +49,6 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   if(segment.inline!="") {
     report.description$reportDescription$segments <- list(segment.inline)
   }
-  if(top>0) { 
-    report.description$reportDescription$top <- unbox(top) 
-  }
-  if(start>0) { 
-    report.description$reportDescription$start <- unbox(start) 
-  }
   if(segment.id!="") { 
     report.description$reportDescription$segment_id <- unbox(segment.id) 
   }
@@ -69,27 +63,22 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   }
   report.description$reportDescription$metrics = data.frame(id = metrics)
 
-  if(length(selected)>0) {
-    # build up each element with selections
-    elements.formatted <- list()
-    for(i in 1:length(elements)) {
-      element <- elements[[i]]
-      if(i==1){
-        working.element <- list(id = unbox(element), selected=selected)
-      } else {
-        working.element <- list(id = unbox(element))
-      }
-      if(length(elements.formatted)>0) {
-        elements.formatted <- rbind(elements.formatted,working.element)
-      } else {
-        elements.formatted <- working.element
-      }
+  # build up each element with selections
+  elements.formatted <- list()
+  for(i in 1:length(elements)) {
+    element <- elements[[i]]
+    if(length(selected)>0&&i==1){
+      working.element <- list(id = unbox(element), selected=selected,top=unbox(top),startingWith=unbox(start))
+    } else {
+      working.element <- list(id = unbox(element),top=unbox(top),startingWith=unbox(start))
     }
-    report.description$reportDescription$elements <- list(elements.formatted)
-  } else {
-    # just plug in the elements
-    report.description$reportDescription$elements <- data.frame(id = elements)
+    if(length(elements.formatted)>0) {
+      elements.formatted <- rbind(elements.formatted,working.element)
+    } else {
+      elements.formatted <- working.element
+    }
   }
+  report.description$reportDescription$elements <- list(elements.formatted)
 
   report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 

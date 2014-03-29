@@ -30,13 +30,13 @@ GetMetrics <- function(reportsuite.ids, metrics=c(), elements=c(), date.granular
     request.body$reportSuiteID <- unbox(reportsuite.id)
 
     if(length(metrics)>0) { 
-      request.body$reportDescription$existingMetrics <- metrics
+      request.body$existingMetrics <- metrics
     }
     if(length(elements)>0) { 
-      request.body$reportDescription$existingElements <- elements
+      request.body$existingElements <- elements
     }
     if(nchar(date.granularity)>0) { 
-      request.body$reportDescription$dateGranularity <- unbox(date.granularity) 
+      request.body$dateGranularity <- unbox(date.granularity) 
     }
 
     working.metrics <- ApiRequest(body=toJSON(request.body),func.name="Report.GetMetrics")

@@ -27,7 +27,7 @@
 #' @export
 
 QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
-                        top=0,start=0,selected=list(), search=list(),search.type='or',
+                        top=0,start=0,selected=c(), search=c(),search.type='or',
                         segment.id='', segment.inline='', data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120) {
 
   # build JSON description
@@ -42,7 +42,7 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
     report.description$reportDescription$segments <- list(segment.inline)
   }
   if(start>0) { 
-    report.description$reportDescription$start <- unbox(start) 
+    report.description$reportDescription$startingWith <- unbox(start) 
   }
   if(segment.id!="") { 
     report.description$reportDescription$segment_id <- unbox(segment.id) 
@@ -75,7 +75,7 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
     }
 
     if(length(elements.formatted)>0) {
-      elements.formatted <- rbind.fill(elements.formatted,working.element)
+      elements.formatted <- rbind(elements.formatted,working.element)
     } else {
       elements.formatted <- working.element
     }
