@@ -33,45 +33,25 @@ You may also need to install other packages that _RSiteCatalyst v1.4_ depends on
 * [httr](http://cran.r-project.org/web/packages/httr/) (>= 0.3)
 * [stringr](http://cran.r-project.org/web/packages/stringr/) (>=0.6.2)
 
-If you want to use the OAUTH auth method, you'll also need:
-
-* [Rook](http://cran.r-project.org/web/packages/Rook/)
-* [httpuv](http://cran.r-project.org/web/packages/httpuv/)
-* [httr - dev branch](https://github.com/hadley/httr) (requires the development version from Hadley's Github ```install_github('httr')```)
-
 For the legacy auth method (username/shared secret) you'll also need the following:
 
-* [digest](http://cran.r-project.org/web/packages/digest/) (only required for legacy auth method)
-* [base64enc](http://cran.r-project.org/web/packages/base64enc/) (only required for legacy auth method)
+* [digest](http://cran.r-project.org/web/packages/digest/) (only required for legacy auth method) (>= 0.6.4)
+* [base64enc](http://cran.r-project.org/web/packages/base64enc/) (only required for legacy auth method) (>=0.1-1)
+
+If you want to use the OAUTH auth method, you'll also need:
+
+* [httpuv](http://cran.r-project.org/web/packages/httpuv/)
 
 
 ```
-install.packages(c("jsonlite","plyr","httr","stringr","digest","base64enc,"httpuv","Rook"))
-```
-
-And if you're installing the dev branch of HTTR:
-
-```
-library(devtools)
-install_github('httr')
+install.packages(c("jsonlite","plyr","httr","stringr","digest","base64enc,"httpuv"))
 ```
 
 ## Authorisation
 Authorisation can be done using the legacy auth method (username:company + shared secret), or using the newer OAUTH method.
 Either is fine, but ultimately you should move towards using the OAUTH method, as the legacy auth method is deprecated.
 
-##### Using OAUTH
-First you will need to create an application in the [Adobe Dev Center](https://developer.omniture.com/en_US/devcenter). The application name can be whatever you want. The redirect URI should be left blank.
-
-This will provide you with a identifier and secret that you can use to access the Adobe Analytics API.
-
-You currently need to specify your own endpoint. Once the 1.4 API is released, I'll update this to automatically retrieve your company endpoint.
-
-```
-SCAuth("your_identifier", 
-         "your_secret", 
-         endpoint.url="https://your-endpoint.omniture.com/admin/1.4/rest/")
-```
+The OAUTH method is not universally available for all Adobe Analytics accounts, so legacy auth remains the default.
 
 ##### Using legacy auth (web service credentials)
 This auth method is pretty straight-forward, though much more fiddly involved under the hood, which is why it is deprecated.
@@ -83,6 +63,17 @@ SCAuth("your_username:your_company",
          "your_shared_secret", 
          endpoint.url="https://your-endpoint.omniture.com/admin/1.4/", 
          auth.method='legacy')
+```
+
+##### Using OAUTH
+First you will need to create an application in the [Adobe Dev Center](https://developer.omniture.com/en_US/devcenter). The application name can be whatever you want. The redirect URI should be left blank.
+
+This will provide you with a identifier and secret that you can use to access the Adobe Analytics API.
+
+```
+SCAuth("your_identifier", 
+         "your_secret", 
+         endpoint.url="https://your-endpoint.omniture.com/admin/1.4/rest/")
 ```
 
 ## Running Reports
@@ -300,12 +291,4 @@ Gets a list of segments for the specified report suites. Useful to find segment 
 
 ```
 segments <- GetSegments(c("your_prod_report_suite","your_dev_reportsuite"))
-```
-
-
-## Debugging
-If you put the library into debug mode, it will return more verbose output, and save some responses to disk so that they can be loaded in the console for debugging.
-
-```
-SCSetDebug(TRUE)
 ```
