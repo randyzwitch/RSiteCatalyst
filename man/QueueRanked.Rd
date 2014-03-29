@@ -25,12 +25,13 @@ QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   \item{start}{start row if you do not want to start at #1
   - only applies to the first element.}
 
-  \item{selected}{list of specific items to include in the
-  report - e.g. list(page=c("Home","Search","About")). this
-  only works for the first element (API limitation).}
+  \item{selected}{list of specific items (of the first
+  element) to include in the report - e.g.
+  c("www:home","www:search","www:about"). this only works
+  for the first element (API limitation).}
 
-  \item{search}{list of keywords for a specified element -
-  e.g. list(page=c("contact","about","shop")). search
+  \item{search}{list of keywords for the first specified
+  element - e.g. c("contact","about","shop"). search
   overrides anything specified using selected}
 
   \item{search.type}{string specifying the search type:

@@ -30,13 +30,13 @@ GetElements <- function(reportsuite.ids, metrics=c(), elements=c(), date.granula
     request.body$reportSuiteID <- unbox(reportsuite.id)
 
     if(length(metrics)>0) { 
-      request.body$reportDescription$existingElements <- metrics
+      request.body$existingMetrics <- metrics
     }
     if(length(elements)>0) { 
-      request.body$reportDescription$existingElements <- elements
+      request.body$existingElements <- elements
     }
     if(nchar(date.granularity)>0) { 
-      request.body$reportDescription$dateGranularity <- unbox(date.granularity) 
+      request.body$dateGranularity <- unbox(date.granularity) 
     }
     working.elements <- ApiRequest(body=toJSON(request.body),func.name="Report.GetElements")
     working.elements$rsid <- reportsuite.id

@@ -9,7 +9,10 @@
 #' @param elements list of elements to include in the report
 #' @param top number of rows to return
 #' @param start start row if you do not want to start at #1
-#' @param selected list of specific items to include in the report - e.g. list(page=c("Home","Search","About"))
+#' @param selected list of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about")
+#' @param search list of keywords for the first specified element - e.g. c("contact","about","shop").
+#' search overrides anything specified using selected
+#' @param search.type string specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
 #' @param date.granularity time granularity of the report (year/month/week/day/hour), default to 'day'
 #' @param segment.id id of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline inline segment definition
@@ -24,7 +27,7 @@
 #' @export
 
 QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
-                        top=0,start=0,selected=list(),
+                        top=0,start=0,selected=c(),search=c(),search.type='or',
                         date.granularity='day', segment.id='', segment.inline='', anomaly.detection=FALSE,
                         data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120) {
   
@@ -39,7 +42,7 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   }
 
   # build JSON description
-  # we have to use unbox to force jsonlist not put strings into single-element arrays
+  # we have to use unbox to force jsonlite not put strings into single-element arrays
   report.description <- c()
   report.description$reportDescription <- c(data.frame(matrix(ncol=0, nrow=1)))
   report.description$reportDescription$dateFrom <- unbox(date.from)
@@ -48,12 +51,6 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   report.description$reportDescription$dateGranularity <- unbox(date.granularity)
   if(segment.inline!="") {
     report.description$reportDescription$segments <- list(segment.inline)
-  }
-  if(top>0) { 
-    report.description$reportDescription$top <- unbox(top) 
-  }
-  if(start>0) { 
-    report.description$reportDescription$start <- unbox(start) 
   }
   if(segment.id!="") { 
     report.description$reportDescription$segment_id <- unbox(segment.id) 
@@ -69,24 +66,34 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   }
   report.description$reportDescription$metrics = data.frame(id = metrics)
 
-  if(length(selected)>0) {
-    # build up each element with selections
-    elements.formatted <- list()
-    for(element in elements) {
-      if(length(selected[element])){
-        working.element <- list(id = unbox(element), selected=selected[element][1][[1]])
+  # build up each element with selections
+  elements.formatted <- list()
+  for(i in 1:length(elements)) {
+    element <- elements[[i]]
+
+    # we only put selected, search, top and startingWith for the first element
+    if(i==1){
+      working.element <- list(id = unbox(element), 
+                              top = unbox(top), 
+                              startingWith = unbox(start))
+
+      if(length(selected)!=0){
+        working.element[["selected"]] <- selected
       }
-      if(length(elements.formatted)>0) {
-        elements.formatted <- rbind(elements.formatted,working.element)
-      } else {
-        elements.formatted <- working.element
+      if(length(search)!=0){
+        working.element[["search"]] <- list(type = unbox(search.type), 
+                                            keywords = search)
       }
+    } else {
+      working.element <- list(id = unbox(element))
     }
-    report.description$reportDescription$elements <- list(elements.formatted)
-  } else {
-    # just plug in the elements
-    report.description$reportDescription$elements <- data.frame(id = elements)
+    if(length(elements.formatted)>0) {
+      elements.formatted <- rbind(elements.formatted,working.element)
+    } else {
+      elements.formatted <- working.element
+    }
   }
+  report.description$reportDescription$elements <- list(elements.formatted)
 
   report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 

@@ -16,6 +16,7 @@
 
 GetEndpoint <- function(company) {
   
+  # This does not use ApiRequest() because it does not return JSON
   endpoint <- content(POST('https://api.omniture.com/admin/1.4/rest/?method=Company.GetEndpoint', 
          body=sprintf('{"company": "%s"}',company)),'text')
   endpoint <- gsub('\\','',gsub('"','',endpoint,fixed=TRUE),fixed=TRUE)

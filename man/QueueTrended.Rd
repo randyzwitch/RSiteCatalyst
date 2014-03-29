@@ -3,10 +3,9 @@
 \title{QueueTrended}
 \usage{
 QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
-  start = 0, selected = list(), date.granularity = "day",
-  segment.id = "", segment.inline = "", anomaly.detection = FALSE,
-  data.current = FALSE, expedite = FALSE, interval.seconds = 5,
-  max.attempts = 120)
+  start = 0, selected = c(), date.granularity = "day", segment.id = "",
+  segment.inline = "", anomaly.detection = FALSE, data.current = FALSE,
+  expedite = FALSE, interval.seconds = 5, max.attempts = 120)
 }
 \arguments{
   \item{reportsuite.id}{report suite id}
@@ -24,8 +23,9 @@ QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
 
   \item{start}{start row if you do not want to start at #1}
 
-  \item{selected}{list of specific items to include in the
-  report - e.g. list(page=c("Home","Search","About"))}
+  \item{selected}{list of specific items (of the first
+  element) to include in the report - e.g.
+  c("www:home","www:search","www:about")}
 
   \item{date.granularity}{time granularity of the report
   (year/month/week/day/hour), default to 'day'}

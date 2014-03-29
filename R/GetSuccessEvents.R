@@ -22,7 +22,7 @@ GetSuccessEvents <- function(reportsuite.ids) {
   request.body <- c()
   request.body$rsid_list <- reportsuite.ids
 
-  valid.successevents <- ApiRequest(body=toJSON(request.body),func.name="ReportSuite.GetSuccessEvents")
+  valid.successevents <- ApiRequest(body=toJSON(request.body),func.name="ReportSuite.GetEvents")
 
   successevents.formatted <- data.frame()
   for (i in 1:length(valid.successevents$rsid) ) {
