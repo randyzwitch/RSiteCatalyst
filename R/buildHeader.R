@@ -11,7 +11,7 @@
 #' @keywords internal
 
 BuildHeader <- function() {
-
+  
   #Create nonce
   nonce <- as.character(as.numeric(Sys.time()))
   #Create timestamp
@@ -20,12 +20,12 @@ BuildHeader <- function() {
   nonce.create.secret <- paste(nonce, created.date, SC.Credentials$secret, sep="")
   sha.object <- digest(nonce.create.secret, algo="sha1", serialize=FALSE)
   password.digest <- base64encode(charToRaw(sha.object))
-
-  #Build & Return Header 
-  headers <- c('X-WSSE'=paste('UsernameToken Username=\"',SC.Credentials$key, '\"',sep=""),
-              'PasswordDigest'=password.digest,
-              'Nonce'=nonce,
-              'Created'=paste('"',created.date,'"',sep='')
+  
+  #Build & Return X-WSSE Header 
+  headers <- c('X-WSSE'=paste0('UsernameToken Username="',SC.Credentials$key,'", ',
+                               'PasswordDigest="',password.digest,'", ',
+                               'Nonce="',nonce,'", ',
+                               'Created="',created.date,'"')
               )
   return(headers)
   

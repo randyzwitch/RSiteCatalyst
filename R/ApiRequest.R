@@ -45,7 +45,7 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
     }
     if(response$status==200 || response$status==400) {
       # we have a valid response or a bad request error
-      response.content <- content(response,'parsed')
+      response.content <- fromJSON(content(response,'text'))
       if(response$status==400&&response.content$error=='report_not_ready') {
         result <- FALSE
       } else {
@@ -58,7 +58,7 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
   }
 
   if(!result||response$status==400){
-    response.content <- content(response,'parsed')
+    response.content <- content(response,'text')
     if(response$status==400) {
       stop(paste('ERROR:',response.content$error_description))
     } else {
@@ -75,7 +75,7 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
     sink()
   }
 
-  data <- content(response,'parsed')
+  data <- fromJSON(content(response,'text'))
 
   return(data)
 
