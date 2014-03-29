@@ -16,7 +16,9 @@
 
 GetEndpoint <- function(company) {
   
-  return(content(POST("https://api.omniture.com/admin/1.4/rest/?method=Company.GetEndpoint", add_headers(BuildHeader()), 
-                      sprintf('{"company": "%s"}',company))))
+  endpoint <- content(POST('https://api.omniture.com/admin/1.4/rest/?method=Company.GetEndpoint', 
+         body=sprintf('{"company": "%s"}',company)),'text')
+  endpoint <- gsub('\\','',gsub('"','',endpoint,fixed=TRUE),fixed=TRUE)
+  return(endpoint)
    
 } #End function bracket

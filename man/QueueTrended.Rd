@@ -5,7 +5,8 @@
 QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   start = 0, selected = list(), date.granularity = "day",
   segment.id = "", segment.inline = "", anomaly.detection = FALSE,
-  data.current = FALSE, expedite = FALSE)
+  data.current = FALSE, expedite = FALSE, interval.seconds = 5,
+  max.attempts = 120)
 }
 \arguments{
   \item{reportsuite.id}{report suite id}

@@ -4,6 +4,7 @@
 #'
 #' @param key client id from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API username (username:company)
 #' @param secret secret from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API shared secret
+#' @param company your company (only required if using OAUTH2 AUTH method)
 #' @param token.file if you would like to save your OAUTH token and other auth details for use in 
 #' future sessions, specify a file here. The method checks for the existence of the file and uses that if available.
 #' @param auth.method defaults to legacy, can be set to 'OAUTH2' to use the newer OAUTH method.
@@ -13,11 +14,16 @@
 #'
 #' @export
 
-SCAuth <- function(key, secret, token.file="", auth.method="legacy"){
+SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy"){
 
   #Temporarily set SC.Credentials for GetEndpoint function call
   SC.Credentials <<- list(key=key, secret=secret)
-  company <- str_split_fixed(key, ":", 2)
+  if(company==''&&auth.method=='OAUTH2') {
+    stop("ERROR: You must specify a company if using the OAUTH2 auth method.")
+  } else {
+    company <- str_split_fixed(key, ":", 2)[2]
+  }
+  
   endpoint.url <- GetEndpoint(company)
   
   SC.Credentials <<- "" #This might be defensive overkill
@@ -79,7 +85,6 @@ SCAuth <- function(key, secret, token.file="", auth.method="legacy"){
     if(error.flag >0){
       stop("Authentication failed due to errors")
     } else {
-      company <- str_split_fixed(key, ":", 2)
       #Create SCCredentials object in Global Environment
       SC.Credentials <<- list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url)
       save(SC.Credentials,file="~/SC.Credentials")

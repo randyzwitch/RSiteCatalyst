@@ -3,8 +3,9 @@
 \title{QueueRanked}
 \usage{
 QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
-  start = 0, selected = list(), segment.id = "", segment.inline = "",
-  anomaly.detection = FALSE, data.current = FALSE, expedite = FALSE)
+  start = 0, selected = list(), search = list(), search.type = "or",
+  segment.id = "", segment.inline = "", data.current = FALSE,
+  expedite = FALSE, interval.seconds = 5, max.attempts = 120)
 }
 \arguments{
   \item{reportsuite.id}{report suite id}
@@ -28,14 +29,17 @@ QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   report - e.g. list(page=c("Home","Search","About")). this
   only works for the first element (API limitation).}
 
+  \item{search}{list of keywords for a specified element -
+  e.g. list(page=c("contact","about","shop")). search
+  overrides anything specified using selected}
+
+  \item{search.type}{string specifying the search type:
+  'and', or, 'or' 'not' (defaults to 'or')}
+
   \item{segment.id}{id of Adobe Analytics segment to
   retrieve the report for}
 
   \item{segment.inline}{inline segment definition}
-
-  \item{anomaly.detection}{set to TRUE to include forecast
-  data (only valid for day granularity with small date
-  ranges)}
 
   \item{data.current}{TRUE or FALSE - whether to include
   current data for reports that include today's date}

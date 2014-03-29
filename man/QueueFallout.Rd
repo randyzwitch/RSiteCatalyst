@@ -3,7 +3,8 @@
 \title{QueueFallout}
 \usage{
 QueueFallout(reportsuite.id, date.from, date.to, metrics, element, checkpoints,
-  segment.id = "", expedite = FALSE)
+  segment.id = "", expedite = FALSE, interval.seconds = 5,
+  max.attempts = 120)
 }
 \arguments{
   \item{reportsuite.id}{report suite id}
