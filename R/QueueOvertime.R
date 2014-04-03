@@ -42,7 +42,7 @@ queue_resp <- content(json_queue)
 #If response returns an error, return error message. Else, continue with
 #capturing report ID
 if(queue_resp[1] != "queued" ) {
-  stop("Error: Likely a syntax error or missing required argument to QueueOvertime function")
+  stop(sprintf("API %s : %s", queue_resp$status, queue_resp$statusMsg))
 } else {
   reportID <- queue_resp[[3]] 
 }

@@ -107,7 +107,7 @@ QueueRanked <- function(reportSuiteID, dateFrom, dateTo, metrics, elements, top=
   #If response returns an error, return error message. Else, continue with
   #capturing report ID
   if(queue_resp[1] != "queued" ) {
-    stop("Error: Likely a syntax error in arguments to QueueRanked function")
+    stop(sprintf("API %s : %s", queue_resp$status, queue_resp$statusMsg))
   } else {
     reportID <- queue_resp[[3]] 
   }
