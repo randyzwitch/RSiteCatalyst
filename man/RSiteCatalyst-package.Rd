@@ -13,8 +13,8 @@ This package is not intended for Adobe Analytics Administration.
 \tabular{ll}{
 Package: \tab RSiteCatalyst\cr
 Type: \tab Package\cr
-Version: \tab 1.3.2\cr
-Date: \tab 2014-03-23\cr
+Version: \tab 1.3.3\cr
+Date: \tab 2014-04-04\cr
 License: \tab GPL-2\cr
 }
 }
