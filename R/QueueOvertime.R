@@ -90,11 +90,9 @@ rows_df <- cbind(rows_df, segment=result[[5]]$segment_id) #add segment to df
 
 counts <- lapply(data, "[[", "counts") # Just the "counts" column
 counts_df <- ldply(counts, quickdf) # counts as DF
-
-#Somehow, making this global scope makes error go away
-counts_df <<- as.data.frame(apply(counts_df, MARGIN=2, FUN= function(x) as.numeric(x))) #convert to numeric
-  
 names(counts_df) <- lapply(result[[5]]$metrics, "[[", "id") #assign names to counts_df
+
+counts_df <- as.data.frame(lapply(counts_df, FUN= function(x) as.numeric(x))) #convert to numeric
 
 
 
@@ -118,7 +116,6 @@ if(anomalyDetection == "1" & dateGranularity == "day") {
   names(lb_df) <- lapply(lapply(result[[5]]$metrics, "[[", "id"), function(x) paste(x, "_lower", sep=""))
   
   end_result <- cbind(rows_df, counts_df, ub_df, forecasts_df, lb_df)
-  rm(countsdf) #remove this object from global scope, part of unclear bug above
   
   return(end_result) #return after anomaly parsing
 } #End parsing anomalyDetection
