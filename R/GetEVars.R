@@ -7,7 +7,14 @@
 #' @importFrom jsonlite toJSON
 #' @importFrom plyr rbind.fill
 #' @return List of valid evars
+#' 
+#' @examples
+#' \dontrun{
+#' evars <- GetEvars("reportsuite"your-report-suite")
+#' 
+#' evars <- GetEvars(report_suites$rsid)
 #'
+#'}
 #' @export
 
 GetEvars <- function(reportsuite.ids) {

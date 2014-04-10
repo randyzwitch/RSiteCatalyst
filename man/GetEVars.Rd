@@ -14,4 +14,12 @@ List of valid evars
 \description{
 Gets available report suite evars
 }
+\examples{
+\dontrun{
+evars <- GetEvars("reportsuite"your-report-suite")
+
+evars <- GetEvars(report_suites$rsid)
+
+}
+}
 

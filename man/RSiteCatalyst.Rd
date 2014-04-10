@@ -2,15 +2,31 @@
 \name{RSiteCatalyst}
 \alias{RSiteCatalyst}
 \alias{RSiteCatalyst-package}
-\title{R Client for Adobe Analytics v1.4 API}
+\title{R Client for Adobe Analytics API v1.4}
 \description{
-R Client for Adobe Analytics v1.4 API
+This package contains an "analyst's toolbox" of functions
+for accessing the Adobe Analytics Reporting API v1.4. These
+functions allow the user to authenticate, get metadata
+about report suites (eVars, props, events, segments, etc.),
+and create reports using Adobe Analytics data.
+
+This package is not intended for Adobe Analytics
+administration.
 }
 \details{
-R client library for the Adobe Analytics 1.4 API, currently
-in beta, but due out in Feb 2014.
+Package: RSiteCatalyst \cr Type: Package \cr Version: 1.4
+\cr Date: 2014-04-08 \cr License: GPL-2 \cr
 }
 \author{
 Willem Paling, Randy Zwitch, Jowanza Joseph
+}
+\references{
+Official Adobe Analytics API documentation:
+
+https://marketing.adobe.com/developer/en_US/documentation
+
+For support & bugs:
+
+https://github.com/randyzwitch/RSiteCatalyst
 }
 

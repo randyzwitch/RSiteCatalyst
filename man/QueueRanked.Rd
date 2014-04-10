@@ -3,7 +3,7 @@
 \title{QueueRanked}
 \usage{
 QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
-  start = 0, selected = list(), search = list(), search.type = "or",
+  start = 0, selected = c(), search = c(), search.type = "or",
   segment.id = "", segment.inline = "", data.current = FALSE,
   expedite = FALSE, interval.seconds = 5, max.attempts = 120)
 }

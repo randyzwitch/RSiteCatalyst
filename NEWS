@@ -1,9 +1,30 @@
 RSiteCatalyst 1.4
 =================
 
-* Fixes to support new version of Adobe Analytics API
+* Fixes to support version 1.4 of Adobe Analytics API
 
-* Converted authentication to support OAuth
+* Authentication now supports OAuth and legacy
+
+* Consistent syntax/naming conventions across functions
+
+* Improved functionality around multiple element/breakdown reports
+
+RSiteCatalyst 1.3.3
+=================
+
+* Miscellaneous bug fixes
+
+* Improved error reporting
+
+RSiteCatalyst 1.3.2
+=================
+
+* Fixes to comply with httr 0.3 changes
+
+RSiteCatalyst 1.3.1
+=================
+
+* Export real-time reporting functions
 
 RSiteCatalyst 1.3
 =================

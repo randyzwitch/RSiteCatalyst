@@ -17,7 +17,7 @@
 #' @examples
 #' \dontrun{
 #' elements.valid <- GetElements("your_report_suite",metrics=c('visitors','pageviews'),
-#' elements=c('page','geoCountry'),date.granularity='day')
+#'                              elements=c('page','geoCountry'),date.granularity='day')
 #' 
 #' elements <- GetElements(c("your_prod_report_suite","your_dev_report_suite"))
 #' }

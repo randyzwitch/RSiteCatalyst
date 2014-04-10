@@ -4,7 +4,7 @@
 #'
 #' @param report.id id of the report that you want to cancel
 #'
-#' @return nothing
+#' @return Console message
 #'
 #' @importFrom httr content add_headers POST
 #' @importFrom jsonlite toJSON fromJSON
@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' queue <- GetQueue()
+#' CancelReport('12345678')
 #' }
 
 CancelReport <- function(report.id) {

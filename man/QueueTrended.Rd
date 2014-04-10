@@ -3,9 +3,10 @@
 \title{QueueTrended}
 \usage{
 QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
-  start = 0, selected = c(), date.granularity = "day", segment.id = "",
-  segment.inline = "", anomaly.detection = FALSE, data.current = FALSE,
-  expedite = FALSE, interval.seconds = 5, max.attempts = 120)
+  start = 0, selected = c(), search = c(), search.type = "or",
+  date.granularity = "day", segment.id = "", segment.inline = "",
+  anomaly.detection = FALSE, data.current = FALSE, expedite = FALSE,
+  interval.seconds = 5, max.attempts = 120)
 }
 \arguments{
   \item{reportsuite.id}{report suite id}
@@ -26,6 +27,13 @@ QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   \item{selected}{list of specific items (of the first
   element) to include in the report - e.g.
   c("www:home","www:search","www:about")}
+
+  \item{search}{list of keywords for the first specified
+  element - e.g. c("contact","about","shop"). search
+  overrides anything specified using selected}
+
+  \item{search.type}{string specifying the search type:
+  'and', or, 'or' 'not' (defaults to 'or')}
 
   \item{date.granularity}{time granularity of the report
   (year/month/week/day/hour), default to 'day'}
@@ -50,5 +58,10 @@ Flat data frame containing datetimes and metric values
 }
 \description{
 Helper function to run a Trended Report
+}
+\examples{
+report.data <- QueueTrended("your_report_suite", "2014-01-01", "2014-01-07",
+                           c("visits","uniquevisitors","pageviews","event10"),
+                           c("page","geoCountry","geoCity"))
 }
 

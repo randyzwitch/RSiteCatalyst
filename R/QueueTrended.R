@@ -23,6 +23,11 @@
 #' @importFrom jsonlite toJSON unbox
 #'
 #' @return Flat data frame containing datetimes and metric values
+#' 
+#' @examples
+#' report.data <- QueueTrended("your_report_suite", "2014-01-01", "2014-01-07", 
+#'                            c("visits","uniquevisitors","pageviews","event10"), 
+#'                            c("page","geoCountry","geoCity"))
 #'
 #' @export
 
