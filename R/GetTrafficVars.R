@@ -2,6 +2,29 @@
 #This one could use minor cleanup
 
 
+
+
+#' Get Traffic Variables (props) Associated with a Report Suite
+#' 
+#' Get Traffic Variables (props) Associated with a Report Suite.
+#' 
+#' This function requires having a character vector with one or more valid
+#' Report Suites specified.
+#' 
+#' @param report_suites Character vector containing one or more valid Report
+#' Suite names
+#' @return Data Frame
+#' @keywords prop
+#' @examples
+#' 
+#' \dontrun{    
+#'     
+#'     GetTrafficVars("keystonejowanza")
+#'     GetTrafficVars(c("keystonejowanza", "keystonerandy", "keystonetraining"))
+#' }    
+#'     
+#'     
+#' 
 GetTrafficVars <- function (report_suites) {
 
   

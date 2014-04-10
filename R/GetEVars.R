@@ -1,6 +1,29 @@
 #GetEVars- Get evars for a single or multiple report suites
 #This one could use minor cleanup
 
+
+
+#' Get Commerce Variables (eVars) Associated with a Report Suite
+#' 
+#' Get Commerce Variables (eVars) Associated with a Report Suite.
+#' 
+#' This function requires having a character vector with one or more valid
+#' Report Suites specified.
+#' 
+#' @param report_suites Character vector containing one or more valid Report
+#' Suite names
+#' @return Data Frame
+#' @keywords eVar
+#' @examples
+#' 
+#' \dontrun{    
+#'     
+#'     GetEVars("keystonejowanza")
+#'     GetEVars(c("keystonejowanza", "keystonerandy", "keystonetraining"))
+#'     
+#'     }
+#'     
+#' 
 GetEVars <- function (report_suites) {
 
 #Converts report_suites to JSON

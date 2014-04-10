@@ -1,5 +1,26 @@
 #Get Report Suites for the account belonging with the user/secret combo
 
+
+
+#' Get Report Suites Associated with a Specific User/Company
+#' 
+#' Get Report Suites Associated with a Specific User/Company
+#' 
+#' Returns a data frame containing the Report Suite ID and Site Title
+#' 
+#' @return Data Frame
+#' @keywords suite
+#' @examples
+#' 
+#' \dontrun{    
+#'     
+#'     GetReportSuites()
+#'     }
+#'     
+#'     
+#'     
+#' 
+#' @export GetReportSuites
 GetReportSuites<-function(){
   
   #Get Report Suites

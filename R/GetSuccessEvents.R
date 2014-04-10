@@ -2,6 +2,30 @@
 #Some of this code could be better
 
 
+
+
+#' Get Success Events Associated with a Report Suite
+#' 
+#' Get Success Events associated with one or more Report Suites.
+#' 
+#' This function requires having a character vector with one or more valid
+#' Report Suites specified.
+#' 
+#' @param report_suites Character vector containing one or more valid Report
+#' Suite names
+#' @return Data Frame
+#' @keywords events
+#' @examples
+#' 
+#' \dontrun{    
+#'     
+#'     GetSuccessEvents("keystonejowanza")
+#'     GetSuccessEvents(c("keystonejowanza", "keystonerandy", "keystonetraining"))
+#'     }
+#'     
+#'     
+#' 
+#' @export GetSuccessEvents
 GetSuccessEvents <- function (report_suites) {
 
   

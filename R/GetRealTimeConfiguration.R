@@ -1,5 +1,28 @@
 #Get existing real-time configuration 
 
+
+
+#' Get Current Configuration for Real-Time Reports
+#' 
+#' Get current configuration for real-time reports
+#' 
+#' 
+#' GetRealTimeConfiguration returns a Data Frame with the current set up of
+#' real-time reports within the Adobe Analytics Real-Time API. To change
+#' configuration settings, use SaveRealTimeConfiguration function.
+#' 
+#' @param report_suite Report Suite ID
+#' @return Data Frame
+#' @seealso \code{\link{SaveRealTimeConfiguration}} \cr
+#' @keywords GetRealTimeConfiguration
+#' @examples
+#' 
+#' \dontrun{
+#'   
+#'   GetRealTimeConfiguration("keystonerandy")
+#' 
+#'    }
+#' 
 GetRealTimeConfiguration<- function (report_suite) {
   
   #API request

@@ -1,4 +1,44 @@
 #Set real-time configration
+
+
+#' Save Configuration for Real-Time Report
+#' 
+#' Selects the metrics and elements (dimensions) on which you want real time
+#' reports enabled. Realtime configuration changes take 15 minutes to be
+#' reflected in reports.
+#' 
+#' 
+#' SaveRealTimeConfiguration should be called each time you want to modify the
+#' structure of your real-time reports. If you are unsure of your current setup
+#' of your real-time reports, use GetRealTimeConfiguration to find out your
+#' current setup.
+#' 
+#' Changes can take up to 15 minutes to be reflected.
+#' 
+#' @param report_suite Report Suite ID
+#' @param metric1 Metric to use in real-time report slot 1
+#' @param elements1 Up to three elements to use for real-time report slot 1
+#' @param metric2 Metric to use in real-time report slot 2
+#' @param elements2 Up to three elements to use for real-time report slot 2
+#' @param metric3 Metric to use in real-time report slot 3
+#' @param elements3 Up to three elements to use for real-time report slot 3
+#' @return Message returned to console
+#' @seealso \code{\link{GetRealTimeConfiguration}} \cr
+#' @keywords SaveRealTimeConfiguration
+#' @examples
+#' 
+#' \dontrun{
+#' 
+#' SaveRealTimeConfiguration("keystonerandy", 
+#' metric1 = "instances", 
+#' elements1 = c("page", "referringdomain", "sitesection"),
+#' metric2 = "revenue",
+#' elements2 = c("referringdomain", "sitesection")
+#' )
+#'   
+#' 
+#'    }
+#' 
 SaveRealTimeConfiguration<- function (report_suite="", metric1="", elements1="", metric2="", elements2="", metric3="", elements3="") {
 
   #Error checking to make sure at least 1 set of reports is defined

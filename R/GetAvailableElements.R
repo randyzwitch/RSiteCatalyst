@@ -1,6 +1,32 @@
 #GetAvailableElements- Get all elements for a single or multiple report suites
 #This one could use minor cleanup, get DW elements hardcoded as "0" (no)
 
+
+
+#' Get Available Elements within a Report Suite
+#' 
+#' Get All Available Elements for a given Report Suite. This list can be used
+#' to inform other functions having an "element" parameter.
+#' 
+#' This function requires having a character vector with one or more valid
+#' Report Suites specified.
+#' 
+#' @param report_suites Character vector containing one or more valid Report
+#' Suite names
+#' @return Data Frame
+#' @references Official Adobe Documentation about Elements list\cr
+#' https://developer.omniture.com/en_US/documentation/sitecatalyst-reporting/r-elements-1
+#' @keywords elements
+#' @examples
+#' 
+#' \dontrun{   
+#' 
+#'     GetAvailableElements("keystonejowanza")
+#'     GetAvailableElements(c("keystonejowanza", "keystonerandy", "keystonetraining"))
+#'     }
+#'     
+#'     
+#' 
 GetAvailableElements <- function (report_suites) {
 
   

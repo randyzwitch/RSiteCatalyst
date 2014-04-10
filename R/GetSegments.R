@@ -2,6 +2,31 @@
 #This one could use minor cleanup
 
 
+
+
+#' Get Segments Defined within a Report Suite
+#' 
+#' Get Segments defined within a Report Suite. Segments include Data Warehouse
+#' segments, pre-defined segments, and user-defined segments
+#' 
+#' This function requires having a character vector with one or more valid
+#' Report Suites specified.
+#' 
+#' @param report_suites Character vector containing one or more valid Report
+#' Suite names
+#' @return Data Frame
+#' @keywords segments
+#' @examples
+#' 
+#' \dontrun{    
+#'     
+#'     GetSegments("keystonejowanza")
+#'     GetSegments(c("keystonejowanza", "keystonerandy", "keystonetraining"))
+#' }    
+#'     
+#'     
+#' 
+#' @export GetSegments
 GetSegments <- function (report_suites) {
 
 #Converts report_suites to JSON

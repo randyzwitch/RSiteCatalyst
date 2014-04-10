@@ -1,6 +1,37 @@
 #GetUsageLog - By report suite, get all user actions for a period of time
 
   
+
+
+#' Admin Actions, Logins, and Reports Accessed
+#' 
+#' Creates data frame containing all Report Suite actions (Admin, Logins,
+#' Reports Accessed) during a given time period.
+#' 
+#' This report is administrative in nature, for users interested in
+#' understanding how internal constituents are using SiteCatalyst. This report
+#' is also a record of all Admin changes to an account.
+#' 
+#' @param date_from Optional: Start date of report, in "YYYY-MM-DD" format. If
+#' argument not set in function call, defaults to Sys.Date() - 1
+#' @param date_to Optional: End date of report, in "YYYY-MM-DD" format. If
+#' argument not set in function call, defaults to Sys.Date()
+#' @param localtime Optional. If TRUE, timestamp converted to local time.
+#' Otherwise, UNIX time in seconds.
+#' @return Data Frame
+#' @keywords admin
+#' @examples
+#' 
+#' \dontrun{
+#' 
+#'     #Timestamp in local time
+#'     GetUsageLog("2013-01-01", "2013-02-13", TRUE)
+#'     
+#'     #UNIX time in seconds for timestamp
+#'     GetUsageLog("2013-01-01", "2013-02-13")
+#'  }   
+#' 
+#' @export GetUsageLog
 GetUsageLog <- function(date_from=as.character(Sys.Date()-1), date_to=as.character(Sys.Date()), localtime=FALSE) {
 
 #Make sure dates are in right order

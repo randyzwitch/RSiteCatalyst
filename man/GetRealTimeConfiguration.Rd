@@ -1,41 +1,33 @@
 \name{GetRealTimeConfiguration}
 \alias{GetRealTimeConfiguration}
-\title{
-    Get Current Configuration for Real-Time Reports
+\title{Get Current Configuration for Real-Time Reports}
+\usage{
+GetRealTimeConfiguration(report_suite)
+}
+\arguments{
+  \item{report_suite}{Report Suite ID}
+}
+\value{
+Data Frame
 }
 \description{
 Get current configuration for real-time reports
-   
-}
-\usage{
-    GetRealTimeConfiguration(report_suite)
-}
-\arguments{
-    \item{report_suite}{
-        Report Suite ID
-    }
-
 }
 \details{
-
-GetRealTimeConfiguration returns a Data Frame with the current set up of real-time reports within the Adobe Analytics Real-Time API. To change configuration settings, use SaveRealTimeConfiguration function.
-
-
-   
-}
-\value{
-    Data Frame
-}
-
-\seealso{
-   \code{\link{SaveRealTimeConfiguration}} \cr
-     
+GetRealTimeConfiguration returns a Data Frame with the
+current set up of real-time reports within the Adobe
+Analytics Real-Time API. To change configuration settings,
+use SaveRealTimeConfiguration function.
 }
 \examples{
 \dontrun{
-  
+
   GetRealTimeConfiguration("keystonerandy")
 
    }
 }
+\seealso{
+\code{\link{SaveRealTimeConfiguration}} \cr
+}
 \keyword{GetRealTimeConfiguration}
+
