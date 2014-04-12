@@ -1,28 +1,19 @@
 RSiteCatalyst
 ===============
 
-R client library for the Adobe Analytics 1.4 API, currently in beta, but due out in Feb 2014.
-Get in touch with me if you're interested in using it. It is functional, but has not been extensively tested.
+R client library for the Adobe Analytics 1.4 API. RSiteCatalyst v1.4 is still in development. Use at your own risk during the development staage, and please submit bug reports and/or pull requests for any issues!
 
-This library borrows from v_1_1 of [RSiteCatalyst](https://github.com/randyzwitch/RSiteCatalyst) package which provides access to the Adobe Analytics v1.3 API. This version of RSiteCatalyst is on CRAN, so if you're looking for something tried and tested, that may be a better option. Install using ```install.packages("RSiteCatalyst")```.
+Once finalized, full documentation will be created and posted at the following location:
+[http://randyzwitch.github.io/RSiteCatalyst/](http://randyzwitch.github.io/RSiteCatalyst/)
+
 ## Installation
-RSiteCatalyst v1.4 is in development, and is not yet on CRAN. You will need to install directly from GitHub.
+RSiteCatalyst v1.4 is in development and is not yet on CRAN. You will need to install directly from GitHub.
 
-First, install and load [devtools](https://www.google.com):
-
-```
+```R
 install.packages("devtools")
 library(devtools)
-```
-And then run ```install_github``` to install _RSiteCatalyst v1.4_.
-
-```
 install_github("RSiteCatalyst", "randyzwitch", ref="version_1_4")
-```
 
-And finally you are ready to load i t.
-
-```
 library(RSiteCatalyst)
 ```
 
@@ -32,19 +23,11 @@ You may also need to install other packages that _RSiteCatalyst v1.4_ depends on
 * [plyr](http://cran.r-project.org/web/packages/plyr/) (>=1.8.1)
 * [httr](http://cran.r-project.org/web/packages/httr/) (>= 0.3)
 * [stringr](http://cran.r-project.org/web/packages/stringr/) (>=0.6.2)
-
-For the legacy auth method (username/shared secret) you'll also need the following:
-
-* [digest](http://cran.r-project.org/web/packages/digest/) (only required for legacy auth method) (>= 0.6.4)
-* [base64enc](http://cran.r-project.org/web/packages/base64enc/) (only required for legacy auth method) (>=0.1-1)
-
-If you want to use the OAUTH auth method, you'll also need:
-
-* [httpuv](http://cran.r-project.org/web/packages/httpuv/)
-
+* [digest](http://cran.r-project.org/web/packages/digest/)
+* [base64enc](http://cran.r-project.org/web/packages/base64enc/)
 
 ```
-install.packages(c("jsonlite","plyr","httr","stringr","digest","base64enc,"httpuv"))
+install.packages(c("jsonlite","plyr","httr","stringr","digest","base64enc))
 ```
 
 ## Authorisation
@@ -54,15 +37,10 @@ Either is fine, but ultimately you should move towards using the OAUTH method, a
 The OAUTH method is not universally available for all Adobe Analytics accounts, so legacy auth remains the default.
 
 ##### Using legacy auth (web service credentials)
-This auth method is pretty straight-forward, though much more fiddly involved under the hood, which is why it is deprecated.
-
-You will simply need your username, and your shared secret, which you can retrieve from your account settings page in the Adobe Analytics web interface.
+This auth method is pretty straight-forward. You will simply need your username, and your shared secret, which you can retrieve from your account settings page in the Adobe Analytics web interface.
 
 ```
-SCAuth("your_username:your_company", 
-         "your_shared_secret", 
-         endpoint.url="https://your-endpoint.omniture.com/admin/1.4/", 
-         auth.method='legacy')
+SCAuth("your_username:your_company", "your_shared_secret")
 ```
 
 ##### Using OAUTH
@@ -72,8 +50,8 @@ This will provide you with a identifier and secret that you can use to access th
 
 ```
 SCAuth("your_identifier", 
-         "your_secret", 
-         endpoint.url="https://your-endpoint.omniture.com/admin/1.4/rest/")
+      "your_secret", 
+      "your company")
 ```
 
 ## Running Reports
