@@ -18,6 +18,8 @@
 #' @param segment.inline inline segment definition
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
 #' @param expedite set to TRUE to expedite the processing of this report
+#' @param interval.seconds How long to wait between attempts
+#' @param max.attempts Number of API attempts before stopping
 #'
 #' @importFrom jsonlite toJSON unbox
 #' @importFrom plyr rbind.fill

@@ -7,6 +7,12 @@ JsonQueueReport(report.description, interval.seconds = 5,
 }
 \arguments{
   \item{report.description}{JSON report description}
+
+  \item{interval.seconds}{How long to wait between
+  attempts}
+
+  \item{max.attempts}{Number of API attempts before
+  stopping}
 }
 \value{
 Formatted data frame

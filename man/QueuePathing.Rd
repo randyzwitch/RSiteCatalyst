@@ -36,6 +36,12 @@ QueuePathing(reportsuite.id, date.from, date.to, metric, element, pattern,
 
   \item{expedite}{set to TRUE to expedite the processing of
   this report}
+
+  \item{interval.seconds}{How long to wait between
+  attempts}
+
+  \item{max.attempts}{Number of API attempts before
+  stopping}
 }
 \value{
 Flat data frame containing checkpoints and metrics for each

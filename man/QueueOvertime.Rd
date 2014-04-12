@@ -33,6 +33,12 @@ QueueOvertime(reportsuite.id, date.from, date.to, metrics,
 
   \item{expedite}{set to TRUE to expedite the processing of
   this report}
+
+  \item{interval.seconds}{How long to wait between
+  attempts}
+
+  \item{max.attempts}{Number of API attempts before
+  stopping}
 }
 \value{
 Flat data frame containing datetimes and metric values

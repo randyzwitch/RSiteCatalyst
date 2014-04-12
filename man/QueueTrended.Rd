@@ -52,6 +52,12 @@ QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
 
   \item{expedite}{set to TRUE to expedite the processing of
   this report}
+
+  \item{interval.seconds}{How long to wait between
+  attempts}
+
+  \item{max.attempts}{Number of API attempts before
+  stopping}
 }
 \value{
 Flat data frame containing datetimes and metric values
@@ -60,8 +66,10 @@ Flat data frame containing datetimes and metric values
 Helper function to run a Trended Report
 }
 \examples{
+\dontrun{
 report.data <- QueueTrended("your_report_suite", "2014-01-01", "2014-01-07",
                            c("visits","uniquevisitors","pageviews","event10"),
                            c("page","geoCountry","geoCity"))
+}
 }
 

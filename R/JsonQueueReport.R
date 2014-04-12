@@ -3,6 +3,8 @@
 #' Generic interface to validate, queue and retrieve a report from the API
 #'
 #' @param report.description JSON report description
+#' @param interval.seconds How long to wait between attempts
+#' @param max.attempts Number of API attempts before stopping
 #'
 #' @importFrom jsonlite toJSON unbox
 #'

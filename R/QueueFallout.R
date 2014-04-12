@@ -10,6 +10,8 @@
 #' @param checkpoints character vector of checkpoints in the fallout path (e.g. c("Home","Contact","Thank You"))
 #' @param segment.id id of Adobe Analytics segment to retrieve the report for
 #' @param expedite set to TRUE to expedite the processing of this report
+#' @param interval.seconds How long to wait between attempts
+#' @param max.attempts Number of API attempts before stopping
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
