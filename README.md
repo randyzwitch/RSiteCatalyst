@@ -16,10 +16,10 @@ This package requires R 2.15.2 or greater. Also, due to the number of package de
 
 ##News
 
-2014-04-06: Version 1.3.3 (GitHub only for now)
+2014-04-12: Version 1.3.3 submitted to CRAN
 - Additional bug fixes, improvement to error reporting to use API error messages. 
 
-NOTE: Version 1.3.3 will likely be the last update for this codebase; Adobe has released version 1.4 of the API, and newer versions of RSiteCatalyst will be updated against the newer version of the API. 
+**NOTE: Version 1.3.3 will likely be the last update for this codebase; Adobe has released version 1.4 of the API, and newer versions of RSiteCatalyst will be updated against the newer version of the API.**
 
 2014-03-23: Version 1.3.2 submitted to CRAN
 - Fixed issues arising from upgrading to httr 0.3. Package behavior should be identical using v0.2 or v0.3 of httr.
