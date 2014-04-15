@@ -1,6 +1,6 @@
 \name{GetUsageLog}
 \alias{GetUsageLog}
-\title{Admin Actions, Logins, and Reports Accessed}
+\title{Get Admin Actions, Logins, and Reports Accessed}
 \usage{
 GetUsageLog(date.from = as.character(Sys.Date() - 1),
   date.to = as.character(Sys.Date()), localtime = FALSE)
