@@ -1,8 +1,10 @@
 #' GetProps
 #'
-#' Gets sprop (traffic variable) definitions for the specified report suite(s). 
+#' Get Traffic Variables (props) Associated with a Report Suite(s). 
 #' Useful to audit or document a report suite or company in Adobe Analytics.
-#'
+#' 
+#' @title Get Traffic Variables (props) Associated with a Report Suite
+#' 
 #' @param reportsuite.ids report suite id (or list of report suite ids)
 #'
 #' @importFrom jsonlite toJSON

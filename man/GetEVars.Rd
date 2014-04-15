@@ -1,6 +1,6 @@
 \name{GetEvars}
 \alias{GetEvars}
-\title{GetEvars}
+\title{Get Commerce Variables (eVars) Associated with a Report Suite}
 \usage{
 GetEvars(reportsuite.ids)
 }
@@ -12,6 +12,9 @@ GetEvars(reportsuite.ids)
 List of valid evars
 }
 \description{
+GetEvars
+}
+\details{
 Gets available report suite evars
 }
 \examples{

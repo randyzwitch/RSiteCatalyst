@@ -1,6 +1,8 @@
 #' QueueTrended
 #'
 #' Helper function to run a Trended Report
+#' 
+#' @title Run a QueueTrended Report
 #'
 #' @param reportsuite.id report suite id
 #' @param date.from start date for the report (YYYY-MM-DD)

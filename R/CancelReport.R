@@ -2,6 +2,7 @@
 #'
 #' Cancels the specified report
 #'
+#' @title Cancel a Report in the Report Queue
 #' @param report.id id of the report that you want to cancel
 #'
 #' @return Console message

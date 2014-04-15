@@ -1,6 +1,6 @@
 \name{GetUsageLog}
 \alias{GetUsageLog}
-\title{GetUsageLog}
+\title{Admin Actions, Logins, and Reports Accessed}
 \usage{
 GetUsageLog(date.from = as.character(Sys.Date() - 1),
   date.to = as.character(Sys.Date()), localtime = FALSE)
@@ -18,6 +18,9 @@ data frame with: datetime, login, event_num, event_type,
 ip_address, report_suite, event_details
 }
 \description{
+GetUsageLog
+}
+\details{
 Gets the Adobe Analytics usage log for all users within the
 specified date range.
 }

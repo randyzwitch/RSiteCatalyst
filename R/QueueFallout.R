@@ -1,6 +1,8 @@
 #' QueueFallout
 #'
 #' Helper function to run a QueueFallout Report
+#' 
+#' @title Run a Fallout Report
 #'
 #' @param reportsuite.id report suite id
 #' @param date.from start date for the report (YYYY-MM-DD)

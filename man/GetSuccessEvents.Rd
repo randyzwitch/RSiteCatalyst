@@ -1,6 +1,6 @@
 \name{GetSuccessEvents}
 \alias{GetSuccessEvents}
-\title{GetSuccessEvents}
+\title{Get Success Events Associated with a Report Suite}
 \usage{
 GetSuccessEvents(reportsuite.ids)
 }
@@ -12,6 +12,9 @@ GetSuccessEvents(reportsuite.ids)
 List of valid successevents
 }
 \description{
+GetSuccessEvents
+}
+\details{
 Gets success event definitions for the specified report
 suite(s). Useful to audit or document a report suite or
 company in Adobe Analytics.

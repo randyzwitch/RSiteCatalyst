@@ -1,6 +1,8 @@
 #' QueuePathing
 #'
 #' Helper function to run a pathed Report
+#' 
+#' @title Run a Pathing report
 #'
 #' @param reportsuite.id report suite id
 #' @param date.from start date for the report (YYYY-MM-DD)

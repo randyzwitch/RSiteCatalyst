@@ -7,5 +7,5 @@ Author: Willem Paling, Randy Zwitch & Jowanza Joseph
 Maintainer: Randy Zwitch <rzwitch+rsitecatalyst@gmail.com>
 Depends: R (>= 3.0)
 Imports: jsonlite (>= 0.9.5), httr (>= 0.3), plyr, base64enc, digest, stringr
-Description: R Client for Adobe Analytics API v1.4
+Description: Functions for accessing the Adobe Analytics Reporting API
 License: MIT + file LICENSE

@@ -3,7 +3,9 @@
 #' Gets available report suite evars
 #'
 #' @param reportsuite.ids report suite id (or list of report suite ids)
-#'
+#' 
+#' @title Get Commerce Variables (eVars) Associated with a Report Suite
+#' 
 #' @importFrom jsonlite toJSON
 #' @importFrom plyr rbind.fill
 #' @return List of valid evars

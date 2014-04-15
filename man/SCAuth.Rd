@@ -1,6 +1,6 @@
 \name{SCAuth}
 \alias{SCAuth}
-\title{SCAuth}
+\title{Store Credentials for the Adobe Analytics API}
 \usage{
 SCAuth(key, secret, company = "", token.file = "", auth.method = "legacy")
 }
@@ -26,6 +26,9 @@ SCAuth(key, secret, company = "", token.file = "", auth.method = "legacy")
   'OAUTH2' to use the newer OAUTH method.}
 }
 \description{
+SCAuth
+}
+\details{
 Authorise and store credentials for the Adobe Analytics API
 }
 

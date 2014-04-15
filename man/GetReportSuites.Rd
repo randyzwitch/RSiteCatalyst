@@ -1,6 +1,6 @@
 \name{GetReportSuites}
 \alias{GetReportSuites}
-\title{GetReportSuites}
+\title{Get Report Suites Associated with a Specific User/Company}
 \usage{
 GetReportSuites()
 }
@@ -8,6 +8,9 @@ GetReportSuites()
 List of valid reportsuites
 }
 \description{
+GetReportSuites
+}
+\details{
 Gets all available report suites for the company.
 }
 \examples{

@@ -2,6 +2,8 @@
 #'
 #' Gets valid metrics for current user, valid with optionally specified existing metrics, elements and date granularity
 #'
+#' @title Get Available Metrics within a Report Suite
+#' 
 #' @param reportsuite.ids single report suite id, or character vector of report suite ids
 #' @param metrics list of existing metrics you want to use in combination with an additional metric
 #' @param elements list of existing elements you want to use in combination with an additional metric

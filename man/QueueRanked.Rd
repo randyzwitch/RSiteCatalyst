@@ -1,6 +1,6 @@
 \name{QueueRanked}
 \alias{QueueRanked}
-\title{QueueRanked}
+\title{Run a Ranked Report}
 \usage{
 QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   start = 0, selected = c(), search = c(), search.type = "or",
@@ -58,6 +58,9 @@ QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
 Flat data frame containing datetimes and metric values
 }
 \description{
+QueueRanked
+}
+\details{
 Helper function to run a Ranked Report
 }
 

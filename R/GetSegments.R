@@ -2,7 +2,9 @@
 #'
 #' Gets a list of segments for the specified report suites. 
 #' Useful to find segment IDs for use in reporting helper functions or JSON report definitions.
-#'
+#' 
+#' @title Get Segments Defined within a Report Suite
+#' 
 #' @param reportsuite.ids report suite id (or list of report suite ids)
 #'
 #' @importFrom jsonlite toJSON

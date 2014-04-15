@@ -1,6 +1,6 @@
 \name{QueuePathing}
 \alias{QueuePathing}
-\title{QueuePathing}
+\title{Run a Pathing report}
 \usage{
 QueuePathing(reportsuite.id, date.from, date.to, metric, element, pattern,
   top = 1000, start = 1, segment.id = "", expedite = FALSE,
@@ -48,6 +48,9 @@ Flat data frame containing checkpoints and metrics for each
 step
 }
 \description{
+QueuePathing
+}
+\details{
 Helper function to run a pathed Report
 }
 

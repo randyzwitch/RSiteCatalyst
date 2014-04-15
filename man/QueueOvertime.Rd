@@ -1,6 +1,6 @@
 \name{QueueOvertime}
 \alias{QueueOvertime}
-\title{QueueOvertime}
+\title{Run an Overtime Report}
 \usage{
 QueueOvertime(reportsuite.id, date.from, date.to, metrics,
   date.granularity = "day", segment.id = "", segment.inline = "",
@@ -44,6 +44,9 @@ QueueOvertime(reportsuite.id, date.from, date.to, metrics,
 Flat data frame containing datetimes and metric values
 }
 \description{
+QueueOvertime
+}
+\details{
 Helper function to run an OverTime Report
 }
 

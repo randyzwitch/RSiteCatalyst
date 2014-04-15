@@ -1,6 +1,6 @@
 \name{GetSegments}
 \alias{GetSegments}
-\title{GetSegments}
+\title{Get Segments Defined within a Report Suite}
 \usage{
 GetSegments(reportsuite.ids)
 }
@@ -12,6 +12,9 @@ GetSegments(reportsuite.ids)
 List of valid segments
 }
 \description{
+GetSegments
+}
+\details{
 Gets a list of segments for the specified report suites.
 Useful to find segment IDs for use in reporting helper
 functions or JSON report definitions.

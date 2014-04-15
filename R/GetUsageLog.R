@@ -1,6 +1,8 @@
 #' GetUsageLog
 #'
 #' Gets the Adobe Analytics usage log for all users within the specified date range.
+#' 
+#' @title Admin Actions, Logins, and Reports Accessed
 #'
 #' @param date.from Log start date (YYYY-MM-DD)
 #' @param date.to Log end date (YYYY-MM-DD)

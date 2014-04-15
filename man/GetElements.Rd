@@ -1,6 +1,6 @@
 \name{GetElements}
 \alias{GetElements}
-\title{GetElements}
+\title{Get Valid Elements for a Report Suite}
 \usage{
 GetElements(reportsuite.ids, metrics = c(), elements = c(),
   date.granularity = "")
@@ -22,6 +22,9 @@ GetElements(reportsuite.ids, metrics = c(), elements = c(),
 List of valid elements
 }
 \description{
+GetElements
+}
+\details{
 Gets valid elements for a report suite for the current
 user. This list is restricted by optionally specified
 existing elements, existing metrics and date granularity.

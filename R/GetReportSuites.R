@@ -1,7 +1,9 @@
 #' GetReportSuites
 #'
 #' Gets all available report suites for the company.
-#'
+#' 
+#' @title Get Report Suites Associated with a Specific User/Company
+#' 
 #' @return List of valid reportsuites
 #'
 #' @export

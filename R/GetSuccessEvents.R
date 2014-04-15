@@ -2,6 +2,8 @@
 #'
 #' Gets success event definitions for the specified report suite(s). 
 #' Useful to audit or document a report suite or company in Adobe Analytics.
+#' 
+#' @title Get Success Events Associated with a Report Suite
 #'
 #' @param reportsuite.ids report suite id (or list of report suite ids)
 #'

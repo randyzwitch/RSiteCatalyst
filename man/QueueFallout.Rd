@@ -1,6 +1,6 @@
 \name{QueueFallout}
 \alias{QueueFallout}
-\title{QueueFallout}
+\title{Run a Fallout Report}
 \usage{
 QueueFallout(reportsuite.id, date.from, date.to, metrics, element, checkpoints,
   segment.id = "", expedite = FALSE, interval.seconds = 5,
@@ -37,6 +37,9 @@ Flat data frame containing checkpoints and metrics for each
 step
 }
 \description{
+QueueFallout
+}
+\details{
 Helper function to run a QueueFallout Report
 }
 

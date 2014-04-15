@@ -1,6 +1,6 @@
 \name{GetProps}
 \alias{GetProps}
-\title{GetProps}
+\title{Get Traffic Variables (props) Associated with a Report Suite}
 \usage{
 GetProps(reportsuite.ids)
 }
@@ -12,9 +12,12 @@ GetProps(reportsuite.ids)
 List of valid props
 }
 \description{
-Gets sprop (traffic variable) definitions for the specified
-report suite(s). Useful to audit or document a report suite
-or company in Adobe Analytics.
+GetProps
+}
+\details{
+Get Traffic Variables (props) Associated with a Report
+Suite(s). Useful to audit or document a report suite or
+company in Adobe Analytics.
 }
 \examples{
 \dontrun{

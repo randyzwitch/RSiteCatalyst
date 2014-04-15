@@ -1,6 +1,6 @@
 \name{GetMetrics}
 \alias{GetMetrics}
-\title{GetMetrics}
+\title{Get Available Metrics within a Report Suite}
 \usage{
 GetMetrics(reportsuite.ids, metrics = c(), elements = c(),
   date.granularity = "")
@@ -22,6 +22,9 @@ GetMetrics(reportsuite.ids, metrics = c(), elements = c(),
 List of valid metrics
 }
 \description{
+GetMetrics
+}
+\details{
 Gets valid metrics for current user, valid with optionally
 specified existing metrics, elements and date granularity
 }

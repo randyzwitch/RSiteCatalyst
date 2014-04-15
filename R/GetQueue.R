@@ -1,6 +1,8 @@
 #' GetQueue
 #'
 #' Gets the report queue
+#' 
+#' @title Get Number/ID of Reports in Queue
 #'
 #' @return data frame with: reportID, type, queueTime, status, priority, estimate, reportSuiteID, user
 #'

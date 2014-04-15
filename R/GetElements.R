@@ -3,6 +3,7 @@
 #' Gets valid elements for a report suite for the current user. 
 #' This list is restricted by optionally specified existing elements, existing metrics and date granularity.
 #'
+#' @title Get Valid Elements for a Report Suite
 #' @param reportsuite.ids single report suite id, or character vector of report suite ids
 #' @param metrics list of existing metrics you want to use in combination with an additional metric
 #' @param elements list of existing elements you want to use in combination with an additional metric
