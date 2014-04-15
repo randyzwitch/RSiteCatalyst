@@ -3,8 +3,7 @@
 \title{ApiRequest}
 \usage{
 ApiRequest(body = "", func.name = "", interval.seconds = 2,
-  max.attempts = 1, print.attempts = FALSE,
-  SC.Debug = SC.Credentials$debug)
+  max.attempts = 1, print.attempts = FALSE)
 }
 \arguments{
   \item{report.description}{JSON report description}
@@ -21,9 +20,6 @@ ApiRequest(body = "", func.name = "", interval.seconds = 2,
 
   \item{print.attempts}{if set to TRUE, this will print
   attempt numbers to the console}
-
-  \item{SC.Debug}{Debug mode (defaults to value set during
-  SCAuth)}
 }
 \value{
 list of available evars
