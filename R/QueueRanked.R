@@ -1,6 +1,8 @@
 #' QueueRanked
 #'
 #' Helper function to run a Ranked Report
+#' 
+#' @title Run a Ranked Report
 #'
 #' @param reportsuite.id report suite id
 #' @param date.from start date for the report (YYYY-MM-DD)

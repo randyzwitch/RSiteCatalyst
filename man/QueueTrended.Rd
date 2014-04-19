@@ -1,6 +1,6 @@
 \name{QueueTrended}
 \alias{QueueTrended}
-\title{QueueTrended}
+\title{Run a QueueTrended Report}
 \usage{
 QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   start = 0, selected = c(), search = c(), search.type = "or",
@@ -63,6 +63,9 @@ QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
 Flat data frame containing datetimes and metric values
 }
 \description{
+QueueTrended
+}
+\details{
 Helper function to run a Trended Report
 }
 \examples{

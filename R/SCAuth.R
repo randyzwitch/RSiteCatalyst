@@ -1,6 +1,8 @@
 #' SCAuth
 #'
 #' Authorise and store credentials for the Adobe Analytics API
+#' 
+#' @title Store Credentials for the Adobe Analytics API
 #'
 #' @param key client id from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API username (username:company)
 #' @param secret secret from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API shared secret
@@ -8,13 +10,14 @@
 #' @param token.file if you would like to save your OAUTH token and other auth details for use in 
 #' future sessions, specify a file here. The method checks for the existence of the file and uses that if available.
 #' @param auth.method defaults to legacy, can be set to 'OAUTH2' to use the newer OAUTH method.
+#' @param debug.mode set global debug mode
 #'
 #' @importFrom httr oauth_app oauth_endpoint oauth2.0_token
 #' @importFrom stringr str_count str_split_fixed
 #'
 #' @export
 
-SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy"){
+SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy", debug.mode = FALSE){
 
   #Temporarily set SC.Credentials for GetEndpoint function call
   SC.Credentials <<- list(key=key, secret=secret)
@@ -58,7 +61,8 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy")
                                access_token=sc.cred$access_token,
                                scope=sc.cred$scope,
                                client_id=sc.cred$client_id,
-                               expires=sc.cred$expires
+                               expires=sc.cred$expires,
+                               debug = debug.mode
                                )
 
       if(nchar(token.file)) {
@@ -86,10 +90,11 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy")
       stop("Authentication failed due to errors")
     } else {
       #Create SCCredentials object in Global Environment
-      SC.Credentials <<- list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url)
+      SC.Credentials <<- list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url,debug=debug.mode)
       save(SC.Credentials,file="~/SC.Credentials")
       #Assign endpoint to 3rd position in credentials
-      print("Legacy Auth Stored: This method is deprecated. If possible, use OAUTH.")
+      #print("Legacy Auth Stored: This method is deprecated. If possible, use OAUTH.")
+      print("Authentication Succeeded. Legacy Auth Stored")
     }
 
   }

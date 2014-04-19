@@ -1,8 +1,9 @@
 \name{SCAuth}
 \alias{SCAuth}
-\title{SCAuth}
+\title{Store Credentials for the Adobe Analytics API}
 \usage{
-SCAuth(key, secret, company = "", token.file = "", auth.method = "legacy")
+SCAuth(key, secret, company = "", token.file = "", auth.method = "legacy",
+  debug.mode = FALSE)
 }
 \arguments{
   \item{key}{client id from your app in the Adobe Marketing
@@ -24,8 +25,13 @@ SCAuth(key, secret, company = "", token.file = "", auth.method = "legacy")
 
   \item{auth.method}{defaults to legacy, can be set to
   'OAUTH2' to use the newer OAUTH method.}
+
+  \item{debug.mode}{set global debug mode}
 }
 \description{
+SCAuth
+}
+\details{
 Authorise and store credentials for the Adobe Analytics API
 }
 

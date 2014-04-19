@@ -2,7 +2,7 @@
 #' Type:     Package \cr
 #' Version:  1.4 \cr
 #' Date:     2014-04-08 \cr
-#' License:  GPL-2 \cr
+#' License:  MIT + file LICENSE \cr
 #'
 #'
 #' 
@@ -28,6 +28,6 @@
 #' 
 
 utils::globalVariables("SC.Credentials")
-utils::globalVariables("SC.Debug")
+#utils::globalVariables("SC.Debug")
 utils::globalVariables("reportsuite.id") #RZ: Silence CRAN check
-SC.Debug <<- FALSE
+#SC.Debug <<- FALSE

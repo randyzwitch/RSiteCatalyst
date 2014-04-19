@@ -1,6 +1,8 @@
 #' GetUsageLog
 #'
 #' Gets the Adobe Analytics usage log for all users within the specified date range.
+#' 
+#' @title Get Admin Actions, Logins, and Reports Accessed
 #'
 #' @param date.from Log start date (YYYY-MM-DD)
 #' @param date.to Log end date (YYYY-MM-DD)
@@ -11,7 +13,8 @@
 #'
 #' @return data frame with: datetime, login, event_num, event_type, ip_address, report_suite, event_details
 #'
-#' @export
+#' @family internal
+#' @keywords internal
 #'
 #' @examples
 #' \dontrun{

@@ -1,20 +1,24 @@
-#' GetSuccessEvents
+#' @details This function requires having a character vector with one or more valid Report Suites specified.
 #'
-#' Gets success event definitions for the specified report suite(s). 
+#' @description Gets success event definitions for the specified report suite(s). 
 #' Useful to audit or document a report suite or company in Adobe Analytics.
+#' 
+#' @title Get Success Events Associated with a Report Suite
 #'
 #' @param reportsuite.ids report suite id (or list of report suite ids)
 #'
 #' @importFrom jsonlite toJSON
 #' @importFrom plyr rbind.fill
 #'
-#' @return List of valid successevents
+#' @return Data frame
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' successevents <- GetSuccessEvents(c("your_prod_report_suite","your_dev_reportsuite"))
+#' events <- GetSuccessEvents("your_report_suite")
+#' 
+#' events2 <- GetSuccessEvents(report_suites$rsid)
 #' }
 
 GetSuccessEvents <- function(reportsuite.ids) {

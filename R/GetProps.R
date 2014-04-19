@@ -1,8 +1,10 @@
-#' GetProps
+#' @details This function requires having a character vector with one or more valid Report Suites specified.
 #'
-#' Gets sprop (traffic variable) definitions for the specified report suite(s). 
+#' @description Get Traffic Variables (props) Associated with a Report Suite(s). 
 #' Useful to audit or document a report suite or company in Adobe Analytics.
-#'
+#' 
+#' @title Get Traffic Variables (props) Associated with a Report Suite
+#' 
 #' @param reportsuite.ids report suite id (or list of report suite ids)
 #'
 #' @importFrom jsonlite toJSON
@@ -14,7 +16,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' props <- GetProps(c("your_prod_report_suite","your_dev_reportsuite"))
+#' props <- GetProps("your_report_suite")
+#' 
+#' props2 <- GetProps(report_suites$rsid)
 #' }
 
 GetProps <- function(reportsuite.ids) {

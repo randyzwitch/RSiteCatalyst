@@ -1,34 +1,42 @@
 \name{GetMetrics}
 \alias{GetMetrics}
-\title{GetMetrics}
+\title{Get Available Metrics within a Report Suite}
 \usage{
 GetMetrics(reportsuite.ids, metrics = c(), elements = c(),
   date.granularity = "")
 }
 \arguments{
-  \item{reportsuite.ids}{single report suite id, or
+  \item{reportsuite.ids}{Single report suite id, or
   character vector of report suite ids}
 
-  \item{metrics}{list of existing metrics you want to use
+  \item{metrics}{List of existing metrics you want to use
   in combination with an additional metric}
 
-  \item{elements}{list of existing elements you want to use
+  \item{elements}{List of existing elements you want to use
   in combination with an additional metric}
 
-  \item{date.granularity}{granularity that you want to
+  \item{date.granularity}{Granularity that you want to
   combine with an additional metric}
 }
 \value{
-List of valid metrics
+Data frame of valid metrics
 }
 \description{
 Gets valid metrics for current user, valid with optionally
 specified existing metrics, elements and date granularity
 }
+\details{
+This function requires having a character vector with one
+or more valid Report Suites specified.
+}
 \examples{
 \dontrun{
-metrics.valid <- GetMetrics("your_report_suite",metrics=c('visitors','pageviews'),
-elements=c('page','geoCountry'),date.granularity='day')
+metrics.valid <- GetMetrics("your_report_suite",
+                            metrics=c('visitors','pageviews'),
+                            elements=c('page','geoCountry'),
+                            date.granularity='day')
+
+metrics <- GetMetrics(report_suites$rsid)
 }
 }
 

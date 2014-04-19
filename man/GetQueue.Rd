@@ -1,15 +1,19 @@
 \name{GetQueue}
 \alias{GetQueue}
-\title{GetQueue}
+\title{Get Number/ID of Reports in Queue}
 \usage{
 GetQueue()
 }
 \value{
-data frame with: reportID, type, queueTime, status,
-priority, estimate, reportSuiteID, user
+Console message and/or list
 }
 \description{
-Gets the report queue
+Requests the number of reports in the Report Queue, as well
+as the Report ID.
+}
+\details{
+Returns either a message to the console that no reports are
+in the Queue or a list with the Report ID's.
 }
 \examples{
 \dontrun{

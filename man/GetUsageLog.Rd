@@ -1,6 +1,6 @@
 \name{GetUsageLog}
 \alias{GetUsageLog}
-\title{GetUsageLog}
+\title{Get Admin Actions, Logins, and Reports Accessed}
 \usage{
 GetUsageLog(date.from = as.character(Sys.Date() - 1),
   date.to = as.character(Sys.Date()), localtime = FALSE)
@@ -18,6 +18,9 @@ data frame with: datetime, login, event_num, event_type,
 ip_address, report_suite, event_details
 }
 \description{
+GetUsageLog
+}
+\details{
 Gets the Adobe Analytics usage log for all users within the
 specified date range.
 }
@@ -26,4 +29,13 @@ specified date range.
 usagelog <- GetUsageLog("2014-01-01","2014-01-31")
 }
 }
+\seealso{
+Other internal: \code{\link{ApiRequest}};
+\code{\link{BuildHeader}};
+\code{\link{BuildInnerBreakdownsRecursively}};
+\code{\link{GetEndpoint}}; \code{\link{ParseFallout}};
+\code{\link{ParseOvertime}}; \code{\link{ParsePathing}};
+\code{\link{ParseRanked}}; \code{\link{ParseTrended}}
+}
+\keyword{internal}
 

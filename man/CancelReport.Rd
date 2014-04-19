@@ -1,6 +1,6 @@
 \name{CancelReport}
 \alias{CancelReport}
-\title{CancelReport}
+\title{Cancel a Report in the Report Queue}
 \usage{
 CancelReport(report.id)
 }
@@ -12,6 +12,9 @@ CancelReport(report.id)
 Console message
 }
 \description{
+CancelReport
+}
+\details{
 Cancels the specified report
 }
 \examples{

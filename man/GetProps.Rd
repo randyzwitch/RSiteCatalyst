@@ -1,6 +1,6 @@
 \name{GetProps}
 \alias{GetProps}
-\title{GetProps}
+\title{Get Traffic Variables (props) Associated with a Report Suite}
 \usage{
 GetProps(reportsuite.ids)
 }
@@ -12,13 +12,19 @@ GetProps(reportsuite.ids)
 List of valid props
 }
 \description{
-Gets sprop (traffic variable) definitions for the specified
-report suite(s). Useful to audit or document a report suite
-or company in Adobe Analytics.
+Get Traffic Variables (props) Associated with a Report
+Suite(s). Useful to audit or document a report suite or
+company in Adobe Analytics.
+}
+\details{
+This function requires having a character vector with one
+or more valid Report Suites specified.
 }
 \examples{
 \dontrun{
-props <- GetProps(c("your_prod_report_suite","your_dev_reportsuite"))
+props <- GetProps("your_report_suite")
+
+props2 <- GetProps(report_suites$rsid)
 }
 }
 

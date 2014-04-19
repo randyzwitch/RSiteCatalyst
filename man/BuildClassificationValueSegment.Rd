@@ -1,6 +1,6 @@
 \name{BuildClassificationValueSegment}
 \alias{BuildClassificationValueSegment}
-\title{BuildClassificationValueSegment}
+\title{Build a Classification Value Segment}
 \usage{
 BuildClassificationValueSegment(element, search.keywords, classification = "",
   search.type = "OR")
@@ -23,6 +23,9 @@ BuildClassificationValueSegment(element, search.keywords, classification = "",
 segment definition for use with Queue* helper functions
 }
 \description{
+BuildClassificationValueSegment
+}
+\details{
 Helper function to build a classification value segment for
 use with other reports Multiple segments can be combined in
 a list. Note that search can only be applied to a breakdown

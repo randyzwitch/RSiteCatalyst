@@ -1,20 +1,24 @@
-#' GetSegments
+#' @details This function requires having a character vector with one or more valid Report Suites specified.
 #'
-#' Gets a list of segments for the specified report suites. 
+#' @description Get a data frame of segments for the specified report suites. 
 #' Useful to find segment IDs for use in reporting helper functions or JSON report definitions.
-#'
-#' @param reportsuite.ids report suite id (or list of report suite ids)
+#' 
+#' @title Get Segments Defined within a Report Suite
+#' 
+#' @param reportsuite.ids Report suite id (or list of report suite ids)
 #'
 #' @importFrom jsonlite toJSON
 #' @importFrom plyr rbind.fill
 #'
-#' @return List of valid segments
+#' @return Data frame
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' segments <- GetSegments(c("your_prod_report_suite","your_dev_reportsuite"))
+#' segments <- GetSegments("your_report_suite")
+#' 
+#' segments2 <- GetSegments(report_suites$rsid)
 #' }
 
 GetSegments <- function(reportsuite.ids) {

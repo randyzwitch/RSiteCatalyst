@@ -2,6 +2,7 @@
 #'
 #' Cancels the specified report
 #'
+#' @title Cancel a Report in the Report Queue
 #' @param report.id id of the report that you want to cancel
 #'
 #' @return Console message
@@ -36,7 +37,10 @@ CancelReport <- function(report.id) {
     print(paste0("Report #",report.id," was successfully cancelled."))
   } else {
     result <- fromJSON(result)
-    print(paste0('ERROR: ',response.content$error," - ",response.content$error_description))
+    #print(paste0('ERROR: ',response.content$error," - ",response.content$error_description))
+    #RZ, 4/18/14: Commented the above out, R CMD Check was throwing warning
+    #Appears that response.content isn't correct reference, changed to result
+    print(paste0('ERROR: ',result$error," - ",result$error_description))
   }
 
 }

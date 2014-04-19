@@ -7,6 +7,7 @@
 #' @param interval.seconds Time to wait between request attempts (defaults to 2 seconds)
 #' @param max.attempts Max number of attempts to make the request (defaults to 1, this is only increased for GetReport)
 #' @param print.attempts if set to TRUE, this will print attempt numbers to the console
+#' 
 #'
 #' @importFrom httr content add_headers POST
 #' @importFrom jsonlite toJSON fromJSON
@@ -17,7 +18,10 @@
 #' @keywords internal
 
 ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,print.attempts=FALSE) {
-
+  
+  #Set debug flag from global credentials
+  SC.Debug <- SC.Credentials$debug
+  
   endpoint <- SC.Credentials$endpoint
   if(SC.Credentials$auth.method=='OAUTH2') {
     url <- paste(endpoint, '?method=',func.name,'&access_token=',SC.Credentials$access_token, sep='')

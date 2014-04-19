@@ -4,6 +4,8 @@
 #' Multiple segments can be combined in a list.
 #' Note that search can only be applied to a breakdown classification and not an element value.
 #'
+#' @title Build a Classification Value Segment
+#' 
 #' @param element list of elements on which to vase the segment
 #' @param search.keywords list of search keyword vectorsfor each element 
 #' (this can use ^ to pin to start, and $ to pin to end, or both to specify exact match)

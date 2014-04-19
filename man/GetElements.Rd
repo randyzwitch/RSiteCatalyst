@@ -1,35 +1,41 @@
 \name{GetElements}
 \alias{GetElements}
-\title{GetElements}
+\title{Get Valid Elements for a Report Suite}
 \usage{
 GetElements(reportsuite.ids, metrics = c(), elements = c(),
   date.granularity = "")
 }
 \arguments{
-  \item{reportsuite.ids}{single report suite id, or
+  \item{reportsuite.ids}{Single report suite id, or
   character vector of report suite ids}
 
-  \item{metrics}{list of existing metrics you want to use
+  \item{metrics}{List of existing metrics you want to use
   in combination with an additional metric}
 
-  \item{elements}{list of existing elements you want to use
+  \item{elements}{List of existing elements you want to use
   in combination with an additional metric}
 
-  \item{date.granularity}{granularity that you want to
+  \item{date.granularity}{Granularity that you want to
   combine with an additional metric}
 }
 \value{
-List of valid elements
+Data frame of valid elements
 }
 \description{
-Gets valid elements for a report suite for the current
-user. This list is restricted by optionally specified
-existing elements, existing metrics and date granularity.
+Get valid elements for a report suite for the current user.
+This list is restricted by optionally specified existing
+elements, existing metrics and date granularity.
+}
+\details{
+This function requires having a character vector with one
+or more valid Report Suites specified.
 }
 \examples{
 \dontrun{
-elements.valid <- GetElements("your_report_suite",metrics=c('visitors','pageviews'),
-                             elements=c('page','geoCountry'),date.granularity='day')
+elements.valid <- GetElements("your_report_suite",
+                              metrics=c('visitors','pageviews'),
+                              elements=c('page','geoCountry'),
+                              date.granularity='day')
 
 elements <- GetElements(c("your_prod_report_suite","your_dev_report_suite"))
 }

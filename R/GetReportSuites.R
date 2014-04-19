@@ -1,14 +1,16 @@
-#' GetReportSuites
+#' @description Get Report Suites Associated with a Specific User/Company
 #'
-#' Gets all available report suites for the company.
-#'
-#' @return List of valid reportsuites
+#' @details Returns a data frame containing the Report Suite ID and Site Title
+#' 
+#' @title Get Report Suites Associated with a Specific User/Company
+#' 
+#' @return Data frame
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' reportsuites <- GetReportSuites()
+#' report_suites <- GetReportSuites()
 #' }
 
 
