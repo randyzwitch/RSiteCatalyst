@@ -8,44 +8,44 @@ QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   expedite = FALSE, interval.seconds = 5, max.attempts = 120)
 }
 \arguments{
-  \item{reportsuite.id}{report suite id}
+  \item{reportsuite.id}{Report suite id}
 
-  \item{date.from}{start date for the report (YYYY-MM-DD)}
+  \item{date.from}{Start date for the report (YYYY-MM-DD)}
 
-  \item{date.to}{end date for the report (YYYY-MM-DD)}
+  \item{date.to}{End date for the report (YYYY-MM-DD)}
 
-  \item{metrics}{list of metrics to include in the report}
+  \item{metrics}{List of metrics to include in the report}
 
-  \item{elements}{list of elements to include in the
+  \item{elements}{List of elements to include in the
   report}
 
-  \item{top}{number of elements to include (top X) - only
+  \item{top}{Number of elements to include (top X) - only
   applies to the first element.}
 
-  \item{start}{start row if you do not want to start at #1
+  \item{start}{Start row if you do not want to start at #1
   - only applies to the first element.}
 
-  \item{selected}{list of specific items (of the first
+  \item{selected}{List of specific items (of the first
   element) to include in the report - e.g.
   c("www:home","www:search","www:about"). this only works
   for the first element (API limitation).}
 
-  \item{search}{list of keywords for the first specified
+  \item{search}{List of keywords for the first specified
   element - e.g. c("contact","about","shop"). search
   overrides anything specified using selected}
 
-  \item{search.type}{string specifying the search type:
+  \item{search.type}{String specifying the search type:
   'and', or, 'or' 'not' (defaults to 'or')}
 
-  \item{segment.id}{id of Adobe Analytics segment to
+  \item{segment.id}{Id of Adobe Analytics segment to
   retrieve the report for}
 
-  \item{segment.inline}{inline segment definition}
+  \item{segment.inline}{Inline segment definition}
 
   \item{data.current}{TRUE or FALSE - whether to include
   current data for reports that include today's date}
 
-  \item{expedite}{set to TRUE to expedite the processing of
+  \item{expedite}{Set to TRUE to expedite the processing of
   this report}
 
   \item{interval.seconds}{How long to wait between
@@ -55,12 +55,43 @@ QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   stopping}
 }
 \value{
-Flat data frame containing datetimes and metric values
+Data frame
 }
 \description{
-QueueRanked
+A QueueRanked report is a report that shows the ranking of
+values for one or more elements relative to a metric,
+aggregated over the time period selected.
 }
 \details{
-Helper function to run a Ranked Report
+The QueueRanked function returns a data frame equivalent to
+pulling a Ranked report in Adobe Reports & Analytics.
+Correlations & Sub-Relations are supported.
+
+Because of the Reporting API structure, this function first
+requests the report, then checks the reporting queue to see
+if the report is completed, and when the report returns as
+"done" pulls the report from the API. This checking process
+will occur up to the specified number of times (default
+120), with a delay between status checks (default 5
+seconds). If the report does not return as "done" after the
+number of tries have completed, the function will return an
+error message.
+
+Note: Because of the multiple argument types ("top" and
+"start" OR "selected"), keyword arguments are generally
+needed towards the end of the function call instead of just
+positional arguments.
+}
+\examples{
+\dontrun{
+
+ranked1 <- QueueRanked("your_report_suite",
+                       date.from = "2014-04-01",
+                       date.to = "2014-04-20",
+                       metrics = "pageviews",
+                       elements = c("sitesection", "page")
+                       )
+
+}
 }
 

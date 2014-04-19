@@ -1,38 +1,59 @@
-#' QueueTrended
+#' @details The QueueTrended report is analogous to pulling a "trended"
+#' report within Adobe Reports & Analytics, but without the limitation of
+#' only 5 elements as in the Adobe Reports & Analytics interface.
 #'
-#' Helper function to run a Trended Report
+#' Because of the Reporting API structure, this function first requests the
+#' report, then checks the reporting queue to see if the report is completed, 
+#' and when the report returns as "done" pulls the report from the API. This 
+#' checking process will occur up to the specified number of times (default 120),
+#' with a delay between status checks (default 5 seconds). If the report does not
+#' return as "done" after the number of tries have completed, the function will return 
+#' an error message.
+#' 
+#' Note: Because of the multiple argument type ("top" and "start" OR "selected"), 
+#' keyword arguments are generally needed towards the end of the function call 
+#' instead of just positional arguments.
+#'
+#' @description A QueueTrended report is a report where a single metric is 
+#' retrieved, broken down by an element such as page, eVar, prop, etc. and with
+#' a time component. Within the 'element' list, either the "Top X" number of
+#' elements can be received or you can specify the specific elements you are
+#' interested in (such as 3 specific page names).
 #' 
 #' @title Run a QueueTrended Report
 #'
-#' @param reportsuite.id report suite id
-#' @param date.from start date for the report (YYYY-MM-DD)
-#' @param date.to end date for the report (YYYY-MM-DD)
-#' @param metrics list of metrics to include in the report
-#' @param elements list of elements to include in the report
-#' @param top number of rows to return
-#' @param start start row if you do not want to start at #1
-#' @param selected list of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about")
-#' @param search list of keywords for the first specified element - e.g. c("contact","about","shop").
+#' @param reportsuite.id Report suite id
+#' @param date.from Start date for the report (YYYY-MM-DD)
+#' @param date.to End date for the report (YYYY-MM-DD)
+#' @param metrics List of metrics to include in the report
+#' @param elements List of elements to include in the report
+#' @param top Number of rows to return
+#' @param start Start row if you do not want to start at #1
+#' @param selected List of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about")
+#' @param search List of keywords for the first specified element - e.g. c("contact","about","shop").
 #' search overrides anything specified using selected
-#' @param search.type string specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
-#' @param date.granularity time granularity of the report (year/month/week/day/hour), default to 'day'
-#' @param segment.id id of Adobe Analytics segment to retrieve the report for
-#' @param segment.inline inline segment definition
-#' @param anomaly.detection  set to TRUE to include forecast data (only valid for day granularity with small date ranges)
+#' @param search.type String specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
+#' @param date.granularity Time granularity of the report (year/month/week/day/hour), default to 'day'
+#' @param segment.id Id of Adobe Analytics segment to retrieve the report for
+#' @param segment.inline Inline segment definition
+#' @param anomaly.detection Set to TRUE to include forecast data (only valid for day granularity with small date ranges)
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
-#' @param expedite set to TRUE to expedite the processing of this report
+#' @param expedite Set to TRUE to expedite the processing of this report
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
-#' @return Flat data frame containing datetimes and metric values
+#' @return Data frame
 #' 
 #' @examples
 #' \dontrun{
-#' report.data <- QueueTrended("your_report_suite", "2014-01-01", "2014-01-07", 
-#'                            c("visits","uniquevisitors","pageviews","event10"), 
-#'                            c("page","geoCountry","geoCity"))
+#' report.data <- QueueTrended("your_report_suite", 
+#'                             "2014-01-01",
+#'                             "2014-01-07", 
+#'                             c("visits","uniquevisitors","pageviews","event10"),
+#'                             c("page","geoCountry","geoCity")
+#'                             )
 #'}
 #' @export
 

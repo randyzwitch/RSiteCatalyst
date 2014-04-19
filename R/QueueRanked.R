@@ -1,32 +1,59 @@
-#' QueueRanked
+#' @details The QueueRanked function returns a data frame equivalent to pulling 
+#' a Ranked report in Adobe Reports & Analytics. Correlations & Sub-Relations are
+#' supported.
+#' 
+#' Because of the Reporting API structure, this function first requests the 
+#' report, then checks the reporting queue to see if the report is completed, and
+#' when the report returns as "done" pulls the report from the API. This checking 
+#' process will occur up to the specified number of times (default 120), with a
+#' delay between status checks (default 5 seconds). If the report does not return
+#' as "done" after the number of tries have completed, the function will return an
+#' error message.
+#' 
+#' Note: Because of the multiple argument types ("top" and "start" OR "selected"), 
+#' keyword arguments are generally needed towards the end of the function call instead
+#' of just positional arguments.
 #'
-#' Helper function to run a Ranked Report
+#' @description A QueueRanked report is a report that shows the ranking of values for 
+#' one or more elements relative to a metric, aggregated over the time period selected.
 #' 
 #' @title Run a Ranked Report
 #'
-#' @param reportsuite.id report suite id
-#' @param date.from start date for the report (YYYY-MM-DD)
-#' @param date.to end date for the report (YYYY-MM-DD)
-#' @param metrics list of metrics to include in the report
-#' @param elements list of elements to include in the report
-#' @param top number of elements to include (top X) - only applies to the first element.
-#' @param start start row if you do not want to start at #1 - only applies to the first element.
-#' @param selected list of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about").
+#' @param reportsuite.id Report suite id
+#' @param date.from Start date for the report (YYYY-MM-DD)
+#' @param date.to End date for the report (YYYY-MM-DD)
+#' @param metrics List of metrics to include in the report
+#' @param elements List of elements to include in the report
+#' @param top Number of elements to include (top X) - only applies to the first element.
+#' @param start Start row if you do not want to start at #1 - only applies to the first element.
+#' @param selected List of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about").
 #' this only works for the first element (API limitation).
-#' @param search list of keywords for the first specified element - e.g. c("contact","about","shop").
+#' @param search List of keywords for the first specified element - e.g. c("contact","about","shop").
 #' search overrides anything specified using selected
-#' @param search.type string specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
-#' @param segment.id id of Adobe Analytics segment to retrieve the report for
-#' @param segment.inline inline segment definition
+#' @param search.type String specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
+#' @param segment.id Id of Adobe Analytics segment to retrieve the report for
+#' @param segment.inline Inline segment definition
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
-#' @param expedite set to TRUE to expedite the processing of this report
+#' @param expedite Set to TRUE to expedite the processing of this report
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
 #'
 #' @importFrom jsonlite toJSON unbox
 #' @importFrom plyr rbind.fill
 #'
-#' @return Flat data frame containing datetimes and metric values
+#' @return Data frame
+#' 
+#' @examples
+#' \dontrun{
+#' 
+#' ranked1 <- QueueRanked("your_report_suite", 
+#'                        date.from = "2014-04-01", 
+#'                        date.to = "2014-04-20", 
+#'                        metrics = "pageviews", 
+#'                        elements = c("sitesection", "page") 
+#'                        )
+#' 
+#' }
 #'
 #' @export
 

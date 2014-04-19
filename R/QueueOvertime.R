@@ -1,25 +1,52 @@
-#' QueueOvertime
+#' @details Because of the Reporting API structure, this function first requests
+#' the report, then checks the reporting queue to see if the report is completed,
+#' and when the report returns as "done" pulls the report from the API. This checking process
+#' will occur up to the specified number of times (default 120), with a delay between
+#' status checks (default 5 seconds). If the report does not return as "done" after the 
+#' number of tries have completed, the function will return an error message.
 #'
-#' Helper function to run an OverTime Report
+#' @description A QueueOvertime report is a report where the only granularity allowed is time. This report allows for a single report suite, time granularity, 
+#' multiple metrics, and a single segment. It is similar to the "Key Metrics" report or a Custom Event report 
+#' within the Adobe Reports & Analytics interface.
 #' 
 #' @title Run an Overtime Report
 #'
-#' @param reportsuite.id report suite id
-#' @param date.from start date for the report (YYYY-MM-DD)
-#' @param date.to end date for the report (YYYY-MM-DD)
-#' @param metrics list of metrics to include in the report
-#' @param date.granularity time granularity of the report (year/month/week/day/hour), default to 'day'
-#' @param segment.id id of Adobe Analytics segment to retrieve the report for
-#' @param segment.inline inline segment definition
-#' @param anomaly.detection  set to TRUE to include forecast data (only valid for day granularity with small date ranges)
-#' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
-#' @param expedite set to TRUE to expedite the processing of this report
+#' @param reportsuite.id Report suite id
+#' @param date.from Start date for the report (YYYY-MM-DD)
+#' @param date.to End date for the report (YYYY-MM-DD)
+#' @param metrics List of metrics to include in the report
+#' @param date.granularity Time granularity of the report (year/month/week/day/hour), default to 'day'
+#' @param segment.id Id of Adobe Analytics segment to retrieve the report for
+#' @param segment.inline Inline segment definition
+#' @param anomaly.detection  Set to TRUE to include forecast data (only valid for day granularity with small date ranges)
+#' @param data.current TRUE or FALSE - Whether to include current data for reports that include today's date
+#' @param expedite Set to TRUE to expedite the processing of this report
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
-#' @return Flat data frame containing datetimes and metric values
+#' @return Data frame
+#' 
+#' @examples
+#' \dontrun{
+#' 
+#' overtime1 <- QueueOvertime("your_report_suite",
+#'                            date.from = "2014-04-01",
+#'                            date.to = "2014-04-20",
+#'                            metrics = c("pageviews", "visits", "bounces"),
+#'                            date.granularity = "day")
+#'                            
+#' overtime2 <- QueueOvertime("your_report_suite",
+#'                            date.from = "2014-04-01",
+#'                            date.to = "2014-04-20",
+#'                            metrics = c("pageviews", "visits", "bounces"),
+#'                            date.granularity = "day",
+#'                            segment.id = "Visit_Mobile",
+#'                            anomaly.detection = TRUE,
+#'                            interval.seconds = 10,
+#'                            max.attempts = 20)
+#' }
 #'
 #' @export
 

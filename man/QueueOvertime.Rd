@@ -8,30 +8,30 @@ QueueOvertime(reportsuite.id, date.from, date.to, metrics,
   interval.seconds = 5, max.attempts = 120)
 }
 \arguments{
-  \item{reportsuite.id}{report suite id}
+  \item{reportsuite.id}{Report suite id}
 
-  \item{date.from}{start date for the report (YYYY-MM-DD)}
+  \item{date.from}{Start date for the report (YYYY-MM-DD)}
 
-  \item{date.to}{end date for the report (YYYY-MM-DD)}
+  \item{date.to}{End date for the report (YYYY-MM-DD)}
 
-  \item{metrics}{list of metrics to include in the report}
+  \item{metrics}{List of metrics to include in the report}
 
-  \item{date.granularity}{time granularity of the report
+  \item{date.granularity}{Time granularity of the report
   (year/month/week/day/hour), default to 'day'}
 
-  \item{segment.id}{id of Adobe Analytics segment to
+  \item{segment.id}{Id of Adobe Analytics segment to
   retrieve the report for}
 
-  \item{segment.inline}{inline segment definition}
+  \item{segment.inline}{Inline segment definition}
 
-  \item{anomaly.detection}{set to TRUE to include forecast
+  \item{anomaly.detection}{Set to TRUE to include forecast
   data (only valid for day granularity with small date
   ranges)}
 
-  \item{data.current}{TRUE or FALSE - whether to include
+  \item{data.current}{TRUE or FALSE - Whether to include
   current data for reports that include today's date}
 
-  \item{expedite}{set to TRUE to expedite the processing of
+  \item{expedite}{Set to TRUE to expedite the processing of
   this report}
 
   \item{interval.seconds}{How long to wait between
@@ -41,12 +41,45 @@ QueueOvertime(reportsuite.id, date.from, date.to, metrics,
   stopping}
 }
 \value{
-Flat data frame containing datetimes and metric values
+Data frame
 }
 \description{
-QueueOvertime
+A QueueOvertime report is a report where the only
+granularity allowed is time. This report allows for a
+single report suite, time granularity, multiple metrics,
+and a single segment. It is similar to the "Key Metrics"
+report or a Custom Event report within the Adobe Reports &
+Analytics interface.
 }
 \details{
-Helper function to run an OverTime Report
+Because of the Reporting API structure, this function first
+requests the report, then checks the reporting queue to see
+if the report is completed, and when the report returns as
+"done" pulls the report from the API. This checking process
+will occur up to the specified number of times (default
+120), with a delay between status checks (default 5
+seconds). If the report does not return as "done" after the
+number of tries have completed, the function will return an
+error message.
+}
+\examples{
+\dontrun{
+
+overtime1 <- QueueOvertime("your_report_suite",
+                           date.from = "2014-04-01",
+                           date.to = "2014-04-20",
+                           metrics = c("pageviews", "visits", "bounces"),
+                           date.granularity = "day")
+
+overtime2 <- QueueOvertime("your_report_suite",
+                           date.from = "2014-04-01",
+                           date.to = "2014-04-20",
+                           metrics = c("pageviews", "visits", "bounces"),
+                           date.granularity = "day",
+                           segment.id = "Visit_Mobile",
+                           anomaly.detection = TRUE,
+                           interval.seconds = 10,
+                           max.attempts = 20)
+}
 }
 
