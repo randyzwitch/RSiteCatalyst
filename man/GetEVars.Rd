@@ -12,16 +12,18 @@ GetEvars(reportsuite.ids)
 List of valid evars
 }
 \description{
-GetEvars
+Get Commerce Variables (eVars) Associated with a Report
+Suite.
 }
 \details{
-Gets available report suite evars
+This function requires having a character vector with one
+or more valid Report Suites specified.
 }
 \examples{
 \dontrun{
-evars <- GetEvars("reportsuite"your-report-suite")
+evars <- GetEvars("your_report_suite")
 
-evars <- GetEvars(report_suites$rsid)
+evars2 <- GetEvars(report_suites$rsid)
 
 }
 }

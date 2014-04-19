@@ -5,17 +5,18 @@
 GetReportSuites()
 }
 \value{
-List of valid reportsuites
+Data frame
 }
 \description{
-GetReportSuites
+Get Report Suites Associated with a Specific User/Company
 }
 \details{
-Gets all available report suites for the company.
+Returns a data frame containing the Report Suite ID and
+Site Title
 }
 \examples{
 \dontrun{
-reportsuites <- GetReportSuites()
+report_suites <- GetReportSuites()
 }
 }
 

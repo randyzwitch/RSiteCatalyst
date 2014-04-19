@@ -1,25 +1,29 @@
-#' GetMetrics
+#' @details This function requires having a character vector with one or more valid Report Suites specified.
 #'
-#' Gets valid metrics for current user, valid with optionally specified existing metrics, elements and date granularity
+#' @description Gets valid metrics for current user, valid with optionally specified existing metrics, elements and date granularity
 #'
 #' @title Get Available Metrics within a Report Suite
 #' 
-#' @param reportsuite.ids single report suite id, or character vector of report suite ids
-#' @param metrics list of existing metrics you want to use in combination with an additional metric
-#' @param elements list of existing elements you want to use in combination with an additional metric
-#' @param date.granularity granularity that you want to combine with an additional metric
+#' @param reportsuite.ids Single report suite id, or character vector of report suite ids
+#' @param metrics List of existing metrics you want to use in combination with an additional metric
+#' @param elements List of existing elements you want to use in combination with an additional metric
+#' @param date.granularity Granularity that you want to combine with an additional metric
 #'
 #' @importFrom jsonlite toJSON unbox
 #' @importFrom plyr rbind.fill
 #'
-#' @return List of valid metrics
+#' @return Data frame of valid metrics
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' metrics.valid <- GetMetrics("your_report_suite",metrics=c('visitors','pageviews'),
-#' elements=c('page','geoCountry'),date.granularity='day')
+#' metrics.valid <- GetMetrics("your_report_suite",
+#'                             metrics=c('visitors','pageviews'),
+#'                             elements=c('page','geoCountry'),
+#'                             date.granularity='day')
+#'                             
+#' metrics <- GetMetrics(report_suites$rsid)
 #' }
 
 GetMetrics <- function(reportsuite.ids, metrics=c(), elements=c(), date.granularity='') {

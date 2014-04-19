@@ -5,23 +5,26 @@
 GetSegments(reportsuite.ids)
 }
 \arguments{
-  \item{reportsuite.ids}{report suite id (or list of report
+  \item{reportsuite.ids}{Report suite id (or list of report
   suite ids)}
 }
 \value{
-List of valid segments
+Data frame
 }
 \description{
-GetSegments
+Get a data frame of segments for the specified report
+suites. Useful to find segment IDs for use in reporting
+helper functions or JSON report definitions.
 }
 \details{
-Gets a list of segments for the specified report suites.
-Useful to find segment IDs for use in reporting helper
-functions or JSON report definitions.
+This function requires having a character vector with one
+or more valid Report Suites specified.
 }
 \examples{
 \dontrun{
-segments <- GetSegments(c("your_prod_report_suite","your_dev_reportsuite"))
+segments <- GetSegments("your_report_suite")
+
+segments2 <- GetSegments(report_suites$rsid)
 }
 }
 
