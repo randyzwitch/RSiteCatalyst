@@ -1,6 +1,12 @@
-#' JsonQueueReport
+#' @name JsonQueueReport
+#' 
+#' @title Create Queue Report from JSON
+#' 
+#' @details This is a function for advanced users, for the case where a user feels
+#' that submitting a JSON request would be easier than using one of the pre-defined
+#' functions from RSiteCatalyst
 #'
-#' Generic interface to validate, queue and retrieve a report from the API
+#' @description Generic interface to validate, queue and retrieve a report from the API
 #'
 #' @param report.description JSON report description
 #' @param interval.seconds How long to wait between attempts
@@ -9,7 +15,14 @@
 #' @importFrom jsonlite toJSON unbox
 #'
 #' @return Data frame
+#' 
+#' @examples
+#' \dontrun{
+#' 
+#' custom_report <- JsonQueueReport('valid Adobe Analytics API JSON string')
 #'
+#' }
+#' 
 #' @export
 #'
 

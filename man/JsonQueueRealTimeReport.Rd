@@ -1,6 +1,6 @@
 \name{JsonQueueRealTimeReport}
 \alias{JsonQueueRealTimeReport}
-\title{JsonQueueRealTimeReport}
+\title{Create Real-Time Report from JSON}
 \usage{
 JsonQueueRealTimeReport(report.description)
 }
@@ -13,5 +13,18 @@ Data frame
 \description{
 Generic interface to validate, queue and retrieve a
 realtime report from the API
+}
+\details{
+This is a function for advanced users, for the case where a
+user feels that submitting a JSON request would be easier
+than using one of the pre-defined functions from
+RSiteCatalyst
+}
+\examples{
+\dontrun{
+
+custom_report <- JsonQueueRealTimeReport('valid Adobe Analytics API JSON string')
+
+}
 }
 
