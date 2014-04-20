@@ -29,12 +29,19 @@ SCAuth(key, secret, company = "", token.file = "", auth.method = "legacy",
   \item{debug.mode}{set global debug mode}
 }
 \value{
-Global credentials list SC.Credentials
+Global credentials list 'SC.Credentials'
 }
 \description{
 SCAuth
 }
 \details{
 Authorise and store credentials for the Adobe Analytics API
+}
+\examples{
+\dontrun{
+#Legacy authentication
+SCAuth("key", "secret")
+
+}
 }
 
