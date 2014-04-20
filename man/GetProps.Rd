@@ -9,7 +9,7 @@ GetProps(reportsuite.ids)
   suite ids)}
 }
 \value{
-List of valid props
+Data frame
 }
 \description{
 Get Traffic Variables (props) Associated with a Report

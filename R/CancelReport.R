@@ -1,9 +1,10 @@
-#' CancelReport
+#' @details Returns either a console message that no reports are queued 
+#' or the reportID number that was cancelled
 #'
-#' Cancels the specified report
+#' @description Cancels a report in the Report Queue
 #'
 #' @title Cancel a Report in the Report Queue
-#' @param report.id id of the report that you want to cancel
+#' @param report.id Id of the report that you want to cancel
 #'
 #' @return Console message
 #'

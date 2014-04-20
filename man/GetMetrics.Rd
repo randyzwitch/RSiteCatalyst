@@ -19,7 +19,7 @@ GetMetrics(reportsuite.ids, metrics = c(), elements = c(),
   combine with an additional metric}
 }
 \value{
-Data frame of valid metrics
+Data frame
 }
 \description{
 Gets valid metrics for current user, valid with optionally

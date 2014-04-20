@@ -8,7 +8,7 @@
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
-#' @return Formatted data frame
+#' @return Data frame
 #'
 #' @export
 #'

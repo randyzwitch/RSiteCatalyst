@@ -8,7 +8,7 @@
 #' 
 #' @importFrom jsonlite toJSON
 #' @importFrom plyr rbind.fill
-#' @return List of valid evars
+#' @return Data frame
 #' 
 #' @examples
 #' \dontrun{

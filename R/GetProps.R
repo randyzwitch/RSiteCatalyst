@@ -10,7 +10,7 @@
 #' @importFrom jsonlite toJSON
 #' @importFrom plyr rbind.fill
 #'
-#' @return List of valid props
+#' @return Data frame
 #'
 #' @export
 #'

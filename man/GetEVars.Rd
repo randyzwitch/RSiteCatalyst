@@ -9,7 +9,7 @@ GetEvars(reportsuite.ids)
   suite ids)}
 }
 \value{
-List of valid evars
+Data frame
 }
 \description{
 Get Commerce Variables (eVars) Associated with a Report

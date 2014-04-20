@@ -19,7 +19,7 @@ GetElements(reportsuite.ids, metrics = c(), elements = c(),
   combine with an additional metric}
 }
 \value{
-Data frame of valid elements
+Data frame
 }
 \description{
 Get valid elements for a report suite for the current user.

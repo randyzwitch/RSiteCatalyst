@@ -11,7 +11,7 @@
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
-#' @return Data frame of valid elements
+#' @return Data frame
 #'
 #' @export
 #'

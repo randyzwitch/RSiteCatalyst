@@ -1,23 +1,44 @@
-#' QueueFallout
+#' @details Because of the Reporting API structure, this function first 
+#' requests the report, then checks the reporting queue to see if the report 
+#' is completed, and when the report returns as "done" pulls the report from the
+#' API. This checking process will occur up to the specified number of times 
+#' (default 120), with a delay between status checks (default 5 seconds). If the
+#' report does not return as "done" after the number of tries have completed, the
+#' function will return an error message.
 #'
-#' Helper function to run a QueueFallout Report
+#' @description A QueueFallout Report is a report that shows how visitors drop out 
+#' as part of a specified path.
 #' 
 #' @title Run a Fallout Report
 #'
-#' @param reportsuite.id report suite id
-#' @param date.from start date for the report (YYYY-MM-DD)
-#' @param date.to end date for the report (YYYY-MM-DD)
-#' @param metrics list of metrics to include in the report
-#' @param element single pathed element (usually 'page')
-#' @param checkpoints character vector of checkpoints in the fallout path (e.g. c("Home","Contact","Thank You"))
-#' @param segment.id id of Adobe Analytics segment to retrieve the report for
-#' @param expedite set to TRUE to expedite the processing of this report
+#' @param reportsuite.id Report suite id
+#' @param date.from Start date for the report (YYYY-MM-DD)
+#' @param date.to End date for the report (YYYY-MM-DD)
+#' @param metrics List of metrics to include in the report
+#' @param element Single pathed element (usually 'page')
+#' @param checkpoints Character vector of checkpoints in the fallout path (e.g. c("Home","Contact","Thank You"))
+#' @param segment.id Id of Adobe Analytics segment to retrieve the report for
+#' @param expedite Set to TRUE to expedite the processing of this report
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
-#' @return Flat data frame containing checkpoints and metrics for each step
+#' @return Data frame
+#' 
+#' @examples
+#' \dontrun{
+#' 
+#' falloutpattern <- c("Home Page","Contact Page","Login Page")
+#' queue_fallout_pages <- QueueFallout("your_report_suite", 
+#'                                     "2014-04-01", 
+#'                                     "2014-04-20", 
+#'                                     metric="pageviews", 
+#'                                     element="page", 
+#'                                     falloutpattern
+#'                                     )
+#' 
+#' }
 #'
 #' @export
 

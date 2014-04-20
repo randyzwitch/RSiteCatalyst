@@ -7,18 +7,18 @@ QueuePathing(reportsuite.id, date.from, date.to, metric, element, pattern,
   interval.seconds = 5, max.attempts = 120)
 }
 \arguments{
-  \item{reportsuite.id}{report suite id}
+  \item{reportsuite.id}{Report suite id}
 
-  \item{date.from}{start date for the report (YYYY-MM-DD)}
+  \item{date.from}{Start date for the report (YYYY-MM-DD)}
 
-  \item{date.to}{end date for the report (YYYY-MM-DD)}
+  \item{date.to}{End date for the report (YYYY-MM-DD)}
 
-  \item{metric}{single metric to include in the report
+  \item{metric}{Single metric to include in the report
   (usually 'pageviews')}
 
-  \item{element}{single pathed element (usually 'page')}
+  \item{element}{Single pathed element (usually 'page')}
 
-  \item{pattern}{character vector of items in the path (up
+  \item{pattern}{Character vector of items in the path (up
   to 3) use "::anything::" as a wildcard. For example
   c("Home","::anything::","::anything::") will return all
   paths that start with the home page,
@@ -27,14 +27,14 @@ QueuePathing(reportsuite.id, date.from, date.to, metric, element, pattern,
   c("::anything::","::anything::","Home") will return the
   two previous pages leading to the home page.}
 
-  \item{top}{number of rows to return (defaults to 1000)}
+  \item{top}{Number of rows to return (defaults to 1000)}
 
-  \item{start}{start row if you do not want to start at #1}
+  \item{start}{Start row if you do not want to start at #1}
 
-  \item{segment.id}{id of Adobe Analytics segment to
+  \item{segment.id}{Id of Adobe Analytics segment to
   retrieve the report for}
 
-  \item{expedite}{set to TRUE to expedite the processing of
+  \item{expedite}{Set to TRUE to expedite the processing of
   this report}
 
   \item{interval.seconds}{How long to wait between
@@ -44,13 +44,34 @@ QueuePathing(reportsuite.id, date.from, date.to, metric, element, pattern,
   stopping}
 }
 \value{
-Flat data frame containing checkpoints and metrics for each
-step
+Data frame
 }
 \description{
-QueuePathing
+A QueuePathing Report is a report that shows how often
+visitors go from Page A to Page B to Page C on site.
 }
 \details{
-Helper function to run a pathed Report
+Because of the Reporting API structure, this function first
+requests the report, then checks the reporting queue to see
+if the report is completed, and when the report returns as
+"done" pulls the report from the API. This checking process
+will occur up to the specified number of times (default
+120), with a delay between status checks (default 5
+seconds). If the report does not return as "done" after the
+number of tries have completed, the function will return an
+error message.
+}
+\examples{
+\dontrun{
+pathpattern <- c("Home Page","::anything::","::anything::","::anything::")
+queue_pathing_pages <- QueuePathing("your_report_suite",
+                                    "2014-04-01",
+                                    "2014-04-20",
+                                    metric="pageviews",
+                                    element="page",
+                                    pathpattern
+                                    )
+
+}
 }
 

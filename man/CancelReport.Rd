@@ -5,17 +5,18 @@
 CancelReport(report.id)
 }
 \arguments{
-  \item{report.id}{id of the report that you want to
+  \item{report.id}{Id of the report that you want to
   cancel}
 }
 \value{
 Console message
 }
 \description{
-CancelReport
+Cancels a report in the Report Queue
 }
 \details{
-Cancels the specified report
+Returns either a console message that no reports are queued
+or the reportID number that was cancelled
 }
 \examples{
 \dontrun{

@@ -15,7 +15,7 @@ JsonQueueReport(report.description, interval.seconds = 5,
   stopping}
 }
 \value{
-Formatted data frame
+Data frame
 }
 \description{
 Generic interface to validate, queue and retrieve a report

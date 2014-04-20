@@ -8,7 +8,7 @@ JsonQueueRealTimeReport(report.description)
   \item{report.description}{JSON report description}
 }
 \value{
-Formatted data frame
+Data frame
 }
 \description{
 Generic interface to validate, queue and retrieve a

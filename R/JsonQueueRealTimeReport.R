@@ -6,7 +6,7 @@
 #'
 #' @importFrom jsonlite toJSON
 #'
-#' @return Formatted data frame
+#' @return Data frame
 #'
 #' @export
 #'

@@ -9,7 +9,7 @@ ParseFallout(report.data)
   report data returned from the API}
 }
 \value{
-Formatted data frame
+Data frame
 }
 \description{
 Internal Function - Parses a fallout report returned from

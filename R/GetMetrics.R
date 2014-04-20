@@ -12,7 +12,7 @@
 #' @importFrom jsonlite toJSON unbox
 #' @importFrom plyr rbind.fill
 #'
-#' @return Data frame of valid metrics
+#' @return Data frame
 #'
 #' @export
 #'

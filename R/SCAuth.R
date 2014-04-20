@@ -14,6 +14,8 @@
 #'
 #' @importFrom httr oauth_app oauth_endpoint oauth2.0_token
 #' @importFrom stringr str_count str_split_fixed
+#' 
+#' @return Global credentials list SC.Credentials
 #'
 #' @export
 
