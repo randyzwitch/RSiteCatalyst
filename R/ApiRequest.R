@@ -1,6 +1,6 @@
 #' ApiRequest
 #'
-#' Internal function - Calls the API and gets valid evars for specified params
+#' Internal function - Calls the API and gets response for specified params
 #'
 #' @param report.description JSON report description
 #' @param func.name the name of the Adobe Analytics API function that we are calling
@@ -12,7 +12,7 @@
 #' @importFrom httr content add_headers POST
 #' @importFrom jsonlite toJSON fromJSON
 #'
-#' @return list of available evars
+#' @return json
 #'
 #' @family internal
 #' @keywords internal
@@ -73,7 +73,8 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
 
   # If we are in debug mode, save the output
   if(exists('SC.Debug')&&SC.Debug==TRUE) {
-    filename <- paste('PostRequest_',sub(':','-',Sys.time()),'.json',sep='')
+    #filename <- paste('PostRequest_',sub(':','-',Sys.time()),'.json',sep='')
+    filename <- paste('PostRequest_',as.numeric(Sys.time()),'.json',sep='')
     print(paste('DEBUG: saving output as',filename))
     sink(filename)
     cat(content(response,'text'))
