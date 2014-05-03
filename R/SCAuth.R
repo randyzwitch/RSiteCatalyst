@@ -100,10 +100,10 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
     } else {
       #Create SCCredentials object in Global Environment
       SC.Credentials <<- list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url,debug=debug.mode)
-      save(SC.Credentials,file="~/SC.Credentials")
+      #save(SC.Credentials,file="~/SC.Credentials")
       #Assign endpoint to 3rd position in credentials
       #print("Legacy Auth Stored: This method is deprecated. If possible, use OAUTH.")
-      print("Authentication Succeeded. Legacy Auth Stored")
+      print("Authentication Succeeded.)
     }
 
   }
