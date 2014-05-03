@@ -1,6 +1,6 @@
-#' ValidateReport
+#' BuildInnerBreakdownsRecursively
 #'
-#' Internal function - Calls the API and attempts to validate a report description.
+#' Internal function - Builds inner breakdowns from nested report structure
 #'
 #' @param parent.element element containing breakdown rows
 #' @param elements list of all elements included in the report
@@ -26,7 +26,7 @@ BuildInnerBreakdownsRecursively <- function(parent.element,elements,metrics,
   for(i in 1:nrow(parent.element)){
     
     working.element <- parent.element[i,"breakdown"][[1]]
-    context <- context[0:current.recursion.level-1]
+    context <- context[1:current.recursion.level-1]
     context <- append(context,parent.element[i,"name"])
     
     # check if we are at the lowest level, or if we need to continue deeper
@@ -35,7 +35,14 @@ BuildInnerBreakdownsRecursively <- function(parent.element,elements,metrics,
       
       # we need to go deeper, so we add this level to the context 
       # and call BuildInnerBreakdownsRecursively again
-      accumulator <- BuildInnerBreakdownsRecursively(working.element,elements,metrics,current.recursion.level+1,context,accumulator,date.range=date.range)
+      # we should not go deeper if we have a NULL breakdown
+      if(is.null(working.element)) {
+        if(exists('SC.Debug')&&SC.Debug==TRUE) {
+          print(paste0("DEBUG: Warning! NULL breakdown returned for ",context))
+        }
+      } else {
+        accumulator <- BuildInnerBreakdownsRecursively(working.element,elements,metrics,current.recursion.level+1,context,accumulator,date.range=date.range)
+      }
       
     } else {
       
@@ -50,16 +57,16 @@ BuildInnerBreakdownsRecursively <- function(parent.element,elements,metrics,
         names(forecasts.df) <- paste("forecast.",metrics,sep="")
         working.metrics <- cbind(working.metrics,forecasts.df)
       }
-
+      
       # convert all count columns to numeric
       for(i in 1:ncol(working.metrics)) {
         working.metrics[,i] <- as.numeric(working.metrics[,i])
       }
-
+      
       # build our list of elements
       outer.elements <- working.element$name
       names(outer.elements) <- "name"
-
+      
       # if we have a valid date range, apply it to all rows
       if(length(date.range)==2){
         working.elements.breakdown <- data.frame(matrix(ncol=length(elements)+2, nrow=length(outer.elements)))

@@ -106,17 +106,12 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
     }
 
     if(length(elements.formatted)>0) {
-      elements.formatted <- rbind(elements.formatted,working.element)
+      elements.formatted <- append(elements.formatted,list(working.element))
     } else {
-      elements.formatted <- working.element
+      elements.formatted <- list(working.element)
     }
   }
-
-  if(length(elements)==1) {
-    report.description$reportDescription$elements <- list(elements.formatted)
-  } else {
-    report.description$reportDescription$elements <- elements.formatted
-  }
+  report.description$reportDescription$elements <- elements.formatted
 
   report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 
