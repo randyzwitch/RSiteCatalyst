@@ -22,10 +22,10 @@ ApiRequest(body = "", func.name = "", interval.seconds = 2,
   attempt numbers to the console}
 }
 \value{
-list of available evars
+json
 }
 \description{
-Internal function - Calls the API and gets valid evars for
+Internal function - Calls the API and gets response for
 specified params
 }
 \seealso{

@@ -1,6 +1,6 @@
 \name{BuildInnerBreakdownsRecursively}
 \alias{BuildInnerBreakdownsRecursively}
-\title{ValidateReport}
+\title{BuildInnerBreakdownsRecursively}
 \usage{
 BuildInnerBreakdownsRecursively(parent.element, elements, metrics,
   current.recursion.level, context, accumulator = data.frame(),
@@ -34,8 +34,8 @@ BuildInnerBreakdownsRecursively(parent.element, elements, metrics,
 Flat data frame containing all key report data
 }
 \description{
-Internal function - Calls the API and attempts to validate
-a report description.
+Internal function - Builds inner breakdowns from nested
+report structure
 }
 \seealso{
 Other internal: \code{\link{ApiRequest}};
