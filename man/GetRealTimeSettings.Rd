@@ -1,0 +1,35 @@
+\name{GetRealTimeSettings}
+\alias{GetRealTimeSettings}
+\title{Get Current Settings for Real-Time Reports}
+\usage{
+GetRealTimeSettings(reportsuite.ids)
+}
+\arguments{
+  \item{reportsuite.ids}{Report Suite ID}
+}
+\value{
+Data Frame
+}
+\description{
+Get Current Settings for Real-Time Reports
+}
+\details{
+GetRealTimeSettings returns a Data Frame with the current
+set up of real-time reports within the Adobe Analytics
+Real-Time API.
+
+To change configuration settings, use
+SaveRealTimeConfiguration function.
+}
+\examples{
+\dontrun{
+
+  GetRealTimeSettings("your_report_suite")
+
+   }
+}
+\seealso{
+\code{\link{SaveRealTimeConfiguration}} \cr
+}
+\keyword{GetRealTimeSettings}
+
