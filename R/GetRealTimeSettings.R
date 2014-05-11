@@ -10,7 +10,7 @@
 #' 
 #' @param reportsuite.ids Report Suite ID
 #' @return Data Frame
-#' @seealso \code{\link{SaveRealTimeConfiguration}} \cr
+#' @seealso \code{\link{SaveRealTimeSettings}} \cr
 #' @keywords GetRealTimeSettings
 #' @examples
 #' 
@@ -26,7 +26,6 @@ GetRealTimeSettings<- function (reportsuite.ids) {
   
   #API request
   request.body <- toJSON(list(rsid=unbox(reportsuite.ids)))
-  #request.body <- sprintf('{"rsid":"%s"}', reportsuite.ids)
   results <- ApiRequest(body=request.body,func.name="ReportSuite.GetRealTimeSettings")
   
   #Test if there is a non-zero set of results

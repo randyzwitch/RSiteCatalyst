@@ -7,6 +7,7 @@
 #' @param interval.seconds Time to wait between request attempts (defaults to 2 seconds)
 #' @param max.attempts Max number of attempts to make the request (defaults to 1, this is only increased for GetReport)
 #' @param print.attempts if set to TRUE, this will print attempt numbers to the console
+#' @param skip.queue If set to TRUE, return content instead of parsing via jsonlite
 #' 
 #'
 #' @importFrom httr content add_headers POST
@@ -17,7 +18,7 @@
 #' @family internal
 #' @keywords internal
 
-ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,print.attempts=FALSE) {
+ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,print.attempts=FALSE,skip.queue=FALSE) {
   
   #Set debug flag from global credentials
   SC.Debug <- SC.Credentials$debug
@@ -47,6 +48,14 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
     } else if(SC.Credentials$auth.method=='legacy') {
       response <- POST(url, config=add_headers('',.headers=BuildHeader()), body=body)
     }
+    
+    #RZ: This is a hack for realtime; Adobe realtime API returns 'true' for save method
+    #jsonlite from within httr content function doesn't like this
+    
+    if(skip.queue == TRUE){
+      return(response) 
+    }
+    
     if(response$status==200 || response$status==400) {
       # we have a valid response or a bad request error
       response.content <- fromJSON(content(response,'text'))

@@ -29,7 +29,7 @@ SaveRealTimeConfiguration function.
    }
 }
 \seealso{
-\code{\link{SaveRealTimeConfiguration}} \cr
+\code{\link{SaveRealTimeSettings}} \cr
 }
 \keyword{GetRealTimeSettings}
 

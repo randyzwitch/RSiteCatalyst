@@ -3,7 +3,7 @@
 \title{ApiRequest}
 \usage{
 ApiRequest(body = "", func.name = "", interval.seconds = 2,
-  max.attempts = 1, print.attempts = FALSE)
+  max.attempts = 1, print.attempts = FALSE, skip.queue = FALSE)
 }
 \arguments{
   \item{report.description}{JSON report description}
@@ -20,6 +20,9 @@ ApiRequest(body = "", func.name = "", interval.seconds = 2,
 
   \item{print.attempts}{if set to TRUE, this will print
   attempt numbers to the console}
+
+  \item{skip.queue}{If set to TRUE, return content instead
+  of parsing via jsonlite}
 }
 \value{
 json
