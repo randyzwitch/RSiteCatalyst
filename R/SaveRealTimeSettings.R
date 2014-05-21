@@ -8,7 +8,12 @@
 #' SaveRealTimeSettings should be called each time you want to modify the
 #' structure of your real-time reports. If you are unsure of your current setup
 #' of your real-time reports, use GetRealTimeSettings to find out your
-#' current setup.
+#' current setup. 
+#' 
+#' WARNING: This function allows you to change the settings in your Adobe 
+#' Analytics UI for all users, so be sure this is what you want to do. Additionally,
+#' submitting this function with only one report will mean other reports are deleted,
+#' you're NOT just changing a single report.
 #' 
 #' Changes can take up to 15 minutes to be reflected.
 #' 
@@ -35,10 +40,23 @@ SaveRealTimeSettings <- function (reportsuite.ids="", report1=list(), report2 = 
     stop("report1 must be specified")
   }
   
+  #Create list of reports
+  reports <- list(report1)
+  
+  #If report2 not blank, add it to list. List can only be length 1 at this point
+  if(length(report2) > 0){
+    reports[2] <- report2
+  }
+  
+  #If report3 not blank, add it to list. Need to determine length, since report2 might not have been
+  #populated
+  if(length(report3) > 0){
+    reports[length(reports) + 1] <- report3
+  }
   
   
   #Convert to JSON
-  request.body <- toJSON(list(real_time_settings=list(report1, report2, report3), rsid_list=reportsuite.ids))
+  request.body <- toJSON(list(real_time_settings=reports), rsid_list=reportsuite.ids)
 
   #skip.queue parameter returns raw response
   results <- ApiRequest(body=request.body,func.name="ReportSuite.SaveRealTimeSettings", skip.queue=TRUE)
