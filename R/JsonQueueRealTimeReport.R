@@ -25,11 +25,38 @@
 
 JsonQueueRealTimeReport <- function(report.description) {
 
-  if(!ValidateReport(report.description)) {
-    stop("ERROR: Invalid report description.")
-  }
+#   if(!ValidateReport(report.description)) {
+#     stop("ERROR: Invalid report description.")
+#   }
   
-  report <- ApiRequest(body=report.description,func.name="Report.GetRealTimeReport")
+  #Document that relative time being used
+  #http://www.php.net/manual/en/datetime.formats.relative.php
+  
+  reportsuite.ids <- "zwitchdev"
+  metrics <- "instances"
+  date.granularity <- "7"
+  date.from <- "6 hours ago"
+  date.to <- "2 hours ago"
+  
+  #elements <- c("geocountry", "prop2")
+  
+  
+  #Make container for report description
+  rd <- list() #empty container
+  rd$source <- unbox("realtime") #hardcoded, requirement for API call
+  rd$reportSuiteID <- unbox(reportsuite.ids) #report suite
+  rd$metrics <- list(list(id=unbox(metrics))) #metric specified during Save
+  rd$dateGranularity <- unbox(sprintf("minute:%s", date.granularity))
+  rd$dateFrom <- unbox(date.from)
+  rd$dateTo <- unbox(date.to)
+  
+  
+  
+  
+  #Create JSON string
+  report.description <- toJSON(list(reportDescription = rd))
+  
+  report <- ApiRequest(body=report.description,func.name="Report.Run")
 
   return(report)
 
