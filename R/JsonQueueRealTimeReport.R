@@ -37,9 +37,11 @@ JsonQueueRealTimeReport <- function(report.description) {
   date.granularity <- "7"
   date.from <- "6 hours ago"
   date.to <- "2 hours ago"
-  
-  #elements <- c("geocountry", "prop2")
-  
+  elements <- c("geocountry")
+  sort.algorithm <- "mostpopular"
+  floor.sensitivity <- .25
+  first.rank.period <- 0
+  algorithm.argument <- "linear"
   
   #Make container for report description
   rd <- list() #empty container
@@ -49,15 +51,22 @@ JsonQueueRealTimeReport <- function(report.description) {
   rd$dateGranularity <- unbox(sprintf("minute:%s", date.granularity))
   rd$dateFrom <- unbox(date.from)
   rd$dateTo <- unbox(date.to)
+  rd$sortMethod <- unbox(sprintf("%s:%s:%s:%s",sort.algorithm, floor.sensitivity, first.rank.period, algorithm.argument)) 
   
-  
-  
+  #Needs improvement: this only works for single element
+  #Doesn't incorporate everythingElse argument either
+  #"elements":[{"id":"product","everythingElse": true}]
+  rd$elements <- list(list(id=unbox(elements)))
+    
+    
   
   #Create JSON string
   report.description <- toJSON(list(reportDescription = rd))
   
   report <- ApiRequest(body=report.description,func.name="Report.Run")
-
+  
+  #Can I just return report$report$data directly?
+  #Single element returns a data frame where the breakdown column in a nested list
   return(report)
 
 }
