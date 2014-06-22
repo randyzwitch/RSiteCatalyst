@@ -42,6 +42,7 @@ JsonQueueRealTimeReport <- function(report.description) {
   floor.sensitivity <- .25
   first.rank.period <- 0
   algorithm.argument <- "linear"
+  everything.else <- TRUE
   
   #Make container for report description
   rd <- list() #empty container
@@ -52,16 +53,10 @@ JsonQueueRealTimeReport <- function(report.description) {
   rd$dateFrom <- unbox(date.from)
   rd$dateTo <- unbox(date.to)
   rd$sortMethod <- unbox(sprintf("%s:%s:%s:%s",sort.algorithm, floor.sensitivity, first.rank.period, algorithm.argument)) 
+  rd$elements <- lapply(elements, function (x) list(id=unbox(x), everythingElse=unbox(everything.else)))
   
-  #Needs improvement: this only works for single element
-  #Doesn't incorporate everythingElse argument either
-  #"elements":[{"id":"product","everythingElse": true}]
-  rd$elements <- list(list(id=unbox(elements)))
-    
-    
-  
-  #Create JSON string
-  report.description <- toJSON(list(reportDescription = rd))
+  #Create report description as JSON string
+  report.description <- toJSON(list(reportDescription = rd), pretty=TRUE)
   
   report <- ApiRequest(body=report.description,func.name="Report.Run")
   
