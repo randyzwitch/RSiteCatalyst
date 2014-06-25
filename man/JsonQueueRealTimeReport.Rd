@@ -15,9 +15,7 @@ Data frame
 Generic interface to validate, queue and retrieve a realtime report from the API
 }
 \details{
-This is a function for advanced users, for the case where a user feels
-that submitting a JSON request would be easier than using one of the pre-defined
-functions from RSiteCatalyst
+Used in GetRealTimeReport
 }
 \examples{
 \dontrun{
@@ -26,4 +24,15 @@ custom_report <- JsonQueueRealTimeReport('valid Adobe Analytics API JSON string'
 
 }
 }
+\seealso{
+Other internal: \code{\link{ApiRequest}};
+  \code{\link{BuildHeader}};
+  \code{\link{BuildInnerBreakdownsRecursively}};
+  \code{\link{GetEndpoint}}; \code{\link{GetUsageLog}};
+  \code{\link{JsonQueueReport}};
+  \code{\link{ParseFallout}}; \code{\link{ParseOvertime}};
+  \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
+  \code{\link{ParseTrended}}
+}
+\keyword{internal}
 
