@@ -18,7 +18,7 @@
 #' @param algorithm.argument Ranking algorithm. Defaults to "linear"
 #' @param everything.else Provide counts for elements not returned as 'top'
 #'
-#' @importFrom jsonlite toJSON
+#' @importFrom plyr rename
 #'
 #' @return Data frame
 #' 
@@ -60,9 +60,27 @@ GetRealTimeReport <- function(reportsuite.ids, metrics, elements=c(), date.granu
   
   #Return raw data - Still need parser for elements > 0
   if(length(elements) == 0) {
+    
     df <- report_raw$report$data
-    names(df) <- c("name", "year", "month", "day", "hour", "minute", report_raw$report$metrics$id)
+    df <- rename(df, replace=c("counts" = report_raw$report$metrics$id))
     return(df)
+    
+  } else if(length(elements) == 1){
+    
+    df <- report_raw$report$data
+    breakdown_list <- df$breakdown
+    df$breakdown <- NULL
+    
+    parsed_df <- data.frame()
+    for(i in 1:nrow(df)){
+      right_df <-  breakdown_list[[i]]
+      right_df <- rename(right_df, replace=c("name" = report_raw$report$elements$id[2]))
+      temp <- cbind(df[i,],right_df, row.names = NULL)
+      parsed_df <- rbind(parsed_df, temp)
+    }
+    parsed_df <- rename(parsed_df, replace=c("counts" = report_raw$report$metrics$id))
+    return(parsed_df)
+    
   } else{
     return(report_raw$report$data)
   }
