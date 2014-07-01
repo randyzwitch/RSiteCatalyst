@@ -13,16 +13,16 @@ BuildRealTimeReportStructure(report.name = "", metric = "",
 
 \item{elements}{Breakdowns for Real-Time Report}
 
-\item{min.granularity}{min.granularity}
+\item{min.granularity}{Minimum Granularity for Report. Defaults to 1 minute.}
 
-\item{ui.report}{Show report in Adobe Analytics interface}
+\item{ui.report}{Show report in Adobe Analytics web interface}
 }
 \value{
 List
 }
 \description{
-Selects the metrics and elements (dimensions) on which you want real time
-reports enabled. Use individual reports as arguments in SaveRealTimeSettings
+Selects the metrics and elements (dimensions) on which you want Real-Time
+reports enabled. Use the returned list from this function as argument(s) in SaveRealTimeSettings.
 }
 \examples{
 \dontrun{

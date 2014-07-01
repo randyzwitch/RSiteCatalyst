@@ -7,10 +7,10 @@ BuildClassificationValueSegment(element, search.keywords, classification = "",
   search.type = "OR")
 }
 \arguments{
-\item{element}{List of elements on which to vase the segment}
+\item{element}{List of elements on which to base the segment}
 
-\item{search.keywords}{List of search keyword vectorsfor each element
-(this can use ^ to pin to start, and $ to pin to end, or both to specify exact match)}
+\item{search.keywords}{List of search keyword vectors for each element
+(Use ^ to pin to start and $ to pin to end, or both to specify exact match)}
 
 \item{classification}{(optional) Classification breakdown name for the element (defaults to the element name)}
 
@@ -20,10 +20,10 @@ BuildClassificationValueSegment(element, search.keywords, classification = "",
 Segment definition for use with Queue* functions
 }
 \description{
-Build a Classification Value Segment
+Function to build a classification value segment for use in segmenting reports.
 }
 \details{
-Helper function to build a classification value segment for use with other reports.
+Function to build a classification value segment for use in segmenting reports.
 
 Multiple segments can be combined in a list.
 Note that search can only be applied to a breakdown classification and not an element value.
