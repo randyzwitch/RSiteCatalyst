@@ -13,7 +13,6 @@ Data frame
 }
 \description{
 Get Traffic Variables (props) Associated with a Report Suite(s).
-Useful to audit or document a report suite or company in Adobe Analytics.
 }
 \details{
 This function requires having a character vector with one or more valid Report Suites specified.
