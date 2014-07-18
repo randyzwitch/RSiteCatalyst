@@ -1,7 +1,7 @@
 #' @description Get valid elements for a report suite for the current user. 
 #' This list is restricted by optionally specified existing elements, existing metrics and date granularity.
 #' 
-#' @details This function requires having a character vector with one or more valid Report Suites specified.
+#' @details This function requires a character vector with one or more valid Report Suites specified.
 #'
 #' @title Get Valid Elements for a Report Suite
 #' @param reportsuite.ids Single report suite id, or character vector of report suite ids

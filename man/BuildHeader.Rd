@@ -15,6 +15,8 @@ Internal function - Build Header for REST API call. This is deprecated, we shoul
 Other internal: \code{\link{ApiRequest}};
   \code{\link{BuildInnerBreakdownsRecursively}};
   \code{\link{GetEndpoint}}; \code{\link{GetUsageLog}};
+  \code{\link{JsonQueueRealTimeReport}};
+  \code{\link{JsonQueueReport}};
   \code{\link{ParseFallout}}; \code{\link{ParseOvertime}};
   \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
   \code{\link{ParseTrended}}

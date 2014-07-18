@@ -34,6 +34,11 @@ Analytics UI for all users, so be sure this is what you want to do. Additionally
 submitting this function with only one report will mean other reports are deleted,
 you're NOT just changing a single report.
 
+NOTE: If the ui_report parameter is set to false, you must save at least one
+element and one metric or the configuration will be invalid, even though an
+error does not occur. If the ui_report parameter is set to true, you must
+save three elements and one metric or you will receive an error.
+
 Changes can take up to 15 minutes to be reflected.
 }
 \examples{

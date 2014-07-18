@@ -1,15 +1,16 @@
 #' @name BuildClassificationValueSegment
 #'
-#' @details Helper function to build a classification value segment for use with other reports.
+#' @details Function to build a classification value segment for use in segmenting reports.
 #' 
 #' Multiple segments can be combined in a list.
 #' Note that search can only be applied to a breakdown classification and not an element value.
 #'
 #' @title Build a Classification Value Segment
+#' @description Function to build a classification value segment for use in segmenting reports. 
 #' 
-#' @param element List of elements on which to vase the segment
-#' @param search.keywords List of search keyword vectorsfor each element 
-#' (this can use ^ to pin to start, and $ to pin to end, or both to specify exact match)
+#' @param element List of elements on which to base the segment
+#' @param search.keywords List of search keyword vectors for each element 
+#' (Use ^ to pin to start and $ to pin to end, or both to specify exact match)
 #' @param classification (optional) Classification breakdown name for the element (defaults to the element name)
 #' @param search.type How to combine the keywords list. This defaults to 'OR' if it is not specified.
 #'

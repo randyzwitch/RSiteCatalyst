@@ -23,7 +23,7 @@ Get valid elements for a report suite for the current user.
 This list is restricted by optionally specified existing elements, existing metrics and date granularity.
 }
 \details{
-This function requires having a character vector with one or more valid Report Suites specified.
+This function requires a character vector with one or more valid Report Suites specified.
 }
 \examples{
 \dontrun{
