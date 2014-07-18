@@ -2,9 +2,14 @@
 #' 
 #' @title Get Real-Time report
 #'
-#' @description Fill in later
+#' @description Function to access the Adobe Analytics Real-Time API v1.4. This API
+#' provides the ability for reporting up to the most recent minute. This API is best
+#' used at 15-30 second intervals (or longer).
 #' 
-#' @details Fill in later
+#' @details The Real-Time API uses a concept of "relative dates". To get a feeling for
+#' what's possible for submitting to date.from and date.to parameters, see link at:
+#' 
+#' http://php.net/manual/en/datetime.formats.relative.php
 #' 
 #' @param reportsuite.ids Report Suite
 #' @param metrics Report metric
@@ -38,6 +43,11 @@ GetRealTimeReport <- function(reportsuite.ids, metrics, elements=c(), date.granu
                               floor.sensitivity=.25, first.rank.period=0, 
                               algorithm.argument="linear", everything.else=TRUE){
   
+  #Temporary hopefully.
+  if(length(elements > 1)){
+    stop("RSiteCatalyst currently only supports real-time reporting with zero or 1 element")
+  }
+  
   #Make container for report description
   rd <- list() #empty container
   rd$source <- unbox("realtime") #hardcoded, requirement for API call
@@ -58,7 +68,6 @@ GetRealTimeReport <- function(reportsuite.ids, metrics, elements=c(), date.granu
   #Make API call, get response immediately
   report_raw <- JsonQueueRealTimeReport(report.description)
   
-  #Return raw data - Still need parser for elements > 0
   if(length(elements) == 0) {
     
     df <- report_raw$report$data

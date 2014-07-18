@@ -36,10 +36,15 @@ GetRealTimeReport(reportsuite.ids, metrics, elements = c(),
 Data frame
 }
 \description{
-Fill in later
+Function to access the Adobe Analytics Real-Time API v1.4. This API
+provides the ability for reporting up to the most recent minute. This API is best
+used at 15-30 second intervals (or longer).
 }
 \details{
-Fill in later
+The Real-Time API uses a concept of "relative dates". To get a feeling for
+what's possible for submitting to date.from and date.to parameters, see link at:
+
+http://php.net/manual/en/datetime.formats.relative.php
 }
 \examples{
 \dontrun{
