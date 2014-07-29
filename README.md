@@ -12,7 +12,7 @@ RSiteCatalyst v1.4 is in development and is not yet on CRAN. You will need to in
 ```R
 install.packages("devtools")
 library(devtools)
-install_github("RSiteCatalyst", "randyzwitch", ref="version_1_4")
+install_github("RSiteCatalyst", "randyzwitch", ref="master")
 
 library(RSiteCatalyst)
 ```
