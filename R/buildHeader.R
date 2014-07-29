@@ -1,20 +1,40 @@
-#Build Header for REST API call
+#' BuildHeader
+#'
+#' Internal function - Build Header for REST API call. This is deprecated, we should now be using OAUTH.
+#'
+#' @importFrom digest digest
+#' @importFrom base64enc base64encode
+#'
+#' @return Header string for the old API auth method.
+#'
+#' @family internal
+#' @keywords internal
 
-buildHeader <- function() {
+BuildHeader <- function() {
   
-#Create nonce to avoid MITM attack
+  #Create nonce
   nonce <- as.character(as.numeric(Sys.time()))
-
-#Created timestamp
-  created_date <- format(Sys.time(), "%Y-%m-%dT%H:%M:%SZ")
-
-#Concatentate nonce, timestamp, shared secret, then sha1 then base64
-  nonce_create_secret <- paste(nonce, created_date, SCCredentials[2], sep="")
-  sha_object <- digest(nonce_create_secret, algo="sha1", serialize=FALSE)
-  password_digest <- base64encode(charToRaw(sha_object))
+  #Create timestamp
+  created.date <- format(as.POSIXlt(Sys.time(), "GMT"), "%Y-%m-%dT%H:%M:%SZ")
+  #Concatentate nonce, timestamp, shared secret, then sha1 then base64
+  nonce.create.secret <- paste(nonce, created.date, SC.Credentials$secret, sep="")
+  sha.object <- digest(nonce.create.secret, algo="sha1", serialize=FALSE)
+  password.digest <- base64encode(charToRaw(sha.object))
   
+<<<<<<< HEAD
+  #Build & Return X-WSSE Header 
+  headers <- c('X-WSSE'=paste0('UsernameToken Username="',SC.Credentials$key,'", ',
+                               'PasswordDigest="',password.digest,'", ',
+                               'Nonce="',nonce,'", ',
+                               'Created="',created.date,'"')
+              )
+  return(headers)
+  
+}
+=======
 
 #Build & Return Header 
  return(paste('UsernameToken Username=\"',SCCredentials[1], '\"', ',', ' PasswordDigest=\"',password_digest, '\"', ',', ' Nonce=\"', nonce, '\"', ',', ' Created=\"', created_date, '\"', sep=""))
 
 }
+>>>>>>> master

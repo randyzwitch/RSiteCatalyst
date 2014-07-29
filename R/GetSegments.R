@@ -1,3 +1,29 @@
+<<<<<<< HEAD
+#' @details This function requires having a character vector with one or more valid Report Suites specified.
+#'
+#' @description Get a data frame of segments for the specified report suites. 
+#' Useful to find segment IDs for use in reporting helper functions or JSON report definitions.
+#' 
+#' @title Get Segments Defined within a Report Suite
+#' 
+#' @param reportsuite.ids Report suite id (or list of report suite ids)
+#'
+#' @importFrom jsonlite toJSON
+#' @importFrom plyr rbind.fill
+#'
+#' @return Data frame
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' segments <- GetSegments("your_report_suite")
+#' 
+#' segments2 <- GetSegments(report_suites$rsid)
+#' }
+
+GetSegments <- function(reportsuite.ids) {
+=======
 #GetSegments- Get segments for a single or multiple report suites
 #This one could use minor cleanup
 
@@ -49,31 +75,25 @@ results <- fromJSON(str_replace_all(content(json, as="text"), "null", 0))
 temp <- data.frame()
 #Loop over report suite level 
 for(report_suite in 1:length(results)){
+>>>>>>> master
   
-  rsid_name <- results[[report_suite]]["rsid"]
+  request.body <- c()
+  request.body$rsid_list <- reportsuite.ids
   
-  #If to check if there are segments in a report suite
-  if(nrow(ldply(results[[report_suite]]$sc_segments, quickdf)) > 0) {
-  #Create dataframe for each suite based on report suite name with suffix _eVars
-  temp <- rbind.fill(temp, cbind(rsid=rsid_name, ldply(results[[report_suite]]$sc_segments, quickdf)))
+  valid.segments <- ApiRequest(body=toJSON(request.body),func.name="ReportSuite.GetSegments")
+
+  segments.formatted <- data.frame()
+  for (i in 1:length(valid.segments$rsid) ) {
+    if(nrow(valid.segments$segments[[i]])>0) {
+      valid.segments$segments[[i]]$report_suite <- valid.segments$rsid[[i]]
+      if(nrow(segments.formatted)==0) {
+        segments.formatted <- valid.segments$segments[[i]]
+      } else {
+        segments.formatted <- rbind.fill(segments.formatted,valid.segments$segments[[i]])
+      }
+    }
   }
-  
-  } #Ending bracket for report suite loop
 
-return(temp)
-} #Ending bracket for function
+  return(segments.formatted)
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
+}

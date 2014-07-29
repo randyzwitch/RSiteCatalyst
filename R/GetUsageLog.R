@@ -1,3 +1,40 @@
+<<<<<<< HEAD
+#' GetUsageLog
+#'
+#' Gets the Adobe Analytics usage log for all users within the specified date range.
+#' 
+#' @title Get Admin Actions, Logins, and Reports Accessed
+#'
+#' @param date.from Log start date (YYYY-MM-DD)
+#' @param date.to Log end date (YYYY-MM-DD)
+#' @param localtime Whether to change datetimes from UTC to local time
+#'
+#' @importFrom jsonlite toJSON unbox
+#' @importFrom plyr rename
+#'
+#' @return data frame with: datetime, login, event_num, event_type, ip_address, report_suite, event_details
+#'
+#' @family internal
+#' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#' usagelog <- GetUsageLog("2014-01-01","2014-01-31")
+#' }
+
+GetUsageLog <- function(date.from=as.character(Sys.Date()-1),date.to=as.character(Sys.Date()),localtime=FALSE) {
+
+  request.body <- c()
+  request.body$date_from <- unbox(date.from)
+  request.body$date_to <- unbox(date.to)
+
+  usagelog <- ApiRequest(body=toJSON(request.body),func.name="Logs.GetUsageLog")
+
+  if(localtime==TRUE) {
+    usagelog$timestamp <- as.POSIXlt(as.numeric(usagelog$timestamp), origin="1970-01-01")
+  } else {
+    usagelog$timestamp <- as.POSIXlt(as.numeric(usagelog$timestamp), origin="1970-01-01", tz="UTC")
+=======
 #GetUsageLog - By report suite, get all user actions for a period of time
 
   
@@ -58,14 +95,10 @@ if(length(results) > 0) {
   #Convert to local time if flag set to TRUE
   if(localtime) {
   temp$timestamp <- as.POSIXct(as.numeric(temp$timestamp), origin="1970-01-01")
+>>>>>>> master
   }
-  
-return(temp)
+  usagelog <- rename(usagelog, c("timestamp"="datetime"))
 
-} else {
-  warning("There are no results for the timeperiod selected")
-}
-
+  return(usagelog)
 
 }
-
