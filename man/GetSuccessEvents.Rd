@@ -3,7 +3,6 @@
 \alias{GetSuccessEvents}
 \title{Get Success Events Associated with a Report Suite}
 \usage{
-<<<<<<< HEAD
 GetSuccessEvents(reportsuite.ids)
 }
 \arguments{
@@ -26,31 +25,4 @@ events <- GetSuccessEvents("your_report_suite")
 events2 <- GetSuccessEvents(report_suites$rsid)
 }
 }
-=======
-GetSuccessEvents(report_suites)
-}
-\arguments{
-  \item{report_suites}{Character vector containing one or
-  more valid Report Suite names}
-}
-\value{
-Data Frame
-}
-\description{
-Get Success Events associated with one or more Report
-Suites.
-}
-\details{
-This function requires having a character vector with one
-or more valid Report Suites specified.
-}
-\examples{
-\dontrun{
-
-    GetSuccessEvents("keystonejowanza")
-    GetSuccessEvents(c("keystonejowanza", "keystonerandy", "keystonetraining"))
-    }
-}
-\keyword{events}
->>>>>>> master
 

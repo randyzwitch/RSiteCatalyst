@@ -9,15 +9,9 @@ RSiteCatalyst.Rproj
 *.csv
 .DS_Store
 local_code.R
-<<<<<<< HEAD
 .Rproj.user
 tests.R
 *.json
 *.Rda
 tests_v1.3.R
 
-=======
-tests.R
-GetClassifications.R
-.Rapp.history
->>>>>>> master

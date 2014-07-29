@@ -6,17 +6,12 @@
 GetReportSuites()
 }
 \value{
-<<<<<<< HEAD
 Data frame
-=======
-Data Frame
->>>>>>> master
 }
 \description{
 Get Report Suites Associated with a Specific User/Company
 }
 \details{
-<<<<<<< HEAD
 Returns a data frame containing the Report Suite ID and Site Title
 }
 \examples{
@@ -24,16 +19,4 @@ Returns a data frame containing the Report Suite ID and Site Title
 report_suites <- GetReportSuites()
 }
 }
-=======
-Returns a data frame containing the Report Suite ID and
-Site Title
-}
-\examples{
-\dontrun{
-
-    GetReportSuites()
-    }
-}
-\keyword{suite}
->>>>>>> master
 

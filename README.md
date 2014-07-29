@@ -9,49 +9,15 @@ Once finalized, full documentation will be created and posted at the following l
 ## Installation
 RSiteCatalyst v1.4 is in development and is not yet on CRAN. You will need to install directly from GitHub.
 
-<<<<<<< HEAD
 ```R
 install.packages("devtools")
 library(devtools)
 install_github("RSiteCatalyst", "randyzwitch", ref="version_1_4")
-=======
-	R 2.15.3
-	digest: 0.6.3
-	base64enc: 0.1-1
-	httr: 0.2
-	rjson: 0.2.12
-	plyr: 1.8
-	stringr: 0.6.2
->>>>>>> master
 
 library(RSiteCatalyst)
 ```
 
-<<<<<<< HEAD
 You may also need to install other packages that _RSiteCatalyst v1.4_ depends on.
-=======
-2014-04-12: Version 1.3.3 submitted to CRAN
-- Additional bug fixes, improvement to error reporting to use API error messages. 
-
-**NOTE: Version 1.3.3 will likely be the last update for this codebase; Adobe has released version 1.4 of the API, and newer versions of RSiteCatalyst will be updated against the newer version of the API.**
-
-2014-03-23: Version 1.3.2 submitted to CRAN
-- Fixed issues arising from upgrading to httr 0.3. Package behavior should be identical using v0.2 or v0.3 of httr.
-
-2014-02-20: Version 1.3.1 submitted to CRAN
-- Fixed NAMESPACE issue to export real-time functions
-
-2014-02-03: Version 1.3 submitted to CRAN
-
-Changes in version 1.3 include
-- Fixed validate flag in JSON request to work correctly
-- Allow for variable API request timing in Queue functions
-- Search via regex functionality in QueueRanked/QueueTrended functions
-- Support for Realtime API reports: Overtime and one-element Ranked report
-- Deprecated GetAdminConsoleLog
-
-2013-11-04: Version 1.2 submitted to CRAN
->>>>>>> master
 
 * [jsonlite](http://cran.r-project.org/web/packages/jsonlite/) (>=0.9.5)
 * [plyr](http://cran.r-project.org/web/packages/plyr/) (>=1.8.1)
