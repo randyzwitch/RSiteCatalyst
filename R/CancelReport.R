@@ -44,9 +44,4 @@ CancelReport <- function(report.id) {
     print(paste0('ERROR: ',result$error," - ",result$error_description))
   }
 
-<<<<<<< HEAD
 }
-
-=======
-}
->>>>>>> parent of 2831735... Pre-master commit

@@ -13,10 +13,7 @@
 #' report_suites <- GetReportSuites()
 #' }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> parent of 2831735... Pre-master commit
 GetReportSuites <- function() {
 
   reportsuites <- ApiRequest(func.name="Company.GetReportSuites")
