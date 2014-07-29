@@ -21,6 +21,7 @@ BuildHeader <- function() {
   sha.object <- digest(nonce.create.secret, algo="sha1", serialize=FALSE)
   password.digest <- base64encode(charToRaw(sha.object))
   
+<<<<<<< HEAD
   #Build & Return X-WSSE Header 
   headers <- c('X-WSSE'=paste0('UsernameToken Username="',SC.Credentials$key,'", ',
                                'PasswordDigest="',password.digest,'", ',
@@ -30,3 +31,10 @@ BuildHeader <- function() {
   return(headers)
   
 }
+=======
+
+#Build & Return Header 
+ return(paste('UsernameToken Username=\"',SCCredentials[1], '\"', ',', ' PasswordDigest=\"',password_digest, '\"', ',', ' Nonce=\"', nonce, '\"', ',', ' Created=\"', created_date, '\"', sep=""))
+
+}
+>>>>>>> master
