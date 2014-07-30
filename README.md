@@ -135,7 +135,7 @@ elements <- c("page","geoCountry","geoCity")
 report.data <- QueueRanked(reportsuite.id, date.from, date.to, metrics, elements)
 ```
 
-You may also wish to set any of the 6 optional named parameters. While you can specify more than one element with _selected_, at this point, the 1.4 API only supports this for the first element specified.
+You may also wish to set any of the 6 optional named parameters. The 1.4 API only supports this for the first element specified. In the example below, _selected_ applies to the first element, _page_.
 
 ```
 date.from <- "2014-01-01"
@@ -145,7 +145,7 @@ metrics <- c("visits","uniquevisitors","pageviews","event10","event10")
 elements <- c("page","geoCountry","geoCity")
 top <- 100
 start <- 100
-selected <- list(page=c("Home","Search","About"))
+selected <- c("Home","Search","About")
 segment.id <- "dw:12345"
 data.current <- TRUE
 expedite <- TRUE
