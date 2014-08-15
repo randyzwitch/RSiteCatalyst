@@ -17,7 +17,21 @@
 #' @examples
 #' 
 #' \dontrun{
-#' 
+#'
+#'report.test1 <- BuildRealTimeReportStructure(report.name="test123",
+#'                metric="instances",
+#'                elements = c("prop2", "searchenginekeyword", "geocountry"))
+#'
+#'report.test2 <- BuildRealTimeReportStructure(report.name="test456",
+#'                metric="instances",
+#'                elements = c("prop2", "searchenginekeyword", "geocountry"),
+#'                min.granularity = "5")
+#'
+#'report.test3 <- BuildRealTimeReportStructure(report.name="test789",
+#'                metric="instances",
+#'                elements = c("prop2", "searchenginekeyword", "geocountry"),
+#'                min.granularity = "5",
+#'                ui.report=FALSE)
 #'    }
 #' 
 #' @export

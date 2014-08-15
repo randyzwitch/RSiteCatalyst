@@ -29,3 +29,4 @@
 
 utils::globalVariables("SC.Credentials")
 utils::globalVariables("reportsuite.id") #RZ: Silence CRAN check
+utils::globalVariables("SC.Debug")
