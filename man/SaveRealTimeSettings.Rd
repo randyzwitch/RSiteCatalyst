@@ -44,10 +44,14 @@ Changes can take up to 15 minutes to be reflected.
 \examples{
 \dontrun{
 
+saverealtime <- SaveRealTimeSettings("your-report-suite", report1, report2, report3)
+
    }
 }
 \seealso{
 \code{\link{GetRealTimeSettings}} \cr
+
+\code{\link{BuildRealTimeReportStructure}} \cr
 }
 \keyword{SaveRealTimeSettings}
 

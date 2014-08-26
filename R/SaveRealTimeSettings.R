@@ -29,10 +29,13 @@
 #' 
 #' @return Message returned to console
 #' @seealso \code{\link{GetRealTimeSettings}} \cr
+#' @seealso \code{\link{BuildRealTimeReportStructure}} \cr
 #' @keywords SaveRealTimeSettings
 #' @examples
 #' 
 #' \dontrun{
+#' 
+#' saverealtime <- SaveRealTimeSettings("your-report-suite", report1, report2, report3)
 #' 
 #'    }
 #' 
