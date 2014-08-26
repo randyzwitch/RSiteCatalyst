@@ -1,7 +1,7 @@
 RSiteCatalyst
 ===============
 
-R client library for the Adobe Analytics 1.4 API. RSiteCatalyst v1.4 is still in development. Use at your own risk during the development staage, and please submit bug reports and/or pull requests for any issues!
+R client library for the Adobe Analytics 1.4 API.
 
 Once finalized, full documentation will be created and posted at the following location:
 [http://randyzwitch.github.io/RSiteCatalyst/](http://randyzwitch.github.io/RSiteCatalyst/)
@@ -88,10 +88,10 @@ report.data <- JsonQueueReport(desc)
 ```
 
 #### Using the report helper functions
-RSiteCatalyst v1.4 has helper functions that make it easier to generate all report types (ranked, overtime, trended, pathing, fallout). These take parameters in R, convert them to JSON, then call JsonQueueReport. _RSiteCatalyst v1.4_ helper functions do not yet support inline segmentation or search, so if you want to use that functionality, you will need to use JsonQueueReport directly.
+RSiteCatalyst v1.4 has helper functions that make it easier to generate all report types (ranked, overtime, trended, pathing, fallout). These take parameters in R, convert them to JSON, then call JsonQueueReport.
 
 #### QueueOvertime
-Returns an overtime report. This is similar to the key metrics report, in that the only granularity allowed is time. 
+Returns an overtime report. This is similar to the key metrics report in that the only granularity allowed is time. 
 
 QueueOvertime requires a start and end date, a reportsuite ID, and a character vector of metrics.
 
