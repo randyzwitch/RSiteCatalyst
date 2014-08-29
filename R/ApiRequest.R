@@ -21,12 +21,12 @@
 ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,print.attempts=FALSE,skip.queue=FALSE) {
   
   #Set debug flag from global credentials
-  SC.Debug <- SC.Credentials$debug
+  SC.Debug <- AdobeAnalytics$SC.Credentials$debug
   
-  endpoint <- SC.Credentials$endpoint
-  if(SC.Credentials$auth.method=='OAUTH2') {
-    url <- paste(endpoint, '?method=',func.name,'&access_token=',SC.Credentials$access_token, sep='')
-  } else if(SC.Credentials$auth.method=='legacy') {
+  endpoint <- AdobeAnalytics$SC.Credentials$endpoint
+  if(AdobeAnalytics$SC.Credentials$auth.method=='OAUTH2') {
+    url <- paste(endpoint, '?method=',func.name,'&access_token=',AdobeAnalytics$SC.Credentials$access_token, sep='')
+  } else if(AdobeAnalytics$SC.Credentials$auth.method=='legacy') {
     url <- paste(endpoint, '?method=',func.name, sep='')
   }
 
@@ -43,9 +43,9 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
     if(print.attempts==TRUE) {
       print(paste('Requesting URL attempt #',num.tries,sep=''))
     }
-    if(SC.Credentials$auth.method=='OAUTH2') {
+    if(AdobeAnalytics$SC.Credentials$auth.method=='OAUTH2') {
       response <- POST(url, body=body)
-    } else if(SC.Credentials$auth.method=='legacy') {
+    } else if(AdobeAnalytics$SC.Credentials$auth.method=='legacy') {
       response <- POST(url, config=add_headers('',.headers=BuildHeader()), body=body)
     }
     

@@ -29,7 +29,10 @@
 SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy", debug.mode = FALSE){
 
   #Temporarily set SC.Credentials for GetEndpoint function call
-  SC.Credentials <<- list(key=key, secret=secret)
+  #SC.Credentials <<- list(key=key, secret=secret)
+  
+  assign("SC.Credentials", list(key=key, secret=secret),  envir = AdobeAnalytics)  
+  
   if(company==''&&auth.method=='OAUTH2') {
     stop("ERROR: You must specify a company if using the OAUTH2 auth method.")
   } else {
@@ -38,7 +41,9 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
   
   endpoint.url <- GetEndpoint(company)
   
-  SC.Credentials <<- "" #This might be defensive overkill
+  #SC.Credentials <<- "" #This might be defensive overkill
+  
+  assign("SC.Credentials", "", envir = AdobeAnalytics)
 
   if(auth.method=="OAUTH2") {
     token.required = TRUE
@@ -46,7 +51,10 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
     if(nchar(token.file)) {
       if(file.exists(token.file)) {
         load(token.file)
-        SC.Credentials <<- SC.storedcredentials
+        #SC.Credentials <<- SC.storedcredentials
+        
+        assign("SC.Credentials", SC.storedcredentials, envir = AdobeAnalytics)
+        
         #@TODO: check if token has expired, and whether the endpoint matches before deciding
         token.required = FALSE
       }
@@ -65,7 +73,7 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
         stop(sc.cred$error_description)
       }
 
-      SC.Credentials <<- list(endpoint.url=endpoint.url,
+      scc <- list(endpoint.url=endpoint.url,
                                auth.method=auth.method,
                                access_token=sc.cred$access_token,
                                scope=sc.cred$scope,
@@ -73,6 +81,8 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
                                expires=sc.cred$expires,
                                debug = debug.mode
                                )
+      
+      assign("SC.Credentials", scc, envir = AdobeAnalytics)
 
       if(nchar(token.file)) {
         SC.storedcredentials <- SC.Credentials
@@ -99,7 +109,10 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
       stop("Authentication failed due to errors")
     } else {
       #Create SCCredentials object in Global Environment
-      SC.Credentials <<- list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url,debug=debug.mode)
+      #SC.Credentials <<- list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url,debug=debug.mode)
+      
+      assign("SC.Credentials", list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url,debug=debug.mode), envir = AdobeAnalytics)
+      
       #save(SC.Credentials,file="~/SC.Credentials")
       #Assign endpoint to 3rd position in credentials
       #print("Legacy Auth Stored: This method is deprecated. If possible, use OAUTH.")
@@ -109,3 +122,6 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
   }
 
 }
+
+#Create an environment to hold credentials
+AdobeAnalytics <- new.env(parent = emptyenv())

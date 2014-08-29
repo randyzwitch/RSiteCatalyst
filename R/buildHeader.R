@@ -17,12 +17,12 @@ BuildHeader <- function() {
   #Create timestamp
   created.date <- format(as.POSIXlt(Sys.time(), "GMT"), "%Y-%m-%dT%H:%M:%SZ")
   #Concatentate nonce, timestamp, shared secret, then sha1 then base64
-  nonce.create.secret <- paste(nonce, created.date, SC.Credentials$secret, sep="")
+  nonce.create.secret <- paste(nonce, created.date, AdobeAnalytics$SC.Credentials$secret, sep="")
   sha.object <- digest(nonce.create.secret, algo="sha1", serialize=FALSE)
   password.digest <- base64encode(charToRaw(sha.object))
   
   #Build & Return X-WSSE Header 
-  headers <- c('X-WSSE'=paste0('UsernameToken Username="',SC.Credentials$key,'", ',
+  headers <- c('X-WSSE'=paste0('UsernameToken Username="',AdobeAnalytics$SC.Credentials$key,'", ',
                                'PasswordDigest="',password.digest,'", ',
                                'Nonce="',nonce,'", ',
                                'Created="',created.date,'"')
