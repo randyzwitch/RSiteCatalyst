@@ -36,8 +36,10 @@ BuildInnerBreakdownsRecursively <- function(parent.element,elements,metrics,
       # we need to go deeper, so we add this level to the context 
       # and call BuildInnerBreakdownsRecursively again
       # we should not go deeper if we have a NULL breakdown
+      #RZ 8/29: Modified SC.Debug logic for referencing hidden credentials list
+      #Not sure I actually understand what this is doing, but it seems right
       if(is.null(working.element)) {
-        if(exists('SC.Debug')&&SC.Debug==TRUE) {
+        if(exists('SC.Debug', AdobeAnalytics$SC.Credentials)&&AdobeAnalytics$SC.Credentials$SC.Debug==TRUE) {
           print(paste0("DEBUG: Warning! NULL breakdown returned for ",context))
         }
       } else {

@@ -85,7 +85,7 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
       assign("SC.Credentials", scc, envir = AdobeAnalytics)
 
       if(nchar(token.file)) {
-        SC.storedcredentials <- SC.Credentials
+        SC.storedcredentials <- AdobeAnalytics$SC.Credentials
         save(SC.storedcredentials,file=token.file)
       }
     }

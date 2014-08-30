@@ -23,11 +23,11 @@ CancelReport <- function(report.id) {
   request.body <- sprintf('{"reportID": %s}',report.id)
 
   # This does not use ApiRequest() because it does not return JSON
-  endpoint <- SC.Credentials$endpoint
-  if(SC.Credentials$auth.method=='OAUTH2') {
-    url <- paste0(endpoint,'?method=Report.Cancel&access_token=',SC.Credentials$access_token)
+  endpoint <- AdobeAnalytics$SC.Credentials$endpoint
+  if(AdobeAnalytics$SC.Credentials$auth.method=='OAUTH2') {
+    url <- paste0(endpoint,'?method=Report.Cancel&access_token=',AdobeAnalytics$SC.Credentials$access_token)
     response <- POST(url, body=request.body)
-  } else if(SC.Credentials$auth.method=='legacy') {
+  } else if(AdobeAnalytics$SC.Credentials$auth.method=='legacy') {
     url <- paste0(endpoint, '?method=Report.Cancel')
     response <- POST(url, config=add_headers('',.headers=BuildHeader()), body=request.body)
   }
