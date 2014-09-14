@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/randyzwitch/RSiteCatalyst.png?branch=master)](https://travis-ci.org/randyzwitch/RSiteCatalyst)
+
 RSiteCatalyst
 ===============
 
