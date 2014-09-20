@@ -102,7 +102,7 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
                                             keywords = search)
       }
     } else {
-      working.element <- list(id = unbox(element))
+      working.element <- list(id = unbox(element), top = unbox("50000"))
     }
 
     if(length(elements.formatted)>0) {
