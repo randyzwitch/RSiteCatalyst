@@ -22,6 +22,7 @@
 #' @param first.rank.period First Ranking Period. Defaults to 0
 #' @param algorithm.argument Ranking algorithm. Defaults to "linear"
 #' @param everything.else Provide counts for elements not returned as 'top'
+#' @param segment.inline Inline segment definition
 #'
 #' @importFrom plyr rename
 #'
@@ -41,11 +42,15 @@
 GetRealTimeReport <- function(reportsuite.ids, metrics, elements=c(), date.granularity=5, 
                               date.from="1 hour ago", date.to="now", sort.algorithm="mostpopular",
                               floor.sensitivity=.25, first.rank.period=0, 
-                              algorithm.argument="linear", everything.else=TRUE){
+                              algorithm.argument="linear", everything.else=TRUE,
+                              segment.inline=''){
   
   #Temporary hopefully.
-  if(length(elements > 1)){
+  if(length(elements) > 1){
     stop("RSiteCatalyst currently only supports real-time reporting with zero or 1 element")
+  }
+  if(segment.inline!="") {
+    report.description$reportDescription$segments <- list(segment.inline)
   }
   
   #Make container for report description
