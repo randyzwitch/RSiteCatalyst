@@ -9,7 +9,7 @@ Once finalized, full documentation will be created and posted at the following l
 [http://randyzwitch.github.io/RSiteCatalyst/](http://randyzwitch.github.io/RSiteCatalyst/)
 
 ## Installation
-RSiteCatalyst v1.4 is in development and is not yet on CRAN. You will need to install directly from GitHub.
+RSiteCatalyst v1.4 is on CRAN. You can also install directly from GitHub.
 
 ```R
 install.packages("devtools")
@@ -57,37 +57,7 @@ SCAuth("your_identifier",
 ```
 
 ## Running Reports
-Once you've authorised, reports can be queued and retrieved using the helper libraries for each report type, or by using raw JSON report definitions.
-
-#### Running a report using a JSON definition
-The following code defines a JSON report description, and runs it. As no date granularity is specified, it will return a ranked report.
-
-```
-report.desc <- '{ "reportDescription" : { 
-"dateFrom" : "2014-01-01", 
-"dateTo" : "2014-11-07", 
-"reportSuiteID" : "your_report_suite", 
-"metrics" : [ { "id" : "pageviews" } ], 
-"elements" : [ { "id" : "page" } ]
-} }'
-
-report.data <- JsonQueueReport(desc)
-```
-
-This is the same report description, but with daily date granularity, which will return a trended report.
-
-```
-report.desc <- '{ "reportDescription" : { 
-"dateFrom" : "2014-01-01", 
-"dateTo" : "2014-11-07", 
-"dateGranularity" : "day", 
-"reportSuiteID" : "your_report_suite", 
-"metrics" : [ { "id" : "pageviews" } ], 
-"elements" : [ { "id" : "page" } ]
-} }'
-
-report.data <- JsonQueueReport(desc)
-```
+Once you've authorised, reports can be queued and retrieved using the helper functions for each report type.
 
 #### Using the report helper functions
 RSiteCatalyst v1.4 has helper functions that make it easier to generate all report types (ranked, overtime, trended, pathing, fallout). These take parameters in R, convert them to JSON, then call JsonQueueReport.
