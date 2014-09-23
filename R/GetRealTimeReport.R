@@ -50,7 +50,7 @@ GetRealTimeReport <- function(reportsuite.ids, metrics, elements=c(), date.granu
     stop("RSiteCatalyst currently only supports real-time reporting with zero or 1 element")
   }
   if(segment.inline!="") {
-    report.description$reportDescription$segments <- list(segment.inline)
+    rd$segments <- list(segment.inline)
   }
   
   #Make container for report description
