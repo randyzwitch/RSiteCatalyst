@@ -43,14 +43,11 @@ GetRealTimeReport <- function(reportsuite.ids, metrics, elements=c(), date.granu
                               date.from="1 hour ago", date.to="now", sort.algorithm="mostpopular",
                               floor.sensitivity=.25, first.rank.period=0, 
                               algorithm.argument="linear", everything.else=TRUE,
-                              segment.inline=''){
+                              segment.inline=character()){
   
   #Temporary hopefully.
   if(length(elements) > 1){
     stop("RSiteCatalyst currently only supports real-time reporting with zero or 1 element")
-  }
-  if(segment.inline!="") {
-    rd$segments <- list(segment.inline)
   }
   
   #Make container for report description
@@ -65,6 +62,10 @@ GetRealTimeReport <- function(reportsuite.ids, metrics, elements=c(), date.granu
   
   if(length(elements) > 0){
     rd$elements <- lapply(elements, function (x) list(id=unbox(x), everythingElse=unbox(everything.else)))
+  }
+  
+  if(length(segment.inline) > 0) {
+    rd$segments <- list(segment.inline)
   }
   
   #Create report description as JSON string

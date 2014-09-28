@@ -41,30 +41,32 @@
 #' 
 #' @export
 #' 
+#' 
 SaveRealTimeSettings <- function (reportsuite.ids="", report1=list(), report2 = list(), report3 = list()) {
   
   #Check to see if length(report1) > 0, report error otherwise
   if(length(report1) == 0){
     stop("report1 must be specified")
+  } else {
+    reports <- list(report1)
   }
-  
-  #Create list of reports
-  reports <- list(report1)
   
   #If report2 not blank, add it to list. List can only be length 1 at this point
   if(length(report2) > 0){
-    reports[2] <- report2
+    reports[[2]] <- report2
   }
   
   #If report3 not blank, add it to list. Need to determine length, since report2 might not have been
   #populated
-  if(length(report3) > 0){
-    reports[length(reports) + 1] <- report3
+  if(length(report3) > 0 && length(report2) > 0){
+    reports[[3]] <- report3
+  } else{
+    reports[[2]] <- report3
   }
   
   
   #Convert to JSON
-  request.body <- toJSON(list(real_time_settings=reports), rsid_list=reportsuite.ids)
+  request.body <- toJSON(list(real_time_settings=reports, rsid_list=list(unbox(reportsuite.ids))))
 
   #skip.queue parameter returns raw response
   results <- ApiRequest(body=request.body,func.name="ReportSuite.SaveRealTimeSettings", skip.queue=TRUE)
@@ -73,7 +75,8 @@ SaveRealTimeSettings <- function (reportsuite.ids="", report1=list(), report2 = 
   if(results$status_code == 200){
     print("Configuration Saved. Per API documentation, it can take up to 15mins for report to become active")
   } else{
-    warning(sprintf("Status code %s: %s", results$status_code, results$statusmessage))
+    stop(sprintf("Status code %s: %s", results$status_code, results$statusmessage))
   }
 
 } #End function bracket
+
