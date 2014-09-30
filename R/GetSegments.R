@@ -27,7 +27,11 @@ GetSegments <- function(reportsuite.ids) {
   request.body$rsid_list <- reportsuite.ids
   
   valid.segments <- ApiRequest(body=toJSON(request.body),func.name="ReportSuite.GetSegments")
-
+  
+  if(length(valid.segments$segments[[1]]) == 0) {
+      return(print("No Segments Defined For This Report Suite"))
+    }
+  
   segments.formatted <- data.frame()
   for (i in 1:length(valid.segments$rsid) ) {
     if(nrow(valid.segments$segments[[i]])>0) {
