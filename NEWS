@@ -1,3 +1,10 @@
+RSiteCatalyst 1.4.1
+=================
+
+* Fix QueueRanked report to return up to 50000 results when using breakdown
+
+* Misc. bug fixes
+
 RSiteCatalyst 1.4
 =================
 

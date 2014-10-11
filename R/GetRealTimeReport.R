@@ -43,7 +43,7 @@ GetRealTimeReport <- function(reportsuite.ids, metrics, elements=c(), date.granu
                               date.from="1 hour ago", date.to="now", sort.algorithm="mostpopular",
                               floor.sensitivity=.25, first.rank.period=0, 
                               algorithm.argument="linear", everything.else=TRUE,
-                              segment.inline=character()){
+                              segment=character()){
   
   #Temporary hopefully.
   if(length(elements) > 1){
@@ -64,8 +64,8 @@ GetRealTimeReport <- function(reportsuite.ids, metrics, elements=c(), date.granu
     rd$elements <- lapply(elements, function (x) list(id=unbox(x), everythingElse=unbox(everything.else)))
   }
   
-  if(length(segment.inline) > 0) {
-    rd$segments <- list(segment.inline)
+  if(length(segment) > 0) {
+    rd$segments <- list(id=segment)
   }
   
   #Create report description as JSON string
