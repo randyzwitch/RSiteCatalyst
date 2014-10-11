@@ -7,7 +7,7 @@ GetRealTimeReport(reportsuite.ids, metrics, elements = c(),
   date.granularity = 5, date.from = "1 hour ago", date.to = "now",
   sort.algorithm = "mostpopular", floor.sensitivity = 0.25,
   first.rank.period = 0, algorithm.argument = "linear",
-  everything.else = TRUE, segment = character())
+  everything.else = TRUE, selected = c())
 }
 \arguments{
 \item{reportsuite.ids}{Report Suite}
@@ -32,7 +32,7 @@ GetRealTimeReport(reportsuite.ids, metrics, elements = c(),
 
 \item{everything.else}{Provide counts for elements not returned as 'top'}
 
-\item{segment.inline}{Inline segment definition}
+\item{selected}{Selected items for a given element (only works for a single element)}
 }
 \value{
 Data frame
