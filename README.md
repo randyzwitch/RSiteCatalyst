@@ -14,7 +14,7 @@ RSiteCatalyst v1.4 is on CRAN. You can also install directly from GitHub.
 ```R
 install.packages("devtools")
 library(devtools)
-install_github("RSiteCatalyst", "randyzwitch", ref="master")
+install_github("randyzwitch/RSiteCatalyst", ref="master")
 
 library(RSiteCatalyst)
 ```
