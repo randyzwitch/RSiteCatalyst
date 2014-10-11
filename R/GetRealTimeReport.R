@@ -22,7 +22,7 @@
 #' @param first.rank.period First Ranking Period. Defaults to 0
 #' @param algorithm.argument Ranking algorithm. Defaults to "linear"
 #' @param everything.else Provide counts for elements not returned as 'top'
-#' @param segment.inline Inline segment definition
+#' @param selected Selected items for a given element (only works for a single element)
 #'
 #' @importFrom plyr rename
 #'
@@ -43,7 +43,7 @@ GetRealTimeReport <- function(reportsuite.ids, metrics, elements=c(), date.granu
                               date.from="1 hour ago", date.to="now", sort.algorithm="mostpopular",
                               floor.sensitivity=.25, first.rank.period=0, 
                               algorithm.argument="linear", everything.else=TRUE,
-                              segment=character()){
+                              selected=c()){
   
   #Temporary hopefully.
   if(length(elements) > 1){
@@ -60,12 +60,11 @@ GetRealTimeReport <- function(reportsuite.ids, metrics, elements=c(), date.granu
   rd$dateTo <- unbox(date.to)
   rd$sortMethod <- unbox(sprintf("%s:%s:%s:%s",sort.algorithm, floor.sensitivity, first.rank.period, algorithm.argument)) 
   
-  if(length(elements) > 0){
+  #Build in ability to select specific elements
+  if(length(elements) == 1 && length(selected) > 0){
+    rd$elements <- lapply(elements, function (x) list(id=unbox(x), everythingElse=unbox(everything.else), selected=selected))
+  } else if(length(elements) > 0){
     rd$elements <- lapply(elements, function (x) list(id=unbox(x), everythingElse=unbox(everything.else)))
-  }
-  
-  if(length(segment) > 0) {
-    rd$segments <- list(id=segment)
   }
   
   #Create report description as JSON string
