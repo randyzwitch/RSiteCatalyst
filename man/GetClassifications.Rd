@@ -3,12 +3,12 @@
 \alias{GetClassifications}
 \title{Get Classifications for Selected Report Suite Elements}
 \usage{
-GetClassifications(reportsuite.ids, elements)
+GetClassifications(reportsuite.ids, elements = c())
 }
 \arguments{
 \item{reportsuite.ids}{Single report suite id or list of report suites}
 
-\item{elements}{List of existing elements you want to use in combination with an additional metric}
+\item{elements}{Optional. List of existing elements you want to use in combination with an additional metric}
 }
 \value{
 Data frame

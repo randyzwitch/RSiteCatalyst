@@ -8,7 +8,7 @@
 #' @title Get Classifications for Selected Report Suite Elements
 #' 
 #' @param reportsuite.ids Single report suite id or list of report suites
-#' @param elements List of existing elements you want to use in combination with an additional metric
+#' @param elements Optional. List of existing elements you want to use in combination with an additional metric
 #'
 #'
 #' @return Data frame
@@ -23,9 +23,13 @@
 #' }
 
 
-GetClassifications <- function(reportsuite.ids, elements) {
+GetClassifications <- function(reportsuite.ids, elements=c()) {
 
-rd <- toJSON(list(rsid_list=reportsuite.ids, element_list=elements))
+if(length(elements) > 0){
+  rd <- toJSON(list(rsid_list=reportsuite.ids, element_list=elements))
+} else {
+  rd <- toJSON(list(rsid_list=reportsuite.ids))
+}
 
 #Make API call
 raw.response <- ApiRequest(body=rd,func.name="ReportSuite.GetClassifications")
@@ -35,10 +39,10 @@ accumulator <- data.frame()
 classifications_list <- raw.response$element_classifications
 raw.response$element_classifications <- NULL
 
-for(i in 1:length(raw.response)){
+for(i in 1:nrow(raw.response)){
   #Split get element classifications out of report
   temp <- cbind(raw.response[i,], classifications_list[i][[1]], row.names = NULL)
-  accumulator <- rbind(accumulator, temp)
+  accumulator <- rbind.fill(accumulator, temp)
 }
 
 accumulator <- rename(accumulator, c("name" = "element_name"))
@@ -51,7 +55,7 @@ accumulator$classifications <- NULL
 for(i in 1:nrow(accumulator)){
   #Split get element classifications out of report
   temp <- cbind(accumulator[i,], classifications_list2[i][[1]], row.names = NULL)
-  accumulator2 <- rbind(accumulator2, temp)
+  accumulator2 <- rbind.fill(accumulator2, temp)
 }
 accumulator2 <- rename(accumulator2, c("name" = "classification_name"))
 

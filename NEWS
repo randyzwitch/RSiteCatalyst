@@ -1,9 +1,9 @@
 RSiteCatalyst 1.4.1
 =================
 
-* Fix QueueRanked report to return up to 50000 results when using breakdown
+* Fix QueueRanked report to return up to 50,000 results when using breakdown
 
-* Selected argument now supported in GetRealTimeReport
+* "selected" argument now supported in GetRealTimeReport
 
 * Misc. bug fixes
 
