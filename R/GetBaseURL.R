@@ -1,0 +1,37 @@
+#' @details This function requires having a character vector with one or more valid Report Suites specified.
+#'
+#' @description Get base url for the specified report suites. 
+#' 
+#' @title Get Base URL for a Report Suite(s)
+#' 
+#' @param reportsuite.ids Report suite id (or list of report suite ids)
+#'
+#' @importFrom jsonlite toJSON
+#' @importFrom plyr rbind.fill
+#'
+#' @return Data frame
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' url <- GetBaseURL("your_report_suite")
+#' 
+#' url2 <- GetBaseURL(report_suites$rsid)
+#' }
+
+GetBaseURL <- function(reportsuite.ids) {
+  
+  request.body <- c()
+  request.body$rsid_list <- reportsuite.ids
+  
+  response <- ApiRequest(body=toJSON(request.body),func.name="ReportSuite.GetBaseURL")
+  
+  #Don't even know if this is possible, holdover from GetSegments code
+  if(length(response$base_url[[1]]) == 0) {
+      return(print("No Base URL Defined For This Report Suite"))
+    }
+
+  return(response)
+
+}
