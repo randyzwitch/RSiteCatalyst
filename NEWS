@@ -9,6 +9,8 @@ RSiteCatalyst 1.4.1
 
 * Added a bunch of additional Get* methods useful for creating documentation
 
+* Added support for using SAINT classifications in QueueRanked/QueueTrended functions
+
 RSiteCatalyst 1.4
 =================
 

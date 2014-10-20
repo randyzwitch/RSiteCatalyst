@@ -6,8 +6,9 @@
 QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   start = 0, selected = c(), search = c(), search.type = "or",
   date.granularity = "day", segment.id = "", segment.inline = "",
-  anomaly.detection = FALSE, data.current = FALSE, expedite = FALSE,
-  interval.seconds = 5, max.attempts = 120)
+  classification = character(0), anomaly.detection = FALSE,
+  data.current = FALSE, expedite = FALSE, interval.seconds = 5,
+  max.attempts = 120)
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -36,6 +37,8 @@ search overrides anything specified using selected}
 \item{segment.id}{Id of Adobe Analytics segment to retrieve the report for}
 
 \item{segment.inline}{Inline segment definition}
+
+\item{classification}{SAINT classification to use in place of first element. Need to specify element AND classification.}
 
 \item{anomaly.detection}{Set to TRUE to include forecast data (only valid for day granularity with small date ranges)}
 

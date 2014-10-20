@@ -5,8 +5,9 @@
 \usage{
 QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   start = 0, selected = c(), search = c(), search.type = "or",
-  segment.id = "", segment.inline = "", data.current = FALSE,
-  expedite = FALSE, interval.seconds = 5, max.attempts = 120)
+  segment.id = "", segment.inline = "", classification = character(0),
+  data.current = FALSE, expedite = FALSE, interval.seconds = 5,
+  max.attempts = 120)
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -34,6 +35,8 @@ search overrides anything specified using selected}
 \item{segment.id}{Id of Adobe Analytics segment to retrieve the report for}
 
 \item{segment.inline}{Inline segment definition}
+
+\item{classification}{SAINT classification to use in place of first element. Need to specify element AND classification.}
 
 \item{data.current}{TRUE or FALSE - whether to include current data for reports that include today's date}
 

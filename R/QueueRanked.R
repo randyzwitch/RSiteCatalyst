@@ -33,6 +33,7 @@
 #' @param search.type String specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
 #' @param segment.id Id of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline Inline segment definition
+#' @param classification SAINT classification to use in place of first element. Need to specify element AND classification.
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
 #' @param expedite Set to TRUE to expedite the processing of this report
 #' @param interval.seconds How long to wait between attempts
@@ -59,7 +60,8 @@
 
 QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
                         top=0,start=0,selected=c(), search=c(),search.type='or',
-                        segment.id='', segment.inline='', data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120) {
+                        segment.id='', segment.inline='', classification=character(0),data.current=FALSE, 
+                        expedite=FALSE,interval.seconds=5,max.attempts=120) {
 
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
@@ -100,6 +102,9 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
       if(length(search)!=0){
         working.element[["search"]] <- list(type = unbox(search.type), 
                                             keywords = search)
+      }
+      if(length(classification)!=0){
+        working.element[["classification"]] <- unbox(classification)
       }
     } else {
       working.element <- list(id = unbox(element), top = unbox("50000"))

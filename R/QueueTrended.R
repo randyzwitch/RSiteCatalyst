@@ -36,6 +36,7 @@
 #' @param date.granularity Time granularity of the report (year/month/week/day/hour), default to 'day'
 #' @param segment.id Id of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline Inline segment definition
+#' @param classification SAINT classification to use in place of first element. Need to specify element AND classification.
 #' @param anomaly.detection Set to TRUE to include forecast data (only valid for day granularity with small date ranges)
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
 #' @param expedite Set to TRUE to expedite the processing of this report
@@ -59,8 +60,9 @@
 
 QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
                         top=0,start=0,selected=c(),search=c(),search.type='or',
-                        date.granularity='day', segment.id='', segment.inline='', anomaly.detection=FALSE,
-                        data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120) {
+                        date.granularity='day', segment.id='', segment.inline='', classification = character(0), 
+                        anomaly.detection=FALSE, data.current=FALSE, expedite=FALSE,
+                        interval.seconds=5,max.attempts=120) {
   
   if(anomaly.detection==TRUE && length(elements)>1) {
     print("Warning: Anomaly detection will not be used, as it only works for a single element.")
@@ -114,6 +116,9 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
       if(length(search)!=0){
         working.element[["search"]] <- list(type = unbox(search.type), 
                                             keywords = search)
+      }
+      if(length(classification)!=0){
+        working.element[["classification"]] <- unbox(classification)
       }
     } else {
       working.element <- list(id = unbox(element))
