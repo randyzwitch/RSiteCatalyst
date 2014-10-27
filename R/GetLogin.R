@@ -27,7 +27,9 @@ GetLogin<- function(login) {
   
   response <- ApiRequest(body=toJSON(request.body),func.name="Permissions.GetLogin")
 
-  #Returns values, no need for parsing!
-  return(response)
+  temp_df <- as.data.frame(lapply(response[1:11], function (x) ifelse(is.null(x), "", x)))
+  temp_df$group_names <- paste(response[[12]], collapse = ',')
+  
+  return(temp_df)
 
 }

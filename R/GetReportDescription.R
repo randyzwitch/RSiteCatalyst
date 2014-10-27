@@ -1,0 +1,38 @@
+#' @details Requires a single bookmark_id value
+#'
+#' @description Get report description for a specific bookmark_id 
+#' 
+#' @title Get Report Description for a Specific bookmark_id
+#' 
+#' @param bookmark.id 
+#'
+#' @importFrom jsonlite toJSON
+#' @importFrom plyr rbind.fill
+#'
+#' @return List
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' reportdesc <- GetReportDescription("28473595")
+#' 
+#' 
+#' }
+
+GetReportDescription<- function(bookmark.id) {
+  
+  request.body <- c()
+  request.body$bookmark_id  <- unbox(bookmark.id) 
+  
+  response <- ApiRequest(body=toJSON(request.body),func.name="Bookmark.GetReportDescription")
+  
+  #Don't even know if this is possible, holdover from GetSegments code
+  if(length(response$name[[1]]) == 0) {
+      return(print("No Report Defined For This bookmark_id"))
+    }
+  
+
+  return(response)
+
+}
