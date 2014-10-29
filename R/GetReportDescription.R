@@ -1,10 +1,10 @@
-#' @details Requires a single bookmark_id value
+#' @details Requires a single bookmark_id value, obtained from GetBookmarks()
 #'
 #' @description Get report description for a specific bookmark_id 
 #' 
 #' @title Get Report Description for a Specific bookmark_id
 #' 
-#' @param bookmark.id 
+#' @param bookmark.id Bookmark ID
 #'
 #' @importFrom jsonlite toJSON
 #' @importFrom plyr rbind.fill

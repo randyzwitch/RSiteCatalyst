@@ -4,8 +4,8 @@
 #' 
 #' @title Get Defined Dashboards
 #' 
-#' @param dashboard.limit 
-#' @param dashboard.offset
+#' @param dashboard.limit Limit number of dashboards returned
+#' @param dashboard.offset Offset of dashboards (i.e. start with other than first dashboard)
 #'
 #' @importFrom jsonlite toJSON
 #' @importFrom plyr rbind.fill

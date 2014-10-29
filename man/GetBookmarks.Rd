@@ -6,9 +6,9 @@
 GetBookmarks(folder.limit = "", folder.offset = "")
 }
 \arguments{
-\item{folder.limit}{}
+\item{folder.limit}{Max number of folders to return}
 
-\item{folder.offset}{}
+\item{folder.offset}{Offset of folders (i.e. start with other than first folder)}
 }
 \value{
 Data frame

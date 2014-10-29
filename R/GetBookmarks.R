@@ -4,8 +4,8 @@
 #' 
 #' @title Get Defined Bookmarks for a user
 #' 
-#' @param folder.limit 
-#' @param folder.offset
+#' @param folder.limit Max number of folders to return
+#' @param folder.offset Offset of folders (i.e. start with other than first folder)
 #'
 #' @importFrom jsonlite toJSON
 #' @importFrom plyr rbind.fill

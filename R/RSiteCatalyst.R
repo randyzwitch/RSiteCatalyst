@@ -1,7 +1,7 @@
 #' Package:  RSiteCatalyst \cr
 #' Type:     Package \cr
-#' Version:  1.4.0.20141026 \cr
-#' Date:     2014-10-26 \cr
+#' Version:  1.4.0.20141028 \cr
+#' Date:     2014-10-28 \cr
 #' License:  MIT + file LICENSE \cr
 #'
 #'

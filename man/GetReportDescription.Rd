@@ -6,7 +6,7 @@
 GetReportDescription(bookmark.id)
 }
 \arguments{
-\item{bookmark.id}{}
+\item{bookmark.id}{Bookmark ID}
 }
 \value{
 List
@@ -15,7 +15,7 @@ List
 Get report description for a specific bookmark_id
 }
 \details{
-Requires a single bookmark_id value
+Requires a single bookmark_id value, obtained from GetBookmarks()
 }
 \examples{
 \dontrun{

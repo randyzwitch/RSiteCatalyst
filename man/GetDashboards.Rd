@@ -6,9 +6,9 @@
 GetDashboards(dashboard.limit = "", dashboard.offset = "")
 }
 \arguments{
-\item{dashboard.limit}{}
+\item{dashboard.limit}{Limit number of dashboards returned}
 
-\item{dashboard.offset}{}
+\item{dashboard.offset}{Offset of dashboards (i.e. start with other than first dashboard)}
 }
 \value{
 List
