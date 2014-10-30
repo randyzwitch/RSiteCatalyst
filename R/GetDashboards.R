@@ -41,23 +41,28 @@ GetDashboards<- function(dashboard.limit='', dashboard.offset='') {
       return(print("No Dashboards Defined For This Report Suite"))
     }
   
-  #accumulator <- data.frame()
-  #response_ <- response[[1]]
+  #Get df out of single element list
+  response_df<- response[[1]]
+  pages <- response_df$pages
+  response_df$pages <- NULL
+  #Add Pages to parsed response
+  response_df <- cbind(response_df, ldply(pages, quickdf))
   
-  #for(i in 1:nrow(response_)){
+  #Parse bookmarks
+  bookmarks <- response_df$bookmarks
+  response_df$bookmarks <- NULL
+  
+  
+  accumulator<- data.frame()
+  for(i in 1:nrow(response_df)){
+    bkmk_parsed <- ldply(bookmarks[[i]],quickdf)
     
-    #Make copy, delete bookmark list
-  #  left <- response_[i, 1:3]
-  #  left <- rename(left, replace = c("name" = "folder_name", "id" = "folder_id"))
-  #  right <- response_[[i,4]]
-  #  right <- rename(right, replace = c("name" = "bookmark_name", "id" = "bookmark_id"))
-    
-  #  temp <- cbind(left, right)
-    
-  #  accumulator <- rbind.fill(accumulator, temp)
-  #}
+    temp <- cbind(response_df[i,], bkmk_parsed, row.names = NULL)
+    accumulator <- rbind.fill(accumulator, temp)
+  }
+  
   
 
-  return(response)
+  return(accumulator)
 
 }
