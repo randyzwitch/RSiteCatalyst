@@ -9,6 +9,7 @@
 #'
 #' @importFrom jsonlite toJSON
 #' @importFrom plyr rbind.fill
+#' @importFrom plyr quickdf
 #'
 #' @return List
 #'
