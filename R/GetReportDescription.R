@@ -32,7 +32,11 @@ GetReportDescription<- function(bookmark.id) {
       return(print("No Report Defined For This bookmark_id"))
     }
   
-
-  return(response)
+  accumulator <- as.data.frame(response[1])
+  accumulator$reportType <- response[2]
+  accumulator <- cbind(accumulator, response[[3]][1:4])
+  accumulator$metrics <- paste(response$reportDescription$metrics[,1], collapse = ", ")
+  
+  return(accumulator)
 
 }
