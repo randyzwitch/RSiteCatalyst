@@ -3,10 +3,7 @@
 RSiteCatalyst
 ===============
 
-R client library for the Adobe Analytics 1.4 API.
-
-Once finalized, full documentation will be created and posted at the following location:
-[http://randyzwitch.github.io/RSiteCatalyst/](http://randyzwitch.github.io/RSiteCatalyst/)
+R client library for the Adobe Analytics 1.4 API
 
 ## Installation
 RSiteCatalyst v1.4 is on CRAN. You can also install directly from GitHub.
