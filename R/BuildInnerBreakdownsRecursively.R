@@ -22,6 +22,11 @@ BuildInnerBreakdownsRecursively <- function(parent.element,elements,metrics,
                                             current.recursion.level,context,accumulator=data.frame(),
                                             date.range='') {
   
+  #Use this to try and fix #99
+  if(nrow(parent.element) == 0){
+    return(data.frame())
+  }
+
   # loop through all elements and work our way to innermost elements
   for(i in 1:nrow(parent.element)){
     
