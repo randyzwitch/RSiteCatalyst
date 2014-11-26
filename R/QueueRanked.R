@@ -60,7 +60,7 @@
 
 QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
                         top=0,start=0,selected=c(), search=c(),search.type='or',
-                        segment.id='', segment.inline='', classification=character(0),data.current=FALSE, 
+                        segment.id='', segment.inline='', classification=c(),data.current=FALSE, 
                         expedite=FALSE,interval.seconds=5,max.attempts=120) {
 
   # build JSON description
@@ -103,11 +103,13 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
         working.element[["search"]] <- list(type = unbox(search.type), 
                                             keywords = search)
       }
-      if(length(classification)!=0){
-        working.element[["classification"]] <- unbox(classification)
-      }
+
     } else {
       working.element <- list(id = unbox(element), top = unbox("50000"))
+    }
+
+    if(length(classification)>=i){
+      working.element[["classification"]] <- unbox(classification[i])
     }
 
     if(length(elements.formatted)>0) {
