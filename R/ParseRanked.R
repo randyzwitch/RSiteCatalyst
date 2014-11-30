@@ -16,10 +16,10 @@ ParseRanked <- function(report.data) {
   # jsonlite already makes this into a nice data frame for us
   data <- report.data$report$data
 
-  elements <- report.data$report$elements$id
+  elements <- report.data$report$elements
   metrics <- report.data$report$metrics$id
 
-  if(length(elements)==1) {
+  if(nrow(elements)==1) {
     # We don't need to traverse down the data structure
     counts.df <- ldply(data$counts)
     names(counts.df) <- metrics #assign names to counts.df
