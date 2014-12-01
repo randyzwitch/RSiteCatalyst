@@ -1,3 +1,9 @@
+RSiteCatalyst 1.4.2
+=================
+
+* Bug Fix #108 from Jason Morgan (framingeinstein) to fix multi-level SAINT classifications in QueueRanked
+
+
 RSiteCatalyst 1.4.1
 =================
 

@@ -5,7 +5,7 @@
 \usage{
 QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   start = 0, selected = c(), search = c(), search.type = "or",
-  segment.id = "", segment.inline = "", classification = character(0),
+  segment.id = "", segment.inline = "", classification = c(),
   data.current = FALSE, expedite = FALSE, interval.seconds = 5,
   max.attempts = 120)
 }
