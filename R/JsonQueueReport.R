@@ -26,6 +26,7 @@
 #' @family internal
 #' @keywords internal
 #'
+#' @export
 
 JsonQueueReport <- function(report.description,interval.seconds=5,max.attempts=120) {
 
