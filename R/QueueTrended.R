@@ -33,7 +33,7 @@
 #' @param search List of keywords for the first specified element - e.g. c("contact","about","shop").
 #' search overrides anything specified using selected
 #' @param search.type String specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
-#' @param date.granularity Time granularity of the report (year/month/week/day/hour), default to 'day'
+#' @param date.granularity Time granularity of the report (year/month/week/day/hour/aggregate), default to 'day'
 #' @param segment.id Id of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline Inline segment definition
 #' @param classification SAINT classification to use in place of first element. Need to specify element AND classification.
@@ -81,7 +81,11 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   report.description$reportDescription$dateFrom <- unbox(date.from)
   report.description$reportDescription$dateTo <- unbox(date.to)
   report.description$reportDescription$reportSuiteID <- unbox(reportsuite.id)
-  report.description$reportDescription$dateGranularity <- unbox(date.granularity)
+  # Adobe Analytics API aggregates when dateGranularity is not set
+  # This allow for better handling of custom date ranges
+  if (date.granularity != 'aggregate') {
+    report.description$reportDescription$dateGranularity <- unbox(date.granularity)
+  }
   if(segment.inline!="") {
     report.description$reportDescription$segments <- list(segment.inline)
   }
