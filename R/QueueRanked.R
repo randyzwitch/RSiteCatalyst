@@ -120,7 +120,7 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
   }
   report.description$reportDescription$elements <- elements.formatted
 
-  report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
+  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 
   return(report.data) 
 
