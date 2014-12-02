@@ -15,7 +15,7 @@
 #' @param date.from Start date for the report (YYYY-MM-DD)
 #' @param date.to End date for the report (YYYY-MM-DD)
 #' @param metrics List of metrics to include in the report
-#' @param date.granularity Time granularity of the report (year/month/week/day/hour), default to 'day'
+#' @param date.granularity Time granularity of the report (year/month/week/day/hour/aggregate), default to 'day'
 #' @param segment.id Id of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline Inline segment definition
 #' @param anomaly.detection  Set to TRUE to include forecast data (only valid for day granularity with small date ranges)
@@ -61,7 +61,11 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
   report.description$reportDescription$dateFrom <- unbox(date.from)
   report.description$reportDescription$dateTo <- unbox(date.to)
   report.description$reportDescription$reportSuiteID <- unbox(reportsuite.id)
-  report.description$reportDescription$dateGranularity <- unbox(date.granularity)
+  # Adobe Analytics API aggregates when dateGranularity is not set
+  # This allow for better handling of custom date ranges
+  if (date.granularity != 'aggregate') {
+    report.description$reportDescription$dateGranularity <- unbox(date.granularity)
+  }
   report.description$reportDescription$segment_id <- unbox(segment.id)
   report.description$reportDescription$anomalyDetection <- unbox(anomaly.detection)
   report.description$reportDescription$currentData <- unbox(data.current)
