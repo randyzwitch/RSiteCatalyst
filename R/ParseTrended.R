@@ -16,7 +16,7 @@ ParseTrended <- function(report.data) {
   # jsonlite already makes this into a nice data frame for us
   data <- report.data$report$data
 
-  elements <- report.data$report$elements$id
+  elements <- report.data$report$elements
   metrics <- report.data$report$metrics$id
 
   formatted.df <- data.frame()
@@ -25,7 +25,7 @@ ParseTrended <- function(report.data) {
   # We've essentially got a ranked report for each date
   for(i in 1:nrow(data)) {
 
-    if(length(elements)>1){
+    if(nrow(elements)>1){
       # if we have multiple elements, then build inner breakdowns
       temp <- BuildInnerBreakdownsRecursively(data[i,"breakdown"][[1]],elements,metrics,1,c())
     } else {
