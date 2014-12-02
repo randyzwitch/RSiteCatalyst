@@ -61,7 +61,7 @@ QueueFallout <- function(reportsuite.id, date.from, date.to, metrics, element, c
   report.description$reportDescription$metrics = data.frame(id = metrics)
   report.description$reportDescription$elements = list(list(id = unbox(element), checkpoints = checkpoints))
 
-  report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
+  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 
   return(report.data) 
 

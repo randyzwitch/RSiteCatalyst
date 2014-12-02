@@ -69,7 +69,7 @@ QueuePathing <- function(reportsuite.id, date.from, date.to, metric, element, pa
                                                             startingWith = unbox(start), 
                                                             pattern = as.list(pattern)))
 
-  report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
+  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 
   return(report.data) 
 

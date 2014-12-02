@@ -1,4 +1,4 @@
-#' @name JsonQueueReport
+#' @name SubmitJsonQueueReport
 #' 
 #' @title Create Queue Report from JSON
 #' 
@@ -19,15 +19,14 @@
 #' @examples
 #' \dontrun{
 #' 
-#' custom_report <- JsonQueueReport('valid Adobe Analytics API JSON string')
+#' custom_report <- SubmitJsonQueueReport('valid Adobe Analytics API JSON string')
 #'
 #' }
 #' 
-#' @family internal
-#' @keywords internal
+#' @export
 #'
 
-JsonQueueReport <- function(report.description,interval.seconds=5,max.attempts=120) {
+SubmitJsonQueueReport <- function(report.description,interval.seconds=5,max.attempts=120) {
 
   if(!ValidateReport(report.description)) {
     stop("ERROR: Invalid report description.")

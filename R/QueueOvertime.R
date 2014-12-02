@@ -71,7 +71,7 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
   }
   report.description$reportDescription$metrics = data.frame(id = metrics)
 
-  report.data <- JsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
+  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
 
   return(report.data) 
 

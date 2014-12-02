@@ -29,7 +29,6 @@ Other internal: \code{\link{ApiRequest}};
   \code{\link{BuildHeader}};
   \code{\link{BuildInnerBreakdownsRecursively}};
   \code{\link{GetEndpoint}}; \code{\link{GetUsageLog}};
-  \code{\link{JsonQueueReport}};
   \code{\link{ParseFallout}}; \code{\link{ParseOvertime}};
   \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
   \code{\link{ParseTrended}}
