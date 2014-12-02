@@ -3,6 +3,10 @@ RSiteCatalyst 1.4.2
 
 * Bug Fix #108 from Jason Morgan (framingeinstein) to fix multi-level SAINT classifications in QueueRanked
 
+* Bug fix #110 to fix internal helper function
+
+* Expose ability to submit JSON requests directly to API (formerly internal function only)
+
 
 RSiteCatalyst 1.4.1
 =================
