@@ -13,8 +13,8 @@ This package is not intended for Adobe Analytics administration.
 \details{
 Package:  RSiteCatalyst \cr
 Type:     Package \cr
-Version:  1.4.1.20141129 \cr
-Date:     2014-11-29 \cr
+Version:  1.4.2 \cr
+Date:     2014-12-02 \cr
 License:  MIT + file LICENSE \cr
 }
 \author{

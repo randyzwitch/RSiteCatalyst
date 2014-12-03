@@ -7,7 +7,8 @@
 #'
 #' @description A QueueOvertime report is a report where the only granularity allowed is time. This report allows for a single report suite, time granularity, 
 #' multiple metrics, and a single segment. It is similar to the "Key Metrics" report or a Custom Event report 
-#' within the Adobe Reports & Analytics interface.
+#' within the Adobe Reports & Analytics interface. To get a summary report with no time granularity (i.e. a single row),
+#' pass an empty string to the date.granularity function parameter.
 #' 
 #' @title Run an Overtime Report
 #'
@@ -15,7 +16,7 @@
 #' @param date.from Start date for the report (YYYY-MM-DD)
 #' @param date.to End date for the report (YYYY-MM-DD)
 #' @param metrics List of metrics to include in the report
-#' @param date.granularity Time granularity of the report (year/month/week/day/hour), default to 'day'
+#' @param date.granularity Time granularity of the report (year/month/week/day/hour/''), default to 'day'
 #' @param segment.id Id of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline Inline segment definition
 #' @param anomaly.detection  Set to TRUE to include forecast data (only valid for day granularity with small date ranges)
@@ -46,6 +47,12 @@
 #'                            anomaly.detection = TRUE,
 #'                            interval.seconds = 10,
 #'                            max.attempts = 20)
+#'                            
+#' overtime3 <- QueueOvertime("your_report_suite",
+#'                            date.from = "2014-04-01",
+#'                            date.to = "2014-04-20",
+#'                            metrics = c("pageviews", "visits", "bounces"),
+#'                            date.granularity = "")
 #' }
 #'
 #' @export
