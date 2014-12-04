@@ -26,7 +26,7 @@ You may also need to install other packages that _RSiteCatalyst v1.4_ depends on
 * [base64enc](http://cran.r-project.org/web/packages/base64enc/)
 
 ```
-install.packages(c("jsonlite","plyr","httr","stringr","digest","base64enc))
+install.packages(c("jsonlite","plyr","httr","stringr","digest","base64enc"))
 ```
 
 ## Authorisation
