@@ -3,6 +3,8 @@ RSiteCatalyst 1.4.3
 
 * Added DataFeed methods: GetFeed and GetFeeds
 
+* Fixed bug #94 where segment name and segment id not output to data frame
+
 RSiteCatalyst 1.4.2
 =================
 

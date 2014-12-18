@@ -37,7 +37,13 @@ ParseRanked <- function(report.data) {
     # We need to work our way down the nested data structure
     formatted.df <- BuildInnerBreakdownsRecursively(data,elements,metrics,1,c())
   }
+  
+  #If segment null, make a dummy data frame
+  if(is.null(seg)){
+    seg <- data.frame(list("", ""))
+  }
+  names(seg) <- c("segment.id", "segment.name")
 
-  return(formatted.df)
+  return(cbind(formatted.df, seg, row.names = NULL))
 
 }

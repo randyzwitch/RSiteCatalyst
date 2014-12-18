@@ -64,7 +64,7 @@ overtime2 <- QueueOvertime("your_report_suite",
                            date.to = "2014-04-20",
                            metrics = c("pageviews", "visits", "bounces"),
                            date.granularity = "day",
-                           segment.id = "Visit_Mobile",
+                           segment.id = "5433e4e6e4b02df70be4ac63",
                            anomaly.detection = TRUE,
                            interval.seconds = 10,
                            max.attempts = 20)

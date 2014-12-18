@@ -19,7 +19,17 @@ ParsePathing <- function(report.data) {
   names(paths.df) <- paste("step.",1:ncol(paths.df),sep="")
 
   paths.df$count <- as.numeric(data$counts)
+  
+  #Get segment 
+  seg <- report.data$report$segments
+  
+  #If segment null, make a dummy data frame
+  if(is.null(seg)){
+    seg <- data.frame(list("", ""))
+  }
+  names(seg) <- c("segment.id", "segment.name")
 
-  return(paths.df)
-
+  return(cbind(paths.df, seg, row.names = NULL))
 }
+
+
