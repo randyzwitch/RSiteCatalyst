@@ -1,5 +1,4 @@
 # rstudio ide package management
-.Rbuildignore
 .Rhistory
 .Rproj.user
 .RData
