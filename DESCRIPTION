@@ -14,6 +14,8 @@ Imports:
     base64enc,
     digest,
     stringr
+Suggests:
+    testthat
 Description: R Client for Adobe Analytics API v1.4
     (https://api.omniture.com/admin/1.4/rest/)
 License: MIT + file LICENSE
