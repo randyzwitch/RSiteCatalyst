@@ -30,14 +30,5 @@ Flat data frame containing all key report data
 \description{
 Internal function - Builds inner breakdowns from nested report structure
 }
-\seealso{
-Other internal: \code{\link{ApiRequest}};
-  \code{\link{BuildHeader}}; \code{\link{GetEndpoint}};
-  \code{\link{GetUsageLog}};
-  \code{\link{JsonQueueRealTimeReport}};
-  \code{\link{ParseFallout}}; \code{\link{ParseOvertime}};
-  \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
-  \code{\link{ParseTrended}}
-}
 \keyword{internal}
 

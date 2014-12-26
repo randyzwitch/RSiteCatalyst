@@ -19,7 +19,7 @@
 #'
 #' }
 #'
-#' @family internal
+#' @export
 #' @keywords internal
 
 JsonQueueRealTimeReport <- function(report.description) {

@@ -16,13 +16,10 @@ Formatted data frame
 Internal Function - Parses an overtime report returned from the API
 }
 \seealso{
-Other internal: \code{\link{ApiRequest}};
-  \code{\link{BuildHeader}};
-  \code{\link{BuildInnerBreakdownsRecursively}};
-  \code{\link{GetEndpoint}}; \code{\link{GetUsageLog}};
-  \code{\link{JsonQueueRealTimeReport}};
-  \code{\link{ParseFallout}}; \code{\link{ParsePathing}};
-  \code{\link{ParseRanked}}; \code{\link{ParseTrended}}
+Other internal: \code{\link{GetEndpoint}};
+  \code{\link{GetUsageLog}}; \code{\link{ParseFallout}};
+  \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
+  \code{\link{ParseTrended}}
 }
 \keyword{internal}
 

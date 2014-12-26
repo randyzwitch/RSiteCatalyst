@@ -5,6 +5,10 @@ RSiteCatalyst 1.4.3
 
 * Fixed bug #94 where segment name and segment id not output to data frame
 
+* Exported all previously internal functions
+
+* Re-fixed #108 to not break QueueRanked when classifications not used
+
 RSiteCatalyst 1.4.2
 =================
 

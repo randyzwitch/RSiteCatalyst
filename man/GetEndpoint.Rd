@@ -17,11 +17,7 @@ Internal function that gets proper API endpoint for a given
 Adobe Analytics Company
 }
 \seealso{
-Other internal: \code{\link{ApiRequest}};
-  \code{\link{BuildHeader}};
-  \code{\link{BuildInnerBreakdownsRecursively}};
-  \code{\link{GetUsageLog}};
-  \code{\link{JsonQueueRealTimeReport}};
+Other internal: \code{\link{GetUsageLog}};
   \code{\link{ParseFallout}}; \code{\link{ParseOvertime}};
   \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
   \code{\link{ParseTrended}}

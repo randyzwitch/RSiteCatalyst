@@ -16,13 +16,10 @@ Data frame
 Internal Function - Parses a fallout report returned from the API
 }
 \seealso{
-Other internal: \code{\link{ApiRequest}};
-  \code{\link{BuildHeader}};
-  \code{\link{BuildInnerBreakdownsRecursively}};
-  \code{\link{GetEndpoint}}; \code{\link{GetUsageLog}};
-  \code{\link{JsonQueueRealTimeReport}};
-  \code{\link{ParseOvertime}}; \code{\link{ParsePathing}};
-  \code{\link{ParseRanked}}; \code{\link{ParseTrended}}
+Other internal: \code{\link{GetEndpoint}};
+  \code{\link{GetUsageLog}}; \code{\link{ParseOvertime}};
+  \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
+  \code{\link{ParseTrended}}
 }
 \keyword{internal}
 

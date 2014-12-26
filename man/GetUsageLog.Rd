@@ -29,11 +29,7 @@ usagelog <- GetUsageLog("2014-01-01","2014-01-31")
 }
 }
 \seealso{
-Other internal: \code{\link{ApiRequest}};
-  \code{\link{BuildHeader}};
-  \code{\link{BuildInnerBreakdownsRecursively}};
-  \code{\link{GetEndpoint}};
-  \code{\link{JsonQueueRealTimeReport}};
+Other internal: \code{\link{GetEndpoint}};
   \code{\link{ParseFallout}}; \code{\link{ParseOvertime}};
   \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
   \code{\link{ParseTrended}}
