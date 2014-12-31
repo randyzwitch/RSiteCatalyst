@@ -9,6 +9,8 @@ RSiteCatalyst 1.4.3
 
 * Re-fixed #108 to not break QueueRanked when classifications not used
 
+* Add unit tests using Travis CI
+
 RSiteCatalyst 1.4.2
 =================
 

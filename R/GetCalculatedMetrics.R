@@ -29,7 +29,7 @@ GetCalculatedMetrics<- function(reportsuite.ids) {
   
   #Don't even know if this is possible, holdover from GetSegments code
   if(length(response$calculated_metrics[[1]]) == 0) {
-      return(print("No Base URL Defined For This Report Suite"))
+      return(print("No Calculated Metrics Defined For This Report Suite"))
     }
   
   #Parse first level of classification
