@@ -1,8 +1,8 @@
 #' @details This function requires having a character vector with one or more valid Report Suites specified.
 #'
-#' @description Get permanent traffic setting for the specified report suites. 
+#' @description Get scheduled traffic spikes for the specified report suites. 
 #' 
-#' @title Get Permanent Traffic Setting for a Report Suite(s)
+#' @title Get Scheduled Traffic Spike Setting for a Report Suite(s)
 #' 
 #' @param reportsuite.ids Report suite id (or list of report suite ids)
 #'

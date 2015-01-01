@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetScheduledSpike.R
 \name{GetScheduledSpike}
 \alias{GetScheduledSpike}
-\title{Get Permanent Traffic Setting for a Report Suite(s)}
+\title{Get Scheduled Traffic Spike Setting for a Report Suite(s)}
 \usage{
 GetScheduledSpike(reportsuite.ids)
 }
@@ -13,7 +13,7 @@ GetScheduledSpike(reportsuite.ids)
 Data frame
 }
 \description{
-Get permanent traffic setting for the specified report suites.
+Get scheduled traffic spikes for the specified report suites.
 }
 \details{
 This function requires having a character vector with one or more valid Report Suites specified.
