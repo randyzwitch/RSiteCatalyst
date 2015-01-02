@@ -1,8 +1,8 @@
 #' @details This function requires having a character vector with one or more valid Report Suites specified.
 #'
-#' @description Get site title for the specified report suites. 
+#' @description Get Time Zone for the specified report suites. 
 #' 
-#' @title Get Site Title for a Report Suite(s)
+#' @title Get Time Zone for a Report Suite(s)
 #' 
 #' @param reportsuite.ids Report suite id (or list of report suite ids)
 #'

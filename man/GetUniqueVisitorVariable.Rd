@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetUniqueVisitorVariable.R
 \name{GetUniqueVisitorVariable}
 \alias{GetUniqueVisitorVariable}
-\title{Get Whether Transaction Storage for a Report Suite(s)}
+\title{Get Whether Unique Visitor Variable Enabled for a Report Suite(s)}
 \usage{
 GetUniqueVisitorVariable(reportsuite.ids)
 }
@@ -13,7 +13,7 @@ GetUniqueVisitorVariable(reportsuite.ids)
 Data frame
 }
 \description{
-Get whether transaction storage is enabled for the specified report suites.
+Get whether unique visitor variable is enabled for the specified report suites.
 }
 \details{
 This function requires having a character vector with one or more valid Report Suites specified.

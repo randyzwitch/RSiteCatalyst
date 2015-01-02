@@ -1,8 +1,8 @@
 #' @details This function requires having a character vector with one or more valid Report Suites specified.
 #'
-#' @description Get whether transaction storage is enabled for the specified report suites. 
+#' @description Get whether unique visitor variable is enabled for the specified report suites. 
 #' 
-#' @title Get Whether Transaction Storage for a Report Suite(s)
+#' @title Get Whether Unique Visitor Variable Enabled for a Report Suite(s)
 #' 
 #' @param reportsuite.ids Report suite id (or list of report suite ids)
 #'

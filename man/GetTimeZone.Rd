@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetTimeZone.R
 \name{GetTimeZone}
 \alias{GetTimeZone}
-\title{Get Site Title for a Report Suite(s)}
+\title{Get Time Zone for a Report Suite(s)}
 \usage{
 GetTimeZone(reportsuite.ids)
 }
@@ -13,7 +13,7 @@ GetTimeZone(reportsuite.ids)
 Data frame
 }
 \description{
-Get site title for the specified report suites.
+Get Time Zone for the specified report suites.
 }
 \details{
 This function requires having a character vector with one or more valid Report Suites specified.
