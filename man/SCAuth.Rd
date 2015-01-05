@@ -5,7 +5,7 @@
 \title{Store Credentials for the Adobe Analytics API}
 \usage{
 SCAuth(key, secret, company = "", token.file = "", auth.method = "legacy",
-  debug.mode = FALSE)
+  debug.mode = FALSE, use.1.3 = FALSE)
 }
 \arguments{
 \item{key}{client id from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API username (username:company)}
@@ -20,6 +20,8 @@ future sessions, specify a file here. The method checks for the existence of the
 \item{auth.method}{defaults to legacy, can be set to 'OAUTH2' to use the newer OAUTH method.}
 
 \item{debug.mode}{set global debug mode}
+
+\item{use.1.3}{Internal only, used to allow AdobeDW package to use RSiteCatalyst authentication framework.}
 }
 \value{
 Global credentials list 'SC.Credentials'
