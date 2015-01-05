@@ -8,6 +8,6 @@ test_that("Validate GetQueue using legacy credentials", {
   gq <- GetQueue()
   
   #Validate returned value is a data.frame
-  expect_is(gq, "list")
+  expect_is(gq, c("list", "data.frame"))
   
 })
