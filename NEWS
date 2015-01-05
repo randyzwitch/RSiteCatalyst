@@ -5,11 +5,11 @@ RSiteCatalyst 1.4.3
 
 * Fixed bug #94 where segment name and segment id not output to data frame
 
-* Exported all previously internal functions
+* Exported all previously internal functions to support future AdobeDW package
 
 * Re-fixed #108 to not break QueueRanked when classifications not used
 
-* Add unit tests using Travis CI
+* Added unit tests using Travis CI
 
 RSiteCatalyst 1.4.2
 =================
