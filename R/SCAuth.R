@@ -11,9 +11,10 @@
 #' future sessions, specify a file here. The method checks for the existence of the file and uses that if available.
 #' @param auth.method defaults to legacy, can be set to 'OAUTH2' to use the newer OAUTH method.
 #' @param debug.mode set global debug mode
+#' @param use.1.3 Internal only, used to allow AdobeDW package to use RSiteCatalyst authentication framework.
 #'
 #' @importFrom httr oauth_app oauth_endpoint oauth2.0_token
-#' @importFrom stringr str_count str_split_fixed
+#' @importFrom stringr str_count str_split_fixed str_replace
 #' 
 #' @return Global credentials list 'SC.Credentials'
 #' 
@@ -26,7 +27,7 @@
 #'
 #' @export
 
-SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy", debug.mode = FALSE){
+SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy", debug.mode = FALSE, use.1.3 = FALSE){
 
   #Temporarily set SC.Credentials for GetEndpoint function call
   #SC.Credentials <<- list(key=key, secret=secret)
@@ -108,8 +109,11 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
     if(error.flag >0){
       stop("Authentication failed due to errors")
     } else {
-      #Create SCCredentials object in Global Environment
-      #SC.Credentials <<- list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url,debug=debug.mode)
+      
+      #Hack to enable AdobeDW to work while Adobe migrates endpoints (if ever)
+      if(use.1.3 == TRUE){
+        endpoint.url <- str_replace(endpoint.url, "1.4", "1.3")
+      }
       
       assign("SC.Credentials", list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url,debug=debug.mode), envir = AdobeAnalytics)
       
