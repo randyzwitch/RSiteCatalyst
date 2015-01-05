@@ -1,8 +1,8 @@
 Package: RSiteCatalyst
 Type: Package
 Title: R Client for Adobe Analytics API v1.4
-Version: 1.4.2.20141217
-Date: 2014-12-17
+Version: 1.4.2.20150105
+Date: 2015-01-05
 Author: Willem Paling, Randy Zwitch & Jowanza Joseph
 Maintainer: Randy Zwitch <rzwitch+rsitecatalyst@gmail.com>
 Depends:
@@ -14,6 +14,8 @@ Imports:
     base64enc,
     digest,
     stringr
+Suggests:
+    testthat
 Description: R Client for Adobe Analytics API v1.4
     (https://api.omniture.com/admin/1.4/rest/)
 License: MIT + file LICENSE

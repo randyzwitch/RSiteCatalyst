@@ -90,8 +90,10 @@ ParseTrended <- function(report.data) {
         formatted.df <- temp
       }
   }
-
   
+  #Get segment 
+  seg <- report.data$report$segments
+
   #If segment null, make a dummy data frame
   if(is.null(seg)){
     seg <- data.frame(list("", ""))

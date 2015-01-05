@@ -15,7 +15,7 @@
 #'
 #' @return Flat data frame containing all key report data
 #'
-#' @family internal
+#' @export
 #' @keywords internal
 
 BuildInnerBreakdownsRecursively <- function(parent.element,elements,metrics,

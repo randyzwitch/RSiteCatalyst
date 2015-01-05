@@ -15,7 +15,7 @@
 #'
 #' @return json
 #'
-#' @family internal
+#' @export
 #' @keywords internal
 
 ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,print.attempts=FALSE,skip.queue=FALSE) {

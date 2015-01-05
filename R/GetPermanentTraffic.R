@@ -29,7 +29,7 @@ GetPermanentTraffic <- function(reportsuite.ids) {
   
   #Don't even know if this is possible, holdover from GetSegments code
   if(length(response$permanent_traffic[[1]]) == 0) {
-      return(print("Paid Search Detection Not Enabled For This Report Suite"))
+      return(print("Permanent Traffic Not Enabled For This Report Suite"))
     }
   
   #Parse first level of classification
