@@ -167,7 +167,7 @@ date.to <- "2014-01-07"
 reportsuite.id <- "your_report_suite"
 metric <- "pageviews"
 element <- "page"
-pattern <- c("Home",":::anything:::",":::anything:::")
+pattern <- c("Home","::anything::","::anything::")
 
 report.data <- QueuePathing(reportsuite.id, date.from, date.to, metric, element, pattern)
 ```
