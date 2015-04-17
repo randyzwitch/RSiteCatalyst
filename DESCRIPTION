@@ -17,6 +17,6 @@ Imports:
 Suggests:
     testthat
 Description: Functions for interacting with the Adobe Analytics API v1.4
-    (https://api.omniture.com/admin/1.4/rest/)
+    (https://api.omniture.com/admin/1.4/rest/).
 License: MIT + file LICENSE
 BugReports: https://github.com/randyzwitch/RSiteCatalyst
