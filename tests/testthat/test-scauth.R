@@ -4,7 +4,7 @@ test_that("SCAuth legacy credentials work as expected", {
 
   #Correct [masked] credentials
   expect_output(SCAuth(Sys.getenv("USER", ""), Sys.getenv("SECRET", "")),
-                "Authentication Succeeded.")
+                "Credentials Saved in RSiteCatalyst Namespace.")
   
   #Test for error when no arguments passed
   expect_error(SCAuth())

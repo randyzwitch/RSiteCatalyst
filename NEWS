@@ -1,3 +1,7 @@
+RSiteCatalyst 1.4.4
+=================
+* Changed SCAuth success message to be more explicit that credentials were saved, not actually authenticated
+
 RSiteCatalyst 1.4.3
 =================
 

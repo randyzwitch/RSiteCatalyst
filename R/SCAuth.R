@@ -120,7 +120,7 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
       #save(SC.Credentials,file="~/SC.Credentials")
       #Assign endpoint to 3rd position in credentials
       #print("Legacy Auth Stored: This method is deprecated. If possible, use OAUTH.")
-      print("Authentication Succeeded.")
+      print("Credentials Saved in RSiteCatalyst Namespace.")
     }
 
   }
