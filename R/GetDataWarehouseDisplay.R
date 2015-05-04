@@ -2,7 +2,7 @@
 #'
 #' @description Get whether Data Warehouse is enabled for the specified report suites. 
 #' 
-#' @title Get Whether Data Warehouse is for a Report Suite(s)
+#' @title Get Whether Data Warehouse is Enabled for a Report Suite(s)
 #' 
 #' @param reportsuite.ids Report suite id (or list of report suite ids)
 #'
