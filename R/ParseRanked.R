@@ -41,12 +41,12 @@ ParseRanked <- function(report.data) {
   #Get segment 
   seg <- report.data$report$segments
   
-  #If segment null, make a dummy data frame
+  #If segment null, don't add it in
   if(is.null(seg)){
-    seg <- data.frame(list("", ""))
+    return(formatted.df)
+  } else {
+    names(seg) <- c("segment.id", "segment.name")
+    return(cbind(formatted.df, seg, row.names = NULL))
   }
-  names(seg) <- c("segment.id", "segment.name")
-
-  return(cbind(formatted.df, seg, row.names = NULL))
 
 }
