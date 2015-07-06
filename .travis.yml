@@ -15,5 +15,7 @@ notifications:
 env:
   global:
   - secure: V/T8IG3n+8gjAOfs0smq5RgFHnYQGp1nXLas8GlbswE7DpxvhQsXDnRrRZ7cnCUbP4sc08hIHafRAuOkAzHw2mMbSjXQbfTCXKWAC8nH1vgtCd87quV9/s9QjOEoTDtnz8S/MS6FV2xfPNa+MhmI6RskcAEKIF9VzwvXfT+rM4M=
-  - secure: rS+NNm2O07DQtFIET+8ujoKQ09cGoWgyaMSmHAOCTvK/uA7NWigGmGVVTi84m9kcgG8pWD2nD8j0mGC5wjVgdzauZcEQftDz2n+jo0yPH4+jkoTITFVSNFdcg68uML9395itlT6Ia5UivlUhXisNb+TszOww864ahBkL+sHaGjg=
+  - secure: H6gkWcyFLEY6/YWrRMsUiX8QWLlIXbUIgu7b1mFRrmkdnKtbK3m/z3meLIT1/ikH2MUb9mW6iMqagrkdtImaxO+Oiio1FqeBHcyWabx2S/7rQTVjOifD0jWLenfvIt3CZ57PzjjHEafgc0CvaPKSS/5G8/iumush35q2JPNVx4g=
   - NOT_CRAN="true"
+SECRET=fbbd56c3ab0f4698de62a2d74591f40a:
+  secure: ey4Fk02UmI1idSZ+r60ut3l7AkacA6Os+Rf5+f9vwHyzL07SVQ3VQwPwwG3eeY8i7oLYsCIxE4Y0afjckzMq8Gb9QhtppEUdDWEfo5Vz7H1/FXvYJG94TffbuvZs6HAlClcOjpofKT0OYpy0m2ni6F2BvxpnldyXZmvhVKEZMnc=
