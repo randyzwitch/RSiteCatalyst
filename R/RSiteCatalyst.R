@@ -1,14 +1,14 @@
 #' Package:  RSiteCatalyst \cr
 #' Type:     Package \cr
-#' Version:  1.4.3.20150504 \cr
-#' Date:     2015-05-04 \cr
+#' Version:  1.4.3.20150707 \cr
+#' Date:     2015-07-07 \cr
 #' License:  MIT + file LICENSE \cr
 #'
 #'
 #' 
 #' @name RSiteCatalyst
 #' @docType package
-#' @title R Client for Adobe Analytics API v1.4 
+#' @title R Client for Adobe Analytics API V1.4 
 #' @author Willem Paling, Randy Zwitch, Jowanza Joseph
 #' @description 
 #' This package contains an "analyst's toolbox" of functions for accessing the Adobe Analytics Reporting API v1.4. 
