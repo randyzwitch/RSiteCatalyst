@@ -43,8 +43,8 @@ BuildInnerBreakdownsRecursively <- function(parent.element,elements,metrics,
       # we should not go deeper if we have a NULL breakdown
       #RZ 8/29: Modified SC.Debug logic for referencing hidden credentials list
       #Not sure I actually understand what this is doing, but it seems right
-      if(is.null(working.element)) {
-        if(exists('SC.Debug', AdobeAnalytics$SC.Credentials)&&AdobeAnalytics$SC.Credentials$SC.Debug==TRUE) {
+      if(is.null(working.element)||length(working.element)==0) {
+        if(!is.null(AdobeAnalytics$SC.Credentials)&&!is.null(AdobeAnalytics$SC.Credentials$SC.Debug)&&AdobeAnalytics$SC.Credentials$SC.Debug==TRUE) {
           print(paste0("DEBUG: Warning! NULL breakdown returned for ",context))
         }
       } else {
@@ -52,58 +52,64 @@ BuildInnerBreakdownsRecursively <- function(parent.element,elements,metrics,
       }
       
     } else {
-      
-      # we are at the lowest level
-      # build our list of metrics
-      working.metrics <- ldply(working.element$counts)
-      names(working.metrics) <- metrics
-      
-      # check if we have anomaly detection
-      if("forecasts" %in% colnames(working.element)) {
-        forecasts.df <- ldply(working.element$forecasts)
-        names(forecasts.df) <- paste("forecast.",metrics,sep="")
-        working.metrics <- cbind(working.metrics,forecasts.df)
-      }
-      
-      # convert all count columns to numeric
-      for(i in 1:ncol(working.metrics)) {
-        working.metrics[,i] <- as.numeric(working.metrics[,i])
-      }
-      
-      # build our list of elements
-      outer.elements <- working.element$name
-      names(outer.elements) <- "name"
 
-      # build named elements, with classifications if they exist
-      elements.named <- elements$id
-      for(i in 1:nrow(elements)) {
-        if(!is.null(elements[i,]$classification) && nchar(elements[i,]$classification)>0) {
-          elements.named[i] <- paste0(elements[i,]$id,": ",elements[i,]$classification)
+      if(is.null(working.element)||length(working.element)==0) {
+        if(!is.null(AdobeAnalytics$SC.Credentials)&&!is.null(AdobeAnalytics$SC.Credentials$SC.Debug)&&AdobeAnalytics$SC.Credentials$SC.Debug==TRUE) {
+          print(paste0("DEBUG: Warning! NULL breakdown returned for ",context))
         }
-      }
-      
-      # if we have a valid date range, apply it to all rows
-      if(length(date.range)==2){
-        working.elements.breakdown <- data.frame(matrix(ncol=nrow(elements)+2, nrow=length(outer.elements)))
-        names(working.elements.breakdown) <- append(c("date.start","date.end"),elements.named)
-        working.elements.breakdown$date.start <- date.range[1]
-        working.elements.breakdown$date.end <- date.range[2]   
       } else {
-        working.elements.breakdown <- data.frame(matrix(ncol=nrow(elements), nrow=length(outer.elements)))
-        names(working.elements.breakdown) <- elements.named
+        # we are at the lowest level
+        # build our list of metrics
+        working.metrics <- ldply(working.element$counts)
+        names(working.metrics) <- metrics
+        
+        # check if we have anomaly detection
+        if("forecasts" %in% colnames(working.element)) {
+          forecasts.df <- ldply(working.element$forecasts)
+          names(forecasts.df) <- paste("forecast.",metrics,sep="")
+          working.metrics <- cbind(working.metrics,forecasts.df)
+        }
+        
+        # convert all count columns to numeric
+        for(i in 1:ncol(working.metrics)) {
+          working.metrics[,i] <- as.numeric(working.metrics[,i])
+        }
+        
+        # build our list of elements
+        outer.elements <- working.element$name
+        names(outer.elements) <- "name"
+
+        # build named elements, with classifications if they exist
+        elements.named <- elements$id
+        for(i in 1:nrow(elements)) {
+          if(!is.null(elements[i,]$classification) && nchar(elements[i,]$classification)>0) {
+            elements.named[i] <- paste0(elements[i,]$id,": ",elements[i,]$classification)
+          }
+        }
+        
+        # if we have a valid date range, apply it to all rows
+        if(length(date.range)==2){
+          working.elements.breakdown <- data.frame(matrix(ncol=nrow(elements)+2, nrow=length(outer.elements)))
+          names(working.elements.breakdown) <- append(c("date.start","date.end"),elements.named)
+          working.elements.breakdown$date.start <- date.range[1]
+          working.elements.breakdown$date.end <- date.range[2]   
+        } else {
+          working.elements.breakdown <- data.frame(matrix(ncol=nrow(elements), nrow=length(outer.elements)))
+          names(working.elements.breakdown) <- elements.named
+        }
+        
+        # apply context to all rows
+        for(j in 1:(nrow(elements)-1)) {
+          working.elements.breakdown[j] <- context[j]
+        }
+        
+        # apply outer element to all rows
+        working.elements.breakdown[j+1] <- outer.elements
+        
+        # bind to the accumulator
+        temp <- cbind(working.elements.breakdown,working.metrics)
+        accumulator <- rbind(accumulator,temp)  
       }
-      
-      # apply context to all rows
-      for(j in 1:(nrow(elements)-1)) {
-        working.elements.breakdown[j] <- context[j]
-      }
-      
-      # apply outer element to all rows
-      working.elements.breakdown[j+1] <- outer.elements
-      
-      # bind to the accumulator
-      temp <- cbind(working.elements.breakdown,working.metrics)
-      accumulator <- rbind(accumulator,temp)
       
     }
   }
