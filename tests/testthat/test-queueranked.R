@@ -54,7 +54,30 @@ test_that("Validate QueueRanked using legacy credentials", {
                     data.current = "1")
   
   #Validate returned value is a data.frame
-  expect_is(dd, "data.frame")  
+  expect_is(dd, "data.frame")
+  
+  ee <- QueueRanked("zwitchdev", 
+                         date.from = "2015-04-01", 
+                         date.to = "2015-04-20", 
+                         metrics = "pageviews", 
+                         elements = c("page", "sitesection") 
+  )
+  
+  
+  #Validate returned value is a data.frame
+  expect_is(ee, "data.frame")
+  
+  ff <- QueueRanked("zwitchdev", 
+                         date.from = "2015-04-01", 
+                         date.to = "2015-04-20", 
+                         metrics = "pageviews", 
+                         elements = c("page", "sitesection", "browser") 
+  )
+  
+  
+  #Validate returned value is a data.frame
+  expect_is(ff, "data.frame")
+  
   
 })
 

@@ -82,6 +82,36 @@ test_that("Validate QueueTrended using legacy credentials", {
   #Validate returned value is a data.frame
   expect_is(ff, "data.frame")
   
+  gg <- QueueTrended("zwitchdev", 
+                           date.from = "2015-04-01", 
+                           date.to = "2015-04-20", 
+                           metrics = c("pageviews","visits"), 
+                           elements = c("sitesection") 
+  )
+  
+  #Validate returned value is a data.frame
+  expect_is(gg, "data.frame")
+  
+  hh <- QueueTrended("zwitchdev", 
+                           date.from = "2015-04-01", 
+                           date.to = "2015-04-20", 
+                           metrics = "pageviews", 
+                           elements = c("sitesection", "page") 
+  )
+  
+  #Validate returned value is a data.frame
+  expect_is(hh, "data.frame")
+  
+  ii <- QueueTrended("zwitchdev", 
+                           date.from = "2015-04-01", 
+                           date.to = "2015-04-02", 
+                           metrics = "pageviews", 
+                           elements = c("sitesection", "page","browser") 
+  )
+  
+  #Validate returned value is a data.frame
+  expect_is(ii, "data.frame")
+  
 })
 
 
