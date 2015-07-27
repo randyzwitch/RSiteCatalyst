@@ -99,17 +99,17 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   }
   report.description$reportDescription$metrics = data.frame(id = metrics)
 
-  # build up each element with selections
   elements.formatted <- list()
-  for(i in 1:length(elements)) {
-    element <- elements[[i]]
-
+  # build up each element with selections
+  i <- 0
+  for(element in elements) {
+    i <- i + 1
     # we only put selected, search, top and startingWith for the first element
     if(i==1){
       working.element <- list(id = unbox(element), 
                               top = unbox(top), 
                               startingWith = unbox(start))
-
+      
       if(length(selected)!=0){
         working.element[["selected"]] <- selected
       }
@@ -117,12 +117,15 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
         working.element[["search"]] <- list(type = unbox(search.type), 
                                             keywords = search)
       }
-      if(length(classification)!=0){
-        working.element[["classification"]] <- unbox(classification)
-      }
+      
     } else {
-      working.element <- list(id = unbox(element))
+      working.element <- list(id = unbox(element), top = unbox("50000"))
     }
+    
+    if(length(classification)>=i){
+      working.element[["classification"]] <- unbox(classification[i])
+    }
+    
     if(length(elements.formatted)>0) {
       elements.formatted <- append(elements.formatted,list(working.element))
     } else {
