@@ -14,8 +14,6 @@ notifications:
     on_failure: change
 env:
   global:
-  - secure: V/T8IG3n+8gjAOfs0smq5RgFHnYQGp1nXLas8GlbswE7DpxvhQsXDnRrRZ7cnCUbP4sc08hIHafRAuOkAzHw2mMbSjXQbfTCXKWAC8nH1vgtCd87quV9/s9QjOEoTDtnz8S/MS6FV2xfPNa+MhmI6RskcAEKIF9VzwvXfT+rM4M=
-  - secure: H6gkWcyFLEY6/YWrRMsUiX8QWLlIXbUIgu7b1mFRrmkdnKtbK3m/z3meLIT1/ikH2MUb9mW6iMqagrkdtImaxO+Oiio1FqeBHcyWabx2S/7rQTVjOifD0jWLenfvIt3CZ57PzjjHEafgc0CvaPKSS/5G8/iumush35q2JPNVx4g=
+  - secure: fiyGwDpuFeKotrOqSsRpHr8f3eAjK3pfUBoW7PIqa4rAzuvPR2Ft2j/a2EvsuPlXwxsb7i9pjtbSBXIHoLngCEJ6kDNOCPeKCLNGW8SEWImQC18ThNcCOrD8rdgdON3IeZbS0mWWJqfK6CUELeuZAEt2pqlmLa+0TrNKPW8PTls=
+  - secure: Uvjp8cUwYrzVmEVTh36PG10VdEy+uLl6Nx/h47/semGooGO3VjU43ZLrliZ2dTPEQ/7mYuHibte9zpvVV3CE0Ia0xmqqSSzmREwUNVFdQwPFcfUGaZdz6r6sM/9FFksmO4EuD0R5ehbFHz3CJbO+ZXgJAHcItDNmF2fbJL8VdM8=
   - NOT_CRAN="true"
-SECRET=fbbd56c3ab0f4698de62a2d74591f40a:
-  secure: ey4Fk02UmI1idSZ+r60ut3l7AkacA6Os+Rf5+f9vwHyzL07SVQ3VQwPwwG3eeY8i7oLYsCIxE4Y0afjckzMq8Gb9QhtppEUdDWEfo5Vz7H1/FXvYJG94TffbuvZs6HAlClcOjpofKT0OYpy0m2ni6F2BvxpnldyXZmvhVKEZMnc=
