@@ -4,6 +4,8 @@ RSiteCatalyst 1.4.5
 
 * Added 'endpoint' function argument to allow users to specify their own endpoint
 
+* Added CalculatedMetrics API method: GetFunctions
+
 RSiteCatalyst 1.4.4
 =================
 * Changed SCAuth success message to be more explicit that credentials were saved, not actually authenticated against the API

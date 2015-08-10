@@ -24,7 +24,7 @@ future sessions, specify a file here. The method checks for the existence of the
 \item{endpoint}{Set Adobe Analytics API endpoint rather than let RSiteCatalyst decide (not recommended)}
 }
 \value{
-Global credentials list 'SC.Credentials'
+Global credentials list 'SC.Credentials' in AdobeAnalytics (hidden) environment
 }
 \description{
 SCAuth
