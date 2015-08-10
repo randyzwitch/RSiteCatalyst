@@ -1,3 +1,9 @@
+RSiteCatalyst 1.4.5
+=================
+* Removed SCAuth function internal argument use1.3, no longer needed
+
+* Added 'endpoint' function argument to allow users to specify their own endpoint
+
 RSiteCatalyst 1.4.4
 =================
 * Changed SCAuth success message to be more explicit that credentials were saved, not actually authenticated against the API
