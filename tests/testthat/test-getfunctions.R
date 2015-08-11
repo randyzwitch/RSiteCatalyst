@@ -5,7 +5,7 @@ test_that("Validate GetFunctions using legacy credentials", {
   #Correct [masked] credentials
   SCAuth(Sys.getenv("USER", ""), Sys.getenv("SECRET", ""))
   
-  aa <- GetFunctions("zwitchdev")
+  aa <- GetFunctions()
   
   #Validate returned value is a data.frame
   expect_is(aa, "data.frame")
