@@ -2,7 +2,7 @@
 % Please edit documentation in R/QueueTrended.R
 \name{QueueTrended}
 \alias{QueueTrended}
-\title{Run a QueueTrended Report}
+\title{Run a Trended Report}
 \usage{
 QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   start = 0, selected = c(), search = c(), search.type = "or",

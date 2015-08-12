@@ -5,26 +5,26 @@
 \title{Store Credentials for the Adobe Analytics API}
 \usage{
 SCAuth(key, secret, company = "", token.file = "", auth.method = "legacy",
-  debug.mode = FALSE, use.1.3 = FALSE)
+  debug.mode = FALSE, endpoint = "")
 }
 \arguments{
-\item{key}{client id from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API username (username:company)}
+\item{key}{Client id from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API username (username:company)}
 
-\item{secret}{secret from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API shared secret}
+\item{secret}{Secret from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API shared secret}
 
-\item{company}{your company (only required if using OAUTH2 AUTH method)}
+\item{company}{Your company (only required if using OAUTH2 AUTH method)}
 
-\item{token.file}{if you would like to save your OAUTH token and other auth details for use in
+\item{token.file}{If you would like to save your OAUTH token and other auth details for use in
 future sessions, specify a file here. The method checks for the existence of the file and uses that if available.}
 
-\item{auth.method}{defaults to legacy, can be set to 'OAUTH2' to use the newer OAUTH method.}
+\item{auth.method}{Defaults to legacy, can be set to 'OAUTH2' to use the newer OAUTH method.}
 
-\item{debug.mode}{set global debug mode}
+\item{debug.mode}{Set global debug mode}
 
-\item{use.1.3}{Internal only, used to allow AdobeDW package to use RSiteCatalyst authentication framework.}
+\item{endpoint}{Set Adobe Analytics API endpoint rather than let RSiteCatalyst decide (not recommended)}
 }
 \value{
-Global credentials list 'SC.Credentials'
+Global credentials list 'SC.Credentials' in AdobeAnalytics (hidden) environment
 }
 \description{
 SCAuth

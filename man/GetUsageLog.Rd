@@ -32,7 +32,7 @@ usagelog <- GetUsageLog("2014-01-01","2014-01-31")
 Other internal: \code{\link{GetEndpoint}};
   \code{\link{ParseFallout}}; \code{\link{ParseOvertime}};
   \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
-  \code{\link{ParseTrended}}
+  \code{\link{ParseSummary}}; \code{\link{ParseTrended}}
 }
 \keyword{internal}
 

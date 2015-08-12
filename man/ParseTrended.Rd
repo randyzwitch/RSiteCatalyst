@@ -19,7 +19,7 @@ Internal Function - Parses a trended report returned from the API
 Other internal: \code{\link{GetEndpoint}};
   \code{\link{GetUsageLog}}; \code{\link{ParseFallout}};
   \code{\link{ParseOvertime}}; \code{\link{ParsePathing}};
-  \code{\link{ParseRanked}}
+  \code{\link{ParseRanked}}; \code{\link{ParseSummary}}
 }
 \keyword{internal}
 

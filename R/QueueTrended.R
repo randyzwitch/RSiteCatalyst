@@ -20,7 +20,7 @@
 #' elements can be received or you can specify the specific elements you are
 #' interested in (such as 3 specific page names).
 #' 
-#' @title Run a QueueTrended Report
+#' @title Run a Trended Report
 #'
 #' @param reportsuite.id Report suite id
 #' @param date.from Start date for the report (YYYY-MM-DD)

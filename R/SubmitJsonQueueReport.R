@@ -55,7 +55,8 @@ SubmitJsonQueueReport <- function(report.description,interval.seconds=5,max.atte
       trended={ParseTrended(report.data)},
       pathing={ParsePathing(report.data)},
       fallout={ParseFallout(report.data)},
-      overtime={ParseOvertime(report.data)}
+      overtime={ParseOvertime(report.data)},
+      summary={ParseSummary(report.data)}
     )
   } else {
     print("Warning: Your report definition returned an empty data set.")

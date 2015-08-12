@@ -4,19 +4,19 @@
 #' 
 #' @title Store Credentials for the Adobe Analytics API
 #'
-#' @param key client id from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API username (username:company)
-#' @param secret secret from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API shared secret
-#' @param company your company (only required if using OAUTH2 AUTH method)
-#' @param token.file if you would like to save your OAUTH token and other auth details for use in 
+#' @param key Client id from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API username (username:company)
+#' @param secret Secret from your app in the Adobe Marketing cloud Dev Center OR if you are using auth.method='legacy', then this is the API shared secret
+#' @param company Your company (only required if using OAUTH2 AUTH method)
+#' @param token.file If you would like to save your OAUTH token and other auth details for use in 
 #' future sessions, specify a file here. The method checks for the existence of the file and uses that if available.
-#' @param auth.method defaults to legacy, can be set to 'OAUTH2' to use the newer OAUTH method.
-#' @param debug.mode set global debug mode
-#' @param use.1.3 Internal only, used to allow AdobeDW package to use RSiteCatalyst authentication framework.
+#' @param auth.method Defaults to legacy, can be set to 'OAUTH2' to use the newer OAUTH method.
+#' @param debug.mode Set global debug mode
+#' @param endpoint Set Adobe Analytics API endpoint rather than let RSiteCatalyst decide (not recommended)
 #'
 #' @importFrom httr oauth_app oauth_endpoint oauth2.0_token
 #' @importFrom stringr str_count str_split_fixed str_replace
 #' 
-#' @return Global credentials list 'SC.Credentials'
+#' @return Global credentials list 'SC.Credentials' in AdobeAnalytics (hidden) environment
 #' 
 #' @examples
 #' \dontrun{
@@ -27,7 +27,7 @@
 #'
 #' @export
 
-SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy", debug.mode = FALSE, use.1.3 = FALSE){
+SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy", debug.mode = FALSE, endpoint = ""){
 
   #Temporarily set SC.Credentials for GetEndpoint function call
   #SC.Credentials <<- list(key=key, secret=secret)
@@ -110,9 +110,9 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
       stop("Authentication failed due to errors")
     } else {
       
-      #Hack to enable AdobeDW to work while Adobe migrates endpoints (if ever)
-      if(use.1.3 == TRUE){
-        endpoint.url <- str_replace(endpoint.url, "1.4", "1.3")
+      #Allow for users to specify their own endpoint
+      if(endpoint != ""){
+        endpoint.url <- endpoint
       }
       
       assign("SC.Credentials", list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url,debug=debug.mode), envir = AdobeAnalytics)

@@ -20,7 +20,7 @@ Adobe Analytics Company
 Other internal: \code{\link{GetUsageLog}};
   \code{\link{ParseFallout}}; \code{\link{ParseOvertime}};
   \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
-  \code{\link{ParseTrended}}
+  \code{\link{ParseSummary}}; \code{\link{ParseTrended}}
 }
 \keyword{internal}
 
