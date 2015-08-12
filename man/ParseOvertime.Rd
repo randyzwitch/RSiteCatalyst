@@ -19,7 +19,7 @@ Internal Function - Parses an overtime report returned from the API
 Other internal: \code{\link{GetEndpoint}};
   \code{\link{GetUsageLog}}; \code{\link{ParseFallout}};
   \code{\link{ParsePathing}}; \code{\link{ParseRanked}};
-  \code{\link{ParseTrended}}
+  \code{\link{ParseSummary}}; \code{\link{ParseTrended}}
 }
 \keyword{internal}
 
