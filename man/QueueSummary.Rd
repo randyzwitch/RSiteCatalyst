@@ -8,6 +8,8 @@ QueueSummary(reportsuite.ids, date, metrics, interval.seconds = 5,
   max.attempts = 120)
 }
 \arguments{
+\item{reportsuite.ids}{Report suite ids}
+
 \item{date}{Time period for the report (see Description)}
 
 \item{metrics}{List of metrics to include in the report}
@@ -15,8 +17,6 @@ QueueSummary(reportsuite.ids, date, metrics, interval.seconds = 5,
 \item{interval.seconds}{How long to wait between attempts}
 
 \item{max.attempts}{Number of API attempts before stopping}
-
-\item{reportsuite.id}{Report suite ids}
 }
 \value{
 Data frame

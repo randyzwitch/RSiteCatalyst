@@ -17,7 +17,7 @@
 #' 
 #' @title Run a Summary Report
 #'
-#' @param reportsuite.id Report suite ids
+#' @param reportsuite.ids Report suite ids
 #' @param date Time period for the report (see Description)
 #' @param metrics List of metrics to include in the report
 #' @param interval.seconds How long to wait between attempts
