@@ -26,12 +26,14 @@
 #' @export
 #'
 
-SubmitJsonQueueReport <- function(report.description,interval.seconds=5,max.attempts=120) {
+SubmitJsonQueueReport <- function(report.description,interval.seconds=5,max.attempts=120,validate=TRUE) {
 
-  if(!ValidateReport(report.description)) {
-    stop("ERROR: Invalid report description.")
+  if(validate) {
+    if(!ValidateReport(report.description)) {
+      stop("ERROR: Invalid report description.")
+    }
   }
-
+  
   response <- ApiRequest(body=report.description,func.name="Report.Queue")
   
   #If response returns an error, return error message. Else, continue with capturing report ID
