@@ -24,7 +24,7 @@
 #' @param date.to End date for the report (YYYY-MM-DD)
 #' @param metrics List of metrics to include in the report
 #' @param elements List of elements to include in the report
-#' @param top Number of elements to include (top X) - only applies to the first element.
+#' @param top List of numbers to limit the number of elements to include (top X). eg. c(10,5)
 #' @param start Start row if you do not want to start at #1 - only applies to the first element.
 #' @param selected List of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about").
 #' this only works for the first element (API limitation).
@@ -91,8 +91,10 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
   i <- 0
   for(element in elements) {
     i <- i + 1
+
     # we only put selected, search, top and startingWith for the first element
     if(i==1){
+      firstTop <- 
       working.element <- list(id = unbox(element), 
                               top = unbox(top), 
                               startingWith = unbox(start))
@@ -106,7 +108,13 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
       }
 
     } else {
-      working.element <- list(id = unbox(element), top = unbox("50000"))
+   	  # Check if the input is a vector with more than 1 element
+      if(length(top)>=i){
+      	# Use the matching limit value from vector
+      	working.element <- list(id = unbox(element), top = unbox( top[i] ))
+      } else {
+      	working.element <- list(id = unbox(element), top = unbox("50000"))
+      }
     }
 
     if(length(classification)>=i){
