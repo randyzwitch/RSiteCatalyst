@@ -96,7 +96,7 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
     if(i==1){
       firstTop <- 
       working.element <- list(id = unbox(element), 
-                              top = unbox(top), 
+                              top = unbox(top[1]), 
                               startingWith = unbox(start))
 
       if(length(selected)!=0){
