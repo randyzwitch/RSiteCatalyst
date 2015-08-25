@@ -11,6 +11,7 @@
 #' @param report.description JSON report description
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
+#' @param validate Weather to submit report definition for validation before requesting the data.
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
@@ -28,6 +29,7 @@
 
 SubmitJsonQueueReport <- function(report.description,interval.seconds=5,max.attempts=120,validate=TRUE) {
 
+  # Determine if we should validate the definition
   if(validate) {
     if(!ValidateReport(report.description)) {
       stop("ERROR: Invalid report description.")
