@@ -27,7 +27,7 @@
 #' @param date.to End date for the report (YYYY-MM-DD)
 #' @param metrics List of metrics to include in the report
 #' @param elements List of elements to include in the report
-#' @param top Number of rows to return
+#' @param top List of numbers to limit the number of rows to include (top X). eg. c(10,5)
 #' @param start Start row if you do not want to start at #1
 #' @param selected List of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about")
 #' @param search List of keywords for the first specified element - e.g. c("contact","about","shop").
@@ -42,6 +42,7 @@
 #' @param expedite Set to TRUE to expedite the processing of this report
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
+#' @param validate Weather to submit report definition for validation before requesting the data.
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
@@ -62,7 +63,7 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
                         top=0,start=0,selected=c(),search=c(),search.type='or',
                         date.granularity='day', segment.id='', segment.inline='', classification = character(0), 
                         anomaly.detection=FALSE, data.current=FALSE, expedite=FALSE,
-                        interval.seconds=5,max.attempts=120) {
+                        interval.seconds=5,max.attempts=120,validate=TRUE) {
   
   if(anomaly.detection==TRUE && length(elements)>1) {
     print("Warning: Anomaly detection will not be used, as it only works for a single element.")
@@ -107,7 +108,7 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
     # we only put selected, search, top and startingWith for the first element
     if(i==1){
       working.element <- list(id = unbox(element), 
-                              top = unbox(top), 
+                              top = unbox(top[1]), 
                               startingWith = unbox(start))
       
       if(length(selected)!=0){
@@ -119,7 +120,13 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
       }
       
     } else {
-      working.element <- list(id = unbox(element), top = unbox("50000"))
+   	  # Check if the input is a vector with more than 1 element
+      if(length(top)>=i){
+      	# Use the matching limit value from vector
+      	working.element <- list(id = unbox(element), top = unbox( top[i] ))
+      } else {
+      	working.element <- list(id = unbox(element), top = unbox("50000"))
+      }
     }
     
     if(length(classification)>=i){
@@ -134,7 +141,7 @@ QueueTrended <- function(reportsuite.id, date.from, date.to, metrics, elements,
   }
   report.description$reportDescription$elements <- elements.formatted
 
-  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
+  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate)
 
   return(report.data) 
 
