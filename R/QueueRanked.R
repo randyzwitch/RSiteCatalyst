@@ -24,7 +24,7 @@
 #' @param date.to End date for the report (YYYY-MM-DD)
 #' @param metrics List of metrics to include in the report
 #' @param elements List of elements to include in the report
-#' @param top List of numbers to limit the number of elements to include (top X). eg. c(10,5)
+#' @param top List of numbers to limit the number of rows to include (top X). eg. c(10,5)
 #' @param start Start row if you do not want to start at #1 - only applies to the first element.
 #' @param selected List of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about").
 #' this only works for the first element (API limitation).
