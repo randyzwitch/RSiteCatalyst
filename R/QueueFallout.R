@@ -21,6 +21,7 @@
 #' @param expedite Set to TRUE to expedite the processing of this report
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
+#' @param validate Weather to submit report definition for validation before requesting the data.
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
@@ -43,7 +44,7 @@
 #' @export
 
 QueueFallout <- function(reportsuite.id, date.from, date.to, metrics, element, checkpoints,
-                        segment.id='', expedite=FALSE,interval.seconds=5,max.attempts=120) {
+                        segment.id='', expedite=FALSE,interval.seconds=5,max.attempts=120,validate=TRUE) {
   
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
@@ -61,7 +62,7 @@ QueueFallout <- function(reportsuite.id, date.from, date.to, metrics, element, c
   report.description$reportDescription$metrics = data.frame(id = metrics)
   report.description$reportDescription$elements = list(list(id = unbox(element), checkpoints = checkpoints))
 
-  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
+  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate)
 
   return(report.data) 
 

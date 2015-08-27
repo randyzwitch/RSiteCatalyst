@@ -24,7 +24,7 @@
 #' @param date.to End date for the report (YYYY-MM-DD)
 #' @param metrics List of metrics to include in the report
 #' @param elements List of elements to include in the report
-#' @param top Number of elements to include (top X) - only applies to the first element.
+#' @param top List of numbers to limit the number of rows to include (top X). eg. c(10,5)
 #' @param start Start row if you do not want to start at #1 - only applies to the first element.
 #' @param selected List of specific items (of the first element) to include in the report - e.g. c("www:home","www:search","www:about").
 #' this only works for the first element (API limitation).
@@ -38,6 +38,7 @@
 #' @param expedite Set to TRUE to expedite the processing of this report
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
+#' @param validate Weather to submit report definition for validation before requesting the data.
 #'
 #' @importFrom jsonlite toJSON unbox
 #' @importFrom plyr rbind.fill
@@ -61,7 +62,7 @@
 QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
                         top=0,start=0,selected=c(), search=c(),search.type='or',
                         segment.id='', segment.inline='', classification=c(),data.current=FALSE, 
-                        expedite=FALSE,interval.seconds=5,max.attempts=120) {
+                        expedite=FALSE,interval.seconds=5,max.attempts=120,validate=TRUE) {
 
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
@@ -90,10 +91,12 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
   i <- 0
   for(element in elements) {
     i <- i + 1
+
     # we only put selected, search, top and startingWith for the first element
     if(i==1){
+      firstTop <- 
       working.element <- list(id = unbox(element), 
-                              top = unbox(top), 
+                              top = unbox(top[1]), 
                               startingWith = unbox(start))
 
       if(length(selected)!=0){
@@ -105,7 +108,13 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
       }
 
     } else {
-      working.element <- list(id = unbox(element), top = unbox("50000"))
+   	  # Check if the input is a vector with more than 1 element
+      if(length(top)>=i){
+      	# Use the matching limit value from vector
+      	working.element <- list(id = unbox(element), top = unbox( top[i] ))
+      } else {
+      	working.element <- list(id = unbox(element), top = unbox("50000"))
+      }
     }
 
     if(length(classification)>=i){
@@ -120,7 +129,7 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
   }
   report.description$reportDescription$elements <- elements.formatted
 
-  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
+  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate)
 
   return(report.data) 
 

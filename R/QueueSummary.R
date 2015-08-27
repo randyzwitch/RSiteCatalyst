@@ -22,6 +22,7 @@
 #' @param metrics List of metrics to include in the report
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
+#' @param validate Weather to submit report definition for validation before requesting the data.
 #'
 #' @importFrom jsonlite toJSON unbox
 #' 
@@ -37,7 +38,7 @@
 #'
 #' @export
 
-QueueSummary <- function(reportsuite.ids, date, metrics, interval.seconds=5, max.attempts=120) {
+QueueSummary <- function(reportsuite.ids, date, metrics, interval.seconds=5, max.attempts=120,validate=TRUE) {
   
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
@@ -48,7 +49,7 @@ QueueSummary <- function(reportsuite.ids, date, metrics, interval.seconds=5, max
   report.description$reportDescription$metrics <- data.frame(id = metrics)
   report.description$reportDescription$elements <- list(list(id = unbox("reportsuite"), selected=c(reportsuite.ids)))
   
-  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts)
+  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate)
   
   return(report.data) 
   
