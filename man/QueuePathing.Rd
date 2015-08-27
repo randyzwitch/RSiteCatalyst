@@ -6,7 +6,7 @@
 \usage{
 QueuePathing(reportsuite.id, date.from, date.to, metric, element, pattern,
   top = 1000, start = 1, segment.id = "", expedite = FALSE,
-  interval.seconds = 5, max.attempts = 120)
+  interval.seconds = 5, max.attempts = 120, validate = TRUE)
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -35,6 +35,8 @@ c("::anything::","::anything::","Home") will return the two previous pages leadi
 \item{interval.seconds}{How long to wait between attempts}
 
 \item{max.attempts}{Number of API attempts before stopping}
+
+\item{validate}{Weather to submit report definition for validation before requesting the data.}
 }
 \value{
 Data frame

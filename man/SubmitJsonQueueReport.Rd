@@ -5,7 +5,7 @@
 \title{Create Queue Report from JSON}
 \usage{
 SubmitJsonQueueReport(report.description, interval.seconds = 5,
-  max.attempts = 120)
+  max.attempts = 120, validate = TRUE)
 }
 \arguments{
 \item{report.description}{JSON report description}
@@ -13,6 +13,8 @@ SubmitJsonQueueReport(report.description, interval.seconds = 5,
 \item{interval.seconds}{How long to wait between attempts}
 
 \item{max.attempts}{Number of API attempts before stopping}
+
+\item{validate}{Weather to submit report definition for validation before requesting the data.}
 }
 \value{
 Data frame

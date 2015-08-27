@@ -1,3 +1,12 @@
+RSiteCatalyst 1.4.6
+=================
+
+* Added second input to 'top' argument for Queue* functions to limit number of rows returned instead of (up to) 50,000
+
+* Added 'validate' function argument to disable API checking; this can improve performance or avoid API errors under high volume
+
+* Both features submitted graciously by Tim Findlay
+
 RSiteCatalyst 1.4.5
 =================
 * Removed SCAuth function internal argument use.1.3, no longer needed
