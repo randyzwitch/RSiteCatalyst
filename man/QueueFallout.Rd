@@ -6,7 +6,7 @@
 \usage{
 QueueFallout(reportsuite.id, date.from, date.to, metrics, element, checkpoints,
   segment.id = "", expedite = FALSE, interval.seconds = 5,
-  max.attempts = 120)
+  max.attempts = 120, validate = TRUE)
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -28,6 +28,8 @@ QueueFallout(reportsuite.id, date.from, date.to, metrics, element, checkpoints,
 \item{interval.seconds}{How long to wait between attempts}
 
 \item{max.attempts}{Number of API attempts before stopping}
+
+\item{validate}{Weather to submit report definition for validation before requesting the data.}
 }
 \value{
 Data frame

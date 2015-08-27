@@ -9,7 +9,7 @@ QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   date.granularity = "day", segment.id = "", segment.inline = "",
   classification = character(0), anomaly.detection = FALSE,
   data.current = FALSE, expedite = FALSE, interval.seconds = 5,
-  max.attempts = 120)
+  max.attempts = 120, validate = TRUE)
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -22,7 +22,7 @@ QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
 
 \item{elements}{List of elements to include in the report}
 
-\item{top}{Number of rows to return}
+\item{top}{List of numbers to limit the number of rows to include (top X). eg. c(10,5)}
 
 \item{start}{Start row if you do not want to start at #1}
 
@@ -50,6 +50,8 @@ search overrides anything specified using selected}
 \item{interval.seconds}{How long to wait between attempts}
 
 \item{max.attempts}{Number of API attempts before stopping}
+
+\item{validate}{Weather to submit report definition for validation before requesting the data.}
 }
 \value{
 Data frame

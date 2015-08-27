@@ -7,7 +7,7 @@
 QueueOvertime(reportsuite.id, date.from, date.to, metrics,
   date.granularity = "day", segment.id = "", segment.inline = "",
   anomaly.detection = FALSE, data.current = FALSE, expedite = FALSE,
-  interval.seconds = 5, max.attempts = 120)
+  interval.seconds = 5, max.attempts = 120, validate = TRUE)
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -33,6 +33,8 @@ QueueOvertime(reportsuite.id, date.from, date.to, metrics,
 \item{interval.seconds}{How long to wait between attempts}
 
 \item{max.attempts}{Number of API attempts before stopping}
+
+\item{validate}{Weather to submit report definition for validation before requesting the data.}
 }
 \value{
 Data frame
