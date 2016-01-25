@@ -1,9 +1,9 @@
 #' @details This function requires having a character vector with one or more valid Report Suites specified.
 #'
-#' @description Get whether unique visitor variable is enabled for the specified report suites. 
-#' 
+#' @description Get whether unique visitor variable is enabled for the specified report suites.
+#'
 #' @title Get Whether Unique Visitor Variable Enabled for a Report Suite(s)
-#' 
+#'
 #' @param reportsuite.ids Report suite id (or list of report suite ids)
 #'
 #' @importFrom jsonlite toJSON
@@ -16,17 +16,22 @@
 #' @examples
 #' \dontrun{
 #' uniq <- GetUniqueVisitorVariable("your_report_suite")
-#' 
+#'
 #' uniq2 <- GetUniqueVisitorVariable(report_suites$rsid)
 #' }
 
 GetUniqueVisitorVariable <- function(reportsuite.ids) {
-  
+
   request.body <- c()
   request.body$rsid_list <- reportsuite.ids
-  
+
+  #Hack in locale, every method calls ApiRequest so this hopefully works
+  #Set encoding to utf-8 as well; if someone wanted to do base64 they are out of luck
+  request.body$locale <- unbox(AdobeAnalytics$SC.Credentials$locale)
+  request.body$elementDataEncoding <- unbox("utf8")
+
   response <- ApiRequest(body=toJSON(request.body),func.name="ReportSuite.GetUniqueVisitorVariable")
-  
+
   #Don't even know if this is possible, holdover from GetSegments code
   if(length(response$unique_visitor_variable[[1]]) == 0) {
       return(print("Unique Visitor Variable Not Defined For This Report Suite"))

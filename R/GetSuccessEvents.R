@@ -1,8 +1,8 @@
 #' @details This function requires having a character vector with one or more valid Report Suites specified.
 #'
-#' @description Gets success event definitions for the specified report suite(s). 
+#' @description Gets success event definitions for the specified report suite(s).
 #' Useful to audit or document a report suite or company in Adobe Analytics.
-#' 
+#'
 #' @title Get Success Events Associated with a Report Suite
 #'
 #' @param reportsuite.ids report suite id (or list of report suite ids)
@@ -17,7 +17,7 @@
 #' @examples
 #' \dontrun{
 #' events <- GetSuccessEvents("your_report_suite")
-#' 
+#'
 #' events2 <- GetSuccessEvents(report_suites$rsid)
 #' }
 
@@ -25,6 +25,11 @@ GetSuccessEvents <- function(reportsuite.ids) {
 
   request.body <- c()
   request.body$rsid_list <- reportsuite.ids
+
+  #Hack in locale, every method calls ApiRequest so this hopefully works
+  #Set encoding to utf-8 as well; if someone wanted to do base64 they are out of luck
+  request.body$locale <- unbox(AdobeAnalytics$SC.Credentials$locale)
+  request.body$elementDataEncoding <- unbox("utf8")
 
   valid.successevents <- ApiRequest(body=toJSON(request.body),func.name="ReportSuite.GetEvents")
 

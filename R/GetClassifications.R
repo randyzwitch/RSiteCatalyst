@@ -1,4 +1,4 @@
-#' @details Retrieves a list of classifications (associated with the specified element) for each of the specified report suites. 
+#' @details Retrieves a list of classifications (associated with the specified element) for each of the specified report suites.
 #' Function attempts to flatten classifications as best as possible; may return data frame having a nested list as a column if classification
 #' is sufficiently complex.
 #'
@@ -6,7 +6,7 @@
 #' @description Retrieves a list of classifications (associated with the specified element) for each of the specified report suites.
 #'
 #' @title Get Classifications for Selected Report Suite Elements
-#' 
+#'
 #' @param reportsuite.ids Single report suite id or list of report suites
 #' @param elements Optional. List of existing elements you want to use in combination with an additional metric
 #'
@@ -17,18 +17,18 @@
 #'
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' classifications <- GetClassifications(c("prod", "dev"), "trackingcode")
-#'                             
+#'
 #' }
 
 
 GetClassifications <- function(reportsuite.ids, elements=c()) {
 
 if(length(elements) > 0){
-  rd <- toJSON(list(rsid_list=reportsuite.ids, element_list=elements))
+  rd <- toJSON(list(rsid_list=reportsuite.ids, element_list=elements, locale=unbox(AdobeAnalytics$SC.Credentials$locale), elementDataEncoding=unbox("utf8")))
 } else {
-  rd <- toJSON(list(rsid_list=reportsuite.ids))
+  rd <- toJSON(list(rsid_list=reportsuite.ids, locale=unbox(AdobeAnalytics$SC.Credentials$locale), elementDataEncoding=unbox("utf8")))
 }
 
 #Make API call

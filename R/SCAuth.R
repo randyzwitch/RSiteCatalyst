@@ -12,11 +12,17 @@
 #' @param auth.method Defaults to legacy, can be set to 'OAUTH2' to use the newer OAUTH method.
 #' @param debug.mode Set global debug mode
 #' @param endpoint Set Adobe Analytics API endpoint rather than let RSiteCatalyst decide (not recommended)
+#' @param locale Set encoding for reports (defaults to en_US)
 #'
 #' @importFrom httr oauth_app oauth_endpoint oauth2.0_token
 #' @importFrom stringr str_count str_split_fixed str_replace
 #' 
 #' @return Global credentials list 'SC.Credentials' in AdobeAnalytics (hidden) environment
+#' 
+#' @references 
+#' The list of locale values can be obtained from the Adobe Analytics documentation:
+#' 
+#' https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-reportdescriptionlocale
 #' 
 #' @examples
 #' \dontrun{
@@ -27,7 +33,7 @@
 #'
 #' @export
 
-SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy", debug.mode = FALSE, endpoint = ""){
+SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy", debug.mode = FALSE, endpoint = "", locale = "en_US"){
 
   #Temporarily set SC.Credentials for GetEndpoint function call
   #SC.Credentials <<- list(key=key, secret=secret)
@@ -80,7 +86,8 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
                                scope=sc.cred$scope,
                                client_id=sc.cred$client_id,
                                expires=sc.cred$expires,
-                               debug = debug.mode
+                               debug = debug.mode,
+                               locale = locale
                                )
       
       assign("SC.Credentials", scc, envir = AdobeAnalytics)
@@ -115,7 +122,7 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
         endpoint.url <- endpoint
       }
       
-      assign("SC.Credentials", list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url,debug=debug.mode), envir = AdobeAnalytics)
+      assign("SC.Credentials", list(key=key,secret=secret,auth.method=auth.method,endpoint.url=endpoint.url,debug=debug.mode,locale=locale), envir = AdobeAnalytics)
       
       #save(SC.Credentials,file="~/SC.Credentials")
       #Assign endpoint to 3rd position in credentials

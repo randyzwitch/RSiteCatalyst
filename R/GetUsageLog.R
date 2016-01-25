@@ -1,7 +1,7 @@
 #' GetUsageLog
 #'
 #' Gets the Adobe Analytics usage log for all users within the specified date range.
-#' 
+#'
 #' @title Get Admin Actions, Logins, and Reports Accessed
 #'
 #' @param date.from Log start date (YYYY-MM-DD)
@@ -26,6 +26,11 @@ GetUsageLog <- function(date.from=as.character(Sys.Date()-1),date.to=as.characte
   request.body <- c()
   request.body$date_from <- unbox(date.from)
   request.body$date_to <- unbox(date.to)
+
+  #Hack in locale, every method calls ApiRequest so this hopefully works
+  #Set encoding to utf-8 as well; if someone wanted to do base64 they are out of luck
+  request.body$locale <- unbox(AdobeAnalytics$SC.Credentials$locale)
+  request.body$elementDataEncoding <- unbox("utf8")
 
   usagelog <- ApiRequest(body=toJSON(request.body),func.name="Logs.GetUsageLog")
 

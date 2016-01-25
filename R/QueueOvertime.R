@@ -2,14 +2,14 @@
 #' the report, then checks the reporting queue to see if the report is completed,
 #' and when the report returns as "done" pulls the report from the API. This checking process
 #' will occur up to the specified number of times (default 120), with a delay between
-#' status checks (default 5 seconds). If the report does not return as "done" after the 
+#' status checks (default 5 seconds). If the report does not return as "done" after the
 #' number of tries have completed, the function will return an error message.
 #'
-#' @description A QueueOvertime report is a report where the only granularity allowed is time. This report allows for a single report suite, time granularity, 
-#' multiple metrics, and a single segment. It is similar to the "Key Metrics" report or a Custom Event report 
+#' @description A QueueOvertime report is a report where the only granularity allowed is time. This report allows for a single report suite, time granularity,
+#' multiple metrics, and a single segment. It is similar to the "Key Metrics" report or a Custom Event report
 #' within the Adobe Reports & Analytics interface. To get a summary report with no time granularity (i.e. a single row),
 #' pass an empty string to the date.granularity function parameter.
-#' 
+#'
 #' @title Run an Overtime Report
 #'
 #' @param reportsuite.id Report suite id
@@ -29,16 +29,16 @@
 #' @importFrom jsonlite toJSON unbox
 #'
 #' @return Data frame
-#' 
+#'
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' overtime1 <- QueueOvertime("your_report_suite",
 #'                            date.from = "2014-04-01",
 #'                            date.to = "2014-04-20",
 #'                            metrics = c("pageviews", "visits", "bounces"),
 #'                            date.granularity = "day")
-#'                            
+#'
 #' overtime2 <- QueueOvertime("your_report_suite",
 #'                            date.from = "2014-04-01",
 #'                            date.to = "2014-04-20",
@@ -48,7 +48,7 @@
 #'                            anomaly.detection = TRUE,
 #'                            interval.seconds = 10,
 #'                            max.attempts = 20)
-#'                            
+#'
 #' overtime3 <- QueueOvertime("your_report_suite",
 #'                            date.from = "2014-04-01",
 #'                            date.to = "2014-04-20",
@@ -61,7 +61,7 @@
 QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
                         date.granularity='day', segment.id='', segment.inline='', anomaly.detection=FALSE,
                         data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120,validate=TRUE) {
-  
+
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
   report.description <- c()
@@ -74,6 +74,12 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
   report.description$reportDescription$anomalyDetection <- unbox(anomaly.detection)
   report.description$reportDescription$currentData <- unbox(data.current)
   report.description$reportDescription$expedite <- unbox(expedite)
+
+  #Hack in locale, every method calls ApiRequest so this hopefully works
+  #Set encoding to utf-8 as well; if someone wanted to do base64 they are out of luck
+  report.description$reportDescription$locale <- unbox(AdobeAnalytics$SC.Credentials$locale)
+  report.description$reportDescription$elementDataEncoding <- unbox("utf8")
+
   if(segment.inline!="") {
     report.description$reportDescription$segments <- list(segment.inline)
   }
@@ -81,6 +87,6 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
 
   report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate)
 
-  return(report.data) 
+  return(report.data)
 
-}  
+}
