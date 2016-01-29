@@ -1,3 +1,10 @@
+RSiteCatalyst 1.4.7
+=================
+
+* Set encoding to UTF-8 by default, resolving GitHub issue #151
+
+* Added `locale` keyword to SCAuth() function, so that if additional encoding issues arise, you can set the report locale, such as Germany as 'de_DE'. A full enumeration of locale codes can be found at https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-reportdescriptionlocale
+
 RSiteCatalyst 1.4.6
 =================
 
