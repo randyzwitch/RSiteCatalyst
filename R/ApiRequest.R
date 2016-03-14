@@ -62,7 +62,7 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
     
     if(response$status==200 || response$status==400) {
       # we have a valid response or a bad request error
-      response.content <- fromJSON(content(response,'text'))
+      response.content <- fromJSON(content(response,'text', encoding = "UTF-8"))
       if(response$status==400&&response.content$error=='report_not_ready') {
         result <- FALSE
         Sys.sleep(interval.seconds)
@@ -76,7 +76,7 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
   }
 
   if(!result||response$status==400){
-    response.content <- fromJSON(content(response,'text'))
+    response.content <- fromJSON(content(response,'text', encoding = "UTF-8"))
     if(response.content$error=='report_not_ready') {
       stop(paste('ERROR: max attempts exceeded for',url))
     } else {
@@ -90,11 +90,11 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
     filename <- paste('PostRequest_',as.numeric(Sys.time()),'.json',sep='')
     print(paste('DEBUG: saving output as',filename))
     sink(filename)
-    cat(content(response,'text'))
+    cat(content(response,'text', encoding = "UTF-8"))
     sink()
   }
 
-  data <- fromJSON(content(response,'text'))
+  data <- fromJSON(content(response,'text', encoding = "UTF-8"))
 
   return(data)
 
