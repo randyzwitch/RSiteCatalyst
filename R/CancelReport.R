@@ -32,7 +32,7 @@ CancelReport <- function(report.id) {
     response <- POST(url, config=add_headers('',.headers=BuildHeader()), body=request.body)
   }
 
-  result <- content(response,'text')
+  result <- content(response,'text', encoding = "UTF-8")
 
   if(result=='true') {
     print(paste0("Report #",report.id," was successfully cancelled."))
