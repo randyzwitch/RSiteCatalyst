@@ -70,7 +70,6 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
   report.description$reportDescription$dateTo <- unbox(date.to)
   report.description$reportDescription$reportSuiteID <- unbox(reportsuite.id)
   report.description$reportDescription$dateGranularity <- unbox(date.granularity)
-  report.description$reportDescription$segment_id <- unbox(segment.id)
   report.description$reportDescription$anomalyDetection <- unbox(anomaly.detection)
   report.description$reportDescription$currentData <- unbox(data.current)
   report.description$reportDescription$expedite <- unbox(expedite)
@@ -85,6 +84,7 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
   }
   report.description$reportDescription$metrics = data.frame(id = metrics)
 
+  report.description$reportDescription$segments <- data.frame( id = segment.id)
   report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate)
 
   return(report.data)
