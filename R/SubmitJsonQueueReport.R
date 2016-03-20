@@ -1,7 +1,7 @@
 #' @name SubmitJsonQueueReport
-#' 
+#'
 #' @title Create Queue Report from JSON
-#' 
+#'
 #' @details This is a function for advanced users, for the case where a user feels
 #' that submitting a JSON request would be easier than using one of the pre-defined
 #' functions from RSiteCatalyst
@@ -16,14 +16,14 @@
 #' @importFrom jsonlite toJSON unbox
 #'
 #' @return Data frame
-#' 
+#'
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' custom_report <- SubmitJsonQueueReport('valid Adobe Analytics API JSON string')
 #'
 #' }
-#' 
+#'
 #' @export
 #'
 
@@ -35,9 +35,9 @@ SubmitJsonQueueReport <- function(report.description,interval.seconds=5,max.atte
       stop("ERROR: Invalid report description.")
     }
   }
-  
+
   response <- ApiRequest(body=report.description,func.name="Report.Queue")
-  
+
   #If response returns an error, return error message. Else, continue with capturing report ID
   report.id <- as.numeric(response$reportID)
   if(!is.numeric(report.id)) {
@@ -50,7 +50,7 @@ SubmitJsonQueueReport <- function(report.description,interval.seconds=5,max.atte
 
   report.type <- report.data$report$type
   print(paste("Received",report.type,"report."))
-
+  #return (ParseOvertime(report.data))
   # Check if there is any data to parse
   if(length(report.data$report$data)>0) {
     report.parsed = switch(report.type,
