@@ -62,6 +62,7 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
                         date.granularity='day', segment.id='', segment.inline='', anomaly.detection=FALSE,
                         data.current=FALSE, expedite=FALSE,interval.seconds=5,max.attempts=120,validate=TRUE) {
 
+
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
   report.description <- c()
@@ -74,6 +75,7 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
   report.description$reportDescription$currentData <- unbox(data.current)
   report.description$reportDescription$expedite <- unbox(expedite)
 
+  print (as.list(segment.id)[1])
   #Hack in locale, every method calls ApiRequest so this hopefully works
   #Set encoding to utf-8 as well; if someone wanted to do base64 they are out of luck
   report.description$reportDescription$locale <- unbox(AdobeAnalytics$SC.Credentials$locale)
@@ -83,8 +85,14 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
     report.description$reportDescription$segments <- list(segment.inline)
   }
   report.description$reportDescription$metrics = data.frame(id = metrics)
-
+  if(as.list(segment.id)[1]==''){
+  report.description$reportDescription$segment_id <- unbox(segment.id)
+    }
+  else{
   report.description$reportDescription$segments <- data.frame( id = segment.id)
+
+  }
+
   report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate)
 
   return(report.data)

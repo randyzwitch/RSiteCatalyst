@@ -64,17 +64,19 @@ ParseOvertime <- function(report.data) {
   #Get segment
   seg <- report.data$report$segments
 
-  #If segment null, make a dummy data frame
+#If segment null, make a dummy data frame
   if(is.null(seg)){
     seg <- data.frame(list("", ""))
+    names(seg) <- c("segment.id", "segment.name")
   }
 
+  else{
   names(seg) <- c("segment.id", "segment.name")
-
   seg$segment.name<-(paste(as.list(seg$segment.name),collapse=" AND "))
   seg$segment.id<-(paste(as.list(seg$segment.id),collapse=" AND "))
 
-  seg<-subset(seg,!duplicated(seg$segment.name))
+  seg<-subset(seg,!duplicated(seg$segment.name))}
+
   #Put segment after dates
   formatted.df <- cbind(datetime,rows.df, seg, counts.df, row.names = NULL)
 
