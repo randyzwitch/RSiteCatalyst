@@ -70,6 +70,8 @@ ParseOvertime <- function(report.data) {
     names(seg) <- c("segment.id", "segment.name")
   }
 
+#If segment has values, concatenate all values with "AND".  R puts the
+#concatenated values in every single row, so I dedupe the dataframe
   else{
   names(seg) <- c("segment.id", "segment.name")
   seg$segment.name<-(paste(as.list(seg$segment.name),collapse=" AND "))
