@@ -22,7 +22,7 @@
 #' @param metrics List of metrics to include in the report
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
-#' @param validate Weather to submit report definition for validation before requesting the data.
+#' @param validate Whether to submit report definition for validation before requesting the data.
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
