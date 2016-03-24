@@ -59,9 +59,17 @@ QueueFallout <- function(reportsuite.id, date.from, date.to, metrics, element, c
   report.description$reportDescription$locale <- unbox(AdobeAnalytics$SC.Credentials$locale)
   report.description$reportDescription$elementDataEncoding <- unbox("utf8")
 
-  if(segment.id!="") {
+  #If segment is null, apply the standard segment unbox function
+    if(as.list(segment.id)[1]==''){
     report.description$reportDescription$segment_id <- unbox(segment.id)
-  }
+      }
+
+  #If segment is not null, treat it like a list of metrics.
+    else{
+    report.description$reportDescription$segments <- data.frame( id = segment.id)
+
+    }
+  
   if(expedite!=FALSE) {
     report.description$reportDescription$expedite <- unbox(expedite)
   }

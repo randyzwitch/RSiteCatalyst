@@ -15,7 +15,7 @@ ParseOvertime <- function(report.data) {
 
   # jsonlite already makes this into a nice data frame for us
   data <- report.data$report$data
-  
+
   # Create a column of R datetimes
   if('hour' %in% colnames(data)){
     datetime <- strptime(paste(data$year,data$month,data$day,data$hour,sep="-"), "%Y-%m-%d-%H")
@@ -61,15 +61,24 @@ ParseOvertime <- function(report.data) {
     counts.df[,i] <- as.numeric(counts.df[,i])
   }
 
-  #Get segment 
+  #Get segment
   seg <- report.data$report$segments
-  
-  #If segment null, make a dummy data frame
+
+#If segment null, make a dummy data frame
   if(is.null(seg)){
     seg <- data.frame(list("", ""))
+    names(seg) <- c("segment.id", "segment.name")
   }
+
+#If segment has values, concatenate all values with "AND".  R puts the
+#concatenated values in every single row, so I dedupe the dataframe
+  else{
   names(seg) <- c("segment.id", "segment.name")
-  
+  seg$segment.name<-(paste(as.list(seg$segment.name),collapse=" AND "))
+  seg$segment.id<-(paste(as.list(seg$segment.id),collapse=" AND "))
+
+  seg<-subset(seg,!duplicated(seg$segment.name))}
+
   #Put segment after dates
   formatted.df <- cbind(datetime,rows.df, seg, counts.df, row.names = NULL)
 

@@ -84,9 +84,15 @@ QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
   if(start>0) {
     report.description$reportDescription$startingWith <- unbox(start)
   }
-  if(segment.id!="") {
+  #If segment is null, apply the standard segment unbox function
+    if(as.list(segment.id)[1]==''){
     report.description$reportDescription$segment_id <- unbox(segment.id)
-  }
+      }
+  #If segment is not null, treat it like a list of metrics.
+    else{
+    report.description$reportDescription$segments <- data.frame( id = segment.id)
+
+    }
   if(expedite==TRUE) {
     report.description$reportDescription$expedite <- unbox(expedite)
   }

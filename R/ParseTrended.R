@@ -34,41 +34,41 @@ ParseTrended <- function(report.data) {
     } else {
       # if we have just one element, then we just process this, as we may have anomaly detection
       temp <- data[i,"breakdown"][[1]]
-      
+
       if(!is.null(temp)&&length(temp)>0) {
         counts.df <- ldply(temp$counts)
         names(counts.df) <- metrics #assign names to counts.df
-        
+
         # check if we have anomaly detection
         if("forecasts" %in% colnames(temp)) {
           forecasts.df <- ldply(temp$forecasts)
           names(forecasts.df) <- paste("forecast.",metrics,sep="")
           counts.df <- cbind(counts.df,forecasts.df)
         }
-        
+
         if("upperBounds" %in% colnames(temp)) {
           upperBounds.df <- ldply(temp$upperBounds)
           names(upperBounds.df) <- paste("upperBound.",metrics,sep="")
           counts.df <- cbind(counts.df,upperBounds.df)
         }
-        
+
         if("lowerBounds" %in% colnames(temp)) {
           lowerBounds.df <- ldply(temp$lowerBounds)
           names(lowerBounds.df) <- paste("lowerBound.",metrics,sep="")
           counts.df <- cbind(counts.df,lowerBounds.df)
         }
-        
+
         # convert all count columns to numeric
         for(j in 1:ncol(counts.df)) {
           counts.df[,j] <- as.numeric(counts.df[,j])
         }
-        
+
         drops <- c("counts","forecasts","upperBounds","lowerBounds")
         temp <- temp[,!(names(temp) %in% drops)]
-        temp <- cbind(temp,counts.df)        
+        temp <- cbind(temp,counts.df)
       }
     }
-    
+
     # build out the date columns and bind them to the left of the data frame
     if(exists("temp")&&!is.null(temp)&&length(temp)>0) {
       date.df <- data.frame(matrix(NA, nrow = nrow(temp), ncol = 5))
@@ -97,16 +97,25 @@ ParseTrended <- function(report.data) {
       }
     }
   }
-  
-  #Get segment 
+
+  #Get segment
   seg <- report.data$report$segments
 
-  #If segment null, don't add it in
-  if(is.null(seg)){
-    return(formatted.df)
-  } else {
-    names(seg) <- c("segment.id", "segment.name")
-    return(cbind(formatted.df, seg, row.names = NULL))
-  }
+  #If segment null, make a dummy data frame
+    if(is.null(seg)){
+      seg <- data.frame(list("", ""))
+      names(seg) <- c("segment.id", "segment.name")
+    }
 
+  #If segment has values, concatenate all values with "AND".  R puts the
+  #concatenated values in every single row, so I dedupe the dataframe
+    else{
+    names(seg) <- c("segment.id", "segment.name")
+    seg$segment.name<-(paste(as.list(seg$segment.name),collapse=" AND "))
+    seg$segment.id<-(paste(as.list(seg$segment.id),collapse=" AND "))
+
+    seg<-subset(seg,!duplicated(seg$segment.name))}
+
+
+return(cbind(formatted.df, seg, row.names = NULL))
 }
