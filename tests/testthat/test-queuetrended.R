@@ -120,7 +120,7 @@ test_that("Validate QueueTrended using legacy credentials", {
                      metrics="pageviews",
                      elements="page",
                      top="10",
-                     segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"))
+                     segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(jj, "data.frame")
@@ -135,7 +135,7 @@ test_that("Validate QueueTrended using legacy credentials", {
                      elements="page",
                      top=10,
                      start=11,
-                     segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"))
+                     segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(kk, "data.frame")
@@ -148,7 +148,7 @@ test_that("Validate QueueTrended using legacy credentials", {
                      metrics="visits",
                      elements="page",
                      top="7",
-                     segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"))
+                     segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(ll, "data.frame")
@@ -161,7 +161,7 @@ test_that("Validate QueueTrended using legacy credentials", {
                      metrics="exits",
                      elements="page",
                      selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
-                     segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"))
+                     segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(mm, "data.frame")
@@ -174,7 +174,7 @@ test_that("Validate QueueTrended using legacy credentials", {
                      metrics="entries",
                      elements="page",
                      selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
-                     segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"))
+                     segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(nn, "data.frame")
@@ -187,7 +187,7 @@ test_that("Validate QueueTrended using legacy credentials", {
                      metrics="pageviews",
                      elements="page",
                      selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
-                     segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"),
+                     segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"),
                      anomaly.detection = "1")
 
   #Validate returned value is a data.frame
@@ -199,7 +199,7 @@ test_that("Validate QueueTrended using legacy credentials", {
                            date.to = "2015-04-20",
                            metrics = c("pageviews","visits"),
                            elements = c("sitesection") ,
-                           segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86")
+                           segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
   )
 
   #Validate returned value is a data.frame
@@ -211,7 +211,7 @@ test_that("Validate QueueTrended using legacy credentials", {
                            date.to = "2015-04-20",
                            metrics = "pageviews",
                            elements = c("sitesection", "page") ,
-                           segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86")
+                           segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
   )
 
   #Validate returned value is a data.frame
@@ -223,7 +223,7 @@ test_that("Validate QueueTrended using legacy credentials", {
                            date.to = "2015-04-02",
                            metrics = "pageviews",
                            elements = c("sitesection", "page","browser") ,
-                           segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86")
+                           segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
   )
 
   #Validate returned value is a data.frame

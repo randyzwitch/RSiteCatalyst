@@ -18,7 +18,7 @@ QueueSummary(reportsuite.ids, date, metrics, interval.seconds = 5,
 
 \item{max.attempts}{Number of API attempts before stopping}
 
-\item{validate}{Weather to submit report definition for validation before requesting the data.}
+\item{validate}{Whether to submit report definition for validation before requesting the data.}
 }
 \value{
 Data frame

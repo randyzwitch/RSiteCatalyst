@@ -75,7 +75,6 @@ QueueOvertime <- function(reportsuite.id, date.from, date.to, metrics,
   report.description$reportDescription$currentData <- unbox(data.current)
   report.description$reportDescription$expedite <- unbox(expedite)
 
-  print (as.list(segment.id)[1])
   #Hack in locale, every method calls ApiRequest so this hopefully works
   #Set encoding to utf-8 as well; if someone wanted to do base64 they are out of luck
   report.description$reportDescription$locale <- unbox(AdobeAnalytics$SC.Credentials$locale)

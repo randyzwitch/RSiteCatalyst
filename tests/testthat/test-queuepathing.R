@@ -25,7 +25,7 @@ test_that("Validate QueuePathing using legacy credentials", {
                      metric="pageviews",
                      element="page",
                      c("::anything::", "::anything::", "::anything::", "::exited::"),
-                     segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86")
+                     segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
 
   )
 
@@ -40,7 +40,7 @@ test_that("Validate QueuePathing using legacy credentials", {
                      metric="pageviews",
                      element="page",
                      c("::anything::", "::anything::", "::anything::", "::exited::"),
-                     segment.id="54e4e00be4b093ca5b709931"
+                     segment.id="5433e4e6e4b02df70be4ac63"
   )
 
 

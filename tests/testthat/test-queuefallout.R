@@ -23,7 +23,7 @@ bb <-QueueFallout("zwitchdev",
                   metrics="pageviews",
                   element="page",
                   checkpoints=c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
-                  segment.id=c("54e4e00be4b093ca5b709931"))
+                  segment.id=c("5433e4e6e4b02df70be4ac63"))
 
 
 #Validate returned value is a data.frame
@@ -36,7 +36,7 @@ cc <-QueueFallout("zwitchdev",
                   metrics="pageviews",
                   element="page",
                   checkpoints=c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
-                  segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"))
+                  segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
 #Validate returned value is a data.frame
 expect_is(cc, "data.frame")

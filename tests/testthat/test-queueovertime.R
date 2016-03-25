@@ -74,7 +74,7 @@ test_that("Validate QueueOvertime using legacy credentials", {
                       "2014-12-31",
                       "visits",
                       "",
-                      segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"))
+                      segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(gg, "data.frame")
@@ -85,7 +85,7 @@ test_that("Validate QueueOvertime using legacy credentials", {
                       "2014-12-31",
                       "visits",
                       "day",
-                      segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"))
+                      segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(hh, "data.frame")
@@ -96,7 +96,7 @@ test_that("Validate QueueOvertime using legacy credentials", {
                       "2014-12-31",
                       "visits",
                       "week",
-                      segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"))
+                      segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(ii, "data.frame")
@@ -107,7 +107,7 @@ test_that("Validate QueueOvertime using legacy credentials", {
                       "2014-12-31",
                       c("visits", "pageviews"),
                       "week",
-                      segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"))
+                      segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(jj, "data.frame")
@@ -118,7 +118,7 @@ test_that("Validate QueueOvertime using legacy credentials", {
                       "2014-12-31",
                       c("visits", "pageviews"),
                       "month",
-                      segment.id=c("54e4e00be4b093ca5b709931","54e62bd0e4b0619d25327e86"))
+                      segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(kk, "data.frame")
