@@ -57,7 +57,9 @@ ParseRanked <- function(report.data) {
     seg<-subset(seg,!duplicated(seg$segment.name))}
 
     #Put segment after dates
-    formatted.df <- cbind(formatted.df, seg, row.names = NULL)
+    if(nrow(formatted.df) > 0){
+      formatted.df <- cbind(formatted.df, seg, row.names = NULL)
+    }
 
     return(formatted.df)
 

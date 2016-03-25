@@ -116,6 +116,9 @@ ParseTrended <- function(report.data) {
 
     seg<-subset(seg,!duplicated(seg$segment.name))}
 
+  if(nrow(formatted.df) > 0){
+    formatted.df <- cbind(formatted.df, seg, row.names = NULL)
+  }
 
-return(cbind(formatted.df, seg, row.names = NULL))
+return(formatted.df)
 }
