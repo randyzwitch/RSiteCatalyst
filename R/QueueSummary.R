@@ -11,8 +11,9 @@
 #'
 #'
 #' @description A QueueSummary report is a summary report of metrics for one or more report
-#' suites for a given time period. Time period can be specified as year only ("2015"),
-#' year-month ("2015-04") or year-month-day ("2015-04-20")
+#' suites for a given time period. Time period in the date parameter can be specified as year only ("2015"),
+#' year-month ("2015-04") or year-month-day ("2015-04-20"); alternatively, date.to and date.from
+#' are available for custom date ranges.
 #'
 #'
 #' @title Run a Summary Report
@@ -23,6 +24,8 @@
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
 #' @param validate Whether to submit report definition for validation before requesting the data.
+#' @param date.from Start date for the report (YYYY-MM-DD)
+#' @param date.to End date for the report (YYYY-MM-DD)
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
@@ -33,19 +36,28 @@
 #' \dontrun{
 #'
 #' aa <- QueueSummary("zwitchdev", "2015", c("pageviews", "visits"))
+#' bb <- QueueSummary("zwitchdev", "", c("pageviews", "visits"), 
+#'                    date.from = "2016-01-01", date.to="2016-01-15")
 #'
 #' }
 #'
 #' @export
 
-QueueSummary <- function(reportsuite.ids, date, metrics, interval.seconds=5, max.attempts=120,validate=TRUE) {
+QueueSummary <- function(reportsuite.ids, date, metrics, interval.seconds=5, max.attempts=120,validate=TRUE, date.from = "", date.to = "") {
 
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
   # new release of jsonlite will let us use jsonlite::singleton() (function is actually exported)
+  
+  if(date != "" && (date.from != "" || date.to != "")){
+    stop("Use date OR date.from and date.to together, not both.")
+  }
+  
   report.description <- c()
   report.description$reportDescription <- c(data.frame(matrix(ncol=0, nrow=1)))
   report.description$reportDescription$date <- unbox(date)
+  report.description$reportDescription$dateTo <- unbox(date.to)
+  report.description$reportDescription$dateFrom <- unbox(date.from)
   report.description$reportDescription$metrics <- data.frame(id = metrics)
   report.description$reportDescription$elements <- list(list(id = unbox("reportsuite"), selected=c(reportsuite.ids)))
 

@@ -31,7 +31,7 @@
 #' @param search List of keywords for the first specified element - e.g. c("contact","about","shop").
 #' search overrides anything specified using selected
 #' @param search.type String specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
-#' @param segment.id Id of Adobe Analytics segment to retrieve the report for
+#' @param segment.id Id(s) of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline Inline segment definition
 #' @param classification SAINT classification to use in place of first element. Need to specify element AND classification.
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
@@ -60,7 +60,7 @@
 #' @export
 
 QueueRanked <- function(reportsuite.id, date.from, date.to, metrics, elements,
-                        top=0,start=0,selected=c(), search=c(),search.type='or',
+                        top=10,start=1,selected=c(), search=c(),search.type='or',
                         segment.id='', segment.inline='', classification=c(),data.current=FALSE,
                         expedite=FALSE,interval.seconds=5,max.attempts=120,validate=TRUE) {
 

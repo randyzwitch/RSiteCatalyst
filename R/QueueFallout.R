@@ -17,7 +17,7 @@
 #' @param metrics List of metrics to include in the report
 #' @param element Single pathed element (usually 'page')
 #' @param checkpoints Character vector of checkpoints in the fallout path (e.g. c("Home","Contact","Thank You"))
-#' @param segment.id Id of Adobe Analytics segment to retrieve the report for
+#' @param segment.id Id(s) of Adobe Analytics segment to retrieve the report for
 #' @param expedite Set to TRUE to expedite the processing of this report
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping

@@ -28,7 +28,7 @@ c("::anything::","::anything::","Home") will return the two previous pages leadi
 
 \item{start}{Start row if you do not want to start at #1}
 
-\item{segment.id}{Id of Adobe Analytics segment to retrieve the report for}
+\item{segment.id}{Id(s) of Adobe Analytics segment to retrieve the report for}
 
 \item{expedite}{Set to TRUE to expedite the processing of this report}
 

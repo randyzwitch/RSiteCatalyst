@@ -40,5 +40,10 @@ test_that("Validate QueueSummary using legacy credentials", {
   #Validate returned value is a data.frame
   expect_is(gg, "data.frame")
   
+  hh <- QueueSummary("zwitchdev", "", c("pageviews", "visits"), date.from = "2016-01-01", 
+                     date.to="2016-01-15")
+  
+  #Validate returned value is a data.frame
+  expect_is(hh, "data.frame")
   
 })

@@ -35,7 +35,7 @@ search overrides anything specified using selected}
 
 \item{date.granularity}{Time granularity of the report (year/month/week/day/hour), default to 'day'}
 
-\item{segment.id}{Id of Adobe Analytics segment to retrieve the report for}
+\item{segment.id}{Id(s) of Adobe Analytics segment to retrieve the report for}
 
 \item{segment.inline}{Inline segment definition}
 

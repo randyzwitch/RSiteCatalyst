@@ -21,7 +21,7 @@ QueueFallout(reportsuite.id, date.from, date.to, metrics, element, checkpoints,
 
 \item{checkpoints}{Character vector of checkpoints in the fallout path (e.g. c("Home","Contact","Thank You"))}
 
-\item{segment.id}{Id of Adobe Analytics segment to retrieve the report for}
+\item{segment.id}{Id(s) of Adobe Analytics segment to retrieve the report for}
 
 \item{expedite}{Set to TRUE to expedite the processing of this report}
 

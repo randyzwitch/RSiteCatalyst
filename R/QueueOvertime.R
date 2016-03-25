@@ -17,7 +17,7 @@
 #' @param date.to End date for the report (YYYY-MM-DD)
 #' @param metrics List of metrics to include in the report
 #' @param date.granularity Time granularity of the report (year/month/week/day/hour/''), default to 'day'
-#' @param segment.id Id of Adobe Analytics segment to retrieve the report for
+#' @param segment.id Id(s) of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline Inline segment definition
 #' @param anomaly.detection  Set to TRUE to include forecast data (only valid for day granularity with small date ranges)
 #' @param data.current TRUE or FALSE - Whether to include current data for reports that include today's date

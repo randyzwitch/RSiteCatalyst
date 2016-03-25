@@ -34,7 +34,7 @@
 #' search overrides anything specified using selected
 #' @param search.type String specifying the search type: 'and', or, 'or' 'not' (defaults to 'or')
 #' @param date.granularity Time granularity of the report (year/month/week/day/hour), default to 'day'
-#' @param segment.id Id of Adobe Analytics segment to retrieve the report for
+#' @param segment.id Id(s) of Adobe Analytics segment to retrieve the report for
 #' @param segment.inline Inline segment definition
 #' @param classification SAINT classification to use in place of first element. Need to specify element AND classification.
 #' @param anomaly.detection Set to TRUE to include forecast data (only valid for day granularity with small date ranges)

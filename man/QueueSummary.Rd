@@ -5,7 +5,7 @@
 \title{Run a Summary Report}
 \usage{
 QueueSummary(reportsuite.ids, date, metrics, interval.seconds = 5,
-  max.attempts = 120, validate = TRUE)
+  max.attempts = 120, validate = TRUE, date.from = "", date.to = "")
 }
 \arguments{
 \item{reportsuite.ids}{Report suite ids}
@@ -19,14 +19,19 @@ QueueSummary(reportsuite.ids, date, metrics, interval.seconds = 5,
 \item{max.attempts}{Number of API attempts before stopping}
 
 \item{validate}{Whether to submit report definition for validation before requesting the data.}
+
+\item{date.from}{Start date for the report (YYYY-MM-DD)}
+
+\item{date.to}{End date for the report (YYYY-MM-DD)}
 }
 \value{
 Data frame
 }
 \description{
 A QueueSummary report is a summary report of metrics for one or more report
-suites for a given time period. Time period can be specified as year only ("2015"),
-year-month ("2015-04") or year-month-day ("2015-04-20")
+suites for a given time period. Time period in the date parameter can be specified as year only ("2015"),
+year-month ("2015-04") or year-month-day ("2015-04-20"); alternatively, date.to and date.from
+are available for custom date ranges.
 }
 \details{
 The QueueSummary function returns a data frame containing a metric summary for the time period
@@ -44,6 +49,8 @@ error message.
 \dontrun{
 
 aa <- QueueSummary("zwitchdev", "2015", c("pageviews", "visits"))
+bb <- QueueSummary("zwitchdev", "", c("pageviews", "visits"), 
+                   date.from = "2016-01-01", date.to="2016-01-15")
 
 }
 
