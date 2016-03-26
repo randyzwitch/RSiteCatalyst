@@ -7,8 +7,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Top 10 pages by pageviews, daily
   aa <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",
                      elements="page",
@@ -20,8 +20,8 @@ test_that("Validate QueueTrended using legacy credentials", {
   #Top 10 pages by pageviews, daily
   #Starting with 11
   bb <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",
                      elements="page",
@@ -33,8 +33,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Top 7 pages by visits, weekly
   cc <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="week",
                      metrics="visits",
                      elements="page",
@@ -45,8 +45,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, Monthly
   dd <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="month",
                      metrics="exits",
                      elements="page",
@@ -57,8 +57,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, Quarterly, segment
   ee <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="quarter",
                      metrics="entries",
                      elements="page",
@@ -70,8 +70,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, day, segment, Anomaly Detection
   ff <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",
                      elements="page",
@@ -83,8 +83,8 @@ test_that("Validate QueueTrended using legacy credentials", {
   expect_is(ff, "data.frame")
 
   gg <- QueueTrended("zwitchdev",
-                           date.from = "2015-04-01",
-                           date.to = "2015-04-20",
+                           date.from = "2016-04-01",
+                           date.to = "2016-04-20",
                            metrics = c("pageviews","visits"),
                            elements = c("sitesection")
   )
@@ -93,8 +93,8 @@ test_that("Validate QueueTrended using legacy credentials", {
   expect_is(gg, "data.frame")
 
   hh <- QueueTrended("zwitchdev",
-                           date.from = "2015-04-01",
-                           date.to = "2015-04-20",
+                           date.from = "2016-04-01",
+                           date.to = "2016-04-20",
                            metrics = "pageviews",
                            elements = c("sitesection", "page")
   )
@@ -103,8 +103,8 @@ test_that("Validate QueueTrended using legacy credentials", {
   expect_is(hh, "data.frame")
 
   ii <- QueueTrended("zwitchdev",
-                           date.from = "2015-04-01",
-                           date.to = "2015-04-02",
+                           date.from = "2016-04-01",
+                           date.to = "2016-04-02",
                            metrics = "pageviews",
                            elements = c("sitesection", "page","browser")
   )
@@ -114,8 +114,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Top 10 pages by pageviews, daily, 2 segments
   jj <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",
                      elements="page",
@@ -128,8 +128,8 @@ test_that("Validate QueueTrended using legacy credentials", {
   #Top 10 pages by pageviews, daily, 2 segments
   #Starting with 11
   kk <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",
                      elements="page",
@@ -142,8 +142,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Top 7 pages by visits, weekly, 2 segments
   ll <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="week",
                      metrics="visits",
                      elements="page",
@@ -155,8 +155,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, Monthly, 2 segments
   mm <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="month",
                      metrics="exits",
                      elements="page",
@@ -168,8 +168,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, Quarterly, 2 segments
   nn <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="quarter",
                      metrics="entries",
                      elements="page",
@@ -181,8 +181,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, day, segment, Anomaly Detection, 2 segments
   oo <- QueueTrended("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",
                      elements="page",
@@ -195,8 +195,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #gg repeated with 2 segments
   pp <- QueueTrended("zwitchdev",
-                           date.from = "2015-04-01",
-                           date.to = "2015-04-20",
+                           date.from = "2016-04-01",
+                           date.to = "2016-04-20",
                            metrics = c("pageviews","visits"),
                            elements = c("sitesection") ,
                            segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
@@ -207,8 +207,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #hh repeated with 2 segments
   qq <- QueueTrended("zwitchdev",
-                           date.from = "2015-04-01",
-                           date.to = "2015-04-20",
+                           date.from = "2016-04-01",
+                           date.to = "2016-04-20",
                            metrics = "pageviews",
                            elements = c("sitesection", "page") ,
                            segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
@@ -219,8 +219,8 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #ii repeated with 2 segments
   rr <- QueueTrended("zwitchdev",
-                           date.from = "2015-04-01",
-                           date.to = "2015-04-02",
+                           date.from = "2016-04-01",
+                           date.to = "2016-04-02",
                            metrics = "pageviews",
                            elements = c("sitesection", "page","browser") ,
                            segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")

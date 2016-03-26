@@ -6,8 +6,8 @@ test_that("Validate QueuePathing using legacy credentials", {
   SCAuth(Sys.getenv("USER", ""), Sys.getenv("SECRET", ""))
 
   aa <- QueuePathing("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      metric="pageviews",
                      element="page",
                      c("::anything::", "::anything::", "::anything::", "::exited::")
@@ -20,8 +20,8 @@ test_that("Validate QueuePathing using legacy credentials", {
 
 
   bb <- QueuePathing("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      metric="pageviews",
                      element="page",
                      c("::anything::", "::anything::", "::anything::", "::exited::"),
@@ -35,8 +35,8 @@ test_that("Validate QueuePathing using legacy credentials", {
 
 
   cc <- QueuePathing("zwitchdev",
-                     "2014-12-01",
-                     "2015-12-31",
+                     "2015-12-01",
+                     "2016-12-31",
                      metric="pageviews",
                      element="page",
                      c("::anything::", "::anything::", "::anything::", "::exited::"),

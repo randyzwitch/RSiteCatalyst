@@ -7,8 +7,8 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #Top 50 pages
   aa <- QueueRanked("zwitchdev",
-                    "2014-01-01",
-                    "2014-12-31",
+                    "2015-01-01",
+                    "2015-12-31",
                     "pageviews",
                     "page",
                     top="50",
@@ -19,8 +19,8 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #Next 50 pages
   bb <- QueueRanked("zwitchdev",
-                    "2014-01-01",
-                    "2014-12-31",
+                    "2015-01-01",
+                    "2015-12-31",
                     "pageviews",
                     "page",
                     top="50",
@@ -32,8 +32,8 @@ test_that("Validate QueueRanked using legacy credentials", {
   #Two specific pages
   #Visits and pageviews metric
   cc <- QueueRanked("zwitchdev",
-                    "2014-01-01",
-                    "2014-12-31",
+                    "2015-01-01",
+                    "2015-12-31",
                     c("visits", "pageviews"),
                     "page",
                     selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data")
@@ -45,8 +45,8 @@ test_that("Validate QueueRanked using legacy credentials", {
   #Two specific pages - "Home Page" and "Search Results"
   #Visits and pageviews metric, Social Visitors, Current Data
   dd <- QueueRanked("zwitchdev",
-                    "2015-01-01",
-                    "2015-12-31",
+                    "2016-01-01",
+                    "2016-12-31",
                     c("visits", "pageviews"),
                     "page",
                     selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
@@ -57,8 +57,8 @@ test_that("Validate QueueRanked using legacy credentials", {
   expect_is(dd, "data.frame")
 
   ee <- QueueRanked("zwitchdev",
-                         date.from = "2015-04-01",
-                         date.to = "2015-04-20",
+                         date.from = "2016-04-01",
+                         date.to = "2016-04-20",
                          metrics = "pageviews",
                          elements = c("page", "sitesection")
   )
@@ -68,8 +68,8 @@ test_that("Validate QueueRanked using legacy credentials", {
   expect_is(ee, "data.frame")
 
   ff <- QueueRanked("zwitchdev",
-                         date.from = "2015-04-01",
-                         date.to = "2015-04-20",
+                         date.from = "2016-04-01",
+                         date.to = "2016-04-20",
                          metrics = "pageviews",
                          elements = c("page", "sitesection", "browser")
   )
@@ -80,8 +80,8 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #Top 50 pages, 2 segments
   gg <- QueueRanked("zwitchdev",
-                    "2014-01-01",
-                    "2014-12-31",
+                    "2015-01-01",
+                    "2015-12-31",
                     "pageviews",
                     "page",
                     top="50",
@@ -93,8 +93,8 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #Next 50 pages, 2 segments
   hh <- QueueRanked("zwitchdev",
-                    "2014-01-01",
-                    "2014-12-31",
+                    "2015-01-01",
+                    "2015-12-31",
                     "pageviews",
                     "page",
                     top="50",
@@ -107,8 +107,8 @@ test_that("Validate QueueRanked using legacy credentials", {
   #Two specific pages, 2 segments
   #Visits and pageviews metric
   ii <- QueueRanked("zwitchdev",
-                    "2014-01-01",
-                    "2014-12-31",
+                    "2015-01-01",
+                    "2015-12-31",
                     c("visits", "pageviews"),
                     "page",
                     selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
@@ -121,8 +121,8 @@ test_that("Validate QueueRanked using legacy credentials", {
   #Two specific pages - "Home Page" and "Search Results"
   #Visits and pageviews metric, 2 segments, Current Data
   jj <- QueueRanked("zwitchdev",
-                    "2015-01-01",
-                    "2015-12-31",
+                    "2016-01-01",
+                    "2016-12-31",
                     c("visits", "pageviews"),
                     "page",
                     selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
@@ -134,8 +134,8 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   # 2 segments added to ee test
   kk <- QueueRanked("zwitchdev",
-                         date.from = "2015-04-01",
-                         date.to = "2015-04-20",
+                         date.from = "2016-04-01",
+                         date.to = "2016-04-20",
                          metrics = "pageviews",
                          elements = c("page", "sitesection") ,
                          segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
@@ -147,8 +147,8 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #2 segments added to ff
   ll <- QueueRanked("zwitchdev",
-                         date.from = "2015-04-01",
-                         date.to = "2015-04-20",
+                         date.from = "2016-04-01",
+                         date.to = "2016-04-20",
                          metrics = "pageviews",
                          elements = c("page", "sitesection", "browser") ,
                          segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
