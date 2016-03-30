@@ -1,2 +1,2 @@
 library(testthat)
-test_check("RSiteCatalyst", filter = "queuesummary")
+test_check("RSiteCatalyst", filter = "summary")

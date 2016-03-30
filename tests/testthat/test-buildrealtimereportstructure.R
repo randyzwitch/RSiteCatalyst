@@ -3,7 +3,7 @@ test_that("Validate BuildRealTimeReportStructure using legacy credentials", {
   skip_on_cran()
   
   #Correct [masked] credentials
-  #SCAuth(Sys.getenv("USER", ""), Sys.getenv("SECRET", ""))
+  SCAuth(Sys.getenv("USER", ""), Sys.getenv("SECRET", ""))
   
   aa <- BuildRealTimeReportStructure(report.name="test123",
                                      metric="instances",
