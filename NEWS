@@ -5,6 +5,10 @@ RSiteCatalyst 1.4.8
 
 * Add support for segment stacking (provided graciously by Adam Gitzes, resolving #129)
 
+* Clarified documentation around using SAINT classifications as report elements
+
+* Split tests into multiple files to remedy Travis CI build failures
+
 RSiteCatalyst 1.4.7
 =================
 

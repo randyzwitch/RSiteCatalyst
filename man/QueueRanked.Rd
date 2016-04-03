@@ -82,6 +82,15 @@ ranked1 <- QueueRanked("your_report_suite",
                        metrics = "pageviews",
                        elements = c("sitesection", "page")
                        )
+                       
+ ranked2 <- QueueRanked(
+                       reportsuite.id = your_report_suite, 
+                       date.from = "2016-03-30", 
+                       date.to = "2016-03-30",
+                       metrics = "orders",
+                       elements = "product",
+                       classification = "Product Group"
+                       )
 
 }
 
