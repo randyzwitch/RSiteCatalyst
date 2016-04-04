@@ -9,6 +9,8 @@ RSiteCatalyst 1.4.8
 
 * Split tests into multiple files to remedy Travis CI build failures
 
+* Added date.to and date.from to QueueSummary function for parity with other Queue* functions
+
 RSiteCatalyst 1.4.7
 =================
 
