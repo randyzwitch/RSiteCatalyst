@@ -132,5 +132,5 @@ test_that("Validate QueueOvertime using legacy credentials", {
                       enqueueOnly=TRUE)
 
   #Validate returned value is numeric
-  expect_is(cc, "numeric")
+  expect_is(ll, "numeric")
 })

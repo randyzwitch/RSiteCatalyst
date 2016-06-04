@@ -54,6 +54,6 @@ dd <- QueueFallout("zwitchdev",
                   )
 
 #Validate returned value is numeric
-expect_is(cc, "numeric")
+expect_is(dd, "numeric")
 
 })
