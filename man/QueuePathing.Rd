@@ -6,7 +6,8 @@
 \usage{
 QueuePathing(reportsuite.id, date.from, date.to, metric, element, pattern,
   top = 1000, start = 1, segment.id = "", expedite = FALSE,
-  interval.seconds = 5, max.attempts = 120, validate = TRUE)
+  interval.seconds = 5, max.attempts = 120, validate = TRUE,
+  enqueueOnly = FALSE)
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -37,6 +38,8 @@ c("::anything::","::anything::","Home") will return the two previous pages leadi
 \item{max.attempts}{Number of API attempts before stopping}
 
 \item{validate}{Weather to submit report definition for validation before requesting the data.}
+
+\item{enqueueOnly}{only enqueue the report, don't get the data. returns report id, which you can later use to get the data}
 }
 \value{
 Data frame
@@ -64,7 +67,14 @@ queue_pathing_pages <- QueuePathing("your_report_suite",
                                     element="page",
                                     pathpattern
                                     )
-
+enqueued.report.id <- QueuePathing("your_report_suite",
+                                    "2014-04-01",
+                                    "2014-04-20",
+                                    metric="pageviews",
+                                    element="page",
+                                    pathpattern,
+                                    enqueueOnly=TRUE
+                                    )
 }
 
 }

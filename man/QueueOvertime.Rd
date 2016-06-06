@@ -7,7 +7,8 @@
 QueueOvertime(reportsuite.id, date.from, date.to, metrics,
   date.granularity = "day", segment.id = "", segment.inline = "",
   anomaly.detection = FALSE, data.current = FALSE, expedite = FALSE,
-  interval.seconds = 5, max.attempts = 120, validate = TRUE)
+  interval.seconds = 5, max.attempts = 120, validate = TRUE,
+  enqueueOnly = FALSE)
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -35,6 +36,8 @@ QueueOvertime(reportsuite.id, date.from, date.to, metrics,
 \item{max.attempts}{Number of API attempts before stopping}
 
 \item{validate}{Weather to submit report definition for validation before requesting the data.}
+
+\item{enqueueOnly}{only enqueue the report, don't get the data. returns report id, which you can later use to get the data}
 }
 \value{
 Data frame
@@ -77,6 +80,12 @@ overtime3 <- QueueOvertime("your_report_suite",
                            date.to = "2014-04-20",
                            metrics = c("pageviews", "visits", "bounces"),
                            date.granularity = "")
+enqueued.report.id <- QueueOvertime("your_report_suite",
+                           date.from = "2014-04-01",
+                           date.to = "2014-04-20",
+                           metrics = c("pageviews", "visits", "bounces"),
+                           date.granularity = "",
+                           enqueueOnly=TRUE)
 }
 
 }

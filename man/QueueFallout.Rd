@@ -6,7 +6,7 @@
 \usage{
 QueueFallout(reportsuite.id, date.from, date.to, metrics, element, checkpoints,
   segment.id = "", expedite = FALSE, interval.seconds = 5,
-  max.attempts = 120, validate = TRUE)
+  max.attempts = 120, validate = TRUE, enqueueOnly = FALSE)
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -30,9 +30,11 @@ QueueFallout(reportsuite.id, date.from, date.to, metrics, element, checkpoints,
 \item{max.attempts}{Number of API attempts before stopping}
 
 \item{validate}{Weather to submit report definition for validation before requesting the data.}
+
+\item{enqueueOnly}{only enqueue the report, don't get the data. returns report id, which you can later use to get the data}
 }
 \value{
-Data frame
+Data frame or report id, if enqueueOnly is TRUE
 }
 \description{
 A QueueFallout Report is a report that shows how visitors drop out
@@ -58,7 +60,14 @@ queue_fallout_pages <- QueueFallout("your_report_suite",
                                     element="page",
                                     falloutpattern
                                     )
-
+queued_report_id <- QueueFallout("your_report_suite",
+                                    "2014-04-01",
+                                    "2014-04-20",
+                                    metric="pageviews",
+                                    element="page",
+                                    falloutpattern,
+                                    enqueueOnly=TRUE
+                                    )
 }
 
 }

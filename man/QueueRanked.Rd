@@ -8,7 +8,7 @@ QueueRanked(reportsuite.id, date.from, date.to, metrics, elements, top = 10,
   start = 1, selected = c(), search = c(), search.type = "or",
   segment.id = "", segment.inline = "", classification = c(),
   data.current = FALSE, expedite = FALSE, interval.seconds = 5,
-  max.attempts = 120, validate = TRUE)
+  max.attempts = 120, validate = TRUE, enqueueOnly = FALSE)
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -48,6 +48,8 @@ search overrides anything specified using selected}
 \item{max.attempts}{Number of API attempts before stopping}
 
 \item{validate}{Weather to submit report definition for validation before requesting the data.}
+
+\item{enqueueOnly}{only enqueue the report, don't get the data. returns report id, which you can later use to get the data}
 }
 \value{
 Data frame
@@ -91,7 +93,15 @@ ranked1 <- QueueRanked("your_report_suite",
                        elements = "product",
                        classification = "Product Group"
                        )
-
+ enqueued.report.id <- QueueRanked(
+                       reportsuite.id = your_report_suite, 
+                       date.from = "2016-03-30", 
+                       date.to = "2016-03-30",
+                       metrics = "orders",
+                       elements = "product",
+                       classification = "Product Group",
+                       enqueueOnly = TRUE
+                       )
 }
 
 }

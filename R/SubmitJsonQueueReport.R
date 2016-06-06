@@ -12,10 +12,11 @@
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
 #' @param validate Weather to submit report definition for validation before requesting the data.
+#' @param enqueueOnly only enqueue the report, don't get the data. returns report id, which you can later use to get the data
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
-#' @return Data frame
+#' @return Data frame or report id, if enqueueOnly is TRUE
 #'
 #' @examples
 #' \dontrun{
@@ -39,21 +40,21 @@ SubmitJsonQueueReport <-
         stop("ERROR: Invalid report description.")
       }
     }
-    
+
     response <-
       ApiRequest(body = report.description, func.name = "Report.Queue")
-    
+
     #If response returns an error, return error message. Else, continue with capturing report ID
     report.id <- as.numeric(response$reportID)
     if (!is.numeric(report.id)) {
       stop("ERROR: the API validated the report, but did not return a report ID")
     }
-    
+
     if (enqueueOnly) {
       return(report.id)
     } else{
       return(
-        getReport(
+        GetReport(
           report.id,
           interval.seconds = interval.seconds,
           max.attempts = max.attempts,
