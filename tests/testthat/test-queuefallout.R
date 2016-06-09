@@ -41,8 +41,6 @@ cc <-QueueFallout("zwitchdev",
 #Validate returned value is a data.frame
 expect_is(cc, "data.frame")
 
-})
-
 dd <- QueueFallout("zwitchdev",
                   "2015-12-01",
                   "2016-12-31",

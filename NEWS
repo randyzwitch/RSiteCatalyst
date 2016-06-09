@@ -1,3 +1,8 @@
+RSiteCatalyst 1.4.9
+=================
+
+* Ability to enqueue reports created by Queue* functions, rather than return reports immediately (provided by GitHub user shashispace, closing issue #165)
+
 RSiteCatalyst 1.4.8
 =================
 
