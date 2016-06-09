@@ -5,7 +5,7 @@
 \title{Create Queue Report from JSON}
 \usage{
 SubmitJsonQueueReport(report.description, interval.seconds = 5,
-  max.attempts = 120, validate = TRUE)
+  max.attempts = 120, validate = TRUE, enqueueOnly = FALSE)
 }
 \arguments{
 \item{report.description}{JSON report description}
@@ -15,9 +15,11 @@ SubmitJsonQueueReport(report.description, interval.seconds = 5,
 \item{max.attempts}{Number of API attempts before stopping}
 
 \item{validate}{Weather to submit report definition for validation before requesting the data.}
+
+\item{enqueueOnly}{only enqueue the report, don't get the data. returns report id, which you can later use to get the data}
 }
 \value{
-Data frame
+Data frame or report id, if enqueueOnly is TRUE
 }
 \description{
 Generic interface to validate, queue and retrieve a report from the API

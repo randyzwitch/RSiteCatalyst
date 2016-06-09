@@ -229,4 +229,17 @@ test_that("Validate QueueTrended using legacy credentials", {
   #Validate returned value is a data.frame
   expect_is(rr, "data.frame")
 
+
+  #check enqueueOnly returns numeric report id
+  ss <- QueueTrended("zwitchdev",
+                           date.from = "2016-04-01",
+                           date.to = "2016-04-02",
+                           metrics = "pageviews",
+                           elements = c("sitesection", "page","browser") ,
+                           segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"),
+                           enqueueOnly=TRUE
+  )
+
+  #Validate returned value is a numeric
+  expect_is(ss, "numeric")
 })

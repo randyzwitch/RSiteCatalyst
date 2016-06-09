@@ -9,7 +9,7 @@ QueueTrended(reportsuite.id, date.from, date.to, metrics, elements, top = 0,
   date.granularity = "day", segment.id = "", segment.inline = "",
   classification = character(0), anomaly.detection = FALSE,
   data.current = FALSE, expedite = FALSE, interval.seconds = 5,
-  max.attempts = 120, validate = TRUE)
+  max.attempts = 120, validate = TRUE, enqueueOnly = FALSE)
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -52,9 +52,11 @@ search overrides anything specified using selected}
 \item{max.attempts}{Number of API attempts before stopping}
 
 \item{validate}{Weather to submit report definition for validation before requesting the data.}
+
+\item{enqueueOnly}{only enqueue the report, don't get the data. returns report id, which you can later use to get the data}
 }
 \value{
-Data frame
+Data frame or report id, if enqueueOnly is TRUE
 }
 \description{
 A QueueTrended report is a report where a single metric is

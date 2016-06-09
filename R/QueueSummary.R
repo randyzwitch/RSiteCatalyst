@@ -26,6 +26,7 @@
 #' @param validate Whether to submit report definition for validation before requesting the data.
 #' @param date.from Start date for the report (YYYY-MM-DD)
 #' @param date.to End date for the report (YYYY-MM-DD)
+#' @param enqueueOnly only enqueue the report, don't get the data. returns report id, which you can later use to get the data
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
@@ -38,12 +39,14 @@
 #' aa <- QueueSummary("zwitchdev", "2015", c("pageviews", "visits"))
 #' bb <- QueueSummary("zwitchdev", "", c("pageviews", "visits"), 
 #'                    date.from = "2016-01-01", date.to="2016-01-15")
-#'
+#' enqueued.reprot.id <- QueueSummary("zwitchdev", "", c("pageviews", "visits"), 
+#'                    date.from = "2016-01-01", date.to="2016-01-15",
+#'                    enqueueOnly=TRUE)
 #' }
 #'
 #' @export
 
-QueueSummary <- function(reportsuite.ids, date, metrics, interval.seconds=5, max.attempts=120,validate=TRUE, date.from = "", date.to = "") {
+QueueSummary <- function(reportsuite.ids, date, metrics, interval.seconds=5, max.attempts=120,validate=TRUE, date.from = "", date.to = "",enqueueOnly=FALSE) {
 
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
@@ -66,7 +69,7 @@ QueueSummary <- function(reportsuite.ids, date, metrics, interval.seconds=5, max
   report.description$reportDescription$locale <- unbox(AdobeAnalytics$SC.Credentials$locale)
   report.description$reportDescription$elementDataEncoding <- unbox("utf8")
 
-  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate)
+  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate,enqueueOnly=enqueueOnly)
 
   return(report.data)
 

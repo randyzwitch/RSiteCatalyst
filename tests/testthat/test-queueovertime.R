@@ -123,4 +123,14 @@ test_that("Validate QueueOvertime using legacy credentials", {
   #Validate returned value is a data.frame
   expect_is(kk, "data.frame")
 
+  #Check enqueue only returns report id
+  ll <- QueueOvertime("zwitchdev",
+                      "2015-01-01",
+                      "2015-12-31",
+                      "visits",
+                      "",
+                      enqueueOnly=TRUE)
+
+  #Validate returned value is numeric
+  expect_is(ll, "numeric")
 })

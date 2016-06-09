@@ -5,7 +5,8 @@
 \title{Run a Summary Report}
 \usage{
 QueueSummary(reportsuite.ids, date, metrics, interval.seconds = 5,
-  max.attempts = 120, validate = TRUE, date.from = "", date.to = "")
+  max.attempts = 120, validate = TRUE, date.from = "", date.to = "",
+  enqueueOnly = FALSE)
 }
 \arguments{
 \item{reportsuite.ids}{Report suite ids}
@@ -23,6 +24,8 @@ QueueSummary(reportsuite.ids, date, metrics, interval.seconds = 5,
 \item{date.from}{Start date for the report (YYYY-MM-DD)}
 
 \item{date.to}{End date for the report (YYYY-MM-DD)}
+
+\item{enqueueOnly}{only enqueue the report, don't get the data. returns report id, which you can later use to get the data}
 }
 \value{
 Data frame
@@ -51,7 +54,9 @@ error message.
 aa <- QueueSummary("zwitchdev", "2015", c("pageviews", "visits"))
 bb <- QueueSummary("zwitchdev", "", c("pageviews", "visits"), 
                    date.from = "2016-01-01", date.to="2016-01-15")
-
+enqueued.reprot.id <- QueueSummary("zwitchdev", "", c("pageviews", "visits"), 
+                   date.from = "2016-01-01", date.to="2016-01-15",
+                   enqueueOnly=TRUE)
 }
 
 }

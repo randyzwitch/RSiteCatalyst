@@ -47,5 +47,19 @@ test_that("Validate QueuePathing using legacy credentials", {
   #Validate returned value is a data.frame
   expect_is(cc, "data.frame")
 
+  dd <- QueuePathing("zwitchdev",
+                     "2015-12-01",
+                     "2016-12-31",
+                     metric="pageviews",
+                     element="page",
+                     c("::anything::", "::anything::", "::anything::", "::exited::"),
+                     segment.id="5433e4e6e4b02df70be4ac63",
+                     enqueueOnly = TRUE
+  )
+
+
+  #Validate returned value is a data.frame
+  expect_is(dd, "numeric")
+
 
 })

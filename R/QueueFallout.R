@@ -22,10 +22,11 @@
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
 #' @param validate Weather to submit report definition for validation before requesting the data.
+#' @param enqueueOnly only enqueue the report, don't get the data. returns report id, which you can later use to get the data
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
-#' @return Data frame
+#' @return Data frame or report id, if enqueueOnly is TRUE
 #'
 #' @examples
 #' \dontrun{
@@ -38,13 +39,20 @@
 #'                                     element="page",
 #'                                     falloutpattern
 #'                                     )
-#'
+#' queued_report_id <- QueueFallout("your_report_suite",
+#'                                     "2014-04-01",
+#'                                     "2014-04-20",
+#'                                     metric="pageviews",
+#'                                     element="page",
+#'                                     falloutpattern,
+#'                                     enqueueOnly=TRUE
+#'                                     )
 #' }
 #'
 #' @export
 
 QueueFallout <- function(reportsuite.id, date.from, date.to, metrics, element, checkpoints,
-                        segment.id='', expedite=FALSE,interval.seconds=5,max.attempts=120,validate=TRUE) {
+                        segment.id='', expedite=FALSE,interval.seconds=5,max.attempts=120,validate=TRUE,enqueueOnly=FALSE) {
 
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
@@ -76,7 +84,7 @@ QueueFallout <- function(reportsuite.id, date.from, date.to, metrics, element, c
   report.description$reportDescription$metrics = data.frame(id = metrics)
   report.description$reportDescription$elements = list(list(id = unbox(element), checkpoints = checkpoints))
 
-  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate)
+  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate,enqueueOnly=enqueueOnly)
 
   return(report.data)
 
