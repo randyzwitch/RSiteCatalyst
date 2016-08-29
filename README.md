@@ -66,7 +66,7 @@ QueueOvertime requires a start and end date, a reportsuite ID, and a character v
 
 ```
 date.from <- "2014-01-01"
-date.to <- "2013-01-07"
+date.to <- "2014-01-07"
 reportsuite.id <- "your_report_suite"
 metrics <- c("visits","uniquevisitors","pageviews")
 
@@ -108,7 +108,7 @@ You may also wish to set any of the 6 optional named parameters. The 1.4 API onl
 
 ```
 date.from <- "2014-01-01"
-date.to <- "2013-01-07"
+date.to <- "2014-01-07"
 reportsuite.id <- "your_report_suite"
 metrics <- c("visits","uniquevisitors","pageviews","event10","event10")
 elements <- c("page","geoCountry","geoCity")
@@ -141,7 +141,7 @@ You may also wish to set any of the 7 optional named parameters. As with _QueueR
 
 ```
 date.from <- "2014-01-01"
-date.to <- "2013-01-07"
+date.to <- "2014-01-07"
 reportsuite.id <- "your_report_suite"
 metrics <- c("visits","uniquevisitors","pageviews","event10")
 elements <- c("page","geoCountry","geoCity")
