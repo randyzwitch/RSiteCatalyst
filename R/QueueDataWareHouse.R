@@ -1,4 +1,4 @@
-#' @details The QueueDataWareHouse function allows to access to Data WareHouse data
+#' @details The QueueDataWarehouse function allows to access to Data WareHouse data
 #' and returns either a json or send a csv to a ftp server.
 #'
 #' Because of the Reporting API structure, this function requests the
@@ -8,7 +8,7 @@
 #' with a delay between status checks (default 10 seconds). If the report does not
 #' return as "done" or a "delivery_complete" after the number of tries have completed, the function will return
 #' an error message. When \code{enqueueOnly=TRUE} and no ftp server is set, the report can be retrieved with Report.Get
-#' using the reportId returned by the QueueDataWareHouse function.
+#' using the reportId returned by the QueueDataWarehouse function.
 #'
 #' API limitations:
 #' A single segment is supported. Multiple segments are not supported.
@@ -24,7 +24,7 @@
 #' All data warehouse results are paged in chunks of 20 MB. Add "page": to \code{Report.Get} 
 #' to determine the page returned. If no page is specified then the first page is returned. (See \code{\link{Report.Get}} function)
 #'
-#' @description A QueueDataWareHouse report is a report where metrics are
+#' @description A QueueDataWarehouse report is a report where metrics are
 #' retrieved, broken down by an unlimited number of elements such as page, eVar, prop, etc, and
 #' with or without temporal aggregation. Due API limitations, only one segment can be used if needed. 
 #'
@@ -52,7 +52,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' report.data <- QueueDataWareHouse("your_report_suite",
+#' report.data <- QueueDataWarehouse("your_report_suite",
 #'                             "2014-01-01",
 #'                             "2014-01-07",
 #'                             c("visits","uniquevisitors","pageviews","event10"),
@@ -68,7 +68,7 @@
 #'}
 #' @export
 #' 
-QueueDataWareHouse <- function(reportsuite.id, date.from, date.to, metrics, elements, segment.id='',
+QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elements, segment.id='',
                                date.granularity='day', expedite=FALSE, validate=TRUE,enqueueOnly=TRUE, ftp=ftp) {
   
   # build JSON description
