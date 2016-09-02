@@ -5,16 +5,19 @@
 \title{Get Valid Elements for a Report Suite}
 \usage{
 GetElements(reportsuite.ids, metrics = c(), elements = c(),
-  date.granularity = "")
+  date.granularity = "", report.type = "")
 }
 \arguments{
 \item{reportsuite.ids}{Single report suite id, or character vector of report suite ids}
 
-\item{metrics}{List of existing metrics you want to use in combination with an additional metric}
+\item{metrics}{List of existing metrics you want to use in combination with an additional element}
 
-\item{elements}{List of existing elements you want to use in combination with an additional metric}
+\item{elements}{List of existing elements you want to use in combination with an additional element}
 
 \item{date.granularity}{Granularity that you want to combine with an additional metric}
+
+\item{report.type}{If set to 'warehouse', the elements and metrics returned to use in combination with an addional element
+are supported in data warehouse reports.}
 }
 \value{
 Data frame
@@ -31,7 +34,8 @@ This function requires a character vector with one or more valid Report Suites s
 elements.valid <- GetElements("your_report_suite",
                               metrics=c('visitors','pageviews'),
                               elements=c('page','geoCountry'),
-                              date.granularity='day')
+                              date.granularity='day',
+                              report.type='')
 
 elements <- GetElements(c("your_prod_report_suite","your_dev_report_suite"))
 }

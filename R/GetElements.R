@@ -5,9 +5,11 @@
 #'
 #' @title Get Valid Elements for a Report Suite
 #' @param reportsuite.ids Single report suite id, or character vector of report suite ids
-#' @param metrics List of existing metrics you want to use in combination with an additional metric
-#' @param elements List of existing elements you want to use in combination with an additional metric
+#' @param metrics List of existing metrics you want to use in combination with an additional element
+#' @param elements List of existing elements you want to use in combination with an additional element
 #' @param date.granularity Granularity that you want to combine with an additional metric
+#' @param report.type If set to 'warehouse', the elements and metrics returned to use in combination with an addional element
+#' are supported in data warehouse reports.
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
@@ -20,12 +22,13 @@
 #' elements.valid <- GetElements("your_report_suite",
 #'                               metrics=c('visitors','pageviews'),
 #'                               elements=c('page','geoCountry'),
-#'                               date.granularity='day')
+#'                               date.granularity='day',
+#'                               report.type='')
 #'
 #' elements <- GetElements(c("your_prod_report_suite","your_dev_report_suite"))
 #' }
 
-GetElements <- function(reportsuite.ids, metrics=c(), elements=c(), date.granularity='') {
+GetElements <- function(reportsuite.ids, metrics=c(), elements=c(), date.granularity='', report.type='') {
 
   valid.elements <- data.frame()
   for(reportsuite.id in reportsuite.ids) {
@@ -46,6 +49,10 @@ GetElements <- function(reportsuite.ids, metrics=c(), elements=c(), date.granula
     if(nchar(date.granularity)>0) {
       request.body$dateGranularity <- unbox(date.granularity)
     }
+    if(nchar(report.type)>0){
+      request.body$reportType <- unbox(report.type)
+    }
+    
     working.elements <- ApiRequest(body=toJSON(request.body),func.name="Report.GetElements")
     working.elements$rsid <- reportsuite.id
     if(length(valid.elements)){

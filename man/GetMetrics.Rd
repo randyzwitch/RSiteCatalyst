@@ -5,7 +5,7 @@
 \title{Get Available Metrics within a Report Suite}
 \usage{
 GetMetrics(reportsuite.ids, metrics = c(), elements = c(),
-  date.granularity = "")
+  date.granularity = "", report.type = "")
 }
 \arguments{
 \item{reportsuite.ids}{Single report suite id, or character vector of report suite ids}
@@ -15,6 +15,9 @@ GetMetrics(reportsuite.ids, metrics = c(), elements = c(),
 \item{elements}{List of existing elements you want to use in combination with an additional metric}
 
 \item{date.granularity}{Granularity that you want to combine with an additional metric}
+
+\item{report.type}{If set to 'warehouse', the elements and metrics returned to use in combination with an addional element
+are supported in data warehouse reports.}
 }
 \value{
 Data frame
@@ -30,7 +33,8 @@ This function requires having a character vector with one or more valid Report S
 metrics.valid <- GetMetrics("your_report_suite",
                             metrics=c('visitors','pageviews'),
                             elements=c('page','geoCountry'),
-                            date.granularity='day')
+                            date.granularity='day',
+                            report.type=''))
 
 metrics <- GetMetrics(report_suites$rsid)
 }

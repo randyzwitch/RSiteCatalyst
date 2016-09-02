@@ -8,6 +8,8 @@
 #' @param metrics List of existing metrics you want to use in combination with an additional metric
 #' @param elements List of existing elements you want to use in combination with an additional metric
 #' @param date.granularity Granularity that you want to combine with an additional metric
+#' @param report.type If set to 'warehouse', the elements and metrics returned to use in combination with an addional element
+#' are supported in data warehouse reports.
 #'
 #' @importFrom jsonlite toJSON unbox
 #' @importFrom plyr rbind.fill
@@ -21,12 +23,13 @@
 #' metrics.valid <- GetMetrics("your_report_suite",
 #'                             metrics=c('visitors','pageviews'),
 #'                             elements=c('page','geoCountry'),
-#'                             date.granularity='day')
+#'                             date.granularity='day',
+#'                             report.type=''))
 #'
 #' metrics <- GetMetrics(report_suites$rsid)
 #' }
 
-GetMetrics <- function(reportsuite.ids, metrics=c(), elements=c(), date.granularity='') {
+GetMetrics <- function(reportsuite.ids, metrics=c(), elements=c(), date.granularity='', report.type='') {
 
   valid.metrics <- data.frame()
 
@@ -47,6 +50,9 @@ GetMetrics <- function(reportsuite.ids, metrics=c(), elements=c(), date.granular
     }
     if(nchar(date.granularity)>0) {
       request.body$dateGranularity <- unbox(date.granularity)
+    }
+    if(nchar(report.type)>0){
+      request.body$reportType <- unbox(report.type)
     }
 
     working.metrics <- ApiRequest(body=toJSON(request.body),func.name="Report.GetMetrics")
