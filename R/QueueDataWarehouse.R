@@ -22,7 +22,7 @@
 #' Results for data warehouse reports can be accessed in two ways: directly through the API and
 #' through FTP delivery. Email delivery is not supported.
 #' All data warehouse results are paged in chunks of 20 MB. Add "page": to \code{Report.Get} 
-#' to determine the page returned. If no page is specified then the first page is returned. (See \code{\link{Report.Get}} function)
+#' to determine the page returned. If no page is specified then the first page is returned.
 #'
 #' @description A QueueDataWarehouse report is a report where metrics are
 #' retrieved, broken down by an unlimited number of elements such as page, eVar, prop, etc, and
@@ -68,8 +68,10 @@
 #'}
 #' @export
 #' 
-QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elements, segment.id='',
-                               date.granularity='day', expedite=FALSE, validate=TRUE,enqueueOnly=TRUE, ftp=ftp) {
+QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elements,
+                               date.granularity='day', segment.id='', data.current=TRUE,
+                               expedite=FALSE, interval.seconds=5, max.attempts=120,
+                               validate=TRUE,enqueueOnly=TRUE, ftp=ftp) {
   
   # build JSON description
   # we have to use unbox to force jsonlite not put strings into single-element arrays
@@ -102,8 +104,6 @@ QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elem
   if(enqueueOnly==TRUE){
     report.description$reportDescription$ftp <- unbox(data.frame(ftp))
   }
-  
-  prettify(toJSON(report.description), indent=4)
   
   report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate,enqueueOnly=enqueueOnly)
   
