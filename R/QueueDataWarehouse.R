@@ -28,7 +28,7 @@
 #' retrieved, broken down by an unlimited number of elements such as page, eVar, prop, etc, and
 #' with or without temporal aggregation. Due API limitations, only one segment can be used if needed. 
 #'
-#' @title Queue a DataWareHouse Report
+#' @title Queue a DataWarehouse Report
 #'
 #' @param reportsuite.id Report suite id
 #' @param date.from Start date for the report (YYYY-MM-DD)
