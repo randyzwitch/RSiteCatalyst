@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="site_libs/highlight/default.css"
+      type="text/css" />
+<script src="site_libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<p><a href="https://travis-ci.org/randyzwitch/RSiteCatalyst"><img src="https://travis-ci.org/randyzwitch/RSiteCatalyst.png?branch=master" alt="Build Status" /></a></p>
+<div id="rsitecatalyst" class="section level1">
+<h1>RSiteCatalyst</h1>
+<p>R client library for the Adobe Analytics 1.4 API</p>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p>RSiteCatalyst v1.4 is on CRAN. You can also install directly from GitHub.</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)
+library(devtools)
+install_github(&quot;randyzwitch/RSiteCatalyst&quot;, ref=&quot;master&quot;)
+
+library(RSiteCatalyst)</code></pre>
+<p>You may also need to install other packages that <em>RSiteCatalyst v1.4</em> depends on.</p>
+<ul>
+<li><a href="http://cran.r-project.org/web/packages/jsonlite/">jsonlite</a> (&gt;=0.9.5)</li>
+<li><a href="http://cran.r-project.org/web/packages/plyr/">plyr</a> (&gt;=1.8.1)</li>
+<li><a href="http://cran.r-project.org/web/packages/httr/">httr</a> (&gt;= 0.3)</li>
+<li><a href="http://cran.r-project.org/web/packages/stringr/">stringr</a> (&gt;=0.6.2)</li>
+<li><a href="http://cran.r-project.org/web/packages/digest/">digest</a></li>
+<li><a href="http://cran.r-project.org/web/packages/base64enc/">base64enc</a></li>
+</ul>
+<pre><code>install.packages(c(&quot;jsonlite&quot;,&quot;plyr&quot;,&quot;httr&quot;,&quot;stringr&quot;,&quot;digest&quot;,&quot;base64enc&quot;))</code></pre>
+</div>
+<div id="authorisation" class="section level2">
+<h2>Authorisation</h2>
+<p>Authorisation can be done using the legacy auth method (username:company + shared secret), or using the newer OAUTH method. Either is fine, but ultimately you should move towards using the OAUTH method, as the legacy auth method is deprecated.</p>
+<p>The OAUTH method is not universally available for all Adobe Analytics accounts, so legacy auth remains the default.</p>
+<div id="using-legacy-auth-web-service-credentials" class="section level5">
+<h5>Using legacy auth (web service credentials)</h5>
+<p>This auth method is pretty straight-forward. You will simply need your username, and your shared secret, which you can retrieve from your account settings page in the Adobe Analytics web interface.</p>
+<pre><code>SCAuth(&quot;your_username:your_company&quot;, &quot;your_shared_secret&quot;)</code></pre>
+</div>
+<div id="using-oauth" class="section level5">
+<h5>Using OAUTH</h5>
+<p>First you will need to create an application in the <a href="https://developer.omniture.com/en_US/devcenter">Adobe Dev Center</a>. The application name can be whatever you want. The redirect URI should be left blank.</p>
+<p>This will provide you with a identifier and secret that you can use to access the Adobe Analytics API.</p>
+<pre><code>SCAuth(&quot;your_identifier&quot;, 
+      &quot;your_secret&quot;, 
+      &quot;your company&quot;)</code></pre>
+</div>
+</div>
+<div id="running-reports" class="section level2">
+<h2>Running Reports</h2>
+<p>Once you’ve authorised, reports can be queued and retrieved using the helper functions for each report type.</p>
+<div id="using-the-report-helper-functions" class="section level4">
+<h4>Using the report helper functions</h4>
+<p>RSiteCatalyst v1.4 has helper functions that make it easier to generate all report types (ranked, overtime, trended, pathing, fallout). These take parameters in R, convert them to JSON, then call JsonQueueReport.</p>
+</div>
+<div id="queueovertime" class="section level4">
+<h4>QueueOvertime</h4>
+<p>Returns an overtime report. This is similar to the key metrics report in that the only granularity allowed is time.</p>
+<p>QueueOvertime requires a start and end date, a reportsuite ID, and a character vector of metrics.</p>
+<pre><code>date.from &lt;- &quot;2014-01-01&quot;
+date.to &lt;- &quot;2014-01-07&quot;
+reportsuite.id &lt;- &quot;your_report_suite&quot;
+metrics &lt;- c(&quot;visits&quot;,&quot;uniquevisitors&quot;,&quot;pageviews&quot;)
+
+report.data &lt;- QueueOvertime(reportsuite.id, date.from, date.to, metrics)</code></pre>
+<p>You may also wish to set any of the 5 optional named parameters.</p>
+<pre><code>date.from &lt;- &quot;2014-01-01&quot;
+date.to &lt;- &quot;2014-01-07&quot;
+reportsuite.id &lt;- &quot;your_report_suite&quot;
+metrics &lt;- c(&quot;visits&quot;,&quot;uniquevisitors&quot;,&quot;pageviews&quot;)
+date.granularity &lt;- &quot;hour&quot;
+segment.id &lt;- &quot;Visit_Natural_Search&quot;
+anomaly.detection &lt;- TRUE
+data.current &lt;- TRUE
+expedite &lt;- TRUE
+
+report.data &lt;- QueueOvertime(reportsuite.id, date.from, date.to, metrics,date.granularity=date.granularity,segment.id=segment.id,anomaly.detection=anomaly.detection,data.current=data.current,expedite=expedite)</code></pre>
+</div>
+<div id="queueranked" class="section level4">
+<h4>QueueRanked</h4>
+<p>Returns a ranked report. This is an ordered list of elements and associated metrics with no time granularity.</p>
+<p>QueueRanked requires a start and end date, a reportsuite ID, a character vector of elements and a character vector of metrics.</p>
+<pre><code>date.from &lt;- &quot;2014-01-01&quot;
+date.to &lt;- &quot;2014-01-07&quot;
+reportsuite.id &lt;- &quot;your_report_suite&quot;
+metrics &lt;- c(&quot;visits&quot;,&quot;uniquevisitors&quot;,&quot;pageviews&quot;,&quot;event10&quot;)
+elements &lt;- c(&quot;page&quot;,&quot;geoCountry&quot;,&quot;geoCity&quot;)
+
+report.data &lt;- QueueRanked(reportsuite.id, date.from, date.to, metrics, elements)</code></pre>
+<p>You may also wish to set any of the 6 optional named parameters. The 1.4 API only supports this for the first element specified. In the example below, <em>selected</em> applies to the first element, <em>page</em>.</p>
+<pre><code>date.from &lt;- &quot;2014-01-01&quot;
+date.to &lt;- &quot;2014-01-07&quot;
+reportsuite.id &lt;- &quot;your_report_suite&quot;
+metrics &lt;- c(&quot;visits&quot;,&quot;uniquevisitors&quot;,&quot;pageviews&quot;,&quot;event10&quot;,&quot;event10&quot;)
+elements &lt;- c(&quot;page&quot;,&quot;geoCountry&quot;,&quot;geoCity&quot;)
+top &lt;- 100
+start &lt;- 100
+selected &lt;- c(&quot;Home&quot;,&quot;Search&quot;,&quot;About&quot;)
+segment.id &lt;- &quot;dw:12345&quot;
+data.current &lt;- TRUE
+expedite &lt;- TRUE
+
+report.data &lt;- QueueRanked(reportsuite.id, date.from, date.to, metrics,elements,top=top,start=start,selected=selected,segment.id=segment.id,data.current=data.current,expedit=expedite)</code></pre>
+</div>
+<div id="queuetrended" class="section level4">
+<h4>QueueTrended</h4>
+<p>Returns a trended report. This is an ordered list of elements and associated metrics with time granularity.</p>
+<p>QueueTrended requires a start and end date, a reportsuite ID, a character vector of elements and a character vector of metrics.</p>
+<pre><code>date.from &lt;- &quot;2014-01-01&quot;
+date.to &lt;- &quot;2014-01-07&quot;
+reportsuite.id &lt;- &quot;your_report_suite&quot;
+metrics &lt;- c(&quot;visits&quot;,&quot;uniquevisitors&quot;,&quot;pageviews&quot;,&quot;event10&quot;)
+elements &lt;- c(&quot;page&quot;,&quot;geoCountry&quot;,&quot;geoCity&quot;)
+
+report.data &lt;- QueueTrended(reportsuite.id, date.from, date.to, metrics, elements)</code></pre>
+<p>You may also wish to set any of the 7 optional named parameters. As with <em>QueueRanked</em> the 1.4 API only supports <em>selected</em> for the first element specified.</p>
+<pre><code>date.from &lt;- &quot;2014-01-01&quot;
+date.to &lt;- &quot;2014-01-07&quot;
+reportsuite.id &lt;- &quot;your_report_suite&quot;
+metrics &lt;- c(&quot;visits&quot;,&quot;uniquevisitors&quot;,&quot;pageviews&quot;,&quot;event10&quot;)
+elements &lt;- c(&quot;page&quot;,&quot;geoCountry&quot;,&quot;geoCity&quot;)
+top &lt;- 100
+start &lt;- 100
+selected &lt;- list(page=c(&quot;Home&quot;,&quot;Search&quot;,&quot;About&quot;))
+date.granularity &lt;- &quot;hour&quot;
+segment.id &lt;- &quot;dw:12345&quot;
+data.current &lt;- TRUE
+expedite &lt;- TRUE
+
+report.data &lt;- QueueTrended(reportsuite.id, date.from, date.to, metrics,elements,top=top,start=start,selected=selected,segment.id=segment.id,data.current=data.current,expedit=expedite)</code></pre>
+</div>
+<div id="queuepathing" class="section level4">
+<h4>QueuePathing</h4>
+<p>Returns a pathing report. This is an ordered list of paths matching the specified pattern.</p>
+<p>QueuePathing requires a start and end date, a reportsuite ID, a single element, a single metric and a pattern of element values that defined the path.</p>
+<pre><code>date.from &lt;- &quot;2014-01-01&quot;
+date.to &lt;- &quot;2014-01-07&quot;
+reportsuite.id &lt;- &quot;your_report_suite&quot;
+metric &lt;- &quot;pageviews&quot;
+element &lt;- &quot;page&quot;
+pattern &lt;- c(&quot;Home&quot;,&quot;::anything::&quot;,&quot;::anything::&quot;)
+
+report.data &lt;- QueuePathing(reportsuite.id, date.from, date.to, metric, element, pattern)</code></pre>
+</div>
+<div id="queuefallout" class="section level4">
+<h4>QueueFallout</h4>
+<p>Returns a fallout report. This is a pathed list of elements, with fallout values for each.</p>
+<p>QueuePathing requires a start and end date, a reportsuite ID, a single element, a character vector of metrics and a character vector of element values that defined the checkpoints.</p>
+<pre><code>date.from &lt;- &quot;2014-01-01&quot;
+date.to &lt;- &quot;2014-01-07&quot;
+reportsuite.id &lt;- &quot;your_report_suite&quot;
+metrics &lt;- c(&quot;visits&quot;,&quot;uniquevisitors&quot;,&quot;pageviews&quot;,&quot;event10&quot;)
+element &lt;- &quot;page&quot;
+checkpoints &lt;- c(&quot;Home&quot;,&quot;Contact&quot;,&quot;ThankYou&quot;)
+
+report.data &lt;- QueuePathing(reportsuite.id, date.from, date.to, metrics, element, checkpoints)</code></pre>
+</div>
+</div>
+<div id="understanding-the-available-data" class="section level2">
+<h2>Understanding the Available Data</h2>
+<p>Using the API, you can retrieve the setup of your report suite and view definitions for evars and sprops, success events, report suites and segments.</p>
+<div id="getelements" class="section level4">
+<h4>GetElements</h4>
+<p>Gets valid elements for a report suite for the current user. This list is restricted by optionally specified existing elements, existing metrics and date granularity.</p>
+<pre><code>elements.valid &lt;- GetElements(&quot;your_report_suite&quot;,metrics=c(&#39;visitors&#39;,&#39;pageviews&#39;),elements=c(&#39;page&#39;,&#39;geoCountry&#39;),date.granularity=&#39;day&#39;)</code></pre>
+</div>
+<div id="getmetrics" class="section level4">
+<h4>GetMetrics</h4>
+<p>Gets valid metrics for a report suite for the current user. This list is restricted by optionally specified existing elements, existing metrics and date granularity.</p>
+<pre><code>metrics.valid &lt;- GetMetrics(&quot;your_report_suite&quot;,metrics=c(&#39;visitors&#39;,&#39;pageviews&#39;),elements=c(&#39;page&#39;,&#39;geoCountry&#39;),date.granularity=&#39;day&#39;)</code></pre>
+</div>
+<div id="getevars" class="section level4">
+<h4>GetEvars</h4>
+<p>Gets evar (conversion variable) definitions for the specified report suite(s). Useful to audit or document a report suite or company in Adobe Analytics.</p>
+<pre><code>evars &lt;- GetEvars(c(&quot;your_prod_report_suite&quot;,&quot;your_dev_reportsuite&quot;))</code></pre>
+</div>
+<div id="getprops" class="section level4">
+<h4>GetProps</h4>
+<p>Gets sprop (traffic variable) definitions for the specified report suite(s). Useful to audit or document a report suite or company in Adobe Analytics.</p>
+<pre><code>props &lt;- GetProps(c(&quot;your_prod_report_suite&quot;,&quot;your_dev_reportsuite&quot;))</code></pre>
+</div>
+<div id="getsuccessevents" class="section level4">
+<h4>GetSuccessEvents</h4>
+<p>Gets success event definitions for the specified report suite(s). Useful to audit or document a report suite or company in Adobe Analytics.</p>
+<pre><code>successevents &lt;- GetSuccessEvents(c(&quot;your_prod_report_suite&quot;,&quot;your_dev_reportsuite&quot;))</code></pre>
+</div>
+<div id="getreportsuites" class="section level4">
+<h4>GetReportSuites</h4>
+<p>Gets all report suites for the company.</p>
+<pre><code>reportsuites &lt;- GetReportSuites()</code></pre>
+</div>
+<div id="getsegments" class="section level4">
+<h4>GetSegments</h4>
+<p>Gets a list of segments for the specified report suites. Useful to find segment IDs for use in reporting helper functions or JSON report definitions.</p>
+<pre><code>segments &lt;- GetSegments(c(&quot;your_prod_report_suite&quot;,&quot;your_dev_reportsuite&quot;))</code></pre>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

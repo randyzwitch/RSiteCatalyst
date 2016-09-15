@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>RSiteCatalyst</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="css/rmarkdown.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.9em;
+  padding-left: 5px;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+  padding-left: 10px;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">RSiteCatalyst</h1>
+
+</div>
+
+
+<p>RSiteCatalyst is an R package for accessing the Adobe Analytics API. The focus of this package are analysts looking for a convenient, programmatic way for accessing their website data using the power of R.</p>
+<hr />
+<div id="getting-started" class="section level2">
+<h2>Getting Started</h2>
+<div id="installation" class="section level3">
+<h3>Installation</h3>
+<p>RSiteCatalyst can be installed from CRAN as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;RSiteCatalyst&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</code></pre></div>
+<p>After installing RSiteCatalyst, you need to have <u>Web Services Access</u> enabled in the <code>User Management -&gt; Users -&gt; Access</code> menu in the Adobe Analytics Admin panel:</p>
+<div class="figure">
+<img src="images/web-services-access.png" />
+
+</div>
+<p>Additionally, you will either need to obtain your Web Services Credentials or register an OAuth2 application, which will be discussed in detail in the Authentication section.</p>
+<hr />
+</div>
+<div id="authentication" class="section level3">
+<h3>Authentication</h3>
+<p>Regardless of whether you choose the ‘legacy’ method for authentication or the newer OAuth2 method, the API will return the same data. Which method you choose depends on your company security requirements, familiarity with OAuth2 or your application-specific details.</p>
+<div id="legacy-wsse" class="section level4">
+<h4>Legacy (WSSE) <a href="https://marketing.adobe.com/developer/documentation/authentication-1/using-web-service-credentials-2"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>The ‘legacy’ method of authenticating with the Adobe Analytics API requires knowing your <u>User Name</u> and <u>Shared Secret</u>, which can be obtained from the same <code>User Management -&gt; Users -&gt; Access</code> menu in the Admin panel when Web Services Access is granted.</p>
+<p>With the <u>User Name</u> and <u>Shared Secret</u> values, you can start the authentication process in RSiteCatalyst through the <code>SCAuth()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RSiteCatalyst)
+<span class="kw">SCAuth</span>(<span class="st">&quot;username:company&quot;</span>, <span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span>)
+[<span class="dv">1</span>] <span class="st">&quot;Credentials Saved in RSiteCatalyst Namespace.&quot;</span></code></pre></div>
+<p>Note that when the <code>SCAuth()</code> function is submitted, RSiteCatalyst doesn’t actually validate whether the credentials are correct (i.e. verify that the API will return an answer), other than to validate the the <code>key</code> and <code>secret</code> values have the proper format.</p>
+<p>Should your credentials not be accepted by the Adobe Analytics API, you will see the following message (or similar):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RSiteCatalyst)
+<span class="kw">SCAuth</span>(<span class="st">&quot;username:company&quot;</span>, <span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span>)
+[<span class="dv">1</span>] <span class="st">&quot;Credentials Saved in RSiteCatalyst Namespace.&quot;</span>
+<span class="kw">GetReportSuites</span>()
+
+Error in <span class="kw">ApiRequest</span>(<span class="dt">func.name =</span> <span class="st">&quot;Company.GetReportSuites&quot;</span>) :<span class="st"> </span>
+<span class="st">  </span>ERROR:<span class="st"> </span>Bad Request  -<span class="st">  </span>Unable to validate authentication.</code></pre></div>
+</div>
+<div id="oauth2" class="section level4">
+<h4>OAuth2 <a href="https://marketing.adobe.com/developer/documentation/authentication-1/auth-overview-1#concept_4646CEC9CE5E4698A936D84B90A2CD0C"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>TBD</p>
+<hr />
+</div>
+</div>
+<div id="tips-and-tricks" class="section level3">
+<h3>Tips and Tricks</h3>
+<div id="saving-credentials-to-.renviron" class="section level4 toc-ignore">
+<h4>1. Saving credentials to .Renviron</h4>
+<p>While not secure <em>per se</em>, to avoid putting your User Name and Shared Secret in the clear inside of an R script, you can place your credentials in the <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html">.Renviron</a> environment file. This file is loaded each time R is loaded, setting global environment variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">USER=<span class="st">&quot;username:company&quot;</span>
+SECRET=<span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span></code></pre></div>
+<p>Again, this is not truly ‘secure’, it is just security-through-obscurity. If you use this method, your <code>SCAuth()</code> call now becomes the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RSiteCatalyst)
+<span class="kw">SCAuth</span>(<span class="kw">Sys.getenv</span>(<span class="st">&quot;USER&quot;</span>), <span class="kw">Sys.getenv</span>(<span class="st">&quot;SECRET&quot;</span>))</code></pre></div>
+<pre><code>## [1] &quot;Credentials Saved in RSiteCatalyst Namespace.&quot;</code></pre>
+<p>Not enough to stop a truly determined hacker, but enough so that credentials aren’t checked into version control or copy-pasted/shared across users.</p>
+</div>
+<div id="running-getreportsuites-at-the-beginning-of-a-session" class="section level4 toc-ignore">
+<h4>2. Running <code>GetReportSuites()</code> at the beginning of a session</h4>
+<p>One of the best use cases of RSiteCatalyst is accessing large amounts of data, whether that means running reports for a long time period or for many report suites at one time.</p>
+<p>By running <code>GetReportSuites()</code> at the beginning of a session, not only do you get a quick refresher of the report suites contained in your Adobe Analytics, but you have a vector that you can pass to other RSiteCatalyst functions:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rs &lt;-<span class="st"> </span><span class="kw">GetReportSuites</span>()
+rs</code></pre></div>
+<pre><code>##          rsid     site_title
+## 1   zwitchdev ZwitchCorp Dev
+## 2 zwitchjulia Julia Bloggers</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Pass the list of report suite ids, not the whole data frame</span>
+props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</code></pre></div>
+<hr />
+</div>
+</div>
+</div>
+<div id="examples" class="section level2">
+<h2>Examples</h2>
+<hr />
+</div>
+<div id="contributing" class="section level2">
+<h2>Contributing</h2>
+<hr />
+<div id="issues-feature-requests" class="section level3">
+<h3>Issues / Feature Requests</h3>
+</div>
+<div id="submiting-a-pull-request" class="section level3">
+<h3>Submiting A Pull Request</h3>
+</div>
+<div id="contributors" class="section level3">
+<h3>Contributors</h3>
+<hr />
+</div>
+</div>
+<div id="admin-metadata-functions" class="section level2">
+<h2>Admin / Metadata Functions</h2>
+<div id="cancelreport" class="section level3">
+<h3>CancelReport</h3>
+</div>
+<div id="getactivation" class="section level3">
+<h3>GetActivation</h3>
+</div>
+<div id="getaxlestartdate" class="section level3">
+<h3>GetAxleStartDate</h3>
+</div>
+<div id="getbasecurrency" class="section level3">
+<h3>GetBaseCurrency</h3>
+</div>
+<div id="getbaseurl" class="section level3">
+<h3>GetBaseURL</h3>
+</div>
+<div id="getbookmarks" class="section level3">
+<h3>GetBookmarks</h3>
+</div>
+<div id="getcalculatedmetrics" class="section level3">
+<h3>GetCalculatedMetrics</h3>
+</div>
+<div id="getclassifications" class="section level3">
+<h3>GetClassifications</h3>
+</div>
+<div id="getcustomcalendar" class="section level3">
+<h3>GetCustomCalendar</h3>
+</div>
+<div id="getdashboards" class="section level3">
+<h3>GetDashboards</h3>
+</div>
+<div id="getdatawarehousedisplay" class="section level3">
+<h3>GetDataWarehouseDisplay</h3>
+</div>
+<div id="getdefaultpage" class="section level3">
+<h3>GetDefaultPage</h3>
+</div>
+<div id="getdiscoverenabled" class="section level3">
+<h3>GetDiscoverEnabled</h3>
+</div>
+<div id="getecommerce" class="section level3">
+<h3>GetEcommerce</h3>
+</div>
+<div id="getelements" class="section level3">
+<h3>GetElements</h3>
+</div>
+<div id="getevars" class="section level3">
+<h3>GetEvars</h3>
+</div>
+<div id="getfeed" class="section level3">
+<h3>GetFeed</h3>
+</div>
+<div id="getfeeds" class="section level3">
+<h3>GetFeeds</h3>
+</div>
+<div id="getfunctions" class="section level3">
+<h3>GetFunctions</h3>
+</div>
+<div id="getgeosegmentation" class="section level3">
+<h3>GetGeoSegmentation</h3>
+</div>
+<div id="getgroups" class="section level3">
+<h3>GetGroups</h3>
+</div>
+<div id="getinternalurlfilters" class="section level3">
+<h3>GetInternalURLFilters</h3>
+</div>
+<div id="getipaddressexclusions" class="section level3">
+<h3>GetIPAddressExclusions</h3>
+</div>
+<div id="getipobfuscation" class="section level3">
+<h3>GetIPObfuscation</h3>
+</div>
+<div id="getkeyvisitors" class="section level3">
+<h3>GetKeyVisitors</h3>
+</div>
+<div id="getlistvariables" class="section level3">
+<h3>GetListVariables</h3>
+</div>
+<div id="getlocalization" class="section level3">
+<h3>GetLocalization</h3>
+</div>
+<div id="getlogin" class="section level3">
+<h3>GetLogin</h3>
+</div>
+<div id="getmarketingchannelexpiration" class="section level3">
+<h3>GetMarketingChannelExpiration</h3>
+</div>
+<div id="getmarketingchannelrules" class="section level3">
+<h3>GetMarketingChannelRules</h3>
+</div>
+<div id="getmarketingchannels" class="section level3">
+<h3>GetMarketingChannels</h3>
+</div>
+<div id="getmetrics" class="section level3">
+<h3>GetMetrics</h3>
+</div>
+<div id="getmobileappreporting" class="section level3">
+<h3>GetMobileAppReporting</h3>
+</div>
+<div id="getpaidsearchdetection" class="section level3">
+<h3>GetPaidSearchDetection</h3>
+</div>
+<div id="getpermanenttraffic" class="section level3">
+<h3>GetPermanentTraffic</h3>
+</div>
+<div id="getprivacysettings" class="section level3">
+<h3>GetPrivacySettings</h3>
+</div>
+<div id="getprops" class="section level3">
+<h3>GetProps</h3>
+</div>
+<div id="getqueue" class="section level3">
+<h3>GetQueue</h3>
+</div>
+<div id="getrealtimereport" class="section level3">
+<h3>GetRealTimeReport</h3>
+</div>
+<div id="getrealtimesettings" class="section level3">
+<h3>GetRealTimeSettings</h3>
+</div>
+<div id="getreport" class="section level3">
+<h3>GetReport</h3>
+</div>
+<div id="getreportdescription" class="section level3">
+<h3>GetReportDescription</h3>
+</div>
+<div id="getreportsbyids" class="section level3">
+<h3>GetReportsByIds</h3>
+</div>
+<div id="getreportsuites" class="section level3">
+<h3>GetReportSuites</h3>
+</div>
+<div id="getscheduledspike" class="section level3">
+<h3>GetScheduledSpike</h3>
+</div>
+<div id="getsegments" class="section level3">
+<h3>GetSegments</h3>
+</div>
+<div id="getsitetitle" class="section level3">
+<h3>GetSiteTitle</h3>
+</div>
+<div id="getsuccessevents" class="section level3">
+<h3>GetSuccessEvents</h3>
+</div>
+<div id="gettemplate" class="section level3">
+<h3>GetTemplate</h3>
+</div>
+<div id="gettimezone" class="section level3">
+<h3>GetTimeZone</h3>
+</div>
+<div id="gettrackingserver" class="section level3">
+<h3>GetTrackingServer</h3>
+</div>
+<div id="gettransactionenabled" class="section level3">
+<h3>GetTransactionEnabled</h3>
+</div>
+<div id="getuniquevisitorvariable" class="section level3">
+<h3>GetUniqueVisitorVariable</h3>
+</div>
+<div id="getversionaccess" class="section level3">
+<h3>GetVersionAccess</h3>
+</div>
+<div id="getvideosettings" class="section level3">
+<h3>GetVideoSettings</h3>
+<hr />
+</div>
+</div>
+<div id="analytics-functions" class="section level2">
+<h2>Analytics Functions</h2>
+<div id="buildclassificationvaluesegment" class="section level3">
+<h3>BuildClassificationValueSegment</h3>
+</div>
+<div id="buildrealtimereportstructure" class="section level3">
+<h3>BuildRealTimeReportStructure</h3>
+</div>
+<div id="queuefallout" class="section level3">
+<h3>QueueFallout</h3>
+</div>
+<div id="queueovertime" class="section level3">
+<h3>QueueOvertime</h3>
+</div>
+<div id="queuepathing" class="section level3">
+<h3>QueuePathing</h3>
+</div>
+<div id="queueranked" class="section level3">
+<h3>QueueRanked</h3>
+</div>
+<div id="queuesummary" class="section level3">
+<h3>QueueSummary</h3>
+</div>
+<div id="queuetrended" class="section level3">
+<h3>QueueTrended</h3>
+</div>
+<div id="saverealtimesettings" class="section level3">
+<h3>SaveRealTimeSettings</h3>
+</div>
+<div id="scauth" class="section level3">
+<h3>SCAuth</h3>
+</div>
+<div id="submitjsonqueuereport" class="section level3">
+<h3>SubmitJsonQueueReport</h3>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+---
+title: "RSiteCatalyst"
+output: 
+  html_document:
+    highlight: tango
+    toc: true
+    toc_float:
+      collapsed: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+RSiteCatalyst is an R package for accessing the Adobe Analytics API. The focus of this package are analysts looking for a convenient, programmatic way for accessing their website data using the power of R.
+
+---
+
+## Getting Started
+### Installation
+RSiteCatalyst can be installed from CRAN as follows:
+```r
+install.packages("RSiteCatalyst", type = "source")
+```
+
+After installing RSiteCatalyst, you need to have <u>Web Services Access</u> enabled in the `User Management -> Users -> Access` menu in the Adobe Analytics Admin panel:
+
+![](./images/web-services-access.png)
+
+Additionally, you will either need to obtain your Web Services Credentials or register an OAuth2 application, which will be discussed in detail in the Authentication section.
+
+---
+
+### Authentication
+
+Regardless of whether you choose the 'legacy' method for authentication or the newer OAuth2 method, the API will return the same data. Which method you choose depends on your company security requirements, familiarity with OAuth2 or your application-specific details.
+
+#### Legacy (WSSE) [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/authentication-1/using-web-service-credentials-2)
+
+The 'legacy' method of authenticating with the Adobe Analytics API requires knowing your <u>User Name</u> and <u>Shared Secret</u>, which can be obtained from the same `User Management -> Users -> Access` menu in the Admin panel when Web Services Access is granted.
+
+With the <u>User Name</u> and <u>Shared Secret</u> values, you can start the authentication process in RSiteCatalyst through the `SCAuth()` function:
+
+```{r, eval=FALSE}
+library(RSiteCatalyst)
+SCAuth("username:company", "cd1d234dee56e8202da6f7d3213eb1ef")
+[1] "Credentials Saved in RSiteCatalyst Namespace."
+```
+
+Note that when the `SCAuth()` function is submitted, RSiteCatalyst doesn't actually validate whether the credentials are correct (i.e. verify that the API will return an answer), other than to validate the the `key` and `secret` values have the proper format.
+
+Should your credentials not be accepted by the Adobe Analytics API, you will see the following message (or similar):
+```{r, eval = FALSE}
+library(RSiteCatalyst)
+SCAuth("username:company", "cd1d234dee56e8202da6f7d3213eb1ef")
+[1] "Credentials Saved in RSiteCatalyst Namespace."
+GetReportSuites()
+
+Error in ApiRequest(func.name = "Company.GetReportSuites") : 
+  ERROR: Bad Request  -  Unable to validate authentication.
+```
+
+#### OAuth2 [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/authentication-1/auth-overview-1#concept_4646CEC9CE5E4698A936D84B90A2CD0C)
+
+TBD
+
+--- 
+
+### Tips and Tricks
+
+#### 1. Saving credentials to .Renviron {.toc-ignore}
+
+While not secure _per se_, to avoid putting your User Name and Shared Secret in the clear inside of an R script, you can place your credentials in the [.Renviron](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html) environment file. This file is loaded each time R is loaded, setting global environment variables.
+
+```{r, eval = FALSE}
+USER="username:company"
+SECRET="cd1d234dee56e8202da6f7d3213eb1ef"
+```
+
+Again, this is not truly 'secure', it is just security-through-obscurity. If you use this method, your `SCAuth()` call now becomes the following:
+
+```{r}
+library(RSiteCatalyst)
+SCAuth(Sys.getenv("USER"), Sys.getenv("SECRET"))
+```
+
+Not enough to stop a truly determined hacker, but enough so that credentials aren't checked into version control or copy-pasted/shared across
+users.
+
+#### 2. Running `GetReportSuites()` at the beginning of a session {.toc-ignore}
+
+One of the best use cases of RSiteCatalyst is accessing large amounts of data, whether that means running reports for a long time period or for many report suites at one time.
+
+By running `GetReportSuites()` at the beginning of a session, not only do you get a quick refresher of the report suites contained in your Adobe Analytics, but you have a vector that you can pass to other RSiteCatalyst functions:
+
+```{r}
+rs <- GetReportSuites()
+rs
+```
+
+```{r, eval = FALSE}
+# Pass the list of report suite ids, not the whole data frame
+props <- GetProps(rs$rsid)
+```
+
+---
+
+## Examples
+
+---
+
+## Contributing
+
+### Issues / Feature Requests
+### Submiting A Pull Request 
+### Contributors
+
+---
+
+## Admin / Metadata Functions
+### CancelReport
+### GetActivation
+### GetAxleStartDate
+### GetBaseCurrency
+### GetBaseURL
+### GetBookmarks
+### GetCalculatedMetrics
+### GetClassifications
+### GetCustomCalendar
+### GetDashboards
+### GetDataWarehouseDisplay
+### GetDefaultPage
+### GetDiscoverEnabled
+### GetEcommerce
+### GetElements
+### GetEvars
+### GetFeed
+### GetFeeds
+### GetFunctions
+### GetGeoSegmentation
+### GetGroups
+### GetInternalURLFilters
+### GetIPAddressExclusions
+### GetIPObfuscation
+### GetKeyVisitors
+### GetListVariables
+### GetLocalization
+### GetLogin
+### GetMarketingChannelExpiration
+### GetMarketingChannelRules
+### GetMarketingChannels
+### GetMetrics
+### GetMobileAppReporting
+### GetPaidSearchDetection
+### GetPermanentTraffic
+### GetPrivacySettings
+### GetProps
+### GetQueue
+### GetRealTimeReport
+### GetRealTimeSettings
+### GetReport
+### GetReportDescription
+### GetReportsByIds
+### GetReportSuites
+### GetScheduledSpike
+### GetSegments
+### GetSiteTitle
+### GetSuccessEvents
+### GetTemplate
+### GetTimeZone
+### GetTrackingServer
+### GetTransactionEnabled
+### GetUniqueVisitorVariable
+### GetVersionAccess
+### GetVideoSettings
+
+---
+
+## Analytics Functions
+### BuildClassificationValueSegment
+### BuildRealTimeReportStructure
+### QueueFallout
+### QueueOvertime
+### QueuePathing
+### QueueRanked
+### QueueSummary
+### QueueTrended
+### SaveRealTimeSettings
+### SCAuth
+### SubmitJsonQueueReport

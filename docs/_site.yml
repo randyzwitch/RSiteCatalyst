@@ -1,0 +1,14 @@
+output_dir: '.'
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    mathjax: null
+    toc_depth: 4
+    toc_float:
+      collapsed: false
+    includes:
+    css: css/rmarkdown.css
+    
+
+

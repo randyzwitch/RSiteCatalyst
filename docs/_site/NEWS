@@ -1,0 +1,156 @@
+RSiteCatalyst 1.4.9
+=================
+
+* Ability to enqueue reports created by Queue* functions, rather than return reports immediately (provided by GitHub user shashispace, closing issue #165)
+
+RSiteCatalyst 1.4.8
+=================
+
+* Silence "chatty" httr warning about defaulting to UTF-8 encoding, resolving #154
+
+* Add support for segment stacking (provided graciously by Adam Gitzes, resolving #129)
+
+* Clarified documentation around using SAINT classifications as report elements
+
+* Split tests into multiple files to remedy Travis CI build failures
+
+* Added date.to and date.from to QueueSummary function for parity with other Queue* functions
+
+RSiteCatalyst 1.4.7
+=================
+
+* Set encoding to UTF-8 by default, resolving GitHub issue #151
+
+* Added `locale` keyword to SCAuth() function, so that if additional encoding issues arise, you can set the report locale, such as Germany as 'de_DE'. A full enumeration of locale codes can be found at https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-reportdescriptionlocale
+
+RSiteCatalyst 1.4.6
+=================
+
+* Added second input to 'top' argument for Queue* functions to limit number of rows returned instead of (up to) 50,000
+
+* Added 'validate' function argument to disable API checking; this can improve performance or avoid API errors under high volume
+
+* Both features submitted graciously by Tim Findlay
+
+* Added handler for inconsistent reportID data type returned by the API
+
+RSiteCatalyst 1.4.5
+=================
+* Removed SCAuth function internal argument use.1.3, no longer needed
+
+* Added 'endpoint' function argument to allow users to specify their own endpoint
+
+* Added GetFunctions, QueueSummary, GetPrivacySettings, GetTemplate functions
+
+RSiteCatalyst 1.4.4
+=================
+* Changed SCAuth success message to be more explicit that credentials were saved, not actually authenticated against the API
+
+* Fixed bug where a NULL response in some fields for a multi-dimensional Queue report would report an error of 'names' attribute [1] must be the same length as the vector
+
+RSiteCatalyst 1.4.3
+=================
+
+* Added DataFeed methods: GetFeed and GetFeeds
+
+* Fixed bug #94 where segment name and segment id not output to data frame
+
+* Exported all previously internal functions to support future AdobeDW package
+
+* Re-fixed #108 to not break QueueRanked when classifications not used
+
+* Added unit tests using Travis CI
+
+RSiteCatalyst 1.4.2
+=================
+
+* Bug Fix #108 from Jason Morgan (framingeinstein) to fix multi-level SAINT classifications in QueueRanked
+
+* Bug fix #110 to fix internal helper function
+
+* Expose ability to submit JSON requests directly to API (formerly internal function only)
+
+RSiteCatalyst 1.4.1
+=================
+
+* Fix QueueRanked report to return up to 50,000 results when using breakdown
+
+* "selected" argument now supported in GetRealTimeReport
+
+* Misc. bug fixes
+
+* Added a bunch of additional Get* methods useful for creating documentation
+
+* Added support for using SAINT classifications in QueueRanked/QueueTrended functions
+
+RSiteCatalyst 1.4
+=================
+
+* Fixes to support version 1.4 of Adobe Analytics API
+
+* Authentication now supports OAuth and legacy
+
+* Consistent syntax/naming conventions across functions
+
+* Improved functionality around multiple element/breakdown reports
+
+RSiteCatalyst 1.3.3
+=================
+
+* Miscellaneous bug fixes
+
+* Improved error reporting
+
+RSiteCatalyst 1.3.2
+=================
+
+* Fixes to comply with httr 0.3 changes
+
+RSiteCatalyst 1.3.1
+=================
+
+* Export real-time reporting functions
+
+RSiteCatalyst 1.3
+=================
+
+* Bug fixes
+
+* Allow for variable API request timing in Queue functions
+
+* Search via regex functionality in QueueRanked/QueueTrended functions
+
+* Support for Realtime API reports: Overtime and one-element Ranked report
+
+RSiteCatalyst 1.2
+=================
+
+* Removed RCurl dependency
+
+* Changed order of arguments for GetAdminConsoleLog to fix error when dates not   passed
+
+* Return proper numeric type for metric columns
+
+* Remove references to Omniture 
+
+* Fixed bug in GetEVars function
+
+* Added `validate: true` argument to API call
+
+RSiteCatalyst 1.1
+=================
+
+*  Added subrelations/correlations
+
+*  Added anomaly detection
+
+*  Lowered Queue report checking delay
+
+*  Various bug fixes
+
+*  Added current report data flag to Queue functions
+
+RSiteCatalyst 1.0
+=================
+
+* Package submitted to CRAN
