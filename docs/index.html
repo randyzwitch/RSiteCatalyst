@@ -256,15 +256,15 @@ div.tocify {
 <p>RSiteCatalyst is an R package for accessing the Adobe Analytics API. The focus of this package are analysts looking for a convenient, programmatic way for accessing their website data using the power of R.</p>
 <hr />
 <div id="getting-started" class="section level2">
-<h2>Getting Started</h2>
+<h2><strong>Getting Started</strong></h2>
 <div id="installation" class="section level3">
 <h3>Installation</h3>
 <p>RSiteCatalyst can be installed from CRAN as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;RSiteCatalyst&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</code></pre></div>
 <p>After installing RSiteCatalyst, you need to have <u>Web Services Access</u> enabled in the <code>User Management -&gt; Users -&gt; Access</code> menu in the Adobe Analytics Admin panel:</p>
 <div class="figure">
-<img src="images/web-services-access.png" />
-
+<img src="images/web-services-access.png" alt="web services access" />
+<p class="caption">web services access</p>
 </div>
 <p>Additionally, you will either need to obtain your Web Services Credentials or register an OAuth2 application, which will be discussed in detail in the Authentication section.</p>
 <hr />
@@ -272,15 +272,15 @@ div.tocify {
 <div id="authentication" class="section level3">
 <h3>Authentication</h3>
 <p>Regardless of whether you choose the ‘legacy’ method for authentication or the newer OAuth2 method, the API will return the same data. Which method you choose depends on your company security requirements, familiarity with OAuth2 or your application-specific details.</p>
-<div id="legacy-wsse" class="section level4">
+<div id="legacy-wsse" class="section level4 toc-ignore">
 <h4>Legacy (WSSE) <a href="https://marketing.adobe.com/developer/documentation/authentication-1/using-web-service-credentials-2"><span class="glyphicon glyphicon-link"</span></a></h4>
-<p>The ‘legacy’ method of authenticating with the Adobe Analytics API requires knowing your <u>User Name</u> and <u>Shared Secret</u>, which can be obtained from the same <code>User Management -&gt; Users -&gt; Access</code> menu in the Admin panel when Web Services Access is granted.</p>
+<p>The ‘legacy’ method of authenticating with the Adobe Analytics API requires knowing your <u>User Name</u> and <u>Shared Secret</u>, which can be obtained from the same <code>User Management -&gt; Users -&gt; Access</code> menu in the Admin panel where Web Services Access is granted.</p>
 <p>With the <u>User Name</u> and <u>Shared Secret</u> values, you can start the authentication process in RSiteCatalyst through the <code>SCAuth()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RSiteCatalyst)
 <span class="kw">SCAuth</span>(<span class="st">&quot;username:company&quot;</span>, <span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span>)
 [<span class="dv">1</span>] <span class="st">&quot;Credentials Saved in RSiteCatalyst Namespace.&quot;</span></code></pre></div>
 <p>Note that when the <code>SCAuth()</code> function is submitted, RSiteCatalyst doesn’t actually validate whether the credentials are correct (i.e. verify that the API will return an answer), other than to validate the the <code>key</code> and <code>secret</code> values have the proper format.</p>
-<p>Should your credentials not be accepted by the Adobe Analytics API, you will see the following message (or similar):</p>
+<p>When submitting an API request, should your credentials not be accepted by the Adobe Analytics API, you will see the following message (or similar):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RSiteCatalyst)
 <span class="kw">SCAuth</span>(<span class="st">&quot;username:company&quot;</span>, <span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span>)
 [<span class="dv">1</span>] <span class="st">&quot;Credentials Saved in RSiteCatalyst Namespace.&quot;</span>
@@ -289,7 +289,7 @@ div.tocify {
 Error in <span class="kw">ApiRequest</span>(<span class="dt">func.name =</span> <span class="st">&quot;Company.GetReportSuites&quot;</span>) :<span class="st"> </span>
 <span class="st">  </span>ERROR:<span class="st"> </span>Bad Request  -<span class="st">  </span>Unable to validate authentication.</code></pre></div>
 </div>
-<div id="oauth2" class="section level4">
+<div id="oauth2" class="section level4 toc-ignore">
 <h4>OAuth2 <a href="https://marketing.adobe.com/developer/documentation/authentication-1/auth-overview-1#concept_4646CEC9CE5E4698A936D84B90A2CD0C"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>TBD</p>
 <hr />
@@ -309,7 +309,7 @@ SECRET=<span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span></cod
 <p>Not enough to stop a truly determined hacker, but enough so that credentials aren’t checked into version control or copy-pasted/shared across users.</p>
 </div>
 <div id="running-getreportsuites-at-the-beginning-of-a-session" class="section level4 toc-ignore">
-<h4>2. Running <code>GetReportSuites()</code> at the beginning of a session</h4>
+<h4>2. Running GetReportSuites() at the beginning of a session</h4>
 <p>One of the best use cases of RSiteCatalyst is accessing large amounts of data, whether that means running reports for a long time period or for many report suites at one time.</p>
 <p>By running <code>GetReportSuites()</code> at the beginning of a session, not only do you get a quick refresher of the report suites contained in your Adobe Analytics, but you have a vector that you can pass to other RSiteCatalyst functions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rs &lt;-<span class="st"> </span><span class="kw">GetReportSuites</span>()
@@ -323,227 +323,576 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 </div>
 </div>
 </div>
-<div id="examples" class="section level2">
-<h2>Examples</h2>
-<hr />
-</div>
 <div id="contributing" class="section level2">
-<h2>Contributing</h2>
-<hr />
-<div id="issues-feature-requests" class="section level3">
-<h3>Issues / Feature Requests</h3>
+<h2><strong>Contributing</strong></h2>
+<p>RSiteCatalyst is a community-driven, open-source effort, not an official package from Adobe. As such, bug fixes and improvements rely on a vibrant community of users and developers contributing their free time and resources.</p>
+<div id="issues" class="section level3 toc-ignore">
+<h3>Issues</h3>
+<p>If you encounter a bug when using RSiteCatalyst, please use the <a href="https://github.com/randyzwitch/RSiteCatalyst/issues">Issues</a> section of the <a href="https://github.com/randyzwitch/RSiteCatalyst/">RSiteCatalyst GitHub repository</a> to report your issue. When reporting an issue, please include as much information as possible, preferably a reproducible code example. The following information is also valuable for troubleshooting:</p>
+<pre><code>* R version
+* Operating System and Version
+* RSiteCatalyst version (please upgrade to newest version on CRAN before reporting a bug)
+* Environment (RStudio, R command line, cron, etc.)</code></pre>
+<p>While <a href="https://cran.r-project.org/">CRAN</a> requires a valid email address for package submission, personalized help via the maintainer email address is not feasible and will not receive a response.</p>
 </div>
-<div id="submiting-a-pull-request" class="section level3">
+<div id="feature-requests" class="section level3 toc-ignore">
+<h3>Feature Requests</h3>
+<p>While RSiteCatalyst has near feature parity with the Adobe Analytics API Explorer on an <em>analytics/data retrieval</em> basis, this package intentionally does not provide lower-level features such as creating or deleting report suites, uploading SAINT classifications or other ‘development’ type features. While these types of features <em>may</em> be accepted into the package with a pull request of sufficient breadth and quality, they will not be a focus of the core developers.</p>
+<p>If there is analytics functionality desired that is currently available in the Adobe Analytics API but not in RSiteCatalyst, please create an <a href="https://github.com/randyzwitch/RSiteCatalyst/issues">issue</a> on the <a href="https://github.com/randyzwitch/RSiteCatalyst/">RSiteCatalyst GitHub repository</a>, linking to the appropriate section of the Adobe Analytics API documentation. An explanation of your business goals and expected business value will go a long way towards convincing a volunteer to add the functionality.</p>
+</div>
+<div id="submiting-a-pull-request" class="section level3 toc-ignore">
 <h3>Submiting A Pull Request</h3>
+<p>Of course, if you’d like to have a feature added AND submit a pull request to <a href="https://github.com/randyzwitch/RSiteCatalyst/">RSiteCatalyst GitHub repository</a>, the likelihood of seeing the feature added increases dramatically!</p>
+<p>RSiteCatalyst is provided under the <a href="https://tldrlegal.com/license/mit-license">MIT License</a>. Before contributing, please be sure you agree with the terms of the MIT license. All contributions merged into RSiteCatalyst become part of the MIT-licensed package whole; contributions with different license terms desired will not be accepted.</p>
 </div>
-<div id="contributors" class="section level3">
+<div id="contributors" class="section level3 toc-ignore">
 <h3>Contributors</h3>
+<table style="width:89%;">
+<colgroup>
+<col width="40%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Contributor</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p>Randy Zwitch</p></td>
+<td><p><a href="https://github.com/randyzwitch">GitHub</a> <a href="https://www.linkedin.com/in/randyzwitch">LinkedIn</a> <a href="https://twitter.com/randyzwitch">Twitter</a></p></td>
+</tr>
+<tr class="even">
+<td><p>Willem Paling</p></td>
+<td><p><a href="https://github.com/WillemPaling">GitHub</a> <a href="https://au.linkedin.com/in/willempaling">LinkedIn</a> <a href="https://twitter.com/WillemPaling">Twitter</a></p></td>
+</tr>
+<tr class="odd">
+<td><p>Jowanza Joseph</p></td>
+<td><p><a href="https://github.com/josep2">GitHub</a> <a href="https://www.linkedin.com/in/jowanza">LinkedIn</a> <a href="https://twitter.com/Jowanza">Twitter</a></p></td>
+</tr>
+<tr class="even">
+<td><p>Adam Gitzes</p></td>
+<td><p><a href="https://github.com/Gitzman">GitHub</a> <a href="https://www.linkedin.com/in/adam-gitzes-958aa122">LinkedIn</a> <a href="https://twitter.com/FootballActuary">Twitter</a></p></td>
+</tr>
+<tr class="odd">
+<td><p>Shashi Khatri</p></td>
+<td><p><a href="https://github.com/shashispace">GitHub</a> LinkedIn Twitter</p></td>
+</tr>
+<tr class="even">
+<td><p>Diego Villuendas Pellicero</p></td>
+<td><p><a href="https://github.com/dieguico">GitHub</a> LinkedIn Twitter</p></td>
+</tr>
+<tr class="odd">
+<td><p>Jason Morgan</p></td>
+<td><p><a href="https://github.com/framingeinstein">GitHub</a> LinkedIn Twitter</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="release-notes" class="section level3 toc-ignore">
+<h3>Release Notes</h3>
+<ul>
+<li><a href="http://randyzwitch.com/rsitecatalyst-bulk-download-version-1-4-9-release-notes/">1.4.9</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-8-release-notes/">1.4.8</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-7-release-notes/">1.4.7/1.4.6</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-5-release-notes/">1.4.5</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-4-release-notes/">1.4.4</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-3-release-notes/">1.4.3</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-2-release-notes/">1.4.2</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-1-release-notes/">1.4.1</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-release-notes/">1.4</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-3-release-notes/">1.3</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-2-release-notes/">1.2</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-1-release-notes/">1.1</a></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="examples" class="section level2">
+<h2><strong>Examples</strong></h2>
+<p>The following examples are blog posts and examples written by members of the community. No validation has been performed that the code examples contained within work for current and all future versions of RSiteCatalyst; coordinate with the author of the post should you find out-of-date code.</p>
+<div id="business-analytics" class="section level4 toc-ignore">
+<h4>Business Analytics</h4>
+<ul>
+<li><a href="http://33sticks.com/rsitecatalyst-market-basket-analysis-adobe-analytics/">Market Basket Analysis With Adobe Analytics And RSiteCatalyst</a></li>
+<li><a href="http://chrisnart.blogspot.com/2014/03/date-based-cohort-analysis-for-adobe.html">Date Based Cohort Analysis for Adobe SiteCatalyst using R</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-k-means-clustering/">Clustering Search Keywords Using K-Means Clustering</a></li>
+<li><a href="http://randyzwitch.com/anomaly-detection-adobe-analytics-api/">Anomaly Detection Using The Adobe Analytics API</a></li>
+</ul>
+</div>
+<div id="implementation-automation" class="section level4 toc-ignore">
+<h4>Implementation / Automation</h4>
+<ul>
+<li><a href="http://analyticsblog.mecglobal.it/en/analytics-tools/adobe-sitecatalyst-api-in-r/">Adobe Sitecatalyst API and R: how to integrate reports with the SAINT classification file</a></li>
+<li><a href="http://www.cardinalpath.com/automating-your-life-with-adobe-analytics-api-data-and-r/">AUTOMATING YOUR LIFE WITH ADOBE ANALYTICS API DATA AND R</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-adobe-analytics-python/">Calling RSiteCatalyst From Python</a></li>
+<li><a href="http://randyzwitch.com/real-time-reporting-adobe-analytics-api/">Real-time Reporting with the Adobe Analytics API</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-bulk-download-version-1-4-9-release-notes/">Bulk Downloading Adobe Analytics Data</a></li>
+<li><a href="http://randyzwitch.com/adobe-analytics-implementation-documentation/">Adobe Analytics Implementation Documentation in 60 Seconds</a></li>
+<li><a href="http://maassmedia.com/r-site-catalyst-python.php">HOW TO RUN RSITECATALYST USING JUPYTER MAGICS</a></li>
+</ul>
+</div>
+<div id="visualization" class="section level4 toc-ignore">
+<h4>Visualization</h4>
+<ul>
+<li><a href="http://randyzwitch.com/rsitecatalyst-d3-network-graphs/">Visualizing Website Structure With Network Graphs</a></li>
+<li><a href="http://randyzwitch.com/rsitecatalyst-website-pathing-sankey-charts/">Visualizing Website Pathing With Sankey Charts</a></li>
+<li><a href="http://analyticsdemystified.com/analysis/so-r-we-ready-for-r-with-adobe/">SO, R WE READY FOR R WITH ADOBE ANALYTICS?</a></li>
+</ul>
+</div>
+<div id="general" class="section level4 toc-ignore">
+<h4>General</h4>
+<ul>
+<li><a href="https://blogs.adobe.com/digitalmarketing/analytics/playing-hits-summit-2014-filtered-metrics-error-monitoring/">Playing the Hits at Summit 2014: Filtered Metrics, Error Monitoring, and More</a></li>
+</ul>
 <hr />
 </div>
 </div>
 <div id="admin-metadata-functions" class="section level2">
-<h2>Admin / Metadata Functions</h2>
-<div id="cancelreport" class="section level3">
-<h3>CancelReport</h3>
+<h2><strong>Admin / Metadata Functions</strong></h2>
+<div id="cancelreport" class="section level4">
+<h4>CancelReport</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">CancelReport</span>(<span class="dv">12345678</span>)</code></pre></div>
 </div>
-<div id="getactivation" class="section level3">
-<h3>GetActivation</h3>
+<div id="getactivation" class="section level4">
+<h4>GetActivation</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetActivation</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title activation
+## 1   zwitchdev ZwitchCorp Dev       TRUE
+## 2 zwitchjulia Julia Bloggers       TRUE</code></pre>
 </div>
-<div id="getaxlestartdate" class="section level3">
-<h3>GetAxleStartDate</h3>
+<div id="getaxlestartdate" class="section level4">
+<h4>GetAxleStartDate</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetAxleStartDate</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title axle_start_date
+## 1   zwitchdev ZwitchCorp Dev      2014-02-20
+## 2 zwitchjulia Julia Bloggers      2015-01-10</code></pre>
 </div>
-<div id="getbasecurrency" class="section level3">
-<h3>GetBaseCurrency</h3>
+<div id="getbasecurrency" class="section level4">
+<h4>GetBaseCurrency</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetBaseCurrency</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title base_currency
+## 1   zwitchdev ZwitchCorp Dev           USD
+## 2 zwitchjulia Julia Bloggers           USD</code></pre>
 </div>
-<div id="getbaseurl" class="section level3">
-<h3>GetBaseURL</h3>
+<div id="getbaseurl" class="section level4">
+<h4>GetBaseURL</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetBaseURL</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title                     base_url
+## 1   zwitchdev ZwitchCorp Dev   http://www.randyzwitch.com
+## 2 zwitchjulia Julia Bloggers http://www.juliabloggers.com</code></pre>
 </div>
-<div id="getbookmarks" class="section level3">
-<h3>GetBookmarks</h3>
+<div id="getbookmarks" class="section level4">
+<h4>GetBookmarks</h4>
 </div>
-<div id="getcalculatedmetrics" class="section level3">
-<h3>GetCalculatedMetrics</h3>
+<div id="getcalculatedmetrics" class="section level4">
+<h4>GetCalculatedMetrics</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gcm &lt;-<span class="st"> </span><span class="kw">GetCalculatedMetrics</span>(rs$rsid)
+<span class="kw">head</span>(gcm)</code></pre></div>
+<pre><code>##          rsid     site_title formula_name         formula friendly_formula
+## 1   zwitchdev ZwitchCorp Dev PV Per Visit [10] / [visits]  [10] / [Visits]
+## 2 zwitchjulia Julia Bloggers PV Per Visit [10] / [visits]  [10] / [Visits]
+##   decimal_places formula_id    type
+## 1              0  f:1089420 numeric
+## 2              0  f:1091439 numeric</code></pre>
 </div>
-<div id="getclassifications" class="section level3">
-<h3>GetClassifications</h3>
+<div id="getclassifications" class="section level4">
+<h4>GetClassifications</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gcl &lt;-<span class="st"> </span><span class="kw">GetClassifications</span>(rs$rsid)
+<span class="kw">head</span>(gcl)</code></pre></div>
+<pre><code>##        rsid     site_title                id                  element_name
+## 1 zwitchdev ZwitchCorp Dev              page                          Page
+## 2 zwitchdev ZwitchCorp Dev      trackingcode                 Tracking Code
+## 3 zwitchdev ZwitchCorp Dev      trackingcode                 Tracking Code
+## 4 zwitchdev ZwitchCorp Dev firsttouchchannel First Touch Marketing Channel
+## 5 zwitchdev ZwitchCorp Dev firsttouchchannel First Touch Marketing Channel
+## 6 zwitchdev ZwitchCorp Dev  lasttouchchannel  Last Touch Marketing Channel
+##   classification_name                 description             type
+## 1          JuliaPages Pages with Julia in the URL             text
+## 2   Creative Elements                                         text
+## 3           Campaigns                                         text
+## 4    First Touch Cost                             numeric_currency
+## 5  First Touch Budget                             numeric_currency
+## 6     Last Touch Cost                             numeric_currency
+##   date_enabled      metric_id
+## 1        FALSE           &lt;NA&gt;
+## 2        FALSE           &lt;NA&gt;
+## 3         TRUE           &lt;NA&gt;
+## 4           NA div_mult_1_221
+## 5           NA div_mult_3_221
+## 6           NA div_mult_2_223</code></pre>
 </div>
-<div id="getcustomcalendar" class="section level3">
-<h3>GetCustomCalendar</h3>
+<div id="getcustomcalendar" class="section level4">
+<h4>GetCustomCalendar</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetCustomCalendar</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title calendar_type
+## 1   zwitchdev ZwitchCorp Dev     gregorian
+## 2 zwitchjulia Julia Bloggers     gregorian</code></pre>
 </div>
-<div id="getdashboards" class="section level3">
-<h3>GetDashboards</h3>
+<div id="getdashboards" class="section level4">
+<h4>GetDashboards</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gdb &lt;-<span class="st"> </span><span class="kw">GetDashboards</span>()
+<span class="kw">head</span>(gdb)</code></pre></div>
+<pre><code>##            name     id   owner grid         .id          X1
+## 1 Site Overview 635530 rzwitch  3x2        name Key Metrics
+## 2 Site Overview 635530 rzwitch  3x2          id    28517921
+## 3 Site Overview 635530 rzwitch  3x2        rsid   zwitchdev
+## 4 Site Overview 635530 rzwitch  3x2 displayInfo        &lt;NA&gt;
+## 5 Site Overview 635530 rzwitch  3x2 displayInfo        &lt;NA&gt;
+## 6 Site Overview 635530 rzwitch  3x2 displayInfo        &lt;NA&gt;
+##                         X2             X3                  X4        X5
+## 1 Bounce Rate on Top Pages Referrer Types Report Suite Totals Countries
+## 2                 28517919       28517922            28517923  28517920
+## 3                zwitchdev      zwitchdev           zwitchdev zwitchdev
+## 4                     &lt;NA&gt;           &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;
+## 5                     &lt;NA&gt;           &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;
+## 6                     &lt;NA&gt;           &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;
+##                      X6  row  col rowspan colspan graph summary table
+## 1 Search Keywords - All &lt;NA&gt; &lt;NA&gt;      NA      NA  &lt;NA&gt;      NA  &lt;NA&gt;
+## 2              28517924 &lt;NA&gt; &lt;NA&gt;      NA      NA  &lt;NA&gt;      NA  &lt;NA&gt;
+## 3             zwitchdev &lt;NA&gt; &lt;NA&gt;      NA      NA  &lt;NA&gt;      NA  &lt;NA&gt;
+## 4                  &lt;NA&gt;    0    0       1       1  TRUE   FALSE  TRUE
+## 5                  &lt;NA&gt;    0    1       1       1 FALSE   FALSE  TRUE
+## 6                  &lt;NA&gt;    0    2       1       1  TRUE   FALSE  TRUE</code></pre>
 </div>
-<div id="getdatawarehousedisplay" class="section level3">
-<h3>GetDataWarehouseDisplay</h3>
+<div id="getdatawarehousedisplay" class="section level4">
+<h4>GetDataWarehouseDisplay</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetDataWarehouseDisplay</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title data_warehouse_display
+## 1   zwitchdev ZwitchCorp Dev all-logins-have-access
+## 2 zwitchjulia Julia Bloggers all-logins-have-access</code></pre>
 </div>
-<div id="getdefaultpage" class="section level3">
-<h3>GetDefaultPage</h3>
+<div id="getdefaultpage" class="section level4">
+<h4>GetDefaultPage</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetDefaultPage</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title default_page
+## 1   zwitchdev ZwitchCorp Dev             
+## 2 zwitchjulia Julia Bloggers</code></pre>
 </div>
-<div id="getdiscoverenabled" class="section level3">
-<h3>GetDiscoverEnabled</h3>
+<div id="getdiscoverenabled" class="section level4">
+<h4>GetDiscoverEnabled</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetDiscoverEnabled</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title discover_enabled
+## 1   zwitchdev ZwitchCorp Dev             TRUE
+## 2 zwitchjulia Julia Bloggers             TRUE</code></pre>
 </div>
-<div id="getecommerce" class="section level3">
-<h3>GetEcommerce</h3>
+<div id="getecommerce" class="section level4">
+<h4>GetEcommerce</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetEcommerce</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title ecommerce
+## 1   zwitchdev ZwitchCorp Dev      TRUE
+## 2 zwitchjulia Julia Bloggers      TRUE</code></pre>
 </div>
-<div id="getelements" class="section level3">
-<h3>GetElements</h3>
+<div id="getelements" class="section level4">
+<h4>GetElements</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elem &lt;-<span class="st"> </span><span class="kw">GetElements</span>(rs$rsid)
+<span class="kw">head</span>(elem)</code></pre></div>
+<pre><code>##               id                name correlation subrelation
+## 1 accountsummary Report Suite Totals        TRUE       FALSE
+## 2       activity            Activity       FALSE        TRUE
+## 3        browser             Browser        TRUE        TRUE
+## 4  browserheight      Browser Height        TRUE       FALSE
+## 5    browsertype        Browser Type        TRUE       FALSE
+## 6   browserwidth       Browser Width        TRUE       FALSE
+##   max_pathing_steps      rsid
+## 1                NA zwitchdev
+## 2                NA zwitchdev
+## 3                NA zwitchdev
+## 4                NA zwitchdev
+## 5                NA zwitchdev
+## 6                NA zwitchdev</code></pre>
 </div>
-<div id="getevars" class="section level3">
-<h3>GetEvars</h3>
+<div id="getevars" class="section level4">
+<h4>GetEvars</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">evar &lt;-<span class="st"> </span><span class="kw">GetEvars</span>(rs$rsid)
+<span class="kw">head</span>(evar)</code></pre></div>
+<pre><code>##                   name        type           id expiration_type
+## 1        Tracking Code text_string trackingcode            week
+## 2    Logged In (evar1) text_string        evar1           visit
+## 3 Visitor Type (evar2) text_string        evar2           visit
+## 4        Custom eVar 3 text_string        evar3           visit
+## 5        Custom eVar 4 text_string        evar4           visit
+## 6        Custom eVar 5 text_string        evar5           visit
+##   expiration_custom_days  allocation_type description enabled report_suite
+## 1                      1 most_recent_last        &lt;NA&gt;      NA    zwitchdev
+## 2                      1 most_recent_last                TRUE    zwitchdev
+## 3                      1 most_recent_last                TRUE    zwitchdev
+## 4                      1 most_recent_last                TRUE    zwitchdev
+## 5                      1 most_recent_last                TRUE    zwitchdev
+## 6                      1 most_recent_last                TRUE    zwitchdev</code></pre>
 </div>
-<div id="getfeed" class="section level3">
-<h3>GetFeed</h3>
+<div id="getfeed" class="section level4">
+<h4>GetFeed</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">feed &lt;-<span class="st"> </span><span class="kw">GetFeed</span>(<span class="dv">1111111</span>)
+<span class="kw">head</span>(feed)</code></pre></div>
+<pre><code>##     feed_id      rsid                    name interval   timezone status
+## 1   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+## 2   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+## 3   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+## 4   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+## 5   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+## 6   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+
+##                  ftp_host ftp_path             fields
+## 1   ftp.somewhere.com        /        accept_language
+## 2   ftp.somewhere.com        /                browser
+## 3   ftp.somewhere.com        /        connection_type
+## 4   ftp.somewhere.com        /                country
+## 5   ftp.somewhere.com        /              date_time
+## 6   ftp.somewhere.com        /                 domain</code></pre>
 </div>
-<div id="getfeeds" class="section level3">
-<h3>GetFeeds</h3>
+<div id="getfeeds" class="section level4">
+<h4>GetFeeds</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetFeeds</span>(rs$rsid)</code></pre></div>
+<pre><code>##  feed_id      rsid interval   timezone                    name
+## 1 1111111 zwitchdev    daily US/Eastern RSiteCatalyst Data Feed
+##               ftp_host ftp_path
+## 1 ftp.somewhere.com        /
+##                                                       activity
+## 1 29786961, 2016-09-15 04:00:00, 2016-09-16 04:00:00, delivered</code></pre>
 </div>
-<div id="getfunctions" class="section level3">
-<h3>GetFunctions</h3>
+<div id="getfunctions" class="section level4">
+<h4>GetFunctions</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gf &lt;-<span class="st"> </span><span class="kw">GetFunctions</span>()
+<span class="kw">head</span>(gf)</code></pre></div>
+<pre><code>##                       id                            name
+## 1                col-sum                      Column Sum
+## 2 ls-intercept-quadratic Quadratic regression: Intercept
+## 3                   sqrt                     Square Root
+## 4         ls-pred-linear  Linear regression: Predicted Y
+## 5                    exp                        Exponent
+## 6                     if                              If
+##                                                                                                                                                                  description
+## 1                                                                                                                                                                 Column Sum
+## 2                                                                                                                      Quadratic regression: Y = ( a + b X ) ^ 2, Returns a.
+## 3                                                                                                                                                                Square Root
+## 4                                                                                                                                 Linear regression: Y = a X + b. Returns Y.
+## 5                                                                                                                                                                   Exponent
+## 6 If the value of the condition parameter is non-zero (true), then the result will be the value of the then parameter. Otherwise it will be the value of the else parameter.
+##                required      optional example
+## 1               column1                  &lt;NA&gt;
+## 2                  x, y include-zeros    &lt;NA&gt;
+## 3               column1                  &lt;NA&gt;
+## 4                  x, y include-zeros    &lt;NA&gt;
+## 5               column1                  &lt;NA&gt;
+## 6 condition, then, else                  &lt;NA&gt;</code></pre>
 </div>
-<div id="getgeosegmentation" class="section level3">
-<h3>GetGeoSegmentation</h3>
+<div id="getgeosegmentation" class="section level4">
+<h4>GetGeoSegmentation</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetGeoSegmentation</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title geo_segmentation vista_enabled
+## 1   zwitchdev ZwitchCorp Dev             TRUE         FALSE
+## 2 zwitchjulia Julia Bloggers             TRUE         FALSE</code></pre>
 </div>
-<div id="getgroups" class="section level3">
-<h3>GetGroups</h3>
+<div id="getgroups" class="section level4">
+<h4>GetGroups</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gg &lt;-<span class="st"> </span><span class="kw">GetGroups</span>()
+<span class="kw">head</span>(gg)</code></pre></div>
+<pre><code>##                      group_name
+## 1             All Report Access
+## 2 Ad Hoc Analysis License Users
+## 3                Report Builder
+## 4            Web Service Access
+## 5             All Report Access
+## 6           Excel License Users
+##                                                 group_description
+## 1 Access to All Reports and Report Suites, No tools, Not an Admin
+## 2                                       Access to Ad Hoc Analysis
+## 3                                         Access to ReportBuilder
+## 4                                               All Access to API
+## 5 Access to All Reports and Report Suites, No tools, Not an Admin
+## 6                         Access to the SiteCatalyst Excel Client
+##   group_type
+## 1 predefined
+## 2 predefined
+## 3 predefined
+## 4 predefined
+## 5 predefined
+## 6 predefined</code></pre>
 </div>
-<div id="getinternalurlfilters" class="section level3">
-<h3>GetInternalURLFilters</h3>
+<div id="getinternalurlfilters" class="section level4">
+<h4>GetInternalURLFilters</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetInternalURLFilters</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title internal_url_filters
+## 1   zwitchdev ZwitchCorp Dev  www.randyzwitch.com
+## 2   zwitchdev ZwitchCorp Dev      randyzwitch.com
+## 3 zwitchjulia Julia Bloggers  www.randyzwitch.com
+## 4 zwitchjulia Julia Bloggers      randyzwitch.com</code></pre>
 </div>
-<div id="getipaddressexclusions" class="section level3">
-<h3>GetIPAddressExclusions</h3>
+<div id="getipaddressexclusions" class="section level4">
+<h4>GetIPAddressExclusions</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetIPAddressExclusions</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title
+## 1   zwitchdev ZwitchCorp Dev
+## 2 zwitchjulia Julia Bloggers</code></pre>
 </div>
-<div id="getipobfuscation" class="section level3">
-<h3>GetIPObfuscation</h3>
+<div id="getipobfuscation" class="section level4">
+<h4>GetIPObfuscation</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetIPObfuscation</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title ip_obfuscation
+## 1   zwitchdev ZwitchCorp Dev           none
+## 2 zwitchjulia Julia Bloggers           none</code></pre>
 </div>
-<div id="getkeyvisitors" class="section level3">
-<h3>GetKeyVisitors</h3>
+<div id="getkeyvisitors" class="section level4">
+<h4>GetKeyVisitors</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetKeyVisitors</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title key_visitors
+## 1   zwitchdev ZwitchCorp Dev             
+## 2 zwitchjulia Julia Bloggers</code></pre>
 </div>
-<div id="getlistvariables" class="section level3">
-<h3>GetListVariables</h3>
+<div id="getlistvariables" class="section level4">
+<h4>GetListVariables</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetListVariables</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title            name allocation_type enabled
+## 1   zwitchdev ZwitchCorp Dev List Variable 1            full   FALSE
+## 2   zwitchdev ZwitchCorp Dev List Variable 2            full   FALSE
+## 3   zwitchdev ZwitchCorp Dev List Variable 3            full   FALSE
+## 4 zwitchjulia Julia Bloggers List Variable 1            full   FALSE
+## 5 zwitchjulia Julia Bloggers List Variable 2            full   FALSE
+## 6 zwitchjulia Julia Bloggers List Variable 3            full   FALSE
+##   value_delimiter max_values description id expiration_custom_days
+## 1               ,        250              1                      0
+## 2               ,        250              2                      0
+## 3               ,        250              3                      0
+## 4               ,        250              1                      0
+## 5               ,        250              2                      0
+## 6               ,        250              3                      0
+##   expiration_type
+## 1           never
+## 2           never
+## 3           never
+## 4           never
+## 5           never
+## 6           never</code></pre>
 </div>
-<div id="getlocalization" class="section level3">
-<h3>GetLocalization</h3>
+<div id="getlocalization" class="section level4">
+<h4>GetLocalization</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetLocalization</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title localization
+## 1   zwitchdev ZwitchCorp Dev         TRUE
+## 2 zwitchjulia Julia Bloggers         TRUE</code></pre>
 </div>
-<div id="getlogin" class="section level3">
-<h3>GetLogin</h3>
+<div id="getlogin" class="section level4">
+<h4>GetLogin</h4>
 </div>
-<div id="getmarketingchannelexpiration" class="section level3">
-<h3>GetMarketingChannelExpiration</h3>
+<div id="getmarketingchannelexpiration" class="section level4">
+<h4>GetMarketingChannelExpiration</h4>
 </div>
-<div id="getmarketingchannelrules" class="section level3">
-<h3>GetMarketingChannelRules</h3>
+<div id="getmarketingchannelrules" class="section level4">
+<h4>GetMarketingChannelRules</h4>
 </div>
-<div id="getmarketingchannels" class="section level3">
-<h3>GetMarketingChannels</h3>
+<div id="getmarketingchannels" class="section level4">
+<h4>GetMarketingChannels</h4>
 </div>
-<div id="getmetrics" class="section level3">
-<h3>GetMetrics</h3>
+<div id="getmetrics" class="section level4">
+<h4>GetMetrics</h4>
 </div>
-<div id="getmobileappreporting" class="section level3">
-<h3>GetMobileAppReporting</h3>
+<div id="getmobileappreporting" class="section level4">
+<h4>GetMobileAppReporting</h4>
 </div>
-<div id="getpaidsearchdetection" class="section level3">
-<h3>GetPaidSearchDetection</h3>
+<div id="getpaidsearchdetection" class="section level4">
+<h4>GetPaidSearchDetection</h4>
 </div>
-<div id="getpermanenttraffic" class="section level3">
-<h3>GetPermanentTraffic</h3>
+<div id="getpermanenttraffic" class="section level4">
+<h4>GetPermanentTraffic</h4>
 </div>
-<div id="getprivacysettings" class="section level3">
-<h3>GetPrivacySettings</h3>
+<div id="getprivacysettings" class="section level4">
+<h4>GetPrivacySettings</h4>
 </div>
-<div id="getprops" class="section level3">
-<h3>GetProps</h3>
+<div id="getprops" class="section level4">
+<h4>GetProps</h4>
 </div>
-<div id="getqueue" class="section level3">
-<h3>GetQueue</h3>
+<div id="getqueue" class="section level4">
+<h4>GetQueue</h4>
 </div>
-<div id="getrealtimereport" class="section level3">
-<h3>GetRealTimeReport</h3>
+<div id="getrealtimereport" class="section level4">
+<h4>GetRealTimeReport</h4>
 </div>
-<div id="getrealtimesettings" class="section level3">
-<h3>GetRealTimeSettings</h3>
+<div id="getrealtimesettings" class="section level4">
+<h4>GetRealTimeSettings</h4>
 </div>
-<div id="getreport" class="section level3">
-<h3>GetReport</h3>
+<div id="getreport" class="section level4">
+<h4>GetReport</h4>
 </div>
-<div id="getreportdescription" class="section level3">
-<h3>GetReportDescription</h3>
+<div id="getreportdescription" class="section level4">
+<h4>GetReportDescription</h4>
 </div>
-<div id="getreportsbyids" class="section level3">
-<h3>GetReportsByIds</h3>
+<div id="getreportsbyids" class="section level4">
+<h4>GetReportsByIds</h4>
 </div>
-<div id="getreportsuites" class="section level3">
-<h3>GetReportSuites</h3>
+<div id="getreportsuites" class="section level4">
+<h4>GetReportSuites</h4>
 </div>
-<div id="getscheduledspike" class="section level3">
-<h3>GetScheduledSpike</h3>
+<div id="getscheduledspike" class="section level4">
+<h4>GetScheduledSpike</h4>
 </div>
-<div id="getsegments" class="section level3">
-<h3>GetSegments</h3>
+<div id="getsegments" class="section level4">
+<h4>GetSegments</h4>
 </div>
-<div id="getsitetitle" class="section level3">
-<h3>GetSiteTitle</h3>
+<div id="getsitetitle" class="section level4">
+<h4>GetSiteTitle</h4>
 </div>
-<div id="getsuccessevents" class="section level3">
-<h3>GetSuccessEvents</h3>
+<div id="getsuccessevents" class="section level4">
+<h4>GetSuccessEvents</h4>
 </div>
-<div id="gettemplate" class="section level3">
-<h3>GetTemplate</h3>
+<div id="gettemplate" class="section level4">
+<h4>GetTemplate</h4>
 </div>
-<div id="gettimezone" class="section level3">
-<h3>GetTimeZone</h3>
+<div id="gettimezone" class="section level4">
+<h4>GetTimeZone</h4>
 </div>
-<div id="gettrackingserver" class="section level3">
-<h3>GetTrackingServer</h3>
+<div id="gettrackingserver" class="section level4">
+<h4>GetTrackingServer</h4>
 </div>
-<div id="gettransactionenabled" class="section level3">
-<h3>GetTransactionEnabled</h3>
+<div id="gettransactionenabled" class="section level4">
+<h4>GetTransactionEnabled</h4>
 </div>
-<div id="getuniquevisitorvariable" class="section level3">
-<h3>GetUniqueVisitorVariable</h3>
+<div id="getuniquevisitorvariable" class="section level4">
+<h4>GetUniqueVisitorVariable</h4>
 </div>
-<div id="getversionaccess" class="section level3">
-<h3>GetVersionAccess</h3>
+<div id="getversionaccess" class="section level4">
+<h4>GetVersionAccess</h4>
 </div>
-<div id="getvideosettings" class="section level3">
-<h3>GetVideoSettings</h3>
+<div id="getvideosettings" class="section level4">
+<h4>GetVideoSettings</h4>
 <hr />
 </div>
 </div>
 <div id="analytics-functions" class="section level2">
-<h2>Analytics Functions</h2>
-<div id="buildclassificationvaluesegment" class="section level3">
-<h3>BuildClassificationValueSegment</h3>
+<h2><strong>Analytics Functions</strong></h2>
+<div id="buildclassificationvaluesegment" class="section level4">
+<h4>BuildClassificationValueSegment</h4>
 </div>
-<div id="buildrealtimereportstructure" class="section level3">
-<h3>BuildRealTimeReportStructure</h3>
+<div id="buildrealtimereportstructure" class="section level4">
+<h4>BuildRealTimeReportStructure</h4>
 </div>
-<div id="queuefallout" class="section level3">
-<h3>QueueFallout</h3>
+<div id="queuefallout" class="section level4">
+<h4>QueueFallout</h4>
 </div>
-<div id="queueovertime" class="section level3">
-<h3>QueueOvertime</h3>
+<div id="queueovertime" class="section level4">
+<h4>QueueOvertime</h4>
 </div>
-<div id="queuepathing" class="section level3">
-<h3>QueuePathing</h3>
+<div id="queuepathing" class="section level4">
+<h4>QueuePathing</h4>
 </div>
-<div id="queueranked" class="section level3">
-<h3>QueueRanked</h3>
+<div id="queueranked" class="section level4">
+<h4>QueueRanked</h4>
 </div>
-<div id="queuesummary" class="section level3">
-<h3>QueueSummary</h3>
+<div id="queuesummary" class="section level4">
+<h4>QueueSummary</h4>
 </div>
-<div id="queuetrended" class="section level3">
-<h3>QueueTrended</h3>
+<div id="queuetrended" class="section level4">
+<h4>QueueTrended</h4>
 </div>
-<div id="saverealtimesettings" class="section level3">
-<h3>SaveRealTimeSettings</h3>
+<div id="saverealtimesettings" class="section level4">
+<h4>SaveRealTimeSettings</h4>
 </div>
-<div id="scauth" class="section level3">
-<h3>SCAuth</h3>
+<div id="scauth" class="section level4">
+<h4>SCAuth</h4>
 </div>
-<div id="submitjsonqueuereport" class="section level3">
-<h3>SubmitJsonQueueReport</h3>
+<div id="submitjsonqueuereport" class="section level4">
+<h4>SubmitJsonQueueReport</h4>
 </div>
 </div>
 

@@ -10,13 +10,14 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+cacheflag = TRUE
 ```
 
 RSiteCatalyst is an R package for accessing the Adobe Analytics API. The focus of this package are analysts looking for a convenient, programmatic way for accessing their website data using the power of R.
 
 ---
 
-## Getting Started
+## **Getting Started**
 ### Installation
 RSiteCatalyst can be installed from CRAN as follows:
 ```r
@@ -25,7 +26,7 @@ install.packages("RSiteCatalyst", type = "source")
 
 After installing RSiteCatalyst, you need to have <u>Web Services Access</u> enabled in the `User Management -> Users -> Access` menu in the Adobe Analytics Admin panel:
 
-![](./images/web-services-access.png)
+![web services access](./images/web-services-access.png)
 
 Additionally, you will either need to obtain your Web Services Credentials or register an OAuth2 application, which will be discussed in detail in the Authentication section.
 
@@ -35,9 +36,9 @@ Additionally, you will either need to obtain your Web Services Credentials or re
 
 Regardless of whether you choose the 'legacy' method for authentication or the newer OAuth2 method, the API will return the same data. Which method you choose depends on your company security requirements, familiarity with OAuth2 or your application-specific details.
 
-#### Legacy (WSSE) [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/authentication-1/using-web-service-credentials-2)
+#### Legacy (WSSE) [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/authentication-1/using-web-service-credentials-2) {.toc-ignore}
 
-The 'legacy' method of authenticating with the Adobe Analytics API requires knowing your <u>User Name</u> and <u>Shared Secret</u>, which can be obtained from the same `User Management -> Users -> Access` menu in the Admin panel when Web Services Access is granted.
+The 'legacy' method of authenticating with the Adobe Analytics API requires knowing your <u>User Name</u> and <u>Shared Secret</u>, which can be obtained from the same `User Management -> Users -> Access` menu in the Admin panel where Web Services Access is granted.
 
 With the <u>User Name</u> and <u>Shared Secret</u> values, you can start the authentication process in RSiteCatalyst through the `SCAuth()` function:
 
@@ -49,7 +50,7 @@ SCAuth("username:company", "cd1d234dee56e8202da6f7d3213eb1ef")
 
 Note that when the `SCAuth()` function is submitted, RSiteCatalyst doesn't actually validate whether the credentials are correct (i.e. verify that the API will return an answer), other than to validate the the `key` and `secret` values have the proper format.
 
-Should your credentials not be accepted by the Adobe Analytics API, you will see the following message (or similar):
+When submitting an API request, should your credentials not be accepted by the Adobe Analytics API, you will see the following message (or similar):
 ```{r, eval = FALSE}
 library(RSiteCatalyst)
 SCAuth("username:company", "cd1d234dee56e8202da6f7d3213eb1ef")
@@ -60,7 +61,7 @@ Error in ApiRequest(func.name = "Company.GetReportSuites") :
   ERROR: Bad Request  -  Unable to validate authentication.
 ```
 
-#### OAuth2 [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/authentication-1/auth-overview-1#concept_4646CEC9CE5E4698A936D84B90A2CD0C)
+#### OAuth2 [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/authentication-1/auth-overview-1#concept_4646CEC9CE5E4698A936D84B90A2CD0C) {.toc-ignore}
 
 TBD
 
@@ -79,7 +80,7 @@ SECRET="cd1d234dee56e8202da6f7d3213eb1ef"
 
 Again, this is not truly 'secure', it is just security-through-obscurity. If you use this method, your `SCAuth()` call now becomes the following:
 
-```{r}
+```{r, cache=FALSE}
 library(RSiteCatalyst)
 SCAuth(Sys.getenv("USER"), Sys.getenv("SECRET"))
 ```
@@ -87,104 +88,352 @@ SCAuth(Sys.getenv("USER"), Sys.getenv("SECRET"))
 Not enough to stop a truly determined hacker, but enough so that credentials aren't checked into version control or copy-pasted/shared across
 users.
 
-#### 2. Running `GetReportSuites()` at the beginning of a session {.toc-ignore}
+#### 2. Running GetReportSuites() at the beginning of a session {.toc-ignore}
 
 One of the best use cases of RSiteCatalyst is accessing large amounts of data, whether that means running reports for a long time period or for many report suites at one time.
 
 By running `GetReportSuites()` at the beginning of a session, not only do you get a quick refresher of the report suites contained in your Adobe Analytics, but you have a vector that you can pass to other RSiteCatalyst functions:
 
-```{r}
+```{r, cache=cacheflag}
 rs <- GetReportSuites()
 rs
 ```
 
-```{r, eval = FALSE}
+```{r, eval=FALSE}
 # Pass the list of report suite ids, not the whole data frame
 props <- GetProps(rs$rsid)
 ```
 
 ---
 
-## Examples
+## **Contributing**
+
+RSiteCatalyst is a community-driven, open-source effort, not an official package from Adobe. As such, bug fixes and improvements rely on a vibrant community of users and developers contributing their free time and resources.
+
+### Issues {.toc-ignore}
+
+If you encounter a bug when using RSiteCatalyst, please use the [Issues](https://github.com/randyzwitch/RSiteCatalyst/issues) section of the [RSiteCatalyst GitHub repository](https://github.com/randyzwitch/RSiteCatalyst/) to report your issue. When reporting an issue, please include as much information as possible, preferably a reproducible code example. The following information is also valuable for troubleshooting:
+
+    * R version
+    * Operating System and Version
+    * RSiteCatalyst version (please upgrade to newest version on CRAN before reporting a bug)
+    * Environment (RStudio, R command line, cron, etc.)
+
+While [CRAN](https://cran.r-project.org/) requires a valid email address for package submission, personalized help via the maintainer email address is not feasible and will not receive a response.
+
+### Feature Requests {.toc-ignore}
+
+While RSiteCatalyst has near feature parity with the Adobe Analytics API Explorer on an _analytics/data retrieval_ basis, this package intentionally does not provide lower-level features such as creating or deleting report suites, uploading SAINT classifications or other 'development' type features. While these types of features _may_ be accepted into the package with a pull request of sufficient breadth and quality, they will not be a focus of the core developers.
+
+If there is analytics functionality desired that is currently available in the Adobe Analytics API but not in RSiteCatalyst, please create an [issue](https://github.com/randyzwitch/RSiteCatalyst/issues) on the [RSiteCatalyst GitHub repository](https://github.com/randyzwitch/RSiteCatalyst/), linking to the appropriate section of the Adobe Analytics API documentation. An explanation of your business goals and expected business value will go a long way towards convincing a volunteer to add the functionality.
+
+### Submiting A Pull Request {.toc-ignore}
+
+Of course, if you'd like to have a feature added AND submit a pull request to [RSiteCatalyst GitHub repository](https://github.com/randyzwitch/RSiteCatalyst/), the likelihood of seeing the feature added increases dramatically!
+
+RSiteCatalyst is provided under the [MIT License](https://tldrlegal.com/license/mit-license). Before contributing, please be sure you agree with the terms of the MIT license. All contributions merged into RSiteCatalyst become part of the MIT-licensed package whole; contributions with different license terms desired will not be accepted.
+
+### Contributors {.toc-ignore}
+
++----------------------------+----------------------------------+
+| Contributor                |                                  |
++============================+==================================+
+| Randy Zwitch               | [GitHub](https://github.com/randyzwitch)   [LinkedIn](https://www.linkedin.com/in/randyzwitch)   [Twitter](https://twitter.com/randyzwitch)          |
++----------------------------+----------------------------------+
+| Willem Paling              | [GitHub](https://github.com/WillemPaling)   [LinkedIn](https://au.linkedin.com/in/willempaling)   [Twitter](https://twitter.com/WillemPaling)          |
++----------------------------+----------------------------------+
+| Jowanza Joseph             | [GitHub](https://github.com/josep2)   [LinkedIn](https://www.linkedin.com/in/jowanza)   [Twitter](https://twitter.com/Jowanza)          |
++----------------------------+----------------------------------+
+| Adam Gitzes                | [GitHub](https://github.com/Gitzman)   [LinkedIn](https://www.linkedin.com/in/adam-gitzes-958aa122)   [Twitter](https://twitter.com/FootballActuary)          |
++----------------------------+----------------------------------+
+| Shashi Khatri              | [GitHub](https://github.com/shashispace)   LinkedIn   Twitter          |
++----------------------------+----------------------------------+
+| Diego Villuendas Pellicero | [GitHub](https://github.com/dieguico)   LinkedIn   Twitter          |
++----------------------------+----------------------------------+
+| Jason Morgan               | [GitHub](https://github.com/framingeinstein)   LinkedIn   Twitter          |
++----------------------------+----------------------------------+
+
+### Release Notes {.toc-ignore}
+
+- [1.4.9](http://randyzwitch.com/rsitecatalyst-bulk-download-version-1-4-9-release-notes/)
+- [1.4.8](http://randyzwitch.com/rsitecatalyst-version-1-4-8-release-notes/)
+- [1.4.7/1.4.6](http://randyzwitch.com/rsitecatalyst-version-1-4-7-release-notes/)
+- [1.4.5](http://randyzwitch.com/rsitecatalyst-version-1-4-5-release-notes/)
+- [1.4.4](http://randyzwitch.com/rsitecatalyst-version-1-4-4-release-notes/)
+- [1.4.3](http://randyzwitch.com/rsitecatalyst-version-1-4-3-release-notes/)
+- [1.4.2](http://randyzwitch.com/rsitecatalyst-version-1-4-2-release-notes/)
+- [1.4.1](http://randyzwitch.com/rsitecatalyst-version-1-4-1-release-notes/)
+- [1.4](http://randyzwitch.com/rsitecatalyst-version-1-4-release-notes/)
+- [1.3](http://randyzwitch.com/rsitecatalyst-version-1-3-release-notes/)
+- [1.2](http://randyzwitch.com/rsitecatalyst-version-1-2-release-notes/)
+- [1.1](http://randyzwitch.com/rsitecatalyst-version-1-1-release-notes/)
 
 ---
 
-## Contributing
+## **Examples**
 
-### Issues / Feature Requests
-### Submiting A Pull Request 
-### Contributors
+The following examples are blog posts and examples written by members of the community. No validation has been performed that the code examples contained within work for current and all future versions of RSiteCatalyst; coordinate with the author of the post should you find out-of-date code.
 
----
+#### Business Analytics {.toc-ignore}
 
-## Admin / Metadata Functions
-### CancelReport
-### GetActivation
-### GetAxleStartDate
-### GetBaseCurrency
-### GetBaseURL
-### GetBookmarks
-### GetCalculatedMetrics
-### GetClassifications
-### GetCustomCalendar
-### GetDashboards
-### GetDataWarehouseDisplay
-### GetDefaultPage
-### GetDiscoverEnabled
-### GetEcommerce
-### GetElements
-### GetEvars
-### GetFeed
-### GetFeeds
-### GetFunctions
-### GetGeoSegmentation
-### GetGroups
-### GetInternalURLFilters
-### GetIPAddressExclusions
-### GetIPObfuscation
-### GetKeyVisitors
-### GetListVariables
-### GetLocalization
-### GetLogin
-### GetMarketingChannelExpiration
-### GetMarketingChannelRules
-### GetMarketingChannels
-### GetMetrics
-### GetMobileAppReporting
-### GetPaidSearchDetection
-### GetPermanentTraffic
-### GetPrivacySettings
-### GetProps
-### GetQueue
-### GetRealTimeReport
-### GetRealTimeSettings
-### GetReport
-### GetReportDescription
-### GetReportsByIds
-### GetReportSuites
-### GetScheduledSpike
-### GetSegments
-### GetSiteTitle
-### GetSuccessEvents
-### GetTemplate
-### GetTimeZone
-### GetTrackingServer
-### GetTransactionEnabled
-### GetUniqueVisitorVariable
-### GetVersionAccess
-### GetVideoSettings
+* [Market Basket Analysis With Adobe Analytics And RSiteCatalyst](http://33sticks.com/rsitecatalyst-market-basket-analysis-adobe-analytics/)
+* [Date Based Cohort Analysis for Adobe SiteCatalyst using R](http://chrisnart.blogspot.com/2014/03/date-based-cohort-analysis-for-adobe.html)
+* [Clustering Search Keywords Using K-Means Clustering](http://randyzwitch.com/rsitecatalyst-k-means-clustering/)
+* [Anomaly Detection Using The Adobe Analytics API](http://randyzwitch.com/anomaly-detection-adobe-analytics-api/)
+
+#### Implementation / Automation {.toc-ignore}
+* [Adobe Sitecatalyst API and R: how to integrate reports with the SAINT classification file](http://analyticsblog.mecglobal.it/en/analytics-tools/adobe-sitecatalyst-api-in-r/)
+* [AUTOMATING YOUR LIFE WITH ADOBE ANALYTICS API DATA AND R](http://www.cardinalpath.com/automating-your-life-with-adobe-analytics-api-data-and-r/)
+* [Calling RSiteCatalyst From Python](http://randyzwitch.com/rsitecatalyst-adobe-analytics-python/)
+* [Real-time Reporting with the Adobe Analytics API](http://randyzwitch.com/real-time-reporting-adobe-analytics-api/)
+* [Bulk Downloading Adobe Analytics Data](http://randyzwitch.com/rsitecatalyst-bulk-download-version-1-4-9-release-notes/)
+* [Adobe Analytics Implementation Documentation in 60 Seconds](http://randyzwitch.com/adobe-analytics-implementation-documentation/)
+* [HOW TO RUN RSITECATALYST USING JUPYTER MAGICS](http://maassmedia.com/r-site-catalyst-python.php)
+
+#### Visualization {.toc-ignore}
+
+* [Visualizing Website Structure With Network Graphs](http://randyzwitch.com/rsitecatalyst-d3-network-graphs/)
+* [Visualizing Website Pathing With Sankey Charts](http://randyzwitch.com/rsitecatalyst-website-pathing-sankey-charts/)
+* [SO, R WE READY FOR R WITH ADOBE ANALYTICS?](http://analyticsdemystified.com/analysis/so-r-we-ready-for-r-with-adobe/)
+
+#### General {.toc-ignore}
+
+* [Playing the Hits at Summit 2014: Filtered Metrics, Error Monitoring, and More](https://blogs.adobe.com/digitalmarketing/analytics/playing-hits-summit-2014-filtered-metrics-error-monitoring/)
 
 ---
 
-## Analytics Functions
-### BuildClassificationValueSegment
-### BuildRealTimeReportStructure
-### QueueFallout
-### QueueOvertime
-### QueuePathing
-### QueueRanked
-### QueueSummary
-### QueueTrended
-### SaveRealTimeSettings
-### SCAuth
-### SubmitJsonQueueReport
+## **Admin / Metadata Functions**
+#### CancelReport
+
+```{r, eval=FALSE}
+CancelReport(12345678)
+```
+
+#### GetActivation
+
+```{r, cache=cacheflag}
+GetActivation(rs$rsid)
+```
+
+#### GetAxleStartDate
+
+```{r, cache=cacheflag}
+GetAxleStartDate(rs$rsid)
+```
+
+#### GetBaseCurrency
+
+```{r, cache=cacheflag}
+GetBaseCurrency(rs$rsid)
+```
+
+#### GetBaseURL
+
+```{r, cache=cacheflag}
+GetBaseURL(rs$rsid)
+```
+
+#### GetBookmarks
+
+#### GetCalculatedMetrics
+
+```{r, cache=cacheflag}
+gcm <- GetCalculatedMetrics(rs$rsid)
+head(gcm)
+```
+
+#### GetClassifications
+
+```{r, cache=cacheflag}
+gcl <- GetClassifications(rs$rsid)
+head(gcl)
+```
+
+#### GetCustomCalendar
+
+```{r, cache=cacheflag}
+GetCustomCalendar(rs$rsid)
+```
+
+#### GetDashboards
+
+```{r, cache=cacheflag}
+gdb <- GetDashboards()
+head(gdb)
+```
+
+#### GetDataWarehouseDisplay
+
+```{r, cache=cacheflag}
+GetDataWarehouseDisplay(rs$rsid)
+```
+
+#### GetDefaultPage
+
+```{r, cache=cacheflag}
+GetDefaultPage(rs$rsid)
+```
+
+#### GetDiscoverEnabled
+
+```{r, cache=cacheflag}
+GetDiscoverEnabled(rs$rsid)
+```
+
+#### GetEcommerce
+```{r, cache=cacheflag}
+GetEcommerce(rs$rsid)
+```
+
+#### GetElements
+
+```{r, cache=cacheflag}
+elem <- GetElements(rs$rsid)
+head(elem)
+```
+
+#### GetEvars
+
+```{r, cache=cacheflag}
+evar <- GetEvars(rs$rsid)
+head(evar)
+```
+
+#### GetFeed
+
+```{r, eval=FALSE}
+feed <- GetFeed(1111111)
+head(feed)
+```
+```
+##     feed_id      rsid                    name interval   timezone status
+## 1   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+## 2   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+## 3   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+## 4   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+## 5   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+## 6   1111111 zwitchdev RSiteCatalyst Data Feed    daily US/Eastern Active
+
+##                  ftp_host ftp_path             fields
+## 1   ftp.somewhere.com        /        accept_language
+## 2   ftp.somewhere.com        /                browser
+## 3   ftp.somewhere.com        /        connection_type
+## 4   ftp.somewhere.com        /                country
+## 5   ftp.somewhere.com        /              date_time
+## 6   ftp.somewhere.com        /                 domain
+```
+
+#### GetFeeds
+
+```{r, eval=FALSE}
+GetFeeds(rs$rsid)
+```
+```
+##  feed_id      rsid interval   timezone                    name
+## 1 1111111 zwitchdev    daily US/Eastern RSiteCatalyst Data Feed
+##               ftp_host ftp_path
+## 1 ftp.somewhere.com        /
+##                                                       activity
+## 1 29786961, 2016-09-15 04:00:00, 2016-09-16 04:00:00, delivered
+```
+
+#### GetFunctions
+
+```{r, cache=cacheflag}
+gf <- GetFunctions()
+head(gf)
+```
+
+#### GetGeoSegmentation
+
+```{r, cache=cacheflag}
+GetGeoSegmentation(rs$rsid)
+```
+
+#### GetGroups
+
+```{r, cache=cacheflag}
+gg <- GetGroups()
+head(gg)
+```
+
+#### GetInternalURLFilters
+
+```{r, cache=cacheflag}
+GetInternalURLFilters(rs$rsid)
+```
+
+#### GetIPAddressExclusions
+
+```{r, cache=cacheflag}
+GetIPAddressExclusions(rs$rsid)
+```
+
+#### GetIPObfuscation
+
+```{r, cache=cacheflag}
+GetIPObfuscation(rs$rsid)
+```
+
+#### GetKeyVisitors
+
+```{r, cache=cacheflag}
+GetKeyVisitors(rs$rsid)
+```
+
+#### GetListVariables
+
+```{r, cache=cacheflag}
+GetListVariables(rs$rsid)
+```
+
+#### GetLocalization
+
+```{r, cache=cacheflag}
+GetLocalization(rs$rsid)
+```
+
+#### GetLogin
+
+#### GetMarketingChannelExpiration
+#### GetMarketingChannelRules
+#### GetMarketingChannels
+#### GetMetrics
+#### GetMobileAppReporting
+#### GetPaidSearchDetection
+#### GetPermanentTraffic
+#### GetPrivacySettings
+#### GetProps
+#### GetQueue
+#### GetRealTimeReport
+#### GetRealTimeSettings
+#### GetReport
+#### GetReportDescription
+#### GetReportsByIds
+#### GetReportSuites
+#### GetScheduledSpike
+#### GetSegments
+#### GetSiteTitle
+#### GetSuccessEvents
+#### GetTemplate
+#### GetTimeZone
+#### GetTrackingServer
+#### GetTransactionEnabled
+#### GetUniqueVisitorVariable
+#### GetVersionAccess
+#### GetVideoSettings
+
+---
+
+## **Analytics Functions**
+#### BuildClassificationValueSegment
+#### BuildRealTimeReportStructure
+#### QueueFallout
+#### QueueOvertime
+#### QueuePathing
+#### QueueRanked
+#### QueueSummary
+#### QueueTrended
+#### SaveRealTimeSettings
+#### SCAuth
+#### SubmitJsonQueueReport

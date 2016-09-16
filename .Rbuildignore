@@ -3,3 +3,4 @@
 .travis.yml
 README.md
 travis-tool.sh
+docs
