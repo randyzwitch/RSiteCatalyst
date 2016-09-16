@@ -859,3 +859,13 @@ iframe.scale65 {
 .glyphicon.glyphicon-link {
     font-size: 15px;
 }
+
+.tocify {
+    overflow: overlay;
+    border: 0px solid #ccc;
+}
+
+div.tocify {
+    max-height: 90%;
+    overflow-x: overlay;
+}

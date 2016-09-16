@@ -277,17 +277,16 @@ div.tocify {
 <p>The ‘legacy’ method of authenticating with the Adobe Analytics API requires knowing your <u>User Name</u> and <u>Shared Secret</u>, which can be obtained from the same <code>User Management -&gt; Users -&gt; Access</code> menu in the Admin panel where Web Services Access is granted.</p>
 <p>With the <u>User Name</u> and <u>Shared Secret</u> values, you can start the authentication process in RSiteCatalyst through the <code>SCAuth()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RSiteCatalyst)
-<span class="kw">SCAuth</span>(<span class="st">&quot;username:company&quot;</span>, <span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span>)
-[<span class="dv">1</span>] <span class="st">&quot;Credentials Saved in RSiteCatalyst Namespace.&quot;</span></code></pre></div>
+<span class="kw">SCAuth</span>(<span class="st">&quot;username:company&quot;</span>, <span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;Credentials Saved in RSiteCatalyst Namespace.&quot;</code></pre>
 <p>Note that when the <code>SCAuth()</code> function is submitted, RSiteCatalyst doesn’t actually validate whether the credentials are correct (i.e. verify that the API will return an answer), other than to validate the the <code>key</code> and <code>secret</code> values have the proper format.</p>
 <p>When submitting an API request, should your credentials not be accepted by the Adobe Analytics API, you will see the following message (or similar):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RSiteCatalyst)
-<span class="kw">SCAuth</span>(<span class="st">&quot;username:company&quot;</span>, <span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span>)
-[<span class="dv">1</span>] <span class="st">&quot;Credentials Saved in RSiteCatalyst Namespace.&quot;</span>
-<span class="kw">GetReportSuites</span>()
-
-Error in <span class="kw">ApiRequest</span>(<span class="dt">func.name =</span> <span class="st">&quot;Company.GetReportSuites&quot;</span>) :<span class="st"> </span>
-<span class="st">  </span>ERROR:<span class="st"> </span>Bad Request  -<span class="st">  </span>Unable to validate authentication.</code></pre></div>
+<span class="kw">SCAuth</span>(<span class="st">&quot;username:company&quot;</span>, <span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;Credentials Saved in RSiteCatalyst Namespace.&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetReportSuites</span>()</code></pre></div>
+<pre><code>## Error in ApiRequest(func.name = &quot;Company.GetReportSuites&quot;) : 
+##  ERROR: Bad Request  -  Unable to validate authentication.</code></pre>
 </div>
 <div id="oauth2" class="section level4 toc-ignore">
 <h4>OAuth2 <a href="https://marketing.adobe.com/developer/documentation/authentication-1/auth-overview-1#concept_4646CEC9CE5E4698A936D84B90A2CD0C"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -451,6 +450,7 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 </div>
 <div id="admin-metadata-functions" class="section level2">
 <h2><strong>Admin / Metadata Functions</strong></h2>
+<p>With a few exceptions, most of the Admin/Metadata functions take a report suite or a list of report suites as arguments and return the settings for a given report. These settings will mostly correspond with what administrators can see in the Adobe Analytics interface.</p>
 <div id="cancelreport" class="section level4">
 <h4>CancelReport</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">CancelReport</span>(<span class="dv">12345678</span>)</code></pre></div>
@@ -775,36 +775,129 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 </div>
 <div id="getlogin" class="section level4">
 <h4>GetLogin</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetLogin</span>(<span class="st">&quot;rzwitch&quot;</span>)</code></pre></div>
+<pre><code>##    login first_name last_name title             email phone_number
+## 1 me      Randy    Zwitch       me@example.com   1111111111
+##  is_admin must_change_password is_temp temp_start_date temp_end_date
+## 1     TRUE                FALSE   FALSE                              
+##                                                                                                                                                                                         group_names
+## 1 All Report Access,Ad Hoc Analysis License Users,Report Builder,Web Service Access,All Report Access,Discover License Users,Current Data Users,Reports &amp; Analytics Access,Analysis Workspace Access</code></pre>
 </div>
 <div id="getmarketingchannelexpiration" class="section level4">
 <h4>GetMarketingChannelExpiration</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetMarketingChannelExpiration</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid days
+## 1   zwitchdev   30
+## 2 zwitchjulia   30</code></pre>
 </div>
 <div id="getmarketingchannelrules" class="section level4">
 <h4>GetMarketingChannelRules</h4>
 </div>
 <div id="getmarketingchannels" class="section level4">
 <h4>GetMarketingChannels</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gmc &lt;-<span class="st"> </span><span class="kw">GetMarketingChannels</span>(rs$rsid)
+<span class="kw">head</span>(gmc)</code></pre></div>
+<pre><code>##        rsid           name   type  color channel_id enabled
+## 1 zwitchdev    Paid Search online 0F59A9          1    TRUE
+## 2 zwitchdev Natural Search online E07804          2    TRUE
+## 3 zwitchdev        Display online 609D09          3    TRUE
+## 4 zwitchdev          Email online D12112          4    TRUE
+## 5 zwitchdev      Affiliate online 813AA7          5    TRUE
+## 6 zwitchdev         Direct online 056F73          6    TRUE
+##   channel_breakdown override_last_touch_channel
+## 1                 0                       FALSE
+## 2                 0                       FALSE
+## 3                 0                       FALSE
+## 4                 0                       FALSE
+## 5                 0                       FALSE
+## 6                 0                        TRUE</code></pre>
 </div>
 <div id="getmetrics" class="section level4">
 <h4>GetMetrics</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metrics &lt;-<span class="st"> </span><span class="kw">GetMetrics</span>(rs$rsid)
+<span class="kw">head</span>(metrics)</code></pre></div>
+<pre><code>##                       id                       name   type decimals
+## 1    activityconversions       Activity Conversions number        0
+## 2    activityimpressions       Activity Impressions number        0
+## 3       averagepagedepth         Average Page Depth number        0
+## 4 averagetimespentonpage Average Time Spent on Page   time        1
+## 5 averagetimespentonsite Average Time Spent on Site   time        1
+## 6      averagevisitdepth        Average Visit Depth number        0
+##   formula      rsid
+## 1    &lt;NA&gt; zwitchdev
+## 2    &lt;NA&gt; zwitchdev
+## 3    &lt;NA&gt; zwitchdev
+## 4    &lt;NA&gt; zwitchdev
+## 5    &lt;NA&gt; zwitchdev
+## 6    &lt;NA&gt; zwitchdev</code></pre>
 </div>
 <div id="getmobileappreporting" class="section level4">
 <h4>GetMobileAppReporting</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetMobileAppReporting</span>(rs$rsid)</code></pre></div>
+<pre><code>##   allow_configuration all_lifecycle_enabled all_messaging_v1_enabled
+## 1                TRUE                 FALSE                    FALSE
+##   all_messaging_v2_enabled all_messaging_v3_enabled all_appstore_enabled
+## 1                    FALSE                    FALSE                FALSE
+##   all_location_enabled lifecycle_version align_visits_enabled
+## 1                FALSE                 0                    0
+##   deeplink_enabled places_enabled all_messaging_core_enabled
+## 1            FALSE          FALSE                      FALSE</code></pre>
 </div>
 <div id="getpaidsearchdetection" class="section level4">
 <h4>GetPaidSearchDetection</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetPaidSearchDetection</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title search_engine query_string operator
+## 1   zwitchdev ZwitchCorp Dev       ::any::           ps contains
+## 2 zwitchjulia Julia Bloggers       ::any::           ps contains</code></pre>
 </div>
 <div id="getpermanenttraffic" class="section level4">
 <h4>GetPermanentTraffic</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetPermanentTraffic</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title submit_date   login start_date hits_per_day
+## 1   zwitchdev ZwitchCorp Dev  2015-01-12 rzwitch 2015-01-19          600
+## 2 zwitchjulia Julia Bloggers  2015-01-10 rzwitch 2015-01-11          300</code></pre>
 </div>
 <div id="getprivacysettings" class="section level4">
 <h4>GetPrivacySettings</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetPrivacySettings</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title inferred_optout_non_mobile
+## 1   zwitchdev ZwitchCorp Dev                          0
+## 2 zwitchjulia Julia Bloggers                          0
+##   inferred_optout_mobile
+## 1                      0
+## 2                      0</code></pre>
 </div>
 <div id="getprops" class="section level4">
 <h4>GetProps</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)
+<span class="kw">head</span>(props)</code></pre></div>
+<pre><code>##      id                  name enabled description pathing_enabled
+## 1 prop1    Post Title (prop1)    TRUE                        TRUE
+## 2 prop2       Page ID (prop2)    TRUE                       FALSE
+## 3 prop3     Page Type (prop3)    TRUE                       FALSE
+## 4 prop4 Page Sub Type (prop4)    TRUE                       FALSE
+## 5 prop5 Post Category (prop5)    TRUE                       FALSE
+## 6 prop6     Post Tags (prop6)    TRUE                       FALSE
+##   list_enabled participation_enabled case_insensitive
+## 1        FALSE                  TRUE            FALSE
+## 2        FALSE                  TRUE            FALSE
+## 3        FALSE                  TRUE            FALSE
+## 4        FALSE                  TRUE            FALSE
+## 5         TRUE                  TRUE            FALSE
+## 6         TRUE                  TRUE            FALSE
+##   case_insensitive_date_enabled list_delimiter report_suite
+## 1                            NA           &lt;NA&gt;    zwitchdev
+## 2                            NA           &lt;NA&gt;    zwitchdev
+## 3                            NA           &lt;NA&gt;    zwitchdev
+## 4                            NA           &lt;NA&gt;    zwitchdev
+## 5                            NA              ,    zwitchdev
+## 6                            NA              ,    zwitchdev</code></pre>
 </div>
 <div id="getqueue" class="section level4">
 <h4>GetQueue</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetQueue</span>()</code></pre></div>
+<pre><code>## [1] &quot;There are no reports in the Report Queue&quot;</code></pre>
+<pre><code>## list()</code></pre>
 </div>
 <div id="getrealtimereport" class="section level4">
 <h4>GetRealTimeReport</h4>
@@ -823,44 +916,130 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 </div>
 <div id="getreportsuites" class="section level4">
 <h4>GetReportSuites</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetReportSuites</span>()</code></pre></div>
+<pre><code>##          rsid     site_title
+## 1   zwitchdev ZwitchCorp Dev
+## 2 zwitchjulia Julia Bloggers</code></pre>
 </div>
 <div id="getscheduledspike" class="section level4">
 <h4>GetScheduledSpike</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetScheduledSpike</span>(rs$rsid)</code></pre></div>
+<pre><code>## [1] &quot;No scheduled spikes For This Report Suite&quot;</code></pre>
 </div>
 <div id="getsegments" class="section level4">
 <h4>GetSegments</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segments &lt;-<span class="st"> </span><span class="kw">GetSegments</span>(rs$rsid)
+<span class="kw">head</span>(segments)</code></pre></div>
+<pre><code>##                         id                       name folder class
+## 1 5433e4e6e4b02df70be4ac63         Visits from Social             
+## 2 54adfe3de4b02df70be5ea08 Visits from Apple Browsers             
+## 3 5538547ae4b0b5455b976a99                   Compound             
+## 4 5433e4e6e4b02df70be4ac63         Visits from Social             
+## 5 54adfe3de4b02df70be5ea08 Visits from Apple Browsers             
+## 6 5538547ae4b0b5455b976a99                   Compound             
+##   suite_enabled read_only report_suite
+## 1         FALSE     FALSE    zwitchdev
+## 2         FALSE     FALSE    zwitchdev
+## 3         FALSE     FALSE    zwitchdev
+## 4         FALSE     FALSE  zwitchjulia
+## 5         FALSE     FALSE  zwitchjulia
+## 6         FALSE     FALSE  zwitchjulia</code></pre>
 </div>
 <div id="getsitetitle" class="section level4">
 <h4>GetSiteTitle</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetSiteTitle</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title
+## 1   zwitchdev ZwitchCorp Dev
+## 2 zwitchjulia Julia Bloggers</code></pre>
 </div>
 <div id="getsuccessevents" class="section level4">
 <h4>GetSuccessEvents</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">events &lt;-<span class="st"> </span><span class="kw">GetSuccessEvents</span>(rs$rsid)
+<span class="kw">head</span>(events)</code></pre></div>
+<pre><code>##       id     name description     type default_metric participation
+## 1 event1 Custom 1              counter          FALSE      disabled
+## 2 event2 Custom 2              counter          FALSE      disabled
+## 3 event3 Custom 3              counter          FALSE      disabled
+## 4 event4 Custom 4              counter          FALSE      disabled
+## 5 event5 Custom 5              counter          FALSE      disabled
+## 6 event6 Custom 6             disabled          FALSE      disabled
+##   serialization polarity visibility report_suite     site_title
+## 1 always_record positive         NA    zwitchdev ZwitchCorp Dev
+## 2 always_record positive         NA    zwitchdev ZwitchCorp Dev
+## 3 always_record positive         NA    zwitchdev ZwitchCorp Dev
+## 4 always_record positive         NA    zwitchdev ZwitchCorp Dev
+## 5 always_record positive         NA    zwitchdev ZwitchCorp Dev
+## 6 always_record positive         NA    zwitchdev ZwitchCorp Dev
+##   ecommerce_level
+## 1         enabled
+## 2         enabled
+## 3         enabled
+## 4         enabled
+## 5         enabled
+## 6         enabled</code></pre>
 </div>
 <div id="gettemplate" class="section level4">
 <h4>GetTemplate</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetTemplate</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title       template
+## 1   zwitchdev ZwitchCorp Dev             NA
+## 2 zwitchjulia Julia Bloggers ZwitchCorp Dev</code></pre>
 </div>
 <div id="gettimezone" class="section level4">
 <h4>GetTimeZone</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetTimeZone</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title  time_zone
+## 1   zwitchdev ZwitchCorp Dev US/Eastern
+## 2 zwitchjulia Julia Bloggers US/Eastern</code></pre>
 </div>
 <div id="gettrackingserver" class="section level4">
 <h4>GetTrackingServer</h4>
 </div>
 <div id="gettransactionenabled" class="section level4">
 <h4>GetTransactionEnabled</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetTransactionEnabled</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title transaction
+## 1   zwitchdev ZwitchCorp Dev           0
+## 2 zwitchjulia Julia Bloggers           0</code></pre>
 </div>
 <div id="getuniquevisitorvariable" class="section level4">
 <h4>GetUniqueVisitorVariable</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetUniqueVisitorVariable</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title unique_visitor_variable
+## 1   zwitchdev ZwitchCorp Dev                ::none::
+## 2 zwitchjulia Julia Bloggers                ::none::</code></pre>
 </div>
 <div id="getversionaccess" class="section level4">
 <h4>GetVersionAccess</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetVersionAccess</span>()</code></pre></div>
+<pre><code>##   AdobeProducts
+## 1        sc13_5
+## 2          sc14
+## 3          sc15
+## 4          dsc2</code></pre>
 </div>
 <div id="getvideosettings" class="section level4">
 <h4>GetVideoSettings</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetVideoSettings</span>(rs$rsid)</code></pre></div>
+<pre><code>##          rsid     site_title core_enabled ad_tracking_enabled
+## 1   zwitchdev ZwitchCorp Dev        FALSE               FALSE
+## 2 zwitchjulia Julia Bloggers        FALSE               FALSE
+##   chapter_tracking_enabled quality_tracking_enabled using_custom_variables
+## 1                    FALSE                    FALSE                  FALSE
+## 2                    FALSE                    FALSE                  FALSE
+##   video_name_evar content_type_evar video_time_event video_views_event
+## 1              NA                NA               NA                NA
+## 2              NA                NA               NA                NA
+##   video_completes_event
+## 1                    NA
+## 2                    NA</code></pre>
 <hr />
 </div>
 </div>
 <div id="analytics-functions" class="section level2">
 <h2><strong>Analytics Functions</strong></h2>
+<p>The functions in this section represent the types of information a user can retrieve from the Adobe Analytics UI. However, in most cases, the API via RSiteCatalyst can retrieve more data than is displayed in the web interface.</p>
+<p>Note that because of the extensive number of keyword arguments for each function, it’s not feasible to show examples of all functionality. Please see the Examples section above or the detailed documentation within the RSiteCatalyst R manual.</p>
 <div id="buildclassificationvaluesegment" class="section level4">
 <h4>BuildClassificationValueSegment</h4>
 </div>
@@ -890,6 +1069,7 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 </div>
 <div id="scauth" class="section level4">
 <h4>SCAuth</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SCAuth</span>(<span class="st">&quot;username:company&quot;</span>, <span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span>)</code></pre></div>
 </div>
 <div id="submitjsonqueuereport" class="section level4">
 <h4>SubmitJsonQueueReport</h4>

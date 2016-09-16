@@ -45,7 +45,9 @@ With the <u>User Name</u> and <u>Shared Secret</u> values, you can start the aut
 ```{r, eval=FALSE}
 library(RSiteCatalyst)
 SCAuth("username:company", "cd1d234dee56e8202da6f7d3213eb1ef")
-[1] "Credentials Saved in RSiteCatalyst Namespace."
+```
+```
+## [1] "Credentials Saved in RSiteCatalyst Namespace."
 ```
 
 Note that when the `SCAuth()` function is submitted, RSiteCatalyst doesn't actually validate whether the credentials are correct (i.e. verify that the API will return an answer), other than to validate the the `key` and `secret` values have the proper format.
@@ -54,11 +56,16 @@ When submitting an API request, should your credentials not be accepted by the A
 ```{r, eval = FALSE}
 library(RSiteCatalyst)
 SCAuth("username:company", "cd1d234dee56e8202da6f7d3213eb1ef")
-[1] "Credentials Saved in RSiteCatalyst Namespace."
+```
+```
+## [1] "Credentials Saved in RSiteCatalyst Namespace."
+```
+```{r, eval = FALSE}
 GetReportSuites()
-
-Error in ApiRequest(func.name = "Company.GetReportSuites") : 
-  ERROR: Bad Request  -  Unable to validate authentication.
+```
+```
+## Error in ApiRequest(func.name = "Company.GetReportSuites") : 
+##  ERROR: Bad Request  -  Unable to validate authentication.
 ```
 
 #### OAuth2 [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/authentication-1/auth-overview-1#concept_4646CEC9CE5E4698A936D84B90A2CD0C) {.toc-ignore}
@@ -203,6 +210,9 @@ The following examples are blog posts and examples written by members of the com
 ---
 
 ## **Admin / Metadata Functions**
+
+With a few exceptions, most of the Admin/Metadata functions take a report suite or a list of report suites as arguments and return the settings for a given report. These settings will mostly correspond with what administrators can see in the Adobe Analytics interface.
+
 #### CancelReport
 
 ```{r, eval=FALSE}
@@ -394,38 +404,161 @@ GetLocalization(rs$rsid)
 ```
 
 #### GetLogin
+```{r, eval=FALSE}
+GetLogin("rzwitch")
+```
+```
+##    login first_name last_name title             email phone_number
+## 1 me      Randy    Zwitch       me@example.com   1111111111
+##  is_admin must_change_password is_temp temp_start_date temp_end_date
+## 1     TRUE                FALSE   FALSE                              
+##                                                                                                                                                                                         group_names
+## 1 All Report Access,Ad Hoc Analysis License Users,Report Builder,Web Service Access,All Report Access,Discover License Users,Current Data Users,Reports & Analytics Access,Analysis Workspace Access
+```
 
 #### GetMarketingChannelExpiration
+
+```{r, cache=cacheflag}
+GetMarketingChannelExpiration(rs$rsid)
+```
+
 #### GetMarketingChannelRules
+
 #### GetMarketingChannels
+
+```{r, cache=cacheflag}
+gmc <- GetMarketingChannels(rs$rsid)
+head(gmc)
+```
+
 #### GetMetrics
+
+```{r, cache=cacheflag}
+metrics <- GetMetrics(rs$rsid)
+head(metrics)
+```
+
 #### GetMobileAppReporting
+
+```{r, cache=cacheflag}
+GetMobileAppReporting(rs$rsid)
+```
+
 #### GetPaidSearchDetection
+
+```{r, cache=cacheflag}
+GetPaidSearchDetection(rs$rsid)
+```
+
 #### GetPermanentTraffic
+
+```{r, cache=cacheflag}
+GetPermanentTraffic(rs$rsid)
+```
+
 #### GetPrivacySettings
+
+```{r, cache=cacheflag}
+GetPrivacySettings(rs$rsid)
+```
+
 #### GetProps
+
+```{r, cache=cacheflag}
+props <- GetProps(rs$rsid)
+head(props)
+```
+
 #### GetQueue
+
+```{r, cache=cacheflag}
+GetQueue()
+```
+
 #### GetRealTimeReport
 #### GetRealTimeSettings
 #### GetReport
 #### GetReportDescription
 #### GetReportsByIds
 #### GetReportSuites
+
+```{r, cache=cacheflag}
+GetReportSuites()
+```
+
 #### GetScheduledSpike
+
+```{r, cache=cacheflag}
+GetScheduledSpike(rs$rsid)
+```
+
 #### GetSegments
+
+```{r, cache=cacheflag}
+segments <- GetSegments(rs$rsid)
+head(segments)
+```
+
 #### GetSiteTitle
+
+```{r, cache=cacheflag}
+GetSiteTitle(rs$rsid)
+```
+
 #### GetSuccessEvents
+
+```{r, cache=cacheflag}
+events <- GetSuccessEvents(rs$rsid)
+head(events)
+```
+
 #### GetTemplate
+
+```{r, cache=cacheflag}
+GetTemplate(rs$rsid)
+```
+
 #### GetTimeZone
+
+```{r, cache=cacheflag}
+GetTimeZone(rs$rsid)
+```
+
 #### GetTrackingServer
+
+
 #### GetTransactionEnabled
+
+```{r, cache=cacheflag}
+GetTransactionEnabled(rs$rsid)
+```
+
 #### GetUniqueVisitorVariable
+
+```{r, cache=cacheflag}
+GetUniqueVisitorVariable(rs$rsid)
+```
+
 #### GetVersionAccess
+
+```{r, cache=cacheflag}
+GetVersionAccess()
+```
+
 #### GetVideoSettings
+
+```{r, cache=cacheflag}
+GetVideoSettings(rs$rsid)
+```
 
 ---
 
 ## **Analytics Functions**
+
+The functions in this section represent the types of information a user can retrieve from the Adobe Analytics UI. However, in most cases, the API via RSiteCatalyst can retrieve more data than is displayed in the web interface.
+
+Note that because of the extensive number of keyword arguments for each function, it's not feasible to show examples of all functionality. Please see the Examples section above or the detailed documentation within the RSiteCatalyst R manual.
+
 #### BuildClassificationValueSegment
 #### BuildRealTimeReportStructure
 #### QueueFallout
@@ -436,4 +569,9 @@ GetLocalization(rs$rsid)
 #### QueueTrended
 #### SaveRealTimeSettings
 #### SCAuth
+
+```{r, eval=FALSE}
+SCAuth("username:company", "cd1d234dee56e8202da6f7d3213eb1ef")
+```
+
 #### SubmitJsonQueueReport
