@@ -2,7 +2,6 @@
 title: "RSiteCatalyst"
 output: 
   html_document:
-    highlight: tango
     toc: true
     toc_float:
       collapsed: false
