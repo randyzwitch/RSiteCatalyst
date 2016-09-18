@@ -253,7 +253,10 @@ Retrieves the base URL assigned to each of the specified report suites.
 GetBaseURL(rs$rsid)
 ```
 
-#### GetBookmarks [<span class="glyphicon glyphicon-link"</span>]()
+#### GetBookmarks [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbookmarks-1)
+
+Retrieves a list of bookmarks for the authenticated user.
+Parameters folder_limit and folder_offset are optional, and only necessary if the total bookmark count exceeds 500, which is the limit. Use them to select a certain range of folders out of the entire set.
 
 ```{r, cache=cacheflag}
 #TBD
@@ -285,7 +288,10 @@ Retrieves the custom calendar for each of the specified report suites.
 GetCustomCalendar(rs$rsid)
 ```
 
-#### GetDashboards [<span class="glyphicon glyphicon-link"</span>]()
+#### GetDashboards [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdashboards-1)
+
+Retrieves all the dashboards for the authenticated web services user, with bookmarks included.
+Parameters dashboard_limit and dashboard_offset are optional, and only necessary if the total bookmark count exceeds 500, which is the limit. Use them to select a certain range of bookmarks out of the entire set.
 
 ```{r, cache=cacheflag}
 gdb <- GetDashboards()
@@ -324,7 +330,9 @@ Retrieves the commerce level for each of the specified report suites.
 GetEcommerce(rs$rsid)
 ```
 
-#### GetElements [<span class="glyphicon glyphicon-link"</span>]()
+#### GetElements [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getelements)
+
+Retrieves a list of possible valid elements for a report.
 
 ```{r, cache=cacheflag}
 elem <- GetElements(rs$rsid)
@@ -340,7 +348,9 @@ evar <- GetEvars(rs$rsid)
 head(evar)
 ```
 
-#### GetFeed [<span class="glyphicon glyphicon-link"</span>]()
+#### GetFeed [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeed)
+
+Gets configuration details for a specific feed, including feed status, FTP delivery location, and the data columns that are included in the feed.
 
 ```{r, eval=FALSE}
 feed <- GetFeed(1111111)
@@ -364,7 +374,9 @@ head(feed)
 ## 6   ftp.somewhere.com        /                 domain
 ```
 
-#### GetFeeds [<span class="glyphicon glyphicon-link"</span>]()
+#### GetFeeds [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeeds)
+
+Returns a list of data feeds for the specified report suites, including delivery status.
 
 ```{r, eval=FALSE}
 GetFeeds(rs$rsid)
@@ -378,7 +390,7 @@ GetFeeds(rs$rsid)
 ## 1 29786961, 2016-09-15 04:00:00, 2016-09-16 04:00:00, delivered
 ```
 
-#### GetFunctions [<span class="glyphicon glyphicon-link"</span>]()
+#### GetFunctions [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/segments-1-4/calculated-metrics)
 
 ```{r, cache=cacheflag}
 gf <- GetFunctions()
@@ -393,7 +405,9 @@ Retrieves the geography segmentation for the requested report suites.
 GetGeoSegmentation(rs$rsid)
 ```
 
-#### GetGroups [<span class="glyphicon glyphicon-link"</span>]()
+#### GetGroups [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getgroups-1)
+
+Retrieves a list of a company's permission groups.
 
 ```{r, cache=cacheflag}
 gg <- GetGroups()
@@ -448,7 +462,9 @@ Retrieves the localization (multi-byte character) settings for each of the speci
 GetLocalization(rs$rsid)
 ```
 
-#### GetLogin [<span class="glyphicon glyphicon-link"</span>]()
+#### GetLogin [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlogin-1)
+
+Retrieves information about the specified user account.
 
 ```{r, eval=FALSE}
 GetLogin("rzwitch")
@@ -487,7 +503,9 @@ gmc <- GetMarketingChannels(rs$rsid)
 head(gmc)
 ```
 
-#### GetMetrics [<span class="glyphicon glyphicon-link"</span>]()
+#### GetMetrics [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getmetrics)
+
+Retrieves a list of possible valid elements for a report.
 
 ```{r, cache=cacheflag}
 metrics <- GetMetrics(rs$rsid)
@@ -533,13 +551,17 @@ props <- GetProps(rs$rsid)
 head(props)
 ```
 
-#### GetQueue [<span class="glyphicon glyphicon-link"</span>]()
+#### GetQueue [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getqueue-2)
+
+Returns a list of reports in a company's report queue.
 
 ```{r, cache=cacheflag}
 GetQueue()
 ```
 
 #### GetRealTimeReport [<span class="glyphicon glyphicon-link"</span>]()
+
+'source' parameter present and set to 'realtime'. Note that Real-Time reports do not have to be queued, they can run immediately using Report.Run.
 
 ```{r, cache=cacheflag}
 GetRealTimeReport("zwitchdev", "instances")
@@ -559,7 +581,9 @@ Returns the metrics that are configured to provide real time data.
 #TBD
 ```
 
-#### GetReportDescription [<span class="glyphicon glyphicon-link"</span>]()
+#### GetReportDescription [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportdescription)
+
+Retrieves the name, associated report type, and report description for the supplied bookmark ID. This report description can then be used to retrieve report data via the Report API. An error is returned for unsupported bookmark types.
 
 ```{r, cache=cacheflag}
 #TBD
@@ -571,7 +595,9 @@ Returns the metrics that are configured to provide real time data.
 #TBD
 ```
 
-#### GetReportSuites [<span class="glyphicon glyphicon-link"</span>]()
+#### GetReportSuites [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1)
+
+Retrieves all report suites associated with the requesting company.
 
 ```{r, cache=cacheflag}
 GetReportSuites()
@@ -627,7 +653,9 @@ Retrieves the Time Zone setting for each of the specified report suites.
 GetTimeZone(rs$rsid)
 ```
 
-#### GetTrackingServer [<span class="glyphicon glyphicon-link"</span>]()
+#### GetTrackingServer [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettrackingserver-1)
+
+Returns the tracking server and namespace for the specified report suite.
 
 ```{r, cache=cacheflag}
 #TBD
@@ -649,7 +677,9 @@ Retrieves the unique visitor variable setting for the specified report suites.
 GetUniqueVisitorVariable(rs$rsid)
 ```
 
-#### GetVersionAccess [<span class="glyphicon glyphicon-link"</span>]()
+#### GetVersionAccess [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getversionaccess)
+
+Retrieves version access for the company of the authenticated user.
 
 ```{r, cache=cacheflag}
 GetVersionAccess()
@@ -683,55 +713,70 @@ Note that because of the extensive number of keyword arguments for each function
 #TBD
 ```
 
-#### QueueFallout [<span class="glyphicon glyphicon-link"</span>]()
+#### QueueFallout [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+
+Element in the checkpoint parameter.
 
 ```{r, cache=cacheflag}
 #TBD
 ```
 
-#### QueueOvertime [<span class="glyphicon glyphicon-link"</span>]()
+#### QueueOvertime [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+
+No elements with a dateGranularity specified.
 
 ```{r, cache=cacheflag}
 #TBD
 ```
 
-#### QueuePathing [<span class="glyphicon glyphicon-link"</span>]()
+#### QueuePathing [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+
+Element in the pattern parameter.
 
 ```{r, cache=cacheflag}
 #TBD
 ```
 
-#### QueueRanked [<span class="glyphicon glyphicon-link"</span>]()
+#### QueueRanked [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+
+1 or more elements with no dateGranularity specified.
 
 ```{r, cache=cacheflag}
 #TBD
 ```
 
-#### QueueSummary [<span class="glyphicon glyphicon-link"</span>]()
+#### QueueSummary [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+
+No "reportSuiteID" parameter, instead "reportsuite" is specified as the report element and the "selected" parameter contains a list of report suite IDs.
 
 ```{r, cache=cacheflag}
 #TBD
 ```
 
-#### QueueTrended [<span class="glyphicon glyphicon-link"</span>]()
+#### QueueTrended [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+
+1 or more elements with a dateGranularity specified.
 
 ```{r, cache=cacheflag}
 #TBD
 ```
 
-#### SaveRealTimeSettings [<span class="glyphicon glyphicon-link"</span>]()
+#### SaveRealTimeSettings [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-saverealtimesettings)
+
+Selects the metrics and elements (dimensions) on which you want real time reports enabled.
+Realtime configuration changes take 15 minutes to be reflected in reports.
 
 ```{r, cache=cacheflag}
 #TBD
 ```
 
-#### SCAuth [<span class="glyphicon glyphicon-link"</span>]()
+#### SCAuth
 
 ```{r, eval=FALSE}
 SCAuth("username:company", "cd1d234dee56e8202da6f7d3213eb1ef")
 ```
 
-#### SubmitJsonQueueReport [<span class="glyphicon glyphicon-link"</span>]()
+#### SubmitJsonQueueReport
 
 ```{r, cache=cacheflag}
 #TBD

@@ -489,7 +489,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 2 zwitchjulia Julia Bloggers http://www.juliabloggers.com</code></pre>
 </div>
 <div id="getbookmarks" class="section level4">
-<h4>GetBookmarks <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetBookmarks <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbookmarks-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves a list of bookmarks for the authenticated user. Parameters folder_limit and folder_offset are optional, and only necessary if the total bookmark count exceeds 500, which is the limit. Use them to select a certain range of folders out of the entire set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="getcalculatedmetrics" class="section level4">
@@ -540,7 +541,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 2 zwitchjulia Julia Bloggers     gregorian</code></pre>
 </div>
 <div id="getdashboards" class="section level4">
-<h4>GetDashboards <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetDashboards <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdashboards-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves all the dashboards for the authenticated web services user, with bookmarks included. Parameters dashboard_limit and dashboard_offset are optional, and only necessary if the total bookmark count exceeds 500, which is the limit. Use them to select a certain range of bookmarks out of the entire set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gdb &lt;-<span class="st"> </span><span class="kw">GetDashboards</span>()
 <span class="kw">head</span>(gdb)</code></pre></div>
 <pre><code>##            name     id   owner grid         .id          X1
@@ -598,7 +600,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 2 zwitchjulia Julia Bloggers      TRUE</code></pre>
 </div>
 <div id="getelements" class="section level4">
-<h4>GetElements <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetElements <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getelements"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves a list of possible valid elements for a report.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elem &lt;-<span class="st"> </span><span class="kw">GetElements</span>(rs$rsid)
 <span class="kw">head</span>(elem)</code></pre></div>
 <pre><code>##               id                name correlation subrelation
@@ -637,7 +640,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6                      1 most_recent_last                TRUE    zwitchdev</code></pre>
 </div>
 <div id="getfeed" class="section level4">
-<h4>GetFeed <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetFeed <a href="https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeed"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Gets configuration details for a specific feed, including feed status, FTP delivery location, and the data columns that are included in the feed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">feed &lt;-<span class="st"> </span><span class="kw">GetFeed</span>(<span class="dv">1111111</span>)
 <span class="kw">head</span>(feed)</code></pre></div>
 <pre><code>##     feed_id      rsid                    name interval   timezone status
@@ -657,7 +661,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6   ftp.somewhere.com        /                 domain</code></pre>
 </div>
 <div id="getfeeds" class="section level4">
-<h4>GetFeeds <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetFeeds <a href="https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeeds"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Returns a list of data feeds for the specified report suites, including delivery status.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetFeeds</span>(rs$rsid)</code></pre></div>
 <pre><code>##  feed_id      rsid interval   timezone                    name
 ## 1 1111111 zwitchdev    daily US/Eastern RSiteCatalyst Data Feed
@@ -667,7 +672,7 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 1 29786961, 2016-09-15 04:00:00, 2016-09-16 04:00:00, delivered</code></pre>
 </div>
 <div id="getfunctions" class="section level4">
-<h4>GetFunctions <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetFunctions <a href="https://marketing.adobe.com/developer/documentation/segments-1-4/calculated-metrics"><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gf &lt;-<span class="st"> </span><span class="kw">GetFunctions</span>()
 <span class="kw">head</span>(gf)</code></pre></div>
 <pre><code>##                       id                            name
@@ -701,7 +706,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 2 zwitchjulia Julia Bloggers             TRUE         FALSE</code></pre>
 </div>
 <div id="getgroups" class="section level4">
-<h4>GetGroups <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetGroups <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getgroups-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves a list of a company’s permission groups.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gg &lt;-<span class="st"> </span><span class="kw">GetGroups</span>()
 <span class="kw">head</span>(gg)</code></pre></div>
 <pre><code>##                      group_name
@@ -795,7 +801,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 2 zwitchjulia Julia Bloggers         TRUE</code></pre>
 </div>
 <div id="getlogin" class="section level4">
-<h4>GetLogin <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetLogin <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlogin-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves information about the specified user account.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetLogin</span>(<span class="st">&quot;rzwitch&quot;</span>)</code></pre></div>
 <pre><code>##    login first_name last_name title             email phone_number
 ## 1 me      Randy    Zwitch       me@example.com   1111111111
@@ -838,7 +845,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6                 0                        TRUE</code></pre>
 </div>
 <div id="getmetrics" class="section level4">
-<h4>GetMetrics <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetMetrics <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getmetrics"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves a list of possible valid elements for a report.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metrics &lt;-<span class="st"> </span><span class="kw">GetMetrics</span>(rs$rsid)
 <span class="kw">head</span>(metrics)</code></pre></div>
 <pre><code>##                       id                       name   type decimals
@@ -923,13 +931,15 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6                            NA              ,    zwitchdev</code></pre>
 </div>
 <div id="getqueue" class="section level4">
-<h4>GetQueue <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetQueue <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getqueue-2"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Returns a list of reports in a company’s report queue.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetQueue</span>()</code></pre></div>
 <pre><code>## [1] &quot;There are no reports in the Report Queue&quot;</code></pre>
 <pre><code>## list()</code></pre>
 </div>
 <div id="getrealtimereport" class="section level4">
 <h4>GetRealTimeReport <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>‘source’ parameter present and set to ‘realtime’. Note that Real-Time reports do not have to be queued, they can run immediately using Report.Run.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetRealTimeReport</span>(<span class="st">&quot;zwitchdev&quot;</span>, <span class="st">&quot;instances&quot;</span>)</code></pre></div>
 <pre><code>##                        name year month day hour minute instances
 ## 1  2016-09-16T15:20:02-0400 2016     9  16   15     20         2
@@ -955,7 +965,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="getreportdescription" class="section level4">
-<h4>GetReportDescription <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetReportDescription <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportdescription"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the name, associated report type, and report description for the supplied bookmark ID. This report description can then be used to retrieve report data via the Report API. An error is returned for unsupported bookmark types.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="getreportsbyids" class="section level4">
@@ -963,7 +974,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="getreportsuites" class="section level4">
-<h4>GetReportSuites <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetReportSuites <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves all report suites associated with the requesting company.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetReportSuites</span>()</code></pre></div>
 <pre><code>##          rsid     site_title
 ## 1   zwitchdev ZwitchCorp Dev
@@ -1047,7 +1059,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 2 zwitchjulia Julia Bloggers US/Eastern</code></pre>
 </div>
 <div id="gettrackingserver" class="section level4">
-<h4>GetTrackingServer <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetTrackingServer <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettrackingserver-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Returns the tracking server and namespace for the specified report suite.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="gettransactionenabled" class="section level4">
@@ -1067,7 +1080,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 2 zwitchjulia Julia Bloggers                ::none::</code></pre>
 </div>
 <div id="getversionaccess" class="section level4">
-<h4>GetVersionAccess <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>GetVersionAccess <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getversionaccess"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves version access for the company of the authenticated user.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetVersionAccess</span>()</code></pre></div>
 <pre><code>##   AdobeProducts
 ## 1        sc13_5
@@ -1107,39 +1121,46 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queuefallout" class="section level4">
-<h4>QueueFallout <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>QueueFallout <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Element in the checkpoint parameter.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queueovertime" class="section level4">
-<h4>QueueOvertime <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>QueueOvertime <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>No elements with a dateGranularity specified.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queuepathing" class="section level4">
-<h4>QueuePathing <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>QueuePathing <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Element in the pattern parameter.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queueranked" class="section level4">
-<h4>QueueRanked <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>QueueRanked <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>1 or more elements with no dateGranularity specified.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queuesummary" class="section level4">
-<h4>QueueSummary <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>QueueSummary <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>No “reportSuiteID” parameter, instead “reportsuite” is specified as the report element and the “selected” parameter contains a list of report suite IDs.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queuetrended" class="section level4">
-<h4>QueueTrended <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>QueueTrended <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>1 or more elements with a dateGranularity specified.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="saverealtimesettings" class="section level4">
-<h4>SaveRealTimeSettings <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>SaveRealTimeSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-saverealtimesettings"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Selects the metrics and elements (dimensions) on which you want real time reports enabled. Realtime configuration changes take 15 minutes to be reflected in reports.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="scauth" class="section level4">
-<h4>SCAuth <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>SCAuth</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SCAuth</span>(<span class="st">&quot;username:company&quot;</span>, <span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span>)</code></pre></div>
 </div>
 <div id="submitjsonqueuereport" class="section level4">
-<h4>SubmitJsonQueueReport <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>SubmitJsonQueueReport</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 </div>
