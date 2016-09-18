@@ -449,45 +449,52 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 </div>
 </div>
 <div id="admin-metadata-functions" class="section level2">
-<h2><strong>Admin / Metadata Functions</strong></h2>
+<h2><strong>Admin / Metadata Functions</strong> <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/admin-api"><span class="glyphicon glyphicon-link"</span></a></h2>
 <p>With a few exceptions, most of the Admin/Metadata functions take a report suite or a list of report suites as arguments and return the settings for a given report. These settings will mostly correspond with what administrators can see in the Adobe Analytics interface.</p>
 <div id="cancelreport" class="section level4">
-<h4>CancelReport</h4>
+<h4>CancelReport <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-cancel"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Cancels a previously submitted report request, and removes it from the processing queue.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">CancelReport</span>(<span class="dv">12345678</span>)</code></pre></div>
 </div>
 <div id="getactivation" class="section level4">
-<h4>GetActivation</h4>
+<h4>GetActivation <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getactivation-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the activation status for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetActivation</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title activation
 ## 1   zwitchdev ZwitchCorp Dev       TRUE
 ## 2 zwitchjulia Julia Bloggers       TRUE</code></pre>
 </div>
 <div id="getaxlestartdate" class="section level4">
-<h4>GetAxleStartDate</h4>
+<h4>GetAxleStartDate <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getaxlestartdate"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the date a report suite was migrated from SiteCatalyst 14 to axle processing (version 15).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetAxleStartDate</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title axle_start_date
 ## 1   zwitchdev ZwitchCorp Dev      2014-02-20
 ## 2 zwitchjulia Julia Bloggers      2015-01-10</code></pre>
 </div>
 <div id="getbasecurrency" class="section level4">
-<h4>GetBaseCurrency</h4>
+<h4>GetBaseCurrency <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbasecurrency-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves a list of supported currency codes for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetBaseCurrency</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title base_currency
 ## 1   zwitchdev ZwitchCorp Dev           USD
 ## 2 zwitchjulia Julia Bloggers           USD</code></pre>
 </div>
 <div id="getbaseurl" class="section level4">
-<h4>GetBaseURL</h4>
+<h4>GetBaseURL <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbaseurl-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the base URL assigned to each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetBaseURL</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title                     base_url
 ## 1   zwitchdev ZwitchCorp Dev   http://www.randyzwitch.com
 ## 2 zwitchjulia Julia Bloggers http://www.juliabloggers.com</code></pre>
 </div>
 <div id="getbookmarks" class="section level4">
-<h4>GetBookmarks</h4>
+<h4>GetBookmarks <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="getcalculatedmetrics" class="section level4">
-<h4>GetCalculatedMetrics</h4>
+<h4>GetCalculatedMetrics <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcalculatedmetrics-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the calculated metrics assigned to each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gcm &lt;-<span class="st"> </span><span class="kw">GetCalculatedMetrics</span>(rs$rsid)
 <span class="kw">head</span>(gcm)</code></pre></div>
 <pre><code>##          rsid     site_title formula_name         formula friendly_formula
@@ -498,7 +505,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 2              0  f:1091439 numeric</code></pre>
 </div>
 <div id="getclassifications" class="section level4">
-<h4>GetClassifications</h4>
+<h4>GetClassifications <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getclassifications-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves a list of classifications (associated with the specified element) for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gcl &lt;-<span class="st"> </span><span class="kw">GetClassifications</span>(rs$rsid)
 <span class="kw">head</span>(gcl)</code></pre></div>
 <pre><code>##        rsid     site_title                id                  element_name
@@ -524,14 +532,15 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6           NA div_mult_2_223</code></pre>
 </div>
 <div id="getcustomcalendar" class="section level4">
-<h4>GetCustomCalendar</h4>
+<h4>GetCustomCalendar <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcustomcalendar-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the custom calendar for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetCustomCalendar</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title calendar_type
 ## 1   zwitchdev ZwitchCorp Dev     gregorian
 ## 2 zwitchjulia Julia Bloggers     gregorian</code></pre>
 </div>
 <div id="getdashboards" class="section level4">
-<h4>GetDashboards</h4>
+<h4>GetDashboards <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gdb &lt;-<span class="st"> </span><span class="kw">GetDashboards</span>()
 <span class="kw">head</span>(gdb)</code></pre></div>
 <pre><code>##            name     id   owner grid         .id          X1
@@ -557,35 +566,39 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6                  &lt;NA&gt;    0    2       1       1  TRUE   FALSE  TRUE</code></pre>
 </div>
 <div id="getdatawarehousedisplay" class="section level4">
-<h4>GetDataWarehouseDisplay</h4>
+<h4>GetDataWarehouseDisplay <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdatawarehousedisplay"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Returns if data warehouse is enabled for the requested report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetDataWarehouseDisplay</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title data_warehouse_display
 ## 1   zwitchdev ZwitchCorp Dev all-logins-have-access
 ## 2 zwitchjulia Julia Bloggers all-logins-have-access</code></pre>
 </div>
 <div id="getdefaultpage" class="section level4">
-<h4>GetDefaultPage</h4>
+<h4>GetDefaultPage <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdefaultpage-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the default page for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetDefaultPage</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title default_page
 ## 1   zwitchdev ZwitchCorp Dev             
 ## 2 zwitchjulia Julia Bloggers</code></pre>
 </div>
 <div id="getdiscoverenabled" class="section level4">
-<h4>GetDiscoverEnabled</h4>
+<h4>GetDiscoverEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdiscoverenabled"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Returns whether ad hoc analysis (formerly Discover) is enabled for the requested report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetDiscoverEnabled</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title discover_enabled
 ## 1   zwitchdev ZwitchCorp Dev             TRUE
 ## 2 zwitchjulia Julia Bloggers             TRUE</code></pre>
 </div>
 <div id="getecommerce" class="section level4">
-<h4>GetEcommerce</h4>
+<h4>GetEcommerce <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getecommerce-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the commerce level for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetEcommerce</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title ecommerce
 ## 1   zwitchdev ZwitchCorp Dev      TRUE
 ## 2 zwitchjulia Julia Bloggers      TRUE</code></pre>
 </div>
 <div id="getelements" class="section level4">
-<h4>GetElements</h4>
+<h4>GetElements <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elem &lt;-<span class="st"> </span><span class="kw">GetElements</span>(rs$rsid)
 <span class="kw">head</span>(elem)</code></pre></div>
 <pre><code>##               id                name correlation subrelation
@@ -604,7 +617,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6                NA zwitchdev</code></pre>
 </div>
 <div id="getevars" class="section level4">
-<h4>GetEvars</h4>
+<h4>GetEvars <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getevars-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the commerce variables for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">evar &lt;-<span class="st"> </span><span class="kw">GetEvars</span>(rs$rsid)
 <span class="kw">head</span>(evar)</code></pre></div>
 <pre><code>##                   name        type           id expiration_type
@@ -623,7 +637,7 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6                      1 most_recent_last                TRUE    zwitchdev</code></pre>
 </div>
 <div id="getfeed" class="section level4">
-<h4>GetFeed</h4>
+<h4>GetFeed <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">feed &lt;-<span class="st"> </span><span class="kw">GetFeed</span>(<span class="dv">1111111</span>)
 <span class="kw">head</span>(feed)</code></pre></div>
 <pre><code>##     feed_id      rsid                    name interval   timezone status
@@ -643,7 +657,7 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6   ftp.somewhere.com        /                 domain</code></pre>
 </div>
 <div id="getfeeds" class="section level4">
-<h4>GetFeeds</h4>
+<h4>GetFeeds <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetFeeds</span>(rs$rsid)</code></pre></div>
 <pre><code>##  feed_id      rsid interval   timezone                    name
 ## 1 1111111 zwitchdev    daily US/Eastern RSiteCatalyst Data Feed
@@ -653,7 +667,7 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 1 29786961, 2016-09-15 04:00:00, 2016-09-16 04:00:00, delivered</code></pre>
 </div>
 <div id="getfunctions" class="section level4">
-<h4>GetFunctions</h4>
+<h4>GetFunctions <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gf &lt;-<span class="st"> </span><span class="kw">GetFunctions</span>()
 <span class="kw">head</span>(gf)</code></pre></div>
 <pre><code>##                       id                            name
@@ -679,14 +693,15 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6 condition, then, else                  &lt;NA&gt;</code></pre>
 </div>
 <div id="getgeosegmentation" class="section level4">
-<h4>GetGeoSegmentation</h4>
+<h4>GetGeoSegmentation <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getgeosegmentation"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the geography segmentation for the requested report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetGeoSegmentation</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title geo_segmentation vista_enabled
 ## 1   zwitchdev ZwitchCorp Dev             TRUE         FALSE
 ## 2 zwitchjulia Julia Bloggers             TRUE         FALSE</code></pre>
 </div>
 <div id="getgroups" class="section level4">
-<h4>GetGroups</h4>
+<h4>GetGroups <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gg &lt;-<span class="st"> </span><span class="kw">GetGroups</span>()
 <span class="kw">head</span>(gg)</code></pre></div>
 <pre><code>##                      group_name
@@ -712,7 +727,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6 predefined</code></pre>
 </div>
 <div id="getinternalurlfilters" class="section level4">
-<h4>GetInternalURLFilters</h4>
+<h4>GetInternalURLFilters <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getinternalurlfilters-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the internal URL filters for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetInternalURLFilters</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title internal_url_filters
 ## 1   zwitchdev ZwitchCorp Dev  www.randyzwitch.com
@@ -721,28 +737,32 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 4 zwitchjulia Julia Bloggers      randyzwitch.com</code></pre>
 </div>
 <div id="getipaddressexclusions" class="section level4">
-<h4>GetIPAddressExclusions</h4>
+<h4>GetIPAddressExclusions <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getipaddressexclusions-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Returns a list of IP addresses excluded from website tracking for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetIPAddressExclusions</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title
 ## 1   zwitchdev ZwitchCorp Dev
 ## 2 zwitchjulia Julia Bloggers</code></pre>
 </div>
 <div id="getipobfuscation" class="section level4">
-<h4>GetIPObfuscation</h4>
+<h4>GetIPObfuscation <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getipobfuscation-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the IP Address Obfuscation setting for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetIPObfuscation</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title ip_obfuscation
 ## 1   zwitchdev ZwitchCorp Dev           none
 ## 2 zwitchjulia Julia Bloggers           none</code></pre>
 </div>
 <div id="getkeyvisitors" class="section level4">
-<h4>GetKeyVisitors</h4>
+<h4>GetKeyVisitors <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getkeyvisitors-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves a list of key visitors for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetKeyVisitors</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title key_visitors
 ## 1   zwitchdev ZwitchCorp Dev             
 ## 2 zwitchjulia Julia Bloggers</code></pre>
 </div>
 <div id="getlistvariables" class="section level4">
-<h4>GetListVariables</h4>
+<h4>GetListVariables <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlistvariables-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the list variables for the requested report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetListVariables</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title            name allocation_type enabled
 ## 1   zwitchdev ZwitchCorp Dev List Variable 1            full   FALSE
@@ -767,14 +787,15 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6           never</code></pre>
 </div>
 <div id="getlocalization" class="section level4">
-<h4>GetLocalization</h4>
+<h4>GetLocalization <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlocalization-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the localization (multi-byte character) settings for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetLocalization</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title localization
 ## 1   zwitchdev ZwitchCorp Dev         TRUE
 ## 2 zwitchjulia Julia Bloggers         TRUE</code></pre>
 </div>
 <div id="getlogin" class="section level4">
-<h4>GetLogin</h4>
+<h4>GetLogin <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetLogin</span>(<span class="st">&quot;rzwitch&quot;</span>)</code></pre></div>
 <pre><code>##    login first_name last_name title             email phone_number
 ## 1 me      Randy    Zwitch       me@example.com   1111111111
@@ -784,17 +805,21 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 1 All Report Access,Ad Hoc Analysis License Users,Report Builder,Web Service Access,All Report Access,Discover License Users,Current Data Users,Reports &amp; Analytics Access,Analysis Workspace Access</code></pre>
 </div>
 <div id="getmarketingchannelexpiration" class="section level4">
-<h4>GetMarketingChannelExpiration</h4>
+<h4>GetMarketingChannelExpiration <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannelexpiration-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Returns the currently defined Marketing Channel expiration dates for the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetMarketingChannelExpiration</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid days
 ## 1   zwitchdev   30
 ## 2 zwitchjulia   30</code></pre>
 </div>
 <div id="getmarketingchannelrules" class="section level4">
-<h4>GetMarketingChannelRules</h4>
+<h4>GetMarketingChannelRules <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannelrules-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Returns the currently defined Marketing Channel rules for the specified report suites.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="getmarketingchannels" class="section level4">
-<h4>GetMarketingChannels</h4>
+<h4>GetMarketingChannels <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannels-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Returns the currently defined Marketing Channels for the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gmc &lt;-<span class="st"> </span><span class="kw">GetMarketingChannels</span>(rs$rsid)
 <span class="kw">head</span>(gmc)</code></pre></div>
 <pre><code>##        rsid           name   type  color channel_id enabled
@@ -813,7 +838,7 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6                 0                        TRUE</code></pre>
 </div>
 <div id="getmetrics" class="section level4">
-<h4>GetMetrics</h4>
+<h4>GetMetrics <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metrics &lt;-<span class="st"> </span><span class="kw">GetMetrics</span>(rs$rsid)
 <span class="kw">head</span>(metrics)</code></pre></div>
 <pre><code>##                       id                       name   type decimals
@@ -832,7 +857,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6    &lt;NA&gt; zwitchdev</code></pre>
 </div>
 <div id="getmobileappreporting" class="section level4">
-<h4>GetMobileAppReporting</h4>
+<h4>GetMobileAppReporting <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmobileappreporting"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the Mobile Application Tracking settings for the requested report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetMobileAppReporting</span>(rs$rsid)</code></pre></div>
 <pre><code>##   allow_configuration all_lifecycle_enabled all_messaging_v1_enabled
 ## 1                TRUE                 FALSE                    FALSE
@@ -844,21 +870,23 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 1            FALSE          FALSE                      FALSE</code></pre>
 </div>
 <div id="getpaidsearchdetection" class="section level4">
-<h4>GetPaidSearchDetection</h4>
+<h4>GetPaidSearchDetection <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getpaidsearchdetection"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the paid search settings for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetPaidSearchDetection</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title search_engine query_string operator
 ## 1   zwitchdev ZwitchCorp Dev       ::any::           ps contains
 ## 2 zwitchjulia Julia Bloggers       ::any::           ps contains</code></pre>
 </div>
 <div id="getpermanenttraffic" class="section level4">
-<h4>GetPermanentTraffic</h4>
+<h4>GetPermanentTraffic <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getpermanenttraffic-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the permanent traffic settings for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetPermanentTraffic</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title submit_date   login start_date hits_per_day
 ## 1   zwitchdev ZwitchCorp Dev  2015-01-12 rzwitch 2015-01-19          600
 ## 2 zwitchjulia Julia Bloggers  2015-01-10 rzwitch 2015-01-11          300</code></pre>
 </div>
 <div id="getprivacysettings" class="section level4">
-<h4>GetPrivacySettings</h4>
+<h4>GetPrivacySettings <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetPrivacySettings</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title inferred_optout_non_mobile
 ## 1   zwitchdev ZwitchCorp Dev                          0
@@ -868,7 +896,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 2                      0</code></pre>
 </div>
 <div id="getprops" class="section level4">
-<h4>GetProps</h4>
+<h4>GetProps <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getprops"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the props (traffic variables) for the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)
 <span class="kw">head</span>(props)</code></pre></div>
 <pre><code>##      id                  name enabled description pathing_enabled
@@ -894,40 +923,61 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6                            NA              ,    zwitchdev</code></pre>
 </div>
 <div id="getqueue" class="section level4">
-<h4>GetQueue</h4>
+<h4>GetQueue <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetQueue</span>()</code></pre></div>
 <pre><code>## [1] &quot;There are no reports in the Report Queue&quot;</code></pre>
 <pre><code>## list()</code></pre>
 </div>
 <div id="getrealtimereport" class="section level4">
-<h4>GetRealTimeReport</h4>
+<h4>GetRealTimeReport <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetRealTimeReport</span>(<span class="st">&quot;zwitchdev&quot;</span>, <span class="st">&quot;instances&quot;</span>)</code></pre></div>
+<pre><code>##                        name year month day hour minute instances
+## 1  2016-09-16T15:20:02-0400 2016     9  16   15     20         2
+## 2  2016-09-16T15:25:02-0400 2016     9  16   15     25         2
+## 3  2016-09-16T15:30:02-0400 2016     9  16   15     30         4
+## 4  2016-09-16T15:35:02-0400 2016     9  16   15     35         0
+## 5  2016-09-16T15:40:02-0400 2016     9  16   15     40         3
+## 6  2016-09-16T15:45:02-0400 2016     9  16   15     45         1
+## 7  2016-09-16T15:50:02-0400 2016     9  16   15     50         0
+## 8  2016-09-16T15:55:02-0400 2016     9  16   15     55         2
+## 9  2016-09-16T16:00:02-0400 2016     9  16   16      0         2
+## 10 2016-09-16T16:05:02-0400 2016     9  16   16      5         0
+## 11 2016-09-16T16:10:02-0400 2016     9  16   16     10         1
+## 12 2016-09-16T16:15:02-0400 2016     9  16   16     15         0</code></pre>
 </div>
 <div id="getrealtimesettings" class="section level4">
-<h4>GetRealTimeSettings</h4>
+<h4>GetRealTimeSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getrealtimesettings"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Returns the metrics that are configured to provide real time data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="getreport" class="section level4">
-<h4>GetReport</h4>
+<h4>GetReport <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="getreportdescription" class="section level4">
-<h4>GetReportDescription</h4>
+<h4>GetReportDescription <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="getreportsbyids" class="section level4">
-<h4>GetReportsByIds</h4>
+<h4>GetReportsByIds <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="getreportsuites" class="section level4">
-<h4>GetReportSuites</h4>
+<h4>GetReportSuites <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetReportSuites</span>()</code></pre></div>
 <pre><code>##          rsid     site_title
 ## 1   zwitchdev ZwitchCorp Dev
 ## 2 zwitchjulia Julia Bloggers</code></pre>
 </div>
 <div id="getscheduledspike" class="section level4">
-<h4>GetScheduledSpike</h4>
+<h4>GetScheduledSpike <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getscheduledspike-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the scheduled traffic increase settings for the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetScheduledSpike</span>(rs$rsid)</code></pre></div>
 <pre><code>## [1] &quot;No scheduled spikes For This Report Suite&quot;</code></pre>
 </div>
 <div id="getsegments" class="section level4">
-<h4>GetSegments</h4>
+<h4>GetSegments <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getsegments-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the segments that are available in one or more report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segments &lt;-<span class="st"> </span><span class="kw">GetSegments</span>(rs$rsid)
 <span class="kw">head</span>(segments)</code></pre></div>
 <pre><code>##                         id                       name folder class
@@ -946,14 +996,16 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6         FALSE     FALSE  zwitchjulia</code></pre>
 </div>
 <div id="getsitetitle" class="section level4">
-<h4>GetSiteTitle</h4>
+<h4>GetSiteTitle <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getsitetitle-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the site title (friendly name) for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetSiteTitle</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title
 ## 1   zwitchdev ZwitchCorp Dev
 ## 2 zwitchjulia Julia Bloggers</code></pre>
 </div>
 <div id="getsuccessevents" class="section level4">
-<h4>GetSuccessEvents</h4>
+<h4>GetSuccessEvents <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getevents"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the success events for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">events &lt;-<span class="st"> </span><span class="kw">GetSuccessEvents</span>(rs$rsid)
 <span class="kw">head</span>(events)</code></pre></div>
 <pre><code>##       id     name description     type default_metric participation
@@ -979,38 +1031,43 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 6         enabled</code></pre>
 </div>
 <div id="gettemplate" class="section level4">
-<h4>GetTemplate</h4>
+<h4>GetTemplate <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettemplate-2"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the creation template for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetTemplate</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title       template
 ## 1   zwitchdev ZwitchCorp Dev             NA
 ## 2 zwitchjulia Julia Bloggers ZwitchCorp Dev</code></pre>
 </div>
 <div id="gettimezone" class="section level4">
-<h4>GetTimeZone</h4>
+<h4>GetTimeZone <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the Time Zone setting for each of the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetTimeZone</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title  time_zone
 ## 1   zwitchdev ZwitchCorp Dev US/Eastern
 ## 2 zwitchjulia Julia Bloggers US/Eastern</code></pre>
 </div>
 <div id="gettrackingserver" class="section level4">
-<h4>GetTrackingServer</h4>
+<h4>GetTrackingServer <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="gettransactionenabled" class="section level4">
-<h4>GetTransactionEnabled</h4>
+<h4>GetTransactionEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettransactionenabled"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the transaction ids storage enable for the requested report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetTransactionEnabled</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title transaction
 ## 1   zwitchdev ZwitchCorp Dev           0
 ## 2 zwitchjulia Julia Bloggers           0</code></pre>
 </div>
 <div id="getuniquevisitorvariable" class="section level4">
-<h4>GetUniqueVisitorVariable</h4>
+<h4>GetUniqueVisitorVariable <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getuniquevisitorvariable-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves the unique visitor variable setting for the specified report suites.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetUniqueVisitorVariable</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title unique_visitor_variable
 ## 1   zwitchdev ZwitchCorp Dev                ::none::
 ## 2 zwitchjulia Julia Bloggers                ::none::</code></pre>
 </div>
 <div id="getversionaccess" class="section level4">
-<h4>GetVersionAccess</h4>
+<h4>GetVersionAccess <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetVersionAccess</span>()</code></pre></div>
 <pre><code>##   AdobeProducts
 ## 1        sc13_5
@@ -1019,7 +1076,8 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 ## 4          dsc2</code></pre>
 </div>
 <div id="getvideosettings" class="section level4">
-<h4>GetVideoSettings</h4>
+<h4>GetVideoSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvideosettings"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves video measurement settings.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">GetVideoSettings</span>(rs$rsid)</code></pre></div>
 <pre><code>##          rsid     site_title core_enabled ad_tracking_enabled
 ## 1   zwitchdev ZwitchCorp Dev        FALSE               FALSE
@@ -1037,42 +1095,52 @@ props &lt;-<span class="st"> </span><span class="kw">GetProps</span>(rs$rsid)</c
 </div>
 </div>
 <div id="analytics-functions" class="section level2">
-<h2><strong>Analytics Functions</strong></h2>
+<h2><strong>Analytics Functions</strong> <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/get-started"><span class="glyphicon glyphicon-link"</span></a></h2>
 <p>The functions in this section represent the types of information a user can retrieve from the Adobe Analytics UI. However, in most cases, the API via RSiteCatalyst can retrieve more data than is displayed in the web interface.</p>
-<p>Note that because of the extensive number of keyword arguments for each function, it’s not feasible to show examples of all functionality. Please see the Examples section above or the detailed documentation within the RSiteCatalyst R manual.</p>
+<p>Note that because of the extensive number of keyword arguments for each function, it’s not feasible to show examples of all functionality. Please see the <a href="/#examples">Examples</a> section above or the detailed documentation within the RSiteCatalyst R manual.</p>
 <div id="buildclassificationvaluesegment" class="section level4">
-<h4>BuildClassificationValueSegment</h4>
+<h4>BuildClassificationValueSegment <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="buildrealtimereportstructure" class="section level4">
-<h4>BuildRealTimeReportStructure</h4>
+<h4>BuildRealTimeReportStructure <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queuefallout" class="section level4">
-<h4>QueueFallout</h4>
+<h4>QueueFallout <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queueovertime" class="section level4">
-<h4>QueueOvertime</h4>
+<h4>QueueOvertime <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queuepathing" class="section level4">
-<h4>QueuePathing</h4>
+<h4>QueuePathing <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queueranked" class="section level4">
-<h4>QueueRanked</h4>
+<h4>QueueRanked <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queuesummary" class="section level4">
-<h4>QueueSummary</h4>
+<h4>QueueSummary <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="queuetrended" class="section level4">
-<h4>QueueTrended</h4>
+<h4>QueueTrended <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="saverealtimesettings" class="section level4">
-<h4>SaveRealTimeSettings</h4>
+<h4>SaveRealTimeSettings <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 <div id="scauth" class="section level4">
-<h4>SCAuth</h4>
+<h4>SCAuth <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SCAuth</span>(<span class="st">&quot;username:company&quot;</span>, <span class="st">&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</span>)</code></pre></div>
 </div>
 <div id="submitjsonqueuereport" class="section level4">
-<h4>SubmitJsonQueueReport</h4>
+<h4>SubmitJsonQueueReport <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#TBD</span></code></pre></div>
 </div>
 </div>
 
