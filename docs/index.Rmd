@@ -25,7 +25,7 @@ install.packages("RSiteCatalyst", type = "source")
 
 After installing RSiteCatalyst, you need to have <u>Web Services Access</u> enabled in the `User Management -> Users -> Access` menu in the Adobe Analytics Admin panel:
 
-![web services access](./images/web-services-access.png)
+![](./images/web-services-access.png)
 
 Additionally, you will either need to obtain your Web Services Credentials or register an OAuth2 application, which will be discussed in detail in the Authentication section.
 
@@ -258,7 +258,7 @@ Retrieves a list of bookmarks for the authenticated user.
 Parameters folder_limit and folder_offset are optional, and only necessary if the total bookmark count exceeds 500, which is the limit. Use them to select a certain range of folders out of the entire set.
 
 ```{r, cache=cacheflag}
-#TBD
+GetBookmarks()
 ```
 
 #### GetCalculatedMetrics [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcalculatedmetrics-1)
@@ -490,7 +490,8 @@ GetMarketingChannelExpiration(rs$rsid)
 Returns the currently defined Marketing Channel rules for the specified report suites.
 
 ```{r, cache=cacheflag}
-#TBD
+gmcrs <- GetMarketingChannelRules("zwitchdev")
+head(gmcrs)
 ```
 
 #### GetMarketingChannels [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannels-1)
@@ -571,7 +572,7 @@ GetRealTimeReport("zwitchdev", "instances")
 Returns the metrics that are configured to provide real time data.
 
 ```{r, cache=cacheflag}
-#TBD
+GetRealTimeSettings("zwitchdev")
 ```
 
 #### GetReport [<span class="glyphicon glyphicon-link"</span>]()
@@ -585,7 +586,7 @@ Returns the metrics that are configured to provide real time data.
 Retrieves the name, associated report type, and report description for the supplied bookmark ID. This report description can then be used to retrieve report data via the Report API. An error is returned for unsupported bookmark types.
 
 ```{r, cache=cacheflag}
-#TBD
+GetReportDescription(28473595)
 ```
 
 #### GetReportsByIds [<span class="glyphicon glyphicon-link"</span>]()
@@ -654,10 +655,10 @@ GetTimeZone(rs$rsid)
 
 #### GetTrackingServer [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettrackingserver-1)
 
-Returns the tracking server and namespace for the specified report suite.
+Returns the tracking server and namespace for the specified report suite. Only accepts a single report suite, as all report suites within an account will have same tracking server.
 
 ```{r, cache=cacheflag}
-#TBD
+GetTrackingServer("zwitchdev")
 ```
 
 #### GetTransactionEnabled [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettransactionenabled)
@@ -749,7 +750,7 @@ Element in the pattern parameter.
 No "reportSuiteID" parameter, instead "reportsuite" is specified as the report element and the "selected" parameter contains a list of report suite IDs.
 
 ```{r, cache=cacheflag}
-#TBD
+QueueSummary(rs$rsid, "2016-09-01", "visits")
 ```
 
 #### QueueTrended [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)

@@ -861,11 +861,10 @@ iframe.scale65 {
 }
 
 .tocify {
-    overflow: overlay;
+    overflow: auto;
     border: 0px solid #ccc;
 }
 
 div.tocify {
     max-height: 90%;
-    overflow-x: overlay;
 }

@@ -237,8 +237,8 @@ div.tocify {
 <pre class="r"><code>install.packages(&quot;RSiteCatalyst&quot;, type = &quot;source&quot;)</code></pre>
 <p>After installing RSiteCatalyst, you need to have <u>Web Services Access</u> enabled in the <code>User Management -&gt; Users -&gt; Access</code> menu in the Adobe Analytics Admin panel:</p>
 <div class="figure">
-<img src="images/web-services-access.png" alt="web services access" />
-<p class="caption">web services access</p>
+<img src="images/web-services-access.png" />
+
 </div>
 <p>Additionally, you will either need to obtain your Web Services Credentials or register an OAuth2 application, which will be discussed in detail in the Authentication section.</p>
 <hr />
@@ -465,7 +465,10 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <div id="getbookmarks" class="section level4">
 <h4>GetBookmarks <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbookmarks-1"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Retrieves a list of bookmarks for the authenticated user. Parameters folder_limit and folder_offset are optional, and only necessary if the total bookmark count exceeds 500, which is the limit. Use them to select a certain range of folders out of the entire set.</p>
-<pre class="r"><code>#TBD</code></pre>
+<pre class="r"><code>GetBookmarks()</code></pre>
+<pre><code>##      folder_name folder_id   owner bookmark_name bookmark_id      rsid
+## 1     TestFolder   2444942 rzwitch  TestBookmark    28473595 zwitchdev
+## 2 Another Folder   2444946 rzwitch         Test2    28473698 zwitchdev</code></pre>
 </div>
 <div id="getcalculatedmetrics" class="section level4">
 <h4>GetCalculatedMetrics <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcalculatedmetrics-1"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -796,7 +799,36 @@ head(gg)</code></pre>
 <div id="getmarketingchannelrules" class="section level4">
 <h4>GetMarketingChannelRules <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannelrules-1"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Returns the currently defined Marketing Channel rules for the specified report suites.</p>
-<pre class="r"><code>#TBD</code></pre>
+<pre class="r"><code>gmcrs &lt;- GetMarketingChannelRules(&quot;zwitchdev&quot;)
+head(gmcrs)</code></pre>
+<pre><code>##        rsid ruleset_id channel_id junction                 type
+## 1 zwitchdev       3885          1      all search_tracking_code
+## 2 zwitchdev       3886          2      all search_tracking_code
+## 3 zwitchdev       3887          4      all        page_qs_param
+## 4 zwitchdev       3888          3      all        page_qs_param
+## 5 zwitchdev       3889          5      all     referring_domain
+## 6 zwitchdev       3890          8      all     referring_domain
+##   query_string_parameter rule_id             hit_attribute_type
+## 1                           5489                 is_paid_search
+## 2                           5490              is_natural_search
+## 3                  email    5491                  page_qs_param
+## 4                display    5492                  page_qs_param
+## 5                           5493      external_referring_domain
+## 6                           5494 external_referring_root_domain
+##   hit_attribute_query_string_parameter operator
+## 1                                        equals
+## 2                                        equals
+## 3                                email   exists
+## 4                              display   exists
+## 5                                      contains
+## 6                                        equals
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           matches
+## 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+## 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+## 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+## 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+## 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   r-bloggers.com,badhessian.org
+## 6 facebook.com,linkedin.com,twitter.com,plus.google.com,orkut.com,friendster.com,livejournal.com,blogspot.com,wordpress.com,friendfeed.com,myspace.com,digg.com,reddit.com,stumbleupon.com,twine.com,yelp.com,mixx.com,delicious.com,tumblr.com,disqus.com,intensedebate.com,plurk.com,slideshare.net,backtype.com,netvibes.com,mister-wong.com,diigo.com,flixster.com,youtube.com,vimeo.com,12seconds.tv,zooomr.com,identi.ca,jaiku.com,flickr.com,imeem.com,dailymotion.com,photobucket.com,fotolog.com,smugmug.com,classmates.com,myyearbook.com,mylife.com,tagged.com,brightkite.com,ning.com,bebo.com,hi5.com,yuku.com,cafemom.com,xanga.com</code></pre>
 </div>
 <div id="getmarketingchannels" class="section level4">
 <h4>GetMarketingChannels <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannels-1"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -932,7 +964,15 @@ head(props)</code></pre>
 <div id="getrealtimesettings" class="section level4">
 <h4>GetRealTimeSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getrealtimesettings"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Returns the metrics that are configured to provide real time data.</p>
-<pre class="r"><code>#TBD</code></pre>
+<pre class="r"><code>GetRealTimeSettings(&quot;zwitchdev&quot;)</code></pre>
+<pre><code>##            name min_granularity ui_report    metric primary.dimension
+## 1       testxyz               1      TRUE instances             prop2
+## 2       test111               1      TRUE instances             prop2
+## 3 testsep242014               1      TRUE instances              page
+##   secondary.dimension tertiary.dimension
+## 1 searchenginekeyword         geocountry
+## 2 searchenginekeyword         geocountry
+## 3 searchenginekeyword         geocountry</code></pre>
 </div>
 <div id="getreport" class="section level4">
 <h4>GetReport <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -941,7 +981,11 @@ head(props)</code></pre>
 <div id="getreportdescription" class="section level4">
 <h4>GetReportDescription <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportdescription"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Retrieves the name, associated report type, and report description for the supplied bookmark ID. This report description can then be used to retrieve report data via the Report API. An error is returned for unsupported bookmark types.</p>
-<pre class="r"><code>#TBD</code></pre>
+<pre class="r"><code>GetReportDescription(28473595)</code></pre>
+<pre><code>##           name reportType reportSuiteID   dateFrom     dateTo
+## 1 TestBookmark   overtime     zwitchdev 2016-09-01 2016-09-30
+##   dateGranularity                           metrics
+## 1             day pageviews, visits, uniquevisitors</code></pre>
 </div>
 <div id="getreportsbyids" class="section level4">
 <h4>GetReportsByIds <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -1034,8 +1078,10 @@ head(events)</code></pre>
 </div>
 <div id="gettrackingserver" class="section level4">
 <h4>GetTrackingServer <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettrackingserver-1"><span class="glyphicon glyphicon-link"</span></a></h4>
-<p>Returns the tracking server and namespace for the specified report suite.</p>
-<pre class="r"><code>#TBD</code></pre>
+<p>Returns the tracking server and namespace for the specified report suite. Only accepts a single report suite, as all report suites within an account will have same tracking server.</p>
+<pre class="r"><code>GetTrackingServer(&quot;zwitchdev&quot;)</code></pre>
+<pre><code>##    namespace             tracking_server
+## 1 zwitchcorp zwitchcorp.d1.sc.omtrdc.net</code></pre>
 </div>
 <div id="gettransactionenabled" class="section level4">
 <h4>GetTransactionEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettransactionenabled"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -1117,7 +1163,12 @@ head(events)</code></pre>
 <div id="queuesummary" class="section level4">
 <h4>QueueSummary <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>No “reportSuiteID” parameter, instead “reportsuite” is specified as the report element and the “selected” parameter contains a list of report suite IDs.</p>
-<pre class="r"><code>#TBD</code></pre>
+<pre class="r"><code>QueueSummary(rs$rsid, &quot;2016-09-01&quot;, &quot;visits&quot;)</code></pre>
+<pre><code>## [1] &quot;Requesting URL attempt #1&quot;
+## [1] &quot;Received summary report.&quot;</code></pre>
+<pre><code>##              period reportsuite url visits
+## 1 Thu.  1 Sep. 2016   zwitchdev        294
+## 2 Thu.  1 Sep. 2016 zwitchjulia        113</code></pre>
 </div>
 <div id="queuetrended" class="section level4">
 <h4>QueueTrended <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
