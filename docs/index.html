@@ -350,7 +350,7 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 </tr>
 <tr class="odd">
 <td><p>Shashi Khatri</p></td>
-<td><p><a href="https://github.com/shashispace">GitHub</a> LinkedIn Twitter</p></td>
+<td><p><a href="https://github.com/mrshashi">GitHub</a> LinkedIn Twitter</p></td>
 </tr>
 <tr class="even">
 <td><p>Diego Villuendas Pellicero</p></td>
@@ -948,18 +948,18 @@ head(props)</code></pre>
 <p>‘source’ parameter present and set to ‘realtime’. Note that Real-Time reports do not have to be queued, they can run immediately using Report.Run.</p>
 <pre class="r"><code>GetRealTimeReport(&quot;zwitchdev&quot;, &quot;instances&quot;)</code></pre>
 <pre><code>##                        name year month day hour minute instances
-## 1  2016-09-16T15:20:02-0400 2016     9  16   15     20         2
-## 2  2016-09-16T15:25:02-0400 2016     9  16   15     25         2
-## 3  2016-09-16T15:30:02-0400 2016     9  16   15     30         4
-## 4  2016-09-16T15:35:02-0400 2016     9  16   15     35         0
-## 5  2016-09-16T15:40:02-0400 2016     9  16   15     40         3
-## 6  2016-09-16T15:45:02-0400 2016     9  16   15     45         1
-## 7  2016-09-16T15:50:02-0400 2016     9  16   15     50         0
-## 8  2016-09-16T15:55:02-0400 2016     9  16   15     55         2
-## 9  2016-09-16T16:00:02-0400 2016     9  16   16      0         2
-## 10 2016-09-16T16:05:02-0400 2016     9  16   16      5         0
-## 11 2016-09-16T16:10:02-0400 2016     9  16   16     10         1
-## 12 2016-09-16T16:15:02-0400 2016     9  16   16     15         0</code></pre>
+## 1  2016-09-20T13:26:49-0400 2016     9  20   13     26         0
+## 2  2016-09-20T13:31:49-0400 2016     9  20   13     31         5
+## 3  2016-09-20T13:36:49-0400 2016     9  20   13     36         1
+## 4  2016-09-20T13:41:49-0400 2016     9  20   13     41         1
+## 5  2016-09-20T13:46:49-0400 2016     9  20   13     46         1
+## 6  2016-09-20T13:51:49-0400 2016     9  20   13     51         1
+## 7  2016-09-20T13:56:49-0400 2016     9  20   13     56         2
+## 8  2016-09-20T14:01:49-0400 2016     9  20   14      1         1
+## 9  2016-09-20T14:06:49-0400 2016     9  20   14      6         4
+## 10 2016-09-20T14:11:49-0400 2016     9  20   14     11         0
+## 11 2016-09-20T14:16:49-0400 2016     9  20   14     16         3
+## 12 2016-09-20T14:21:49-0400 2016     9  20   14     21         1</code></pre>
 </div>
 <div id="getrealtimesettings" class="section level4">
 <h4>GetRealTimeSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getrealtimesettings"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -974,10 +974,6 @@ head(props)</code></pre>
 ## 2 searchenginekeyword         geocountry
 ## 3 searchenginekeyword         geocountry</code></pre>
 </div>
-<div id="getreport" class="section level4">
-<h4>GetReport <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
-<pre class="r"><code>#TBD</code></pre>
-</div>
 <div id="getreportdescription" class="section level4">
 <h4>GetReportDescription <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportdescription"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Retrieves the name, associated report type, and report description for the supplied bookmark ID. This report description can then be used to retrieve report data via the Report API. An error is returned for unsupported bookmark types.</p>
@@ -986,10 +982,6 @@ head(props)</code></pre>
 ## 1 TestBookmark   overtime     zwitchdev 2016-09-01 2016-09-30
 ##   dateGranularity                           metrics
 ## 1             day pageviews, visits, uniquevisitors</code></pre>
-</div>
-<div id="getreportsbyids" class="section level4">
-<h4>GetReportsByIds <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
-<pre class="r"><code>#TBD</code></pre>
 </div>
 <div id="getreportsuites" class="section level4">
 <h4>GetReportSuites <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -1134,10 +1126,41 @@ head(events)</code></pre>
 <p>Note that because of the extensive number of keyword arguments for each function, it’s not feasible to show examples of all functionality. Please see the <a href="/#examples">Examples</a> section above or the detailed documentation within the RSiteCatalyst R manual.</p>
 <div id="buildclassificationvaluesegment" class="section level4">
 <h4>BuildClassificationValueSegment <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
-<pre class="r"><code>#TBD</code></pre>
+<p>Used for creating inline segments for use in Queue* functions. This is a convenience function to create the proper formatting for the required JSON object, it does not call the API itself.</p>
+<pre class="r"><code>vistor_segment &lt;- BuildClassificationValueSegment(element,
+                                                  search.keywords,
+                                                  classification,
+                                                  search.type)</code></pre>
 </div>
 <div id="buildrealtimereportstructure" class="section level4">
-<h4>BuildRealTimeReportStructure <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<h4>BuildRealTimeReportStructure</h4>
+<p>Selects the metrics and elements (dimensions) on which you want Real-Time reports enabled. This is a convenience function to create the proper formatting for the required JSON object, it does not call the API itself.</p>
+<p>Use the returned list from this function as argument(s) in SaveRealTimeSettings.</p>
+<pre class="r"><code>report.test1 &lt;- BuildRealTimeReportStructure(report.name=&quot;test123&quot;,
+               metric=&quot;instances&quot;,
+               elements = c(&quot;prop2&quot;, &quot;searchenginekeyword&quot;, &quot;geocountry&quot;))
+
+report.test2 &lt;- BuildRealTimeReportStructure(report.name=&quot;test456&quot;,
+               metric=&quot;instances&quot;,
+               elements = c(&quot;prop2&quot;, &quot;searchenginekeyword&quot;, &quot;geocountry&quot;),
+               min.granularity = &quot;5&quot;)
+
+report.test3 &lt;- BuildRealTimeReportStructure(report.name=&quot;test789&quot;,
+               metric=&quot;instances&quot;,
+               elements = c(&quot;prop2&quot;, &quot;searchenginekeyword&quot;, &quot;geocountry&quot;),
+               min.granularity = &quot;5&quot;,
+               ui.report=FALSE)</code></pre>
+</div>
+<div id="getreport" class="section level4">
+<h4>GetReport <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<pre class="r"><code>#TBD</code></pre>
+</div>
+<div id="getreportsbyids" class="section level4">
+<h4>GetReportsByIds <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<pre class="r"><code>#TBD</code></pre>
+</div>
+<div id="queuedatawarehouse" class="section level4">
+<h4>QueueDataWarehouse <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
 <pre class="r"><code>#TBD</code></pre>
 </div>
 <div id="queuefallout" class="section level4">
@@ -1148,23 +1171,85 @@ head(events)</code></pre>
 <div id="queueovertime" class="section level4">
 <h4>QueueOvertime <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>No elements with a dateGranularity specified.</p>
-<pre class="r"><code>#TBD</code></pre>
+<pre class="r"><code>QueueOvertime(&quot;zwitchdev&quot;, &quot;2016-09-07&quot;, &quot;2016-09-13&quot;, &quot;visits&quot;, date.granularity = &quot;week&quot;)</code></pre>
+<pre><code>## [1] &quot;Requesting URL attempt #1&quot;
+## [1] &quot;Requesting URL attempt #2&quot;
+## [1] &quot;Received overtime report.&quot;</code></pre>
+<pre><code>##     datetime                                  name year month day
+## 1 2016-09-07 Wed.  7 Sep. 2016 - Sat. 10 Sep. 2016 2016     9   7
+## 2 2016-09-11 Sun. 11 Sep. 2016 - Tue. 13 Sep. 2016 2016     9  11
+##   segment.id segment.name visits
+## 1                            967
+## 2                            657</code></pre>
 </div>
 <div id="queuepathing" class="section level4">
 <h4>QueuePathing <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Element in the pattern parameter.</p>
-<pre class="r"><code>#TBD</code></pre>
+<pre class="r"><code>pathpattern &lt;- c(&quot;::anything::&quot;, &quot;::anything::&quot;)
+QueuePathing(&quot;zwitchdev&quot;,
+            &quot;2016-09-19&quot;,
+            &quot;2016-09-19&quot;,
+            metric=&quot;pageviews&quot;,
+            element=&quot;page&quot;,
+            pathpattern,
+            top = 5)</code></pre>
+<pre><code>## [1] &quot;Requesting URL attempt #1&quot;
+## [1] &quot;Requesting URL attempt #2&quot;
+## [1] &quot;Received pathing report.&quot;</code></pre>
+<pre><code>##                                                       step.1
+## 1 http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free
+## 2                                               Entered Site
+## 3                                               Entered Site
+## 4  http://randyzwitch.com/creating-stacked-bar-chart-seaborn
+## 5                   http://randyzwitch.com/julia-import-data
+##                                                       step.2 count
+## 1                                                Exited Site    27
+## 2 http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free    27
+## 3  http://randyzwitch.com/creating-stacked-bar-chart-seaborn    20
+## 4                                                Exited Site    19
+## 5                                                Exited Site    17
+##   segment.id segment.name
+## 1                        
+## 2                        
+## 3                        
+## 4                        
+## 5</code></pre>
 </div>
 <div id="queueranked" class="section level4">
 <h4>QueueRanked <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>1 or more elements with no dateGranularity specified.</p>
-<pre class="r"><code>#TBD</code></pre>
+<pre class="r"><code>QueueRanked(&quot;zwitchdev&quot;, &quot;2016-09-01&quot;, &quot;2016-09-19&quot;, &quot;pageviews&quot;, &quot;page&quot;, top = 6, data.current = TRUE)</code></pre>
+<pre><code>## [1] &quot;Requesting URL attempt #1&quot;
+## [1] &quot;Requesting URL attempt #2&quot;
+## [1] &quot;Received ranked report.&quot;</code></pre>
+<pre><code>##                                                         name
+## 1 http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free
+## 2  http://randyzwitch.com/creating-stacked-bar-chart-seaborn
+## 3                                     http://randyzwitch.com
+## 4          http://randyzwitch.com/hive-five-hard-won-lessons
+## 5                   http://randyzwitch.com/julia-import-data
+## 6         http://randyzwitch.com/hadoop-creating-tables-hive
+##                                                          url pageviews
+## 1 http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free       852
+## 2  http://randyzwitch.com/creating-stacked-bar-chart-seaborn       407
+## 3                                     http://randyzwitch.com       372
+## 4          http://randyzwitch.com/hive-five-hard-won-lessons       292
+## 5                   http://randyzwitch.com/julia-import-data       181
+## 6         http://randyzwitch.com/hadoop-creating-tables-hive       172
+##   segment.id segment.name
+## 1                        
+## 2                        
+## 3                        
+## 4                        
+## 5                        
+## 6</code></pre>
 </div>
 <div id="queuesummary" class="section level4">
 <h4>QueueSummary <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>No “reportSuiteID” parameter, instead “reportsuite” is specified as the report element and the “selected” parameter contains a list of report suite IDs.</p>
 <pre class="r"><code>QueueSummary(rs$rsid, &quot;2016-09-01&quot;, &quot;visits&quot;)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
+## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received summary report.&quot;</code></pre>
 <pre><code>##              period reportsuite url visits
 ## 1 Thu.  1 Sep. 2016   zwitchdev        294
@@ -1173,12 +1258,33 @@ head(events)</code></pre>
 <div id="queuetrended" class="section level4">
 <h4>QueueTrended <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>1 or more elements with a dateGranularity specified.</p>
-<pre class="r"><code>#TBD</code></pre>
+<pre class="r"><code>QueueTrended(&quot;zwitchdev&quot;, &quot;2016-09-07&quot;, &quot;2016-09-13&quot;, &quot;visits&quot;, &quot;page&quot;, selected = c(&quot;http://randyzwitch.com&quot;))</code></pre>
+<pre><code>## [1] &quot;Requesting URL attempt #1&quot;
+## [1] &quot;Requesting URL attempt #2&quot;
+## [1] &quot;Received trended report.&quot;</code></pre>
+<pre><code>##     datetime                   name                    url visits
+## 1 2016-09-07 http://randyzwitch.com http://randyzwitch.com      8
+## 2 2016-09-08 http://randyzwitch.com http://randyzwitch.com     16
+## 3 2016-09-09 http://randyzwitch.com http://randyzwitch.com     18
+## 4 2016-09-10 http://randyzwitch.com http://randyzwitch.com     11
+## 5 2016-09-11 http://randyzwitch.com http://randyzwitch.com      9
+## 6 2016-09-12 http://randyzwitch.com http://randyzwitch.com     27
+## 7 2016-09-13 http://randyzwitch.com http://randyzwitch.com     28
+##   segment.id segment.name
+## 1                        
+## 2                        
+## 3                        
+## 4                        
+## 5                        
+## 6                        
+## 7</code></pre>
 </div>
 <div id="saverealtimesettings" class="section level4">
 <h4>SaveRealTimeSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-saverealtimesettings"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Selects the metrics and elements (dimensions) on which you want real time reports enabled. Realtime configuration changes take 15 minutes to be reflected in reports.</p>
-<pre class="r"><code>#TBD</code></pre>
+<p>WARNING: This function allows you to change the settings in your Adobe Analytics UI for all users, so be sure this is what you want to do. Additionally, submitting this function with only one report will mean other reports are deleted, you’re NOT just changing a single report.</p>
+<pre class="r"><code>SaveRealTimeSettings(reportsuite.ids = &quot;&quot;, report1 = list(),
+  report2 = list(), report3 = list())</code></pre>
 </div>
 <div id="scauth" class="section level4">
 <h4>SCAuth</h4>
@@ -1186,7 +1292,8 @@ head(events)</code></pre>
 </div>
 <div id="submitjsonqueuereport" class="section level4">
 <h4>SubmitJsonQueueReport</h4>
-<pre class="r"><code>#TBD</code></pre>
+<p>A function for advanced users, for the case where a user feels that submitting a JSON request to the Report.Queue API endpoint would be easier than using one of the pre-defined functions from RSiteCatalyst.</p>
+<pre class="r"><code>report &lt;- SubmitJsonQueueReport(&quot;valid JSON string&quot;)</code></pre>
 </div>
 </div>
 

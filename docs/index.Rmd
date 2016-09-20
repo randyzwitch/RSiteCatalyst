@@ -152,7 +152,7 @@ RSiteCatalyst is provided under the [MIT License](https://tldrlegal.com/license/
 +----------------------------+----------------------------------+
 | Adam Gitzes                | [GitHub](https://github.com/Gitzman)   [LinkedIn](https://www.linkedin.com/in/adam-gitzes-958aa122)   [Twitter](https://twitter.com/FootballActuary)          |
 +----------------------------+----------------------------------+
-| Shashi Khatri              | [GitHub](https://github.com/shashispace)   LinkedIn   Twitter          |
+| Shashi Khatri              | [GitHub](https://github.com/mrshashi)   LinkedIn   Twitter          |
 +----------------------------+----------------------------------+
 | Diego Villuendas Pellicero | [GitHub](https://github.com/dieguico)   LinkedIn   Twitter          |
 +----------------------------+----------------------------------+
@@ -575,24 +575,12 @@ Returns the metrics that are configured to provide real time data.
 GetRealTimeSettings("zwitchdev")
 ```
 
-#### GetReport [<span class="glyphicon glyphicon-link"</span>]()
-
-```{r, cache=cacheflag}
-#TBD
-```
-
 #### GetReportDescription [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportdescription)
 
 Retrieves the name, associated report type, and report description for the supplied bookmark ID. This report description can then be used to retrieve report data via the Report API. An error is returned for unsupported bookmark types.
 
 ```{r, cache=cacheflag}
 GetReportDescription(28473595)
-```
-
-#### GetReportsByIds [<span class="glyphicon glyphicon-link"</span>]()
-
-```{r, cache=cacheflag}
-#TBD
 ```
 
 #### GetReportSuites [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1)
@@ -703,11 +691,51 @@ Note that because of the extensive number of keyword arguments for each function
 
 #### BuildClassificationValueSegment [<span class="glyphicon glyphicon-link"</span>]()
 
+Used for creating inline segments for use in Queue* functions. This is a convenience function to create the proper formatting for the required JSON object, it does not call the API itself.
+
+```{r, eval=FALSE}
+vistor_segment <- BuildClassificationValueSegment(element,
+                                                  search.keywords,
+                                                  classification,
+                                                  search.type)
+```
+
+#### BuildRealTimeReportStructure
+
+Selects the metrics and elements (dimensions) on which you want Real-Time reports enabled. This is a convenience function to create the proper formatting for the required JSON object, it does not call the API itself.
+
+Use the returned list from this function as argument(s) in SaveRealTimeSettings.
+
+```{r, eval=FALSE}
+report.test1 <- BuildRealTimeReportStructure(report.name="test123",
+               metric="instances",
+               elements = c("prop2", "searchenginekeyword", "geocountry"))
+
+report.test2 <- BuildRealTimeReportStructure(report.name="test456",
+               metric="instances",
+               elements = c("prop2", "searchenginekeyword", "geocountry"),
+               min.granularity = "5")
+
+report.test3 <- BuildRealTimeReportStructure(report.name="test789",
+               metric="instances",
+               elements = c("prop2", "searchenginekeyword", "geocountry"),
+               min.granularity = "5",
+               ui.report=FALSE)
+```
+
+#### GetReport [<span class="glyphicon glyphicon-link"</span>]()
+
 ```{r, cache=cacheflag}
 #TBD
 ```
 
-#### BuildRealTimeReportStructure [<span class="glyphicon glyphicon-link"</span>]()
+#### GetReportsByIds [<span class="glyphicon glyphicon-link"</span>]()
+
+```{r, cache=cacheflag}
+#TBD
+```
+
+#### QueueDataWarehouse [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
 ```{r, cache=cacheflag}
 #TBD
@@ -726,7 +754,7 @@ Element in the checkpoint parameter.
 No elements with a dateGranularity specified.
 
 ```{r, cache=cacheflag}
-#TBD
+QueueOvertime("zwitchdev", "2016-09-07", "2016-09-13", "visits", date.granularity = "week")
 ```
 
 #### QueuePathing [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
@@ -734,7 +762,14 @@ No elements with a dateGranularity specified.
 Element in the pattern parameter.
 
 ```{r, cache=cacheflag}
-#TBD
+pathpattern <- c("::anything::", "::anything::")
+QueuePathing("zwitchdev",
+            "2016-09-19",
+            "2016-09-19",
+            metric="pageviews",
+            element="page",
+            pathpattern,
+            top = 5)
 ```
 
 #### QueueRanked [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
@@ -742,7 +777,7 @@ Element in the pattern parameter.
 1 or more elements with no dateGranularity specified.
 
 ```{r, cache=cacheflag}
-#TBD
+QueueRanked("zwitchdev", "2016-09-01", "2016-09-19", "pageviews", "page", top = 6, data.current = TRUE)
 ```
 
 #### QueueSummary [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
@@ -758,7 +793,7 @@ QueueSummary(rs$rsid, "2016-09-01", "visits")
 1 or more elements with a dateGranularity specified.
 
 ```{r, cache=cacheflag}
-#TBD
+QueueTrended("zwitchdev", "2016-09-07", "2016-09-13", "visits", "page", selected = c("http://randyzwitch.com"))
 ```
 
 #### SaveRealTimeSettings [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-saverealtimesettings)
@@ -766,8 +801,11 @@ QueueSummary(rs$rsid, "2016-09-01", "visits")
 Selects the metrics and elements (dimensions) on which you want real time reports enabled.
 Realtime configuration changes take 15 minutes to be reflected in reports.
 
-```{r, cache=cacheflag}
-#TBD
+WARNING: This function allows you to change the settings in your Adobe Analytics UI for all users, so be sure this is what you want to do. Additionally, submitting this function with only one report will mean other reports are deleted, you're NOT just changing a single report.
+
+```{r, eval=FALSE}
+SaveRealTimeSettings(reportsuite.ids = "", report1 = list(),
+  report2 = list(), report3 = list())
 ```
 
 #### SCAuth
@@ -778,6 +816,8 @@ SCAuth("username:company", "cd1d234dee56e8202da6f7d3213eb1ef")
 
 #### SubmitJsonQueueReport
 
-```{r, cache=cacheflag}
-#TBD
+A function for advanced users, for the case where a user feels that submitting a JSON request to the Report.Queue API endpoint would be easier than using one of the pre-defined functions from RSiteCatalyst.
+
+```{r, eval=FALSE}
+report <- SubmitJsonQueueReport("valid JSON string")
 ```
