@@ -7,7 +7,7 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Top 10 pages by pageviews, daily
   aa <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",
@@ -20,7 +20,7 @@ test_that("Validate QueueTrended using legacy credentials", {
   #Top 10 pages by pageviews, daily
   #Starting with 11
   bb <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",
@@ -33,7 +33,7 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Top 7 pages by visits, weekly
   cc <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="week",
                      metrics="visits",
@@ -45,7 +45,7 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, Monthly
   dd <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="month",
                      metrics="exits",
@@ -57,7 +57,7 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, Quarterly, segment
   ee <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="quarter",
                      metrics="entries",
@@ -70,7 +70,7 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, day, segment, Anomaly Detection
   ff <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",
@@ -114,7 +114,7 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Top 10 pages by pageviews, daily, 2 segments
   jj <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",
@@ -128,7 +128,7 @@ test_that("Validate QueueTrended using legacy credentials", {
   #Top 10 pages by pageviews, daily, 2 segments
   #Starting with 11
   kk <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",
@@ -142,7 +142,7 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Top 7 pages by visits, weekly, 2 segments
   ll <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="week",
                      metrics="visits",
@@ -155,7 +155,7 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, Monthly, 2 segments
   mm <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="month",
                      metrics="exits",
@@ -168,7 +168,7 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, Quarterly, 2 segments
   nn <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="quarter",
                      metrics="entries",
@@ -181,7 +181,7 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Selected Pages, day, segment, Anomaly Detection, 2 segments
   oo <- QueueTrended("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      date.granularity="day",
                      metrics="pageviews",

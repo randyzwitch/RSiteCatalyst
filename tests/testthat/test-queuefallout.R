@@ -6,7 +6,7 @@ test_that("Validate QueueFallout using legacy credentials", {
   SCAuth(Sys.getenv("USER", ""), Sys.getenv("SECRET", ""))
 
   aa <- QueueFallout("zwitchdev",
-                     "2015-12-01",
+                     "2016-08-01",
                      "2016-12-31",
                      metric="pageviews",
                      element="page",
@@ -18,7 +18,7 @@ test_that("Validate QueueFallout using legacy credentials", {
 
 
 bb <-QueueFallout("zwitchdev",
-                  "2015-12-01",
+                  "2016-08-01",
                   "2016-12-31",
                   metrics="pageviews",
                   element="page",
@@ -31,7 +31,7 @@ expect_is(bb, "data.frame")
 
 
 cc <-QueueFallout("zwitchdev",
-                  "2015-12-01",
+                  "2016-08-01",
                   "2016-12-31",
                   metrics="pageviews",
                   element="page",
@@ -42,7 +42,7 @@ cc <-QueueFallout("zwitchdev",
 expect_is(cc, "data.frame")
 
 dd <- QueueFallout("zwitchdev",
-                  "2015-12-01",
+                  "2016-08-01",
                   "2016-12-31",
                   metrics="pageviews",
                   element="page",

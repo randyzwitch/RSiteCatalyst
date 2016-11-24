@@ -7,8 +7,8 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #Top 50 pages
   aa <- QueueRanked("zwitchdev",
-                    "2015-01-01",
-                    "2015-12-31",
+                    "2016-01-01",
+                    "2016-12-31",
                     "pageviews",
                     "page",
                     top="50",
@@ -19,8 +19,8 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #Next 50 pages
   bb <- QueueRanked("zwitchdev",
-                    "2015-01-01",
-                    "2015-12-31",
+                    "2016-01-01",
+                    "2016-12-31",
                     "pageviews",
                     "page",
                     top="50",
@@ -32,8 +32,8 @@ test_that("Validate QueueRanked using legacy credentials", {
   #Two specific pages
   #Visits and pageviews metric
   cc <- QueueRanked("zwitchdev",
-                    "2015-01-01",
-                    "2015-12-31",
+                    "2016-01-01",
+                    "2016-12-31",
                     c("visits", "pageviews"),
                     "page",
                     selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data")
@@ -80,8 +80,8 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #Top 50 pages, 2 segments
   gg <- QueueRanked("zwitchdev",
-                    "2015-01-01",
-                    "2015-12-31",
+                    "2016-01-01",
+                    "2016-12-31",
                     "pageviews",
                     "page",
                     top="50",
@@ -93,8 +93,8 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #Next 50 pages, 2 segments
   hh <- QueueRanked("zwitchdev",
-                    "2015-01-01",
-                    "2015-12-31",
+                    "2016-01-01",
+                    "2016-12-31",
                     "pageviews",
                     "page",
                     top="50",
@@ -107,8 +107,8 @@ test_that("Validate QueueRanked using legacy credentials", {
   #Two specific pages, 2 segments
   #Visits and pageviews metric
   ii <- QueueRanked("zwitchdev",
-                    "2015-01-01",
-                    "2015-12-31",
+                    "2016-01-01",
+                    "2016-12-31",
                     c("visits", "pageviews"),
                     "page",
                     selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
