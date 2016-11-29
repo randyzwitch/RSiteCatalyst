@@ -1,5 +1,7 @@
 Linux/OSX: [![Build Status](https://travis-ci.org/randyzwitch/RSiteCatalyst.png?branch=master)](https://travis-ci.org/randyzwitch/RSiteCatalyst)
 
+Windows: [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/randyzwitch/RSiteCatalyst?branch=master&svg=true)](https://ci.appveyor.com/project/randyzwitch/RSiteCatalyst)
+
 RSiteCatalyst
 ===============
 
