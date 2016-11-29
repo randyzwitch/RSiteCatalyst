@@ -46,4 +46,5 @@ environment:
     secure: XvI9/WqLQ0NkXl296QP543inGADVvohRMeX9D7sKvpQ=
   SECRET:
     secure: pJ6eA2UuIKz0LwktPqC62tVewfpM7NVr8UMKuDNhC1Dh2Ezm7IXkrQC8/av2lHSX
+  NOT_CRAN: true  
 
