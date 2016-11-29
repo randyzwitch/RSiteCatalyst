@@ -25,25 +25,37 @@
 GetRealTimeSettings<- function (reportsuite.ids) {
   
   #API request
-  request.body <- toJSON(list(rsid=unbox(reportsuite.ids)))
+  request.body <- toJSON(list(rsid_list=reportsuite.ids))
   results <- ApiRequest(body=request.body,func.name="ReportSuite.GetRealTimeSettings")
   
-  #Test if there is a non-zero set of results
-  if(length(results$correlations) == 0){
-    return(print("No Real-Time Configuration Previously Set"))
+  df <- data.frame()
+  for(i in 1:nrow(results)){
+    temp <- results[i,]
+    if(nrow(temp$real_time_settings[[1]]) == 0){
+      
+      temp2 <- cbind(data.frame(rsid = temp$rsid), 
+                     data.frame(site_title = temp$site_title)
+      )
+      temp3 <- temp2
+      
+    } else {
+      
+      temp2 <- cbind(data.frame(rsid = temp$rsid), 
+                     data.frame(site_title = temp$site_title), 
+                     temp$real_time_settings)
+      
+      temp3 <- cbind(temp2, ldply(temp2$elements))
+      temp3$elements <- NULL
+      
+      
+    }
+    df <- rbind.fill(df, temp3)
   }
   
-  #Remove the data frame from the list
-  results_df <- results[[1]]
-  
-  #Fix ending column from character vector
-  fixed_end_column <- ldply(results_df$elements)
-  names(fixed_end_column) <- c("primary.dimension", "secondary.dimension", "tertiary.dimension")
-  
-  #Drop elements column
-  results_df$elements <- NULL
-  
-  #Bind two data frames together and return
-  return(cbind(results_df, fixed_end_column))
+  df <- rename(df, c("V1" = "primary.dimension", 
+               "V2" = "secondary.dimension", 
+               "V3" = "tertiary.dimension"),
+         warn_missing = FALSE)
+  return(df)
   
 } #Ending bracket for function
