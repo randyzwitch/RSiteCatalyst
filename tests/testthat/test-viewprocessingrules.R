@@ -1,4 +1,4 @@
-test_that("Validate GetSiteTitle using legacy credentials", {
+test_that("Validate ViewProcessingRules using legacy credentials", {
   
   skip_on_cran()
   
