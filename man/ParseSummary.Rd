@@ -17,9 +17,10 @@ Internal Function - Parses a summary report returned from the API
 }
 \seealso{
 Other internal: \code{\link{GetEndpoint}},
-  \code{\link{GetUsageLog}}, \code{\link{ParseFallout}},
-  \code{\link{ParseOvertime}}, \code{\link{ParsePathing}},
-  \code{\link{ParseRanked}}, \code{\link{ParseTrended}}
+  \code{\link{GetUsageLog}}, \code{\link{ParseDW}},
+  \code{\link{ParseFallout}}, \code{\link{ParseOvertime}},
+  \code{\link{ParsePathing}}, \code{\link{ParseRanked}},
+  \code{\link{ParseTrended}}
 }
 \keyword{internal}
 

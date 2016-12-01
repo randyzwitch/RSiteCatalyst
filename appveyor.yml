@@ -46,5 +46,11 @@ environment:
     secure: XvI9/WqLQ0NkXl296QP543inGADVvohRMeX9D7sKvpQ=
   SECRET:
     secure: pJ6eA2UuIKz0LwktPqC62tVewfpM7NVr8UMKuDNhC1Dh2Ezm7IXkrQC8/av2lHSX
+  FTP:
+    secure: /Bl8Ao7sIyhKBLZ8rYPFfkn5/P57q3Xld2a9SaY3i0g=
+  FTPUSER:
+    secure: BkSR4+Pkkc6iAy2F/hlg7PSHY53jp88hLifK3qvV3mi/Bmjxg+NGQEYsHM1k5zlL
+  FTPPW:
+    secure: J8LA0Uf059mgXeMWGJbI6A==
   NOT_CRAN: true  
 

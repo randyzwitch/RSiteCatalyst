@@ -55,9 +55,9 @@
 #' report.data <- QueueDataWarehouse("your_report_suite",
 #'                             "2014-01-01",
 #'                             "2014-01-07",
-#'                             c("visits","uniquevisitors","pageviews","event10"),
+#'                             c("visits", "pageviews","event10"),
 #'                             c("page","geoCountry","geoCity"),
-#'                             enqueueOnly=TRUE
+#'                             enqueueOnly=TRUE,
 #'                             ftp = list(host = "myftpserver.com",
 #'                                        port = "21",
 #'                                        directory = "/fromDW/",

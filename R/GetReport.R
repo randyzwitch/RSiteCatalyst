@@ -36,7 +36,14 @@ GetReport <- function(report.id,interval.seconds=10,max.attempts=3,print.attempt
   print(paste("Received",report.type,"report."))
   #return (ParseOvertime(report.data))
   # Check if there is any data to parse
-  if(length(report.data$report$data)>0) {
+  # if(is.null(report.data$report$type)){
+  #   
+  #   report.parsed = ParseRanked(report.data)
+  #     
+  # } else 
+    if(is.null(report.data$report$type)){
+      report.parsed = ParseDW(report.data)
+    } else if(length(report.data$report$data)>0) {
     report.parsed = switch(report.type,
                            ranked={ParseRanked(report.data)},
                            trended={ParseTrended(report.data)},
