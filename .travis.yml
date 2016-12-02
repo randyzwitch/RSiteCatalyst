@@ -13,3 +13,5 @@ env:
   - secure: n8M2/NfsjK4mALkanOmC3qz+4L5HsyGRZ7cbYJ0ThtWFJVdJVUdiV/chFXFwtVJNO46zTw2+M0PdRV75R0ZQtFo09tw62swXwbnA5BtDeOv/M8skRO6KhYzjYuCrBweKDv+fHlK3h9ia6jOyrdjVgmckDaqI2DTVIETzTapTowg=
   - secure: M/7JgQWLiZDgRb7qsT9STMx7MqKazBCHhznFFTrgs4AS7YXQhtiDbGOL5krZ6Nxfa/jCxdyjAtPmvqGoReS/ughVNVKX33U1yJz1Z+guuzRDvTfTszqaSv67HJS+vaWLpoWMfUVwdCnDYt5qwCz7XGGnBAt/9quS9tcnn9fCTeM=
   - secure: DwuO9/XtPRFfoobQIAT3QCPuq5/Hm8JUxXvkyUhguiKw9vCys7OED5HoUIYx18oxaq8Ldp58KYrAKgXWjihkF/lNFtQQUlyVlHFMN6FZFlwr2ygbE2rU9O0JrwETpCoxUTOKa0i3Tju0QyWvVUzwFuNWWs2+6BLusT34+9A7UvQ=
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
