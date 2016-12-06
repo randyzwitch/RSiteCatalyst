@@ -4,7 +4,7 @@
 \alias{QueueSummary}
 \title{Run a Summary Report}
 \usage{
-QueueSummary(reportsuite.ids, date, metrics, interval.seconds = 5,
+QueueSummary(reportsuite.ids, date = "", metrics, interval.seconds = 5,
   max.attempts = 120, validate = TRUE, date.from = "", date.to = "",
   enqueueOnly = FALSE)
 }
