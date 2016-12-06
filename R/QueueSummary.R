@@ -46,7 +46,7 @@
 #'
 #' @export
 
-QueueSummary <- function(reportsuite.ids, date, metrics, interval.seconds=5, max.attempts=120,validate=TRUE, date.from = "", date.to = "",enqueueOnly=FALSE) {
+QueueSummary <- function(reportsuite.ids, date = "", metrics, interval.seconds=5, max.attempts=120,validate=TRUE, date.from = "", date.to = "",enqueueOnly=FALSE) {
 
   # build JSON description
   # we have to use unbox to force jsonlist not put strings into single-element arrays
