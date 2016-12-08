@@ -1,3 +1,16 @@
+RSiteCatalyst 1.4.10
+=================
+
+* Added QueueDatawarehouse method to retrieve data from Data Warehouse (provided by GitHub user dieguico Diego Villuendas Pellicero, #177)
+
+* Fixed bug not allowing for a list of report suites to be passed to GetRealTimeSettings (#181)
+
+* Added AppVeyor testing for Windows builds (#189)
+
+* Added (undocumented) ViewProcessingRules method, GetVirtualReportSuiteSettings, GetReportSuiteGroups, GetTimeStampEnabled (work towards #179)
+
+* Changed date argument to be optional in QueueSummary, allowing for more obvious usage of date.to and date.from parameters (#191, contributed by GitHub user jdeboer Johann de Boer)
+
 RSiteCatalyst 1.4.9
 =================
 
