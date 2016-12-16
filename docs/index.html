@@ -22,12 +22,11 @@
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
-<link rel="stylesheet"
-      href="site_libs/highlight/textmate.css"
-      type="text/css" />
-<script src="site_libs/highlight/highlight.js"></script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -103,7 +102,6 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
@@ -129,7 +127,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
@@ -188,8 +186,9 @@ div.tocify {
 }
 
 .tocify-subheader .tocify-item {
-  font-size: 0.9em;
-  padding-left: 5px;
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -201,7 +200,6 @@ div.tocify {
 }
 .tocify-subheader .tocify-item {
   font-size: 0.95em;
-  padding-left: 10px;
 }
 
 </style>
@@ -354,11 +352,15 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 </tr>
 <tr class="even">
 <td><p>Diego Villuendas Pellicero</p></td>
-<td><p><a href="https://github.com/dieguico">GitHub</a> LinkedIn Twitter</p></td>
+<td><p><a href="https://github.com/dieguico">GitHub</a> LinkedIn <a href="https://twitter.com/dieguico">Twitter</a></p></td>
 </tr>
 <tr class="odd">
 <td><p>Jason Morgan</p></td>
 <td><p><a href="https://github.com/framingeinstein">GitHub</a> LinkedIn Twitter</p></td>
+</tr>
+<tr class="even">
+<td><p>Johann De Boer</p></td>
+<td><div style="white-space: pre-line;"><a href="https://github.com/jdeboer">GitHub</a> LinkedIn <a href="https://twitter.com/johannux">Twitter</a></div></td>
 </tr>
 </tbody>
 </table>
@@ -366,6 +368,7 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <div id="release-notes" class="section level3 toc-ignore">
 <h3>Release Notes</h3>
 <ul>
+<li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-10-release-notes/">1.4.10</a></li>
 <li><a href="http://randyzwitch.com/rsitecatalyst-bulk-download-version-1-4-9-release-notes/">1.4.9</a></li>
 <li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-8-release-notes/">1.4.8</a></li>
 <li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-7-release-notes/">1.4.7/1.4.6</a></li>
@@ -404,6 +407,7 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <li><a href="http://randyzwitch.com/rsitecatalyst-bulk-download-version-1-4-9-release-notes/">Bulk Downloading Adobe Analytics Data</a></li>
 <li><a href="http://randyzwitch.com/adobe-analytics-implementation-documentation/">Adobe Analytics Implementation Documentation in 60 Seconds</a></li>
 <li><a href="http://maassmedia.com/r-site-catalyst-python.php">HOW TO RUN RSITECATALYST USING JUPYTER MAGICS</a></li>
+<li><a href="http://www.madridgeekgirls.es/rsitecatalyst-o-como-conectar-r-con-sitecatalyst-de-adobe/">RSiteCatalyst o cómo conectar R con SiteCatalyst de Adobe</a></li>
 </ul>
 </div>
 <div id="visualization" class="section level4 toc-ignore">
@@ -412,12 +416,14 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <li><a href="http://randyzwitch.com/rsitecatalyst-d3-network-graphs/">Visualizing Website Structure With Network Graphs</a></li>
 <li><a href="http://randyzwitch.com/rsitecatalyst-website-pathing-sankey-charts/">Visualizing Website Pathing With Sankey Charts</a></li>
 <li><a href="http://analyticsdemystified.com/analysis/so-r-we-ready-for-r-with-adobe/">SO, R WE READY FOR R WITH ADOBE ANALYTICS?</a></li>
+<li><a href="http://www.ryanpraski.com/real-time-reporting-adobe-analytics-api-tutorial/">Real-Time Reporting Adobe Analytics API Tutorial</a></li>
 </ul>
 </div>
 <div id="general" class="section level4 toc-ignore">
 <h4>General</h4>
 <ul>
 <li><a href="https://blogs.adobe.com/digitalmarketing/analytics/playing-hits-summit-2014-filtered-metrics-error-monitoring/">Playing the Hits at Summit 2014: Filtered Metrics, Error Monitoring, and More</a></li>
+<li><a href="http://www.dartistics.com/api-adobe-analytics.html">Dartistics - The Adobe Analytics API</a></li>
 </ul>
 <hr />
 </div>
@@ -983,13 +989,20 @@ head(props)</code></pre>
 ##   dateGranularity                           metrics
 ## 1             day pageviews, visits, uniquevisitors</code></pre>
 </div>
+<div id="getreportsuitegroups" class="section level4">
+<h4>GetReportSuiteGroups <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuitegroups-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>Retrieves a list of permission groups assigned to the specified report suite.</p>
+<pre class="r"><code>#TBD</code></pre>
+</div>
 <div id="getreportsuites" class="section level4">
 <h4>GetReportSuites <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Retrieves all report suites associated with the requesting company.</p>
 <pre class="r"><code>GetReportSuites()</code></pre>
-<pre><code>##          rsid     site_title
-## 1   zwitchdev ZwitchCorp Dev
-## 2 zwitchjulia Julia Bloggers</code></pre>
+<pre><code>##                       rsid     site_title virtual
+## 1                zwitchdev ZwitchCorp Dev      NA
+## 2              zwitchjulia Julia Bloggers      NA
+## 3         vrs_zwitch0_vrs1   zwitchdevVRS    TRUE
+## 4 vrs_zwitch0_zwitchdevvrs  zwitchdevVRS2    TRUE</code></pre>
 </div>
 <div id="getscheduledspike" class="section level4">
 <h4>GetScheduledSpike <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getscheduledspike-1"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -1002,19 +1015,19 @@ head(props)</code></pre>
 <p>Retrieves the segments that are available in one or more report suites.</p>
 <pre class="r"><code>segments &lt;- GetSegments(rs$rsid)
 head(segments)</code></pre>
-<pre><code>##                         id                       name folder class
-## 1 5433e4e6e4b02df70be4ac63         Visits from Social             
-## 2 54adfe3de4b02df70be5ea08 Visits from Apple Browsers             
-## 3 5538547ae4b0b5455b976a99                   Compound             
-## 4 5433e4e6e4b02df70be4ac63         Visits from Social             
-## 5 54adfe3de4b02df70be5ea08 Visits from Apple Browsers             
-## 6 5538547ae4b0b5455b976a99                   Compound             
+<pre><code>##                                id                       name folder class
+## 1        5433e4e6e4b02df70be4ac63         Visits from Social             
+## 2        54adfe3de4b02df70be5ea08 Visits from Apple Browsers             
+## 3        5538547ae4b0b5455b976a99                   Compound             
+## 4 s14696_58403cbfe4b0bcef55f6e6b5                Last 7 days             
+## 5 s14696_58403d17e4b0bcef55f6e6b6                     Social             
+## 6        5433e4e6e4b02df70be4ac63         Visits from Social             
 ##   suite_enabled read_only report_suite
 ## 1         FALSE     FALSE    zwitchdev
 ## 2         FALSE     FALSE    zwitchdev
 ## 3         FALSE     FALSE    zwitchdev
-## 4         FALSE     FALSE  zwitchjulia
-## 5         FALSE     FALSE  zwitchjulia
+## 4         FALSE     FALSE    zwitchdev
+## 5         FALSE     FALSE    zwitchdev
 ## 6         FALSE     FALSE  zwitchjulia</code></pre>
 </div>
 <div id="getsitetitle" class="section level4">
@@ -1059,6 +1072,10 @@ head(events)</code></pre>
 <pre><code>##          rsid     site_title       template
 ## 1   zwitchdev ZwitchCorp Dev             NA
 ## 2 zwitchjulia Julia Bloggers ZwitchCorp Dev</code></pre>
+</div>
+<div id="gettimestampenabled" class="section level4">
+<h4>GetTimeStampEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1"><span class="glyphicon glyphicon-link"</span></a></h4>
+<pre class="r"><code>#TBD</code></pre>
 </div>
 <div id="gettimezone" class="section level4">
 <h4>GetTimeZone <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -1117,6 +1134,15 @@ head(events)</code></pre>
 ##   video_completes_event
 ## 1                    NA
 ## 2                    NA</code></pre>
+</div>
+<div id="getvirtualreportsuitesettings" class="section level4">
+<h4>GetVirtualReportSuiteSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvirtualreportsuitesettings"><span class="glyphicon glyphicon-link"</span></a></h4>
+<pre class="r"><code>#TBD</code></pre>
+</div>
+<div id="viewprocessingrules" class="section level4">
+<h4>ViewProcessingRules <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<p>List processing rules for a report suite, along with behaviors that define the rule.</p>
+<pre class="r"><code>#TBD</code></pre>
 <hr />
 </div>
 </div>
@@ -1173,7 +1199,6 @@ report.test3 &lt;- BuildRealTimeReportStructure(report.name=&quot;test789&quot;,
 <p>No elements with a dateGranularity specified.</p>
 <pre class="r"><code>QueueOvertime(&quot;zwitchdev&quot;, &quot;2016-09-07&quot;, &quot;2016-09-13&quot;, &quot;visits&quot;, date.granularity = &quot;week&quot;)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
-## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received overtime report.&quot;</code></pre>
 <pre><code>##     datetime                                  name year month day
 ## 1 2016-09-07 Wed.  7 Sep. 2016 - Sat. 10 Sep. 2016 2016     9   7
@@ -1194,7 +1219,6 @@ QueuePathing(&quot;zwitchdev&quot;,
             pathpattern,
             top = 5)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
-## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received pathing report.&quot;</code></pre>
 <pre><code>##                                                       step.1
 ## 1 http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free
@@ -1220,7 +1244,6 @@ QueuePathing(&quot;zwitchdev&quot;,
 <p>1 or more elements with no dateGranularity specified.</p>
 <pre class="r"><code>QueueRanked(&quot;zwitchdev&quot;, &quot;2016-09-01&quot;, &quot;2016-09-19&quot;, &quot;pageviews&quot;, &quot;page&quot;, top = 6, data.current = TRUE)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
-## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received ranked report.&quot;</code></pre>
 <pre><code>##                                                         name
 ## 1 http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free
@@ -1249,7 +1272,6 @@ QueuePathing(&quot;zwitchdev&quot;,
 <p>No “reportSuiteID” parameter, instead “reportsuite” is specified as the report element and the “selected” parameter contains a list of report suite IDs.</p>
 <pre class="r"><code>QueueSummary(rs$rsid, &quot;2016-09-01&quot;, &quot;visits&quot;)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
-## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received summary report.&quot;</code></pre>
 <pre><code>##              period reportsuite url visits
 ## 1 Thu.  1 Sep. 2016   zwitchdev        294
@@ -1260,7 +1282,6 @@ QueuePathing(&quot;zwitchdev&quot;,
 <p>1 or more elements with a dateGranularity specified.</p>
 <pre class="r"><code>QueueTrended(&quot;zwitchdev&quot;, &quot;2016-09-07&quot;, &quot;2016-09-13&quot;, &quot;visits&quot;, &quot;page&quot;, selected = c(&quot;http://randyzwitch.com&quot;))</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
-## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received trended report.&quot;</code></pre>
 <pre><code>##     datetime                   name                    url visits
 ## 1 2016-09-07 http://randyzwitch.com http://randyzwitch.com      8
@@ -1307,8 +1328,11 @@ QueuePathing(&quot;zwitchdev&quot;,
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
 
 

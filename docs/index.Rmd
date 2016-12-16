@@ -154,13 +154,16 @@ RSiteCatalyst is provided under the [MIT License](https://tldrlegal.com/license/
 +----------------------------+----------------------------------+
 | Shashi Khatri              | [GitHub](https://github.com/mrshashi)   LinkedIn   Twitter          |
 +----------------------------+----------------------------------+
-| Diego Villuendas Pellicero | [GitHub](https://github.com/dieguico)   LinkedIn   Twitter          |
+| Diego Villuendas Pellicero | [GitHub](https://github.com/dieguico)   LinkedIn   [Twitter](https://twitter.com/dieguico)          |
 +----------------------------+----------------------------------+
 | Jason Morgan               | [GitHub](https://github.com/framingeinstein)   LinkedIn   Twitter          |
++----------------------------+----------------------------------+
+| Johann De Boer               | [GitHub](https://github.com/jdeboer)   LinkedIn   [Twitter](https://twitter.com/johannux)          |
 +----------------------------+----------------------------------+
 
 ### Release Notes {.toc-ignore}
 
+- [1.4.10](http://randyzwitch.com/rsitecatalyst-version-1-4-10-release-notes/)
 - [1.4.9](http://randyzwitch.com/rsitecatalyst-bulk-download-version-1-4-9-release-notes/)
 - [1.4.8](http://randyzwitch.com/rsitecatalyst-version-1-4-8-release-notes/)
 - [1.4.7/1.4.6](http://randyzwitch.com/rsitecatalyst-version-1-4-7-release-notes/)
@@ -195,16 +198,19 @@ The following examples are blog posts and examples written by members of the com
 * [Bulk Downloading Adobe Analytics Data](http://randyzwitch.com/rsitecatalyst-bulk-download-version-1-4-9-release-notes/)
 * [Adobe Analytics Implementation Documentation in 60 Seconds](http://randyzwitch.com/adobe-analytics-implementation-documentation/)
 * [HOW TO RUN RSITECATALYST USING JUPYTER MAGICS](http://maassmedia.com/r-site-catalyst-python.php)
+* [RSiteCatalyst o cómo conectar R con SiteCatalyst de Adobe](http://www.madridgeekgirls.es/rsitecatalyst-o-como-conectar-r-con-sitecatalyst-de-adobe/)
 
 #### Visualization {.toc-ignore}
 
 * [Visualizing Website Structure With Network Graphs](http://randyzwitch.com/rsitecatalyst-d3-network-graphs/)
 * [Visualizing Website Pathing With Sankey Charts](http://randyzwitch.com/rsitecatalyst-website-pathing-sankey-charts/)
 * [SO, R WE READY FOR R WITH ADOBE ANALYTICS?](http://analyticsdemystified.com/analysis/so-r-we-ready-for-r-with-adobe/)
+* [Real-Time Reporting Adobe Analytics API Tutorial](http://www.ryanpraski.com/real-time-reporting-adobe-analytics-api-tutorial/)
 
 #### General {.toc-ignore}
 
 * [Playing the Hits at Summit 2014: Filtered Metrics, Error Monitoring, and More](https://blogs.adobe.com/digitalmarketing/analytics/playing-hits-summit-2014-filtered-metrics-error-monitoring/)
+* [Dartistics - The Adobe Analytics API](http://www.dartistics.com/api-adobe-analytics.html)
 
 ---
 
@@ -583,6 +589,14 @@ Retrieves the name, associated report type, and report description for the suppl
 GetReportDescription(28473595)
 ```
 
+#### GetReportSuiteGroups [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuitegroups-1)
+
+Retrieves a list of permission groups assigned to the specified report suite.
+
+```{r, cache=cacheflag}
+#TBD
+```
+
 #### GetReportSuites [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1)
 
 Retrieves all report suites associated with the requesting company.
@@ -633,6 +647,12 @@ Retrieves the creation template for each of the specified report suites.
 GetTemplate(rs$rsid)
 ```
 
+#### GetTimeStampEnabled [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1)
+
+```{r, cache=cacheflag}
+#TBD
+```
+
 #### GetTimeZone [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1)
 
 Retrieves the Time Zone setting for each of the specified report suites.
@@ -679,6 +699,20 @@ Retrieves video measurement settings.
 
 ```{r, cache=cacheflag}
 GetVideoSettings(rs$rsid)
+```
+
+#### GetVirtualReportSuiteSettings [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvirtualreportsuitesettings)
+
+```{r, cache=cacheflag}
+#TBD
+```
+
+#### ViewProcessingRules [<span class="glyphicon glyphicon-link"</span>]()
+
+List processing rules for a report suite, along with behaviors that define the rule.
+
+```{r, cache=cacheflag}
+#TBD
 ```
 
 ---
