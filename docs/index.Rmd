@@ -594,7 +594,7 @@ GetReportDescription(28473595)
 Retrieves a list of permission groups assigned to the specified report suite.
 
 ```{r, cache=cacheflag}
-#TBD
+GetReportSuiteGroups("zwitchdev")
 ```
 
 #### GetReportSuites [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1)
@@ -650,7 +650,7 @@ GetTemplate(rs$rsid)
 #### GetTimeStampEnabled [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1)
 
 ```{r, cache=cacheflag}
-#TBD
+GetTimeStampEnabled(c("zwitchdev", "zwitchjulia"))
 ```
 
 #### GetTimeZone [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1)
@@ -703,8 +703,10 @@ GetVideoSettings(rs$rsid)
 
 #### GetVirtualReportSuiteSettings [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvirtualreportsuitesettings)
 
+Get definition of virtual report suite (parent report suite and segments applied)
+
 ```{r, cache=cacheflag}
-#TBD
+GetVirtualReportSuiteSettings("vrs_zwitch0_vrs1")
 ```
 
 #### ViewProcessingRules [<span class="glyphicon glyphicon-link"</span>]()
@@ -712,7 +714,8 @@ GetVideoSettings(rs$rsid)
 List processing rules for a report suite, along with behaviors that define the rule.
 
 ```{r, cache=cacheflag}
-#TBD
+#No processing rules defined
+ViewProcessingRules("zwitchdev")
 ```
 
 ---
@@ -771,30 +774,63 @@ report.test3 <- BuildRealTimeReportStructure(report.name="test789",
 
 #### QueueDataWarehouse [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
+QueueDatawarehouse is a method that can both schedule Data Warehouse reports (like in the Adobe Analytics interface), as well as return reports back in the R interface as calculated by Data Warehouse (developmental). For the most part, users should pass the `enqueueOnly=TRUE` parameters with the `ftp` parameter to send reports to the FTP.
+
+API:
 ```{r, cache=cacheflag}
-#TBD
+# Because report sent to FTP, returns the report.id value
+QueueDataWarehouse("zwitchdev",
+                    "2016-11-01",
+                    "2016-11-07",
+                    c("visits", "pageviews"),
+                    c("page"),
+                    enqueueOnly=TRUE,
+                    ftp = list(host = Sys.getenv("FTP", ""),
+                              port = "21",
+                              directory = "/DWtest/",
+                              username = Sys.getenv("FTPUSER", ""),
+                              password = Sys.getenv("FTPPW", ""),
+                              filename = "myreport.csv")
+  )
 ```
 
 #### QueueFallout [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
-Element in the checkpoint parameter.
+This method generates the underlying data for a Fallout/Pathing report within Adobe Analytics. The API method supports both visits and pageviews as metrics.
 
+Adobe Analytics Interface:
+![](./images/queuefallout.png)
+
+API: 
 ```{r, cache=cacheflag}
-#TBD
+QueueFallout("zwitchdev",
+                   "2016-08-01",
+                   "2016-12-31",
+                   metric="visits",
+                   element="page",
+                   c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"))
 ```
 
 #### QueueOvertime [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
-No elements with a dateGranularity specified.
+This method is analogous to the "Key Metrics" report within Adobe Analytics. Note that the API method does not return the total row, just the metrics by the time breakdown.
 
+Adobe Analytics Interface:
+![](./images/queueovertime.png)
+
+API:
 ```{r, cache=cacheflag}
 QueueOvertime("zwitchdev", "2016-09-07", "2016-09-13", "visits", date.granularity = "week")
 ```
 
 #### QueuePathing [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
-Element in the pattern parameter.
+QueuePathing is the API method that calculates the underlying data for NextPage, Fallout and other path-related reports within Adobe Analytics.
 
+Adobe Analytics Interface:
+![](./images/queuepathing.png)
+
+API:
 ```{r, cache=cacheflag}
 pathpattern <- c("::anything::", "::anything::")
 QueuePathing("zwitchdev",
@@ -808,15 +844,18 @@ QueuePathing("zwitchdev",
 
 #### QueueRanked [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
-1 or more elements with no dateGranularity specified.
+QueueRanked represents the data from a ranked report within Adobe Analytics, where one or more elements is specified with no dateGranularity. Note that the API method does not return the total row, just the metrics by the breakdown(s) specified.
+
+Adobe Analytics Interface:
+![](./images/queueranked.png)
 
 ```{r, cache=cacheflag}
-QueueRanked("zwitchdev", "2016-09-01", "2016-09-19", "pageviews", "page", top = 6, data.current = TRUE)
+QueueRanked("zwitchdev", "2016-10-01", "2016-10-31", "pageviews", "page", top = 10)
 ```
 
 #### QueueSummary [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
-No "reportSuiteID" parameter, instead "reportsuite" is specified as the report element and the "selected" parameter contains a list of report suite IDs.
+QueueSummary does not map to an interface report per se; rather, QueueSummary provides the total calculation row for many reports within Adobe Analytics. It is this method that will provide 'unique` calculations such as visitors, which would be incorrectly summed across an element such as page views.
 
 ```{r, cache=cacheflag}
 QueueSummary(rs$rsid, "2016-09-01", "visits")
@@ -824,8 +863,12 @@ QueueSummary(rs$rsid, "2016-09-01", "visits")
 
 #### QueueTrended [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
-1 or more elements with a dateGranularity specified.
+QueueTrended is similar to a QueueOvertime report, except instead of just having a metric by time granularity, you can specify an element to trend. One notable feature for the API method is that it removes the restriction of five element values to be trended over time (i.e. Top 5 pages over time)
 
+Adobe Analytics Interface:
+![](./images/queuetrended.png)
+
+API:
 ```{r, cache=cacheflag}
 QueueTrended("zwitchdev", "2016-09-07", "2016-09-13", "visits", "page", selected = c("http://randyzwitch.com"))
 ```
