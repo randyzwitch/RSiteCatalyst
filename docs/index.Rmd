@@ -206,6 +206,7 @@ The following examples are blog posts and examples written by members of the com
 * [Visualizing Website Pathing With Sankey Charts](http://randyzwitch.com/rsitecatalyst-website-pathing-sankey-charts/)
 * [SO, R WE READY FOR R WITH ADOBE ANALYTICS?](http://analyticsdemystified.com/analysis/so-r-we-ready-for-r-with-adobe/)
 * [Real-Time Reporting Adobe Analytics API Tutorial](http://www.ryanpraski.com/real-time-reporting-adobe-analytics-api-tutorial/)
+* [R AND ADOBE ANALYTICS: TWO DIMENSIONS, MANY METRICS – PART 1 OF 3](http://analyticsdemystified.com/adobe-analytics/r-adobe-analytics-two-dimensions-many-metrics-part-1-3)
 
 #### General {.toc-ignore}
 
