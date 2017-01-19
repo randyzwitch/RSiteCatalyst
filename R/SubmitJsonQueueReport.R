@@ -13,6 +13,7 @@
 #' @param max.attempts Number of API attempts before stopping
 #' @param validate Weather to submit report definition for validation before requesting the data.
 #' @param enqueueOnly only enqueue the report, don't get the data. returns report id, which you can later use to get the data
+#' @param format "csv" or "json"
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
@@ -33,7 +34,8 @@ SubmitJsonQueueReport <-
            interval.seconds = 5,
            max.attempts = 120,
            validate = TRUE,
-           enqueueOnly = FALSE) {
+           enqueueOnly = FALSE,
+           format = "json") {
     # Determine if we should validate the definition
     if (validate) {
       if (!ValidateReport(report.description)) {
@@ -58,7 +60,8 @@ SubmitJsonQueueReport <-
           report.id,
           interval.seconds = interval.seconds,
           max.attempts = max.attempts,
-          print.attempts = TRUE
+          print.attempts = TRUE,
+          format = format
         )
       )
     }
