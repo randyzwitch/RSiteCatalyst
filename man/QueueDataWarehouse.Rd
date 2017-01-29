@@ -7,7 +7,7 @@
 QueueDataWarehouse(reportsuite.id, date.from, date.to, metrics, elements,
   date.granularity = "day", segment.id = "", data.current = TRUE,
   expedite = FALSE, interval.seconds = 5, max.attempts = 120,
-  validate = TRUE, enqueueOnly = TRUE, ftp = ftp)
+  validate = TRUE, enqueueOnly = TRUE, ftp = ftp, format = "csv")
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -38,6 +38,8 @@ QueueDataWarehouse(reportsuite.id, date.from, date.to, metrics, elements,
 
 \item{ftp}{FTP client parameters, only used if enqueueOnly=TRUE. Double check ftp parameters before requesting
 a long report.}
+
+\item{format}{"csv" or "json".}
 }
 \value{
 Data frame or report id, if enqueueOnly is TRUE

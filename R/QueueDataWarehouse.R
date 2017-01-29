@@ -45,6 +45,7 @@
 #' @param enqueueOnly only enqueue the report, don't get the data. returns report id, which you can later use to get the data
 #' @param ftp FTP client parameters, only used if enqueueOnly=TRUE. Double check ftp parameters before requesting
 #' a long report.
+#' @param format "csv" or "json".
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
@@ -71,7 +72,7 @@
 QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elements,
                                date.granularity='day', segment.id='', data.current=TRUE,
                                expedite=FALSE, interval.seconds=5, max.attempts=120,
-                               validate=TRUE,enqueueOnly=TRUE, ftp=ftp) {
+                               validate=TRUE,enqueueOnly=TRUE, ftp=ftp, format='csv') {
   
   # build JSON description
   # we have to use unbox to force jsonlite not put strings into single-element arrays
@@ -105,7 +106,7 @@ QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elem
     report.description$reportDescription$ftp <- unbox(data.frame(ftp))
   }
   
-  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate,enqueueOnly=enqueueOnly)
+  report.data <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate,enqueueOnly=enqueueOnly,format=format)
   
   return(report.data)
   

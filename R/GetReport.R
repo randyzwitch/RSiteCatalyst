@@ -11,6 +11,7 @@
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
 #' @param print.attempts Print each attempt for fetching data
+#' @param format "csv" or "json"
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
@@ -26,13 +27,14 @@
 #' @export
 #'
 
-GetReport <- function(report.id,interval.seconds=10,max.attempts=3,print.attempts=TRUE) {
+GetReport <- function(report.id,interval.seconds=10,max.attempts=3,print.attempts=TRUE,format="json") {
 
   request.body <- c()
   request.body$reportID <- unbox(report.id)
-  report.data <- ApiRequest(body=toJSON(request.body),func.name="Report.Get",interval.seconds=interval.seconds,max.attempts=max.attempts,print.attempts=print.attempts)
+  request.body$format <- unbox(format)
+  report.data <- ApiRequest(body=toJSON(request.body),func.name="Report.Get",interval.seconds=interval.seconds,max.attempts=max.attempts,print.attempts=print.attempts,format=format)
 
-  report.type <- report.data$report$type
+  if(format!="csv") report.type <- report.data$report$type else report.type <- NULL
   print(paste("Received",report.type,"report."))
   #return (ParseOvertime(report.data))
   # Check if there is any data to parse
@@ -41,8 +43,8 @@ GetReport <- function(report.id,interval.seconds=10,max.attempts=3,print.attempt
   #   report.parsed = ParseRanked(report.data)
   #     
   # } else 
-    if(is.null(report.data$report$type)){
-      report.parsed = ParseDW(report.data)
+    if(is.null(report.type)){
+      report.parsed = ParseDW(report.data, format)
     } else if(length(report.data$report$data)>0) {
     report.parsed = switch(report.type,
                            ranked={ParseRanked(report.data)},
@@ -58,8 +60,10 @@ GetReport <- function(report.id,interval.seconds=10,max.attempts=3,print.attempt
   }
 
   # check if we have a segment ID and append it to the frame for visibility
-  if(!is.null(report.data[["report"]][["segmentID"]])) {
-    report.parsed$segment.id <- report.data$report$segmentID
+  if(format!="csv") {
+    if(!is.null(report.data[["report"]][["segmentID"]])) {
+      report.parsed$segment.id <- report.data$report$segmentID
+    }
   }
 
   return(report.parsed)
