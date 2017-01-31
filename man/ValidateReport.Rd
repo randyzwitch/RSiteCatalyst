@@ -20,4 +20,3 @@ TRUE/FALSE depending on whether the report is valid or not
 Internal function - Calls the API and attempts to validate a report description.
 }
 \keyword{internal}
-

@@ -26,4 +26,3 @@ This function requires having a character vector with one or more valid Report S
  
 }
 }
-

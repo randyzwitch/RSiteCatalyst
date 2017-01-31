@@ -57,4 +57,3 @@ saverealtime <- SaveRealTimeSettings("your-report-suite", report1, report2, repo
 \code{\link{BuildRealTimeReportStructure}} \cr
 }
 \keyword{SaveRealTimeSettings}
-

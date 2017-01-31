@@ -13,4 +13,3 @@ Header string for the old API auth method.
 Internal function - Build Header for REST API call. This is deprecated, we should now be using OAUTH.
 }
 \keyword{internal}
-

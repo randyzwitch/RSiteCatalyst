@@ -25,4 +25,3 @@ ecom <- GetEcommerce("your_report_suite")
 ecom2 <- GetEcommerce(report_suites$rsid)
 }
 }
-

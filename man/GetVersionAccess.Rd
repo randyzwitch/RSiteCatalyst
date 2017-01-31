@@ -20,4 +20,3 @@ Returns a Data Frame of Adobe Analytics products
 versions <- GetVersionAccess()
 }
 }
-

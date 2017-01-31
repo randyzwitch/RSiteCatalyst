@@ -24,4 +24,3 @@ or the reportID number that was cancelled
 CancelReport('12345678')
 }
 }
-

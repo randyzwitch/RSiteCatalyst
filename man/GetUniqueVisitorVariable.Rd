@@ -25,4 +25,3 @@ uniq <- GetUniqueVisitorVariable("your_report_suite")
 uniq2 <- GetUniqueVisitorVariable(report_suites$rsid)
 }
 }
-

@@ -20,4 +20,3 @@ Returns descriptions/formulas available within Adobe Analytics such as median, p
 aa_functions <- GetFunctions()
 }
 }
-

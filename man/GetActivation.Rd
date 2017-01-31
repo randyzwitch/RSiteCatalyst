@@ -25,4 +25,3 @@ active <- GetActivation("your_report_suite")
 active2 <- GetActivation(report_suites$rsid)
 }
 }
-

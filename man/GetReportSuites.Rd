@@ -20,4 +20,3 @@ Returns a data frame containing the Report Suite ID and Site Title
 report_suites <- GetReportSuites()
 }
 }
-

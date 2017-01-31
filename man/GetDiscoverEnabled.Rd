@@ -25,4 +25,3 @@ discenable <- GetDiscoverEnabled("your_report_suite")
 discenable2 <- GetDiscoverEnabled(report_suites$rsid)
 }
 }
-

@@ -23,4 +23,3 @@ Other internal: \code{\link{GetEndpoint}},
   \code{\link{ParseSummary}}
 }
 \keyword{internal}
-

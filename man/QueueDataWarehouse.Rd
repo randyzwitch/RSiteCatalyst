@@ -93,4 +93,3 @@ report.data <- QueueDataWarehouse("your_report_suite",
                             )
 }
 }
-

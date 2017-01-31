@@ -25,4 +25,3 @@ timezone <- GetTimeZone("your_report_suite")
 timezone2 <- GetTimeZone(report_suites$rsid)
 }
 }
-

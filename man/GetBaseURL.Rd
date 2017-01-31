@@ -25,4 +25,3 @@ url <- GetBaseURL("your_report_suite")
 url2 <- GetBaseURL(report_suites$rsid)
 }
 }
-

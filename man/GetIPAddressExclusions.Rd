@@ -25,4 +25,3 @@ ipexc <- GetIPAddressExclusions("your_report_suite")
 ipexc2 <- GetIPAddressExclusions(report_suites$rsid)
 }
 }
-

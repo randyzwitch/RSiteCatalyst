@@ -24,4 +24,3 @@ Other internal: \code{\link{GetUsageLog}},
   \code{\link{ParseTrended}}
 }
 \keyword{internal}
-

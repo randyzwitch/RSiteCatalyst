@@ -25,4 +25,3 @@ local <- GetLocalization("your_report_suite")
 local2 <- GetLocalization(report_suites$rsid)
 }
 }
-

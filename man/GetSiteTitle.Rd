@@ -25,4 +25,3 @@ sitetitle <- GetSiteTitle("your_report_suite")
 sitetitle2 <- GetSiteTitle(report_suites$rsid)
 }
 }
-

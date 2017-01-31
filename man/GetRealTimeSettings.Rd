@@ -34,4 +34,3 @@ To change configuration settings, use SaveRealTimeConfiguration function.
 \code{\link{SaveRealTimeSettings}} \cr
 }
 \keyword{GetRealTimeSettings}
-

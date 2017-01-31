@@ -27,4 +27,3 @@ ts <- GetTrackingServer("your_report_suite")
 
 }
 }
-

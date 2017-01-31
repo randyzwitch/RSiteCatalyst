@@ -36,4 +36,3 @@ custom_report <- GetReport(12345678)
 }
 
 }
-

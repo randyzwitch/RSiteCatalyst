@@ -25,4 +25,3 @@ cal <- GetCustomCalendar("your_report_suite")
 cal2 <- GetCustomCalendar(report_suites$rsid)
 }
 }
-

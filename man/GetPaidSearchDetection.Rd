@@ -25,4 +25,3 @@ paidsearch <- GetPaidSearchDetection("your_report_suite")
 paidsearch2 <- GetPaidSearchDetection(report_suites$rsid)
 }
 }
-

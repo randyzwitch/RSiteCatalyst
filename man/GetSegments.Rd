@@ -26,4 +26,3 @@ segments <- GetSegments("your_report_suite")
 segments2 <- GetSegments(report_suites$rsid)
 }
 }
-

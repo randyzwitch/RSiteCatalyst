@@ -105,4 +105,3 @@ ranked1 <- QueueRanked("your_report_suite",
 }
 
 }
-

@@ -19,4 +19,3 @@ Helper function to build a line item segment for use with other reports
 Multiple segments can be combined in a list
 }
 \keyword{internal}
-

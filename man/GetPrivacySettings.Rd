@@ -27,4 +27,3 @@ privacy2 <- GetPrivacySettings(c("your_dev_suite", "your_prod_suite"))
 
 }
 }
-

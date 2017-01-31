@@ -26,4 +26,3 @@ evars2 <- GetEvars(report_suites$rsid)
 
 }
 }
-

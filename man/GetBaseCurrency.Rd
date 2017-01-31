@@ -25,4 +25,3 @@ currency <- GetBaseCurrency("your_report_suite")
 currency2 <- GetBaseCurrency(report_suites$rsid)
 }
 }
-

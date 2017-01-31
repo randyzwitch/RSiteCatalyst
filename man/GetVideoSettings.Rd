@@ -25,4 +25,3 @@ vidsettings<- GetVideoSettings("your_report_suite")
 vidsettings2 <- GetVideoSettings(report_suites$rsid)
 }
 }
-

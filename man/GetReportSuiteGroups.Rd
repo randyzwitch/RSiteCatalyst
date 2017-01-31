@@ -25,4 +25,3 @@ rsg <- GetReportSuiteGroups("your-report-suite")
 
 }
 }
-

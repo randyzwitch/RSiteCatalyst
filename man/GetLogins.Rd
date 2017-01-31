@@ -27,4 +27,3 @@ logins<- GetLogins()
 logins2 <- GetLogins('last_name', 'zwitch')
 }
 }
-

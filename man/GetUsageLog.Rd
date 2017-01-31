@@ -36,4 +36,3 @@ Other internal: \code{\link{GetEndpoint}},
   \code{\link{ParseTrended}}
 }
 \keyword{internal}
-

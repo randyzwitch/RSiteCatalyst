@@ -56,4 +56,3 @@ custom_report <- GetRealTimeReport('')
 
 }
 }
-

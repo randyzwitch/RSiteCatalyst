@@ -25,4 +25,3 @@ spike <- GetScheduledSpike("your_report_suite")
 spike2 <- GetScheduledSpike(report_suites$rsid)
 }
 }
-

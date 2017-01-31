@@ -92,4 +92,3 @@ report.data <- QueueTrended("your_report_suite",
                             )
 }
 }
-

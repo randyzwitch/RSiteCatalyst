@@ -39,4 +39,3 @@ metrics.valid <- GetMetrics("your_report_suite",
 metrics <- GetMetrics(report_suites$rsid)
 }
 }
-

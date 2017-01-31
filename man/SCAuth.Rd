@@ -47,4 +47,3 @@ The list of locale values can be obtained from the Adobe Analytics documentation
 
 https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-reportdescriptionlocale
 }
-

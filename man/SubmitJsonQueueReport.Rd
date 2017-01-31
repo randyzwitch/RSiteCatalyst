@@ -40,4 +40,3 @@ custom_report <- SubmitJsonQueueReport('valid Adobe Analytics API JSON string')
 }
 
 }
-

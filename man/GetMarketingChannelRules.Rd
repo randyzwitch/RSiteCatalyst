@@ -25,4 +25,3 @@ expire <- GetMarketingChannelRules("your_report_suite")
 expire2 <- GetMarketingChannelRules(report_suites$rsid)
 }
 }
-

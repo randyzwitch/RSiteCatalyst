@@ -25,4 +25,3 @@ switch <- GetAxleStartDate("your_report_suite")
 switch2 <- GetAxleStartDate(report_suites$rsid)
 }
 }
-

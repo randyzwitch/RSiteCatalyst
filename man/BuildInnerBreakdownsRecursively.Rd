@@ -31,4 +31,3 @@ Flat data frame containing all key report data
 Internal function - Builds inner breakdowns from nested report structure
 }
 \keyword{internal}
-

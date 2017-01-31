@@ -25,4 +25,3 @@ calc<- GetListVariables("your_report_suite")
 calc2 <- GetListVariables(report_suites$rsid)
 }
 }
-

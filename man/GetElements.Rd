@@ -40,4 +40,3 @@ elements.valid <- GetElements("your_report_suite",
 elements <- GetElements(c("your_prod_report_suite","your_dev_report_suite"))
 }
 }
-

@@ -25,4 +25,3 @@ trans <- GetTransactionEnabled("your_report_suite")
 trans2 <- GetTransactionEnabled(report_suites$rsid)
 }
 }
-

@@ -25,4 +25,3 @@ props <- GetProps("your_report_suite")
 props2 <- GetProps(report_suites$rsid)
 }
 }
-

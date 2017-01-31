@@ -25,4 +25,3 @@ calc<- GetCalculatedMetrics("your_report_suite")
 calc2 <- GetCalculatedMetrics(report_suites$rsid)
 }
 }
-

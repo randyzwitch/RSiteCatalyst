@@ -71,4 +71,3 @@ queued_report_id <- QueueFallout("your_report_suite",
 }
 
 }
-

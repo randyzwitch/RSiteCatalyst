@@ -26,4 +26,3 @@ events <- GetSuccessEvents("your_report_suite")
 events2 <- GetSuccessEvents(report_suites$rsid)
 }
 }
-

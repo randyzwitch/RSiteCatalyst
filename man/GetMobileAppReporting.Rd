@@ -25,4 +25,3 @@ mobile <- GetMobileAppReporting("your_report_suite")
 mobile2 <- GetMobileAppReporting(report_suites$rsid)
 }
 }
-

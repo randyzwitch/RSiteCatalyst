@@ -28,4 +28,3 @@ json
 Internal function - Calls the API and gets response for specified params
 }
 \keyword{internal}
-

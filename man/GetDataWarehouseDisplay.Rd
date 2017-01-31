@@ -25,4 +25,3 @@ url <- GetDataWarehouseDisplay("your_report_suite")
 url2 <- GetDataWarehouseDisplay(report_suites$rsid)
 }
 }
-

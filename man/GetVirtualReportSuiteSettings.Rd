@@ -26,4 +26,3 @@ virtualsettings2 <- GetVirtualReportSuiteSettings(report_suites$rsid)
 
 }
 }
-

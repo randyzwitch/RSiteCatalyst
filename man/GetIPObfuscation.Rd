@@ -25,4 +25,3 @@ ipobf <- GetIPObfuscation("your_report_suite")
 ipobf2 <- GetIPObfuscation(report_suites$rsid)
 }
 }
-

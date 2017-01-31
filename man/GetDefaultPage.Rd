@@ -25,4 +25,3 @@ defpage <- GetDefaultPage("your_report_suite")
 defpage2 <- GetDefaultPage(report_suites$rsid)
 }
 }
-

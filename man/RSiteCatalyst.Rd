@@ -14,12 +14,9 @@ This package is not intended for Adobe Analytics administration.
 \details{
 Package:  RSiteCatalyst \cr
 Type:     Package \cr
-Version:  1.4.10 \cr
-Date:     2016-12-08 \cr
+Version:  1.4.10.20170129 \cr
+Date:     2017-01-29 \cr
 License:  MIT + file LICENSE \cr
-}
-\author{
-Willem Paling, Randy Zwitch, Jowanza Joseph
 }
 \references{
 Official Adobe Analytics API documentation: 
@@ -30,4 +27,6 @@ For support & bugs:
 
 https://github.com/randyzwitch/RSiteCatalyst
 }
-
+\author{
+Willem Paling, Randy Zwitch, Jowanza Joseph
+}

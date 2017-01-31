@@ -25,4 +25,3 @@ calc<- GetInternalURLFilters("your_report_suite")
 calc2 <- GetInternalURLFilters(report_suites$rsid)
 }
 }
-

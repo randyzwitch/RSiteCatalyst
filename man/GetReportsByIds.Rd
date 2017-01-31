@@ -34,4 +34,3 @@ reports <- GetReportsByIds(list(12345678,87654321),print.attempts=FALSE)
 }
 
 }
-

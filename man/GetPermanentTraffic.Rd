@@ -25,4 +25,3 @@ permtraf <- GetPermanentTraffic("your_report_suite")
 permtraf2 <- GetPermanentTraffic(report_suites$rsid)
 }
 }
-

@@ -27,4 +27,3 @@ custom_report <- JsonQueueRealTimeReport('valid Adobe Analytics API JSON string'
 
 }
 \keyword{internal}
-

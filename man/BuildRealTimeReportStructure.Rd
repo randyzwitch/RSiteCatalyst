@@ -52,4 +52,3 @@ report.test3 <- BuildRealTimeReportStructure(report.name="test789",
 \code{\link{SaveRealTimeSettings}} \cr
 }
 \keyword{BuildRealTimeReportStructure}
-

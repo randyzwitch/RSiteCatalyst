@@ -20,4 +20,3 @@ Returns either a message to the console that no reports are in the Queue or a li
 queue <- GetQueue()
 }
 }
-

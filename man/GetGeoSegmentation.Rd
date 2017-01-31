@@ -25,4 +25,3 @@ geoseg <- GetGeoSegmentation("your_report_suite")
 geoseg2 <- GetGeoSegmentation(report_suites$rsid)
 }
 }
-

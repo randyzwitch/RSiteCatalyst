@@ -25,4 +25,3 @@ mchan <- GetMarketingChannels("your_report_suite")
 mchan2 <- GetMarketingChannels(report_suites$rsid)
 }
 }
-

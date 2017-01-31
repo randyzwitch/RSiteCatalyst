@@ -25,4 +25,3 @@ keyvisit<- GetKeyVisitors("your_report_suite")
 keyvisit2 <- GetKeyVisitors(report_suites$rsid)
 }
 }
-

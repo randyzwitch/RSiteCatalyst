@@ -37,4 +37,3 @@ vistor_segment <- BuildClassificationValueSegment(element,
                                                   search.type)
 }
 }
-
