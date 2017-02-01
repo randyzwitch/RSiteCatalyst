@@ -12,15 +12,19 @@
 #'
 #' API limitations:
 #' A single segment is supported. Multiple segments are not supported.
+#' 
 #' The following element properties are not supported in Data Warehouse reports:
 #'     - selected
 #'     - search
 #'     - top
 #'     - startingWith
 #'     - sortBy
+#'     
 #' Calculated metrics are not supported.
+#' 
 #' Results for data warehouse reports can be accessed in two ways: directly through the API and
 #' through FTP delivery. Email delivery is not supported.
+#' 
 #' All data warehouse results are paged in chunks of 20 MB. Add "page": to \code{Report.Get} 
 #' to determine the page returned. If no page is specified then the first page is returned.
 #'
@@ -45,7 +49,6 @@
 #' @param enqueueOnly only enqueue the report, don't get the data. returns report id, which you can later use to get the data
 #' @param ftp FTP client parameters, only used if enqueueOnly=TRUE. Double check ftp parameters before requesting
 #' a long report.
-#' @param format "csv" or "json".
 #'
 #' @importFrom jsonlite toJSON unbox
 #' @importFrom utils read.csv
@@ -73,7 +76,10 @@
 QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elements,
                                date.granularity='day', segment.id='', data.current=TRUE,
                                expedite=FALSE, interval.seconds=5, max.attempts=120,
-                               validate=TRUE,enqueueOnly=TRUE, ftp=ftp, format='csv') {
+                               validate=TRUE,enqueueOnly=TRUE, ftp=ftp) {
+  
+  #RZ: move this out 
+  format <- 'csv'
   
   # build JSON description
   # we have to use unbox to force jsonlite not put strings into single-element arrays
