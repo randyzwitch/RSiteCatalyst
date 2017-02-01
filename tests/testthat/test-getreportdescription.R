@@ -5,7 +5,7 @@ test_that("Validate GetReportDescription using legacy credentials", {
   #Correct [masked] credentials
   SCAuth(Sys.getenv("USER", ""), Sys.getenv("SECRET", ""))
   
-  grd <- GetReportDescription("28473595")
+  grd <- GetReportDescription("15625765")
   
   #Validate returned value is a data.frame
   expect_is(grd, "data.frame")

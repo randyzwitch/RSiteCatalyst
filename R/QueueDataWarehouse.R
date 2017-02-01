@@ -48,6 +48,7 @@
 #' @param format "csv" or "json".
 #'
 #' @importFrom jsonlite toJSON unbox
+#' @importFrom utils read.csv
 #'
 #' @return Data frame or report id, if enqueueOnly is TRUE
 #'
