@@ -190,6 +190,7 @@ The following examples are blog posts and examples written by members of the com
 * [Clustering Search Keywords Using K-Means Clustering](http://randyzwitch.com/rsitecatalyst-k-means-clustering/)
 * [Anomaly Detection Using The Adobe Analytics API](http://randyzwitch.com/anomaly-detection-adobe-analytics-api/)
 * [What are the impacts of taking the site down right now?](http://whatdothedatasay.com/2017/01/16/analytics-impacts-of-taking-site-down/)
+* [Retrieving Adobe SiteCatalyst data with R](https://dabblingwithdata.wordpress.com/2017/01/05/retrieving-adobe-sitecatalyst-data-with-r/)
 
 #### Implementation / Automation {.toc-ignore}
 * [Adobe Sitecatalyst API and R: how to integrate reports with the SAINT classification file](http://analyticsblog.mecglobal.it/en/analytics-tools/adobe-sitecatalyst-api-in-r/)
@@ -213,6 +214,7 @@ The following examples are blog posts and examples written by members of the com
 
 * [Playing the Hits at Summit 2014: Filtered Metrics, Error Monitoring, and More](https://blogs.adobe.com/digitalmarketing/analytics/playing-hits-summit-2014-filtered-metrics-error-monitoring/)
 * [Dartistics - The Adobe Analytics API](http://www.dartistics.com/api-adobe-analytics.html)
+* [Transforming a Museum to be data-driven using R ](https://earlconf.com/london/download/?id=cxp1j)
 
 ---
 
