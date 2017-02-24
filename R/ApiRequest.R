@@ -103,8 +103,8 @@ ApiRequest <- function(body='',func.name='',interval.seconds=2,max.attempts=1,pr
            data <- fromJSON(content(response,'text', encoding = "UTF-8"))
          },
          csv = {
-           response_content <- content(response,'text', encoding = "UTF-8-BOM")
-           data <- read.csv(text = response_content)
+           response_content <- content(response,'text', encoding = "UTF-8")
+           data <- read.csv(text = response_content, fileEncoding = "UTF-8-BOM")
          })
 
   return(data)
