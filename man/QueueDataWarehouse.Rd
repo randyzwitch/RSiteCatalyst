@@ -7,7 +7,7 @@
 QueueDataWarehouse(reportsuite.id, date.from, date.to, metrics, elements,
   date.granularity = "day", segment.id = "", data.current = TRUE,
   expedite = FALSE, interval.seconds = 5, max.attempts = 120,
-  validate = TRUE, enqueueOnly = TRUE, ftp = ftp)
+  validate = TRUE, enqueueOnly = TRUE, ftp = "")
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}

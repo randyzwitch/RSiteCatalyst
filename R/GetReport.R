@@ -12,6 +12,7 @@
 #' @param max.attempts Number of API attempts before stopping
 #' @param print.attempts Print each attempt for fetching data
 #' @param format "csv" or "json"
+#' @param page Page Number of Resuts (QueueDataWarehouse only)
 #'
 #' @importFrom jsonlite toJSON unbox
 #'
@@ -27,14 +28,22 @@
 #' @export
 #'
 
-GetReport <- function(report.id,interval.seconds=10,max.attempts=3,print.attempts=TRUE,format="json") {
+GetReport <- function(report.id,interval.seconds=10,max.attempts=3,print.attempts=TRUE,format="json", page = 0) {
 
   request.body <- c()
   request.body$reportID <- unbox(report.id)
   request.body$format <- unbox(format)
+  if(page > 0){
+    request.body$page <- unbox(page)
+  }
+
   report.data <- ApiRequest(body=toJSON(request.body),func.name="Report.Get",interval.seconds=interval.seconds,max.attempts=max.attempts,print.attempts=print.attempts,format=format)
 
-  if(format!="csv") report.type <- report.data$report$type else report.type <- NULL
+  if(format!="csv") {
+    report.type <- report.data$report$type
+  } else {
+      report.type <- NULL
+  }
   print(paste("Received",report.type,"report."))
   #return (ParseOvertime(report.data))
   # Check if there is any data to parse

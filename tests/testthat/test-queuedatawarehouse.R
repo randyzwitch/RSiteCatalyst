@@ -24,15 +24,26 @@ test_that("Validate QueueDataWarehouse using legacy credentials", {
   expect_is(report.id, "numeric")
   
   #Return answer to console
-  qdw <- QueueDataWarehouse("zwitchdev",
-                                    "2016-11-01",
-                                    "2016-11-07",
-                                    c("visits", "pageviews"),
-                                    c("page"),
-                                    enqueueOnly=FALSE
+  # qdw <- QueueDataWarehouse("zwitchdev",
+  #                                   "2016-11-01",
+  #                                   "2016-11-07",
+  #                                   c("visits", "pageviews"),
+  #                                   c("page"),
+  #                                   enqueueOnly=FALSE
+  # )
+  # 
+  # #Validate returned value is a data.frame
+  # expect_is(qdw, "data.frame")
+  
+  dwresult <- QueueDataWarehouse("zwitchdev",
+                                 "2014-01-01",
+                                 "2017-02-02",
+                                 c("visits", "pageviews"),
+                                 c("page", "browser"),
+                                 date.granularity = 'hour',
+                                 enqueueOnly=FALSE
   )
   
-  #Validate returned value is a data.frame
-  expect_is(qdw, "data.frame")
+  expect_equal(nrow(dwresult), 303510)
 
 })
