@@ -82,7 +82,7 @@ BuildInnerBreakdownsRecursively <- function(parent.element,elements,metrics,
         # build named elements, with classifications if they exist
         elements.named <- elements$id
         for(i in 1:nrow(elements)) {
-          if(!is.null(elements[i,]$classification) && nchar(elements[i,]$classification)>0) {
+          if(!is.null(elements[i,]$classification) && !is.na(elements[i,]$classification)) {
             elements.named[i] <- paste0(elements[i,]$id,": ",elements[i,]$classification)
           }
         }
