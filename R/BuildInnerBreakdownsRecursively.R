@@ -80,9 +80,10 @@ BuildInnerBreakdownsRecursively <- function(parent.element,elements,metrics,
         names(outer.elements) <- "name"
 
         # build named elements, with classifications if they exist
+        #RZ: Have no idea why is.na and is.null and nchar is here, with is.na fixing GitHub #207
         elements.named <- elements$id
         for(i in 1:nrow(elements)) {
-          if(!is.null(elements[i,]$classification) && nchar(elements[i,]$classification)>0) {
+          if(!is.na(elements[i,]$classification) && !is.null(elements[i,]$classification) && nchar(elements[i,]$classification) > 0) {
             elements.named[i] <- paste0(elements[i,]$id,": ",elements[i,]$classification)
           }
         }
