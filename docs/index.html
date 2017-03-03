@@ -410,6 +410,7 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <li><a href="http://randyzwitch.com/adobe-analytics-implementation-documentation/">Adobe Analytics Implementation Documentation in 60 Seconds</a></li>
 <li><a href="http://maassmedia.com/r-site-catalyst-python.php">HOW TO RUN RSITECATALYST USING JUPYTER MAGICS</a></li>
 <li><a href="http://www.madridgeekgirls.es/rsitecatalyst-o-como-conectar-r-con-sitecatalyst-de-adobe/">RSiteCatalyst o cómo conectar R con SiteCatalyst de Adobe</a></li>
+<li><a href="http://randyzwitch.com/adobe-clickstream-data-feed-self-service-admin-panel/">Self-Service Adobe Analytics Data Feeds!</a></li>
 </ul>
 </div>
 <div id="visualization" class="section level4 toc-ignore">
@@ -519,6 +520,32 @@ head(gcl)</code></pre>
 ## 5           NA div_mult_3_221
 ## 6           NA div_mult_2_223</code></pre>
 </div>
+<div id="getclickmapreporting" class="section level4">
+<h4>GetClickMapReporting <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<pre class="r"><code>gcmr &lt;- GetClickMapReporting(rs$rsid)
+head(gcmr)</code></pre>
+<pre><code>##        rsid allow_configuration all_clickmap_enabled
+## 1 zwitchdev                TRUE                FALSE
+## 2 zwitchdev                TRUE                FALSE
+## 3 zwitchdev                TRUE                FALSE
+## 4 zwitchdev                TRUE                FALSE
+## 5 zwitchdev                TRUE                FALSE
+## 6 zwitchdev                TRUE                FALSE
+##   clickmap_v3_download_enabled selected_metric can_upgrade_30_to_31 id
+## 1                        FALSE               6                FALSE  1
+## 2                        FALSE               6                FALSE  2
+## 3                        FALSE               6                FALSE  3
+## 4                        FALSE               6                FALSE  4
+## 5                        FALSE               6                FALSE  5
+## 6                        FALSE               6                FALSE  6
+##       metric
+## 1    Revenue
+## 2     Orders
+## 3      Units
+## 4      Carts
+## 5 Cart Views
+## 6     Clicks</code></pre>
+</div>
 <div id="getcustomcalendar" class="section level4">
 <h4>GetCustomCalendar <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcustomcalendar-1"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Retrieves the custom calendar for each of the specified report suites.</p>
@@ -533,22 +560,22 @@ head(gcl)</code></pre>
 <pre class="r"><code>gdb &lt;- GetDashboards()
 head(gdb)</code></pre>
 <pre><code>##            name     id   owner grid         .id          X1
-## 1 Site Overview 635530 rzwitch  3x2        name Key Metrics
-## 2 Site Overview 635530 rzwitch  3x2          id    28517921
-## 3 Site Overview 635530 rzwitch  3x2        rsid   zwitchdev
-## 4 Site Overview 635530 rzwitch  3x2 displayInfo        &lt;NA&gt;
-## 5 Site Overview 635530 rzwitch  3x2 displayInfo        &lt;NA&gt;
-## 6 Site Overview 635530 rzwitch  3x2 displayInfo        &lt;NA&gt;
+## 1 Site Overview 826576 rzwitch  3x2        name Key Metrics
+## 2 Site Overview 826576 rzwitch  3x2          id    15625769
+## 3 Site Overview 826576 rzwitch  3x2        rsid   zwitchdev
+## 4 Site Overview 826576 rzwitch  3x2 displayInfo        &lt;NA&gt;
+## 5 Site Overview 826576 rzwitch  3x2 displayInfo        &lt;NA&gt;
+## 6 Site Overview 826576 rzwitch  3x2 displayInfo        &lt;NA&gt;
 ##                         X2             X3                  X4        X5
 ## 1 Bounce Rate on Top Pages Referrer Types Report Suite Totals Countries
-## 2                 28517919       28517922            28517923  28517920
+## 2                 15625767       15625770            15625771  15625768
 ## 3                zwitchdev      zwitchdev           zwitchdev zwitchdev
 ## 4                     &lt;NA&gt;           &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;
 ## 5                     &lt;NA&gt;           &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;
 ## 6                     &lt;NA&gt;           &lt;NA&gt;                &lt;NA&gt;      &lt;NA&gt;
 ##                      X6  row  col rowspan colspan graph summary table
 ## 1 Search Keywords - All &lt;NA&gt; &lt;NA&gt;      NA      NA  &lt;NA&gt;      NA  &lt;NA&gt;
-## 2              28517924 &lt;NA&gt; &lt;NA&gt;      NA      NA  &lt;NA&gt;      NA  &lt;NA&gt;
+## 2              15625772 &lt;NA&gt; &lt;NA&gt;      NA      NA  &lt;NA&gt;      NA  &lt;NA&gt;
 ## 3             zwitchdev &lt;NA&gt; &lt;NA&gt;      NA      NA  &lt;NA&gt;      NA  &lt;NA&gt;
 ## 4                  &lt;NA&gt;    0    0       1       1  TRUE   FALSE  TRUE
 ## 5                  &lt;NA&gt;    0    1       1       1 FALSE   FALSE  TRUE
@@ -596,7 +623,7 @@ head(elem)</code></pre>
 ## 2       activity            Activity       FALSE        TRUE
 ## 3        browser             Browser        TRUE        TRUE
 ## 4  browserheight      Browser Height        TRUE       FALSE
-## 5    browsertype        Browser Type        TRUE       FALSE
+## 5    browsertype        Browser Type        TRUE        TRUE
 ## 6   browserwidth       Browser Width        TRUE       FALSE
 ##   max_pathing_steps      rsid
 ## 1                NA zwitchdev
@@ -697,27 +724,20 @@ head(gf)</code></pre>
 <p>Retrieves a list of a company’s permission groups.</p>
 <pre class="r"><code>gg &lt;- GetGroups()
 head(gg)</code></pre>
-<pre><code>##                      group_name
-## 1             All Report Access
-## 2 Ad Hoc Analysis License Users
-## 3                Report Builder
-## 4            Web Service Access
-## 5             All Report Access
-## 6           Excel License Users
-##                                                 group_description
-## 1 Access to All Reports and Report Suites, No tools, Not an Admin
-## 2                                       Access to Ad Hoc Analysis
-## 3                                         Access to ReportBuilder
-## 4                                               All Access to API
-## 5 Access to All Reports and Report Suites, No tools, Not an Admin
-## 6                         Access to the SiteCatalyst Excel Client
-##   group_type
-## 1 predefined
-## 2 predefined
-## 3 predefined
-## 4 predefined
-## 5 predefined
-## 6 predefined</code></pre>
+<pre><code>##   group_id                    group_name
+## 1   191835           Activity Map Access
+## 2   191836 Ad Hoc Analysis License Users
+## 3   191843             All Report Access
+## 4   191841     Analysis Workspace Access
+## 5   191837            Current Data Users
+## 6   191838              Mobile App Admin
+##                                                                                                                                                                                                                                                                                                                                group_description
+## 1 NOTE: Activity Map is only available for Adobe Analytics Standard or Premium customers. Point product (SiteCatalyst) customers can add users to this group, but those users will not be able to download, install, or use Activity Map. Point product customers can continue to use the legacy ClickMap tool for visual, in-context analytics.
+## 2                                                                                                                                                                                                                                                                                                                      Access to Ad Hoc Analysis
+## 3                                                                                                                                                                        Access to all Report Suites, Dimensions, Metrics, Channel Reports, Anomaly Detection, Current Data, Analysis Workspace, My Recommended Reports and Dashboard Reportlets
+## 4                                                                                                                                                                                                                                                                                                                   Access to Analysis Workspace
+## 5                                                                                                                                                                                                                                                                                                             Access to the Current Data Reports
+## 6                                                                                                                                                                                                                                                                                                    Administrator Access to Adobe Mobile App UI</code></pre>
 </div>
 <div id="getinternalurlfilters" class="section level4">
 <h4>GetInternalURLFilters <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getinternalurlfilters-1"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -909,6 +929,16 @@ head(metrics)</code></pre>
 ## 1   zwitchdev ZwitchCorp Dev  2015-01-12 rzwitch 2015-01-19          600
 ## 2 zwitchjulia Julia Bloggers  2015-01-10 rzwitch 2015-01-11          300</code></pre>
 </div>
+<div id="getpreviousservercalls" class="section level4">
+<h4>GetPreviousServerCalls <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
+<pre class="r"><code>GetPreviousServerCalls(rs$rsid)</code></pre>
+<pre><code>##          rsid average_server_calls peak_day_server_calls_date
+## 1   zwitchdev         0.0000000000                 1969-12-31
+## 2 zwitchjulia         0.0000000000                 1969-12-31
+##   peak_day_server_calls
+## 1                     0
+## 2                     0</code></pre>
+</div>
 <div id="getprivacysettings" class="section level4">
 <h4>GetPrivacySettings <a href=""><span class="glyphicon glyphicon-link"</span></a></h4>
 <pre class="r"><code>GetPrivacySettings(rs$rsid)</code></pre>
@@ -958,38 +988,38 @@ head(props)</code></pre>
 <p>‘source’ parameter present and set to ‘realtime’. Note that Real-Time reports do not have to be queued, they can run immediately using Report.Run.</p>
 <pre class="r"><code>GetRealTimeReport(&quot;zwitchdev&quot;, &quot;instances&quot;)</code></pre>
 <pre><code>##                        name year month day hour minute instances
-## 1  2016-09-20T13:26:49-0400 2016     9  20   13     26         0
-## 2  2016-09-20T13:31:49-0400 2016     9  20   13     31         5
-## 3  2016-09-20T13:36:49-0400 2016     9  20   13     36         1
-## 4  2016-09-20T13:41:49-0400 2016     9  20   13     41         1
-## 5  2016-09-20T13:46:49-0400 2016     9  20   13     46         1
-## 6  2016-09-20T13:51:49-0400 2016     9  20   13     51         1
-## 7  2016-09-20T13:56:49-0400 2016     9  20   13     56         2
-## 8  2016-09-20T14:01:49-0400 2016     9  20   14      1         1
-## 9  2016-09-20T14:06:49-0400 2016     9  20   14      6         4
-## 10 2016-09-20T14:11:49-0400 2016     9  20   14     11         0
-## 11 2016-09-20T14:16:49-0400 2016     9  20   14     16         3
-## 12 2016-09-20T14:21:49-0400 2016     9  20   14     21         1</code></pre>
+## 1  2017-03-03T15:36:40-0500 2017     3   3   15     36         1
+## 2  2017-03-03T15:41:40-0500 2017     3   3   15     41         0
+## 3  2017-03-03T15:46:40-0500 2017     3   3   15     46         5
+## 4  2017-03-03T15:51:40-0500 2017     3   3   15     51         6
+## 5  2017-03-03T15:56:40-0500 2017     3   3   15     56         1
+## 6  2017-03-03T16:01:40-0500 2017     3   3   16      1         1
+## 7  2017-03-03T16:06:40-0500 2017     3   3   16      6         3
+## 8  2017-03-03T16:11:40-0500 2017     3   3   16     11         1
+## 9  2017-03-03T16:16:40-0500 2017     3   3   16     16         1
+## 10 2017-03-03T16:21:40-0500 2017     3   3   16     21         0
+## 11 2017-03-03T16:26:40-0500 2017     3   3   16     26         0
+## 12 2017-03-03T16:31:40-0500 2017     3   3   16     31         1</code></pre>
 </div>
 <div id="getrealtimesettings" class="section level4">
 <h4>GetRealTimeSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getrealtimesettings"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Returns the metrics that are configured to provide real time data.</p>
 <pre class="r"><code>GetRealTimeSettings(&quot;zwitchdev&quot;)</code></pre>
-<pre><code>##            name min_granularity ui_report    metric primary.dimension
-## 1       testxyz               1      TRUE instances             prop2
-## 2       test111               1      TRUE instances             prop2
-## 3 testsep242014               1      TRUE instances              page
-##   secondary.dimension tertiary.dimension
-## 1 searchenginekeyword         geocountry
-## 2 searchenginekeyword         geocountry
-## 3 searchenginekeyword         geocountry</code></pre>
+<pre><code>##        rsid     site_title          name min_granularity ui_report
+## 1 zwitchdev ZwitchCorp Dev       testxyz               1      TRUE
+## 2 zwitchdev ZwitchCorp Dev       test111               1      TRUE
+## 3 zwitchdev ZwitchCorp Dev testsep242014               1      TRUE
+##      metric primary.dimension secondary.dimension tertiary.dimension
+## 1 instances             prop2 searchenginekeyword         geocountry
+## 2 instances             prop2 searchenginekeyword         geocountry
+## 3 instances              page searchenginekeyword         geocountry</code></pre>
 </div>
 <div id="getreportdescription" class="section level4">
 <h4>GetReportDescription <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportdescription"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Retrieves the name, associated report type, and report description for the supplied bookmark ID. This report description can then be used to retrieve report data via the Report API. An error is returned for unsupported bookmark types.</p>
-<pre class="r"><code>GetReportDescription(28473595)</code></pre>
+<pre class="r"><code>GetReportDescription(&quot;15625765&quot;)</code></pre>
 <pre><code>##           name reportType reportSuiteID   dateFrom     dateTo
-## 1 TestBookmark   overtime     zwitchdev 2016-09-01 2016-09-30
+## 1 TestBookmark   overtime     zwitchdev 2017-03-01 2017-03-31
 ##   dateGranularity                           metrics
 ## 1             day pageviews, visits, uniquevisitors</code></pre>
 </div>
@@ -1025,20 +1055,20 @@ head(props)</code></pre>
 <p>Retrieves the segments that are available in one or more report suites.</p>
 <pre class="r"><code>segments &lt;- GetSegments(rs$rsid)
 head(segments)</code></pre>
-<pre><code>##                                id                       name folder class
-## 1        5433e4e6e4b02df70be4ac63         Visits from Social             
-## 2        54adfe3de4b02df70be5ea08 Visits from Apple Browsers             
-## 3        5538547ae4b0b5455b976a99                   Compound             
-## 4 s14696_58403cbfe4b0bcef55f6e6b5                Last 7 days             
-## 5 s14696_58403d17e4b0bcef55f6e6b6                     Social             
-## 6        5433e4e6e4b02df70be4ac63         Visits from Social             
-##   suite_enabled read_only report_suite
-## 1         FALSE     FALSE    zwitchdev
-## 2         FALSE     FALSE    zwitchdev
-## 3         FALSE     FALSE    zwitchdev
-## 4         FALSE     FALSE    zwitchdev
-## 5         FALSE     FALSE    zwitchdev
-## 6         FALSE     FALSE  zwitchjulia</code></pre>
+<pre><code>##                                    id                       name folder
+## 1            5433e4e6e4b02df70be4ac63         Visits from Social       
+## 2            54adfe3de4b02df70be5ea08 Visits from Apple Browsers       
+## 3            5538547ae4b0b5455b976a99                   Compound       
+## 4 s300005752_58403cbfe4b0bcef55f6e6b5                Last 7 days       
+## 5 s300005752_58403d17e4b0bcef55f6e6b6                     Social       
+## 6            5433e4e6e4b02df70be4ac63         Visits from Social       
+##   class suite_enabled read_only report_suite
+## 1               FALSE     FALSE    zwitchdev
+## 2               FALSE     FALSE    zwitchdev
+## 3               FALSE     FALSE    zwitchdev
+## 4               FALSE     FALSE    zwitchdev
+## 5               FALSE     FALSE    zwitchdev
+## 6               FALSE     FALSE  zwitchjulia</code></pre>
 </div>
 <div id="getsitetitle" class="section level4">
 <h4>GetSiteTitle <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getsitetitle-1"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -1102,8 +1132,8 @@ head(events)</code></pre>
 <h4>GetTrackingServer <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettrackingserver-1"><span class="glyphicon glyphicon-link"</span></a></h4>
 <p>Returns the tracking server and namespace for the specified report suite. Only accepts a single report suite, as all report suites within an account will have same tracking server.</p>
 <pre class="r"><code>GetTrackingServer(&quot;zwitchdev&quot;)</code></pre>
-<pre><code>##    namespace             tracking_server
-## 1 zwitchcorp zwitchcorp.d1.sc.omtrdc.net</code></pre>
+<pre><code>##    namespace              tracking_server
+## 1 zwitchcorp zwitchcorp.or1.sc.omtrdc.net</code></pre>
 </div>
 <div id="gettransactionenabled" class="section level4">
 <h4>GetTransactionEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettransactionenabled"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -1222,7 +1252,7 @@ QueueDataWarehouse(&quot;zwitchdev&quot;,
                               password = Sys.getenv(&quot;FTPPW&quot;, &quot;&quot;),
                               filename = &quot;myreport.csv&quot;)
   )</code></pre>
-<pre><code>## [1] 1677748831</code></pre>
+<pre><code>## [1] 1661786899</code></pre>
 </div>
 <div id="queuefallout" class="section level4">
 <h4>QueueFallout <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><span class="glyphicon glyphicon-link"</span></a></h4>
@@ -1241,7 +1271,7 @@ QueueDataWarehouse(&quot;zwitchdev&quot;,
 ## 1      http://randyzwitch.com/r-amazon-ec2
 ## 2 http://randyzwitch.com/julia-import-data
 ##                                        url visits segment.id segment.name
-## 1      http://randyzwitch.com/r-amazon-ec2    701                        
+## 1      http://randyzwitch.com/r-amazon-ec2    768                        
 ## 2 http://randyzwitch.com/julia-import-data      0</code></pre>
 </div>
 <div id="queueovertime" class="section level4">
@@ -1251,6 +1281,7 @@ QueueDataWarehouse(&quot;zwitchdev&quot;,
 <p>API:</p>
 <pre class="r"><code>QueueOvertime(&quot;zwitchdev&quot;, &quot;2016-09-07&quot;, &quot;2016-09-13&quot;, &quot;visits&quot;, date.granularity = &quot;week&quot;)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
+## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received overtime report.&quot;</code></pre>
 <pre><code>##     datetime                                  name year month day
 ## 1 2016-09-07 Wed.  7 Sep. 2016 - Sat. 10 Sep. 2016 2016     9   7
@@ -1273,6 +1304,7 @@ QueuePathing(&quot;zwitchdev&quot;,
             pathpattern,
             top = 5)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
+## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received pathing report.&quot;</code></pre>
 <pre><code>##                                                       step.1
 ## 1 http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free
@@ -1299,6 +1331,7 @@ QueuePathing(&quot;zwitchdev&quot;,
 <p>Adobe Analytics Interface: <img src="images/queueranked.png" /></p>
 <pre class="r"><code>QueueRanked(&quot;zwitchdev&quot;, &quot;2016-10-01&quot;, &quot;2016-10-31&quot;, &quot;pageviews&quot;, &quot;page&quot;, top = 10)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
+## [1] &quot;Requesting URL attempt #2&quot;
 ## [1] &quot;Received ranked report.&quot;</code></pre>
 <pre><code>##                                                            name
 ## 1    http://randyzwitch.com/broken-macbook-pro-hinge-fixed-free

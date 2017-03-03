@@ -201,6 +201,7 @@ The following examples are blog posts and examples written by members of the com
 * [Adobe Analytics Implementation Documentation in 60 Seconds](http://randyzwitch.com/adobe-analytics-implementation-documentation/)
 * [HOW TO RUN RSITECATALYST USING JUPYTER MAGICS](http://maassmedia.com/r-site-catalyst-python.php)
 * [RSiteCatalyst o cómo conectar R con SiteCatalyst de Adobe](http://www.madridgeekgirls.es/rsitecatalyst-o-como-conectar-r-con-sitecatalyst-de-adobe/)
+* [Self-Service Adobe Analytics Data Feeds!](http://randyzwitch.com/adobe-clickstream-data-feed-self-service-admin-panel/)
 
 #### Visualization {.toc-ignore}
 
@@ -287,6 +288,13 @@ Retrieves a list of classifications (associated with the specified element) for 
 ```{r, cache=cacheflag}
 gcl <- GetClassifications(rs$rsid)
 head(gcl)
+```
+
+#### GetClickMapReporting [<span class="glyphicon glyphicon-link"</span>]()
+
+```{r, cache=cacheflag}
+gcmr <- GetClickMapReporting(rs$rsid)
+head(gcmr)
 ```
 
 #### GetCustomCalendar [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcustomcalendar-1)
@@ -546,6 +554,12 @@ Retrieves the permanent traffic settings for each of the specified report suites
 GetPermanentTraffic(rs$rsid)
 ```
 
+#### GetPreviousServerCalls [<span class="glyphicon glyphicon-link"</span>]()
+
+```{r, cache=cacheflag}
+GetPreviousServerCalls(rs$rsid)
+```
+
 #### GetPrivacySettings [<span class="glyphicon glyphicon-link"</span>]()
 
 ```{r, cache=cacheflag}
@@ -590,7 +604,7 @@ GetRealTimeSettings("zwitchdev")
 Retrieves the name, associated report type, and report description for the supplied bookmark ID. This report description can then be used to retrieve report data via the Report API. An error is returned for unsupported bookmark types.
 
 ```{r, cache=cacheflag}
-GetReportDescription(28473595)
+GetReportDescription("15625765")
 ```
 
 #### GetReportSuiteGroups [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuitegroups-1)
