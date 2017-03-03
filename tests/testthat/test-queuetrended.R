@@ -242,4 +242,28 @@ test_that("Validate QueueTrended using legacy credentials", {
 
   #Validate returned value is a numeric
   expect_is(ss, "numeric")
+  
+  #GitHub issue 207, fixes Error in if (!is.null(elements[i, ]$classification) && nchar(elements[i,  : 
+  #missing value where TRUE/FALSE needed 
+  issue207 <- QueueTrended(
+    reportsuite.id = "zwitchdev",
+    date.from = "2016-02-01",
+    date.to = "2016-02-01",
+    top ="1000",
+    metrics = c("visits"),
+    elements = c("page", "mobiledevicetype"),
+    classification = "JuliaPages",
+    date.granularity = "week", 
+    segment.id = "", 
+    data.current = TRUE,
+    expedite = FALSE, 
+    interval.seconds = 5, 
+    max.attempts = 10000,
+    validate = TRUE, 
+    enqueueOnly = FALSE
+  )
+  
+  #Validate returned value is a data.frame
+  expect_is(issue207, "data.frame")
+  
 })

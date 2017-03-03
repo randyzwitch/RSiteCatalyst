@@ -1,3 +1,14 @@
+RSiteCatalyst 1.4.11
+=================
+
+* Fixed issue with QueueDatawarehouse not returning the proper number of results when enqueueOnly = FALSE, fixed encoding for UTF-8-BOM  (#198)
+
+* Added GetClickMapReporting, GetPreviousServerCalls (work towards #179)
+
+* Fixed parser for GetFeeds, to unnest `activity` data frame into discrete columns
+
+* Fixed issue where message 'Error in if (!is.null(elements[i, ]$classification) && nchar(elements[i,  : missing value where TRUE/FALSE needed' displayed when using multiple elements (#207) 
+
 RSiteCatalyst 1.4.10
 =================
 
