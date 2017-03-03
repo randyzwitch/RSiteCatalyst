@@ -52,8 +52,14 @@ GetFeeds <- function(reportsuite.ids, start.time="", end.time="", status=c()) {
   }
 
   response <- ApiRequest(body=toJSON(request.body),func.name="DataFeed.GetFeeds")
+  
+  r <- response$data_feeds
+  
+  feedstatus_activity <- ldply(r$activity, quickdf)
+  r$activity <- NULL
+  r_ <- cbind(r, feedstatus_activity)
 
   #Could be parsed more, but currently returns data frame mostly parsed
-  return(response$data_feeds)
+  return(r_)
 
 }
