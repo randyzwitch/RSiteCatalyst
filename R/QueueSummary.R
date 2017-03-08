@@ -23,7 +23,7 @@
 #' @param metrics List of metrics to include in the report
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
-#' @param validate Whether to submit report definition for validation before requesting the data.
+#' @param validate whether to submit report definition for validation before requesting the data.
 #' @param date.from Start date for the report (YYYY-MM-DD)
 #' @param date.to End date for the report (YYYY-MM-DD)
 #' @param enqueueOnly only enqueue the report, don't get the data. returns report id, which you can later use to get the data

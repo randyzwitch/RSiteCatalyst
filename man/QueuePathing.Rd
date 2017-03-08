@@ -37,7 +37,7 @@ c("::anything::","::anything::","Home") will return the two previous pages leadi
 
 \item{max.attempts}{Number of API attempts before stopping}
 
-\item{validate}{Weather to submit report definition for validation before requesting the data.}
+\item{validate}{whether to submit report definition for validation before requesting the data.}
 
 \item{enqueueOnly}{only enqueue the report, don't get the data. returns report id, which you can later use to get the data}
 }

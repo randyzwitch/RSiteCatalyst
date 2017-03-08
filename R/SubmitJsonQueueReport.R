@@ -11,7 +11,7 @@
 #' @param report.description JSON report description
 #' @param interval.seconds How long to wait between attempts
 #' @param max.attempts Number of API attempts before stopping
-#' @param validate Weather to submit report definition for validation before requesting the data.
+#' @param validate whether to submit report definition for validation before requesting the data.
 #' @param enqueueOnly only enqueue the report, don't get the data. returns report id, which you can later use to get the data
 #' @param format "csv" or "json"
 #'

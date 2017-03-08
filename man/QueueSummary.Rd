@@ -19,7 +19,7 @@ QueueSummary(reportsuite.ids, date = "", metrics, interval.seconds = 5,
 
 \item{max.attempts}{Number of API attempts before stopping}
 
-\item{validate}{Whether to submit report definition for validation before requesting the data.}
+\item{validate}{whether to submit report definition for validation before requesting the data.}
 
 \item{date.from}{Start date for the report (YYYY-MM-DD)}
 
