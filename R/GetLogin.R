@@ -32,8 +32,10 @@ GetLogin<- function(login) {
 
   response <- ApiRequest(body=toJSON(request.body),func.name="Permissions.GetLogin")
 
-  temp_df <- as.data.frame(lapply(response[1:11], function (x) ifelse(is.null(x), "", x)))
-  temp_df$group_names <- paste(response[[12]], collapse = ',')
+  temp_df <- as.data.frame(lapply(response[2:12], function (x) ifelse(is.null(x), "", x)))
+  temp_df$group_names <- paste(response[[13]], collapse = ',')
+  temp_df$selected_ims_group_list <- paste(response[[1]], collapse = ',')
+  
 
   return(temp_df)
 
