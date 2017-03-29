@@ -7,7 +7,7 @@
 #' @param reportsuite.ids Report suite id (or list of report suite ids)
 #'
 #' @importFrom jsonlite toJSON
-#' @importFrom plyr rbind.fill
+#' @importFrom plyr rbind.fill llply
 #'
 #' @return Data frame
 #'
@@ -35,14 +35,31 @@ ViewProcessingRules <- function(reportsuite.ids) {
 
   df <- data.frame()
   for(i in 1:nrow(response)){
+    
     temp <- response[i,]
     #Check for null case
     if(length(temp$processing_rules[[1]]) > 0){ 
-      d_ <- cbind(as.data.frame(temp$rsid), temp$processing_rules)
-      d_2 <- cbind(d_, as.data.frame(d_$actions), row.names = NULL)
-      d_2$actions <- NULL
-      names(d_2) <- c("rsid", "title", "comment", "rules", "actions")
+      
+      #unnest first layer of dataframe
+      rsid <- as.data.frame(temp$rsid)
+      names(rsid) <- "rsid"
+      d_ <- cbind(rsid, temp$processing_rules)
+      d_$rules <- llply(d_$rules, function(x) paste(x, collapse = " AND ")[[1]])
+      
+      #Transpose actions from one row list to multiple rows of strings
+      d_2 <- data.frame()
+      for(j in 1:nrow(d_)){
+        temp <- d_[j,]
+        actions <- as.data.frame(temp$actions)
+        names(actions) <- "actions"
+        temp$actions <- NULL
+        
+        d_2 <- rbind.fill(d_2, cbind(temp, actions, row.names = NULL))
+      }
+      
+      #Append to outer dataframe
       df <- rbind.fill(df, d_2)
+      
     } else{
       temp$processing_rules <- NULL #Remove empty list
       temp$title <- '' #Build all the normal fields
