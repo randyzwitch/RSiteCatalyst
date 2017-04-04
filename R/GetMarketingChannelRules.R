@@ -39,42 +39,53 @@ GetMarketingChannelRules <- function(reportsuite.ids) {
 
   ##Parsing this is a mess
 
-  #Pull out first level
-  mkt_channel_rules <- response$marketing_channel_rules[[1]]
-  response$marketing_channel_rules <- NULL
-  #Group together first level
-  parsed <- cbind(response, mkt_channel_rules, row.names = NULL)
-
-  #Pull out second level
-  channel_value <- parsed$channel_value
-  parsed$channel_value <- NULL
-  #Group together second level
-  parsed <- cbind(parsed, channel_value, row.names = NULL)
-
-  #Pull out third level
-  rules <- parsed$rules
-  parsed$rules <- NULL
-
-  parsed$i <- row.names(parsed)
-
-  accumulator <- data.frame()
-  for(i in 1:length(rules)){
-    temp <- as.data.frame(rules[[i]]$rule_id)
-    names(temp) <- c("rule_id")
-    temp$i <- i
-    temp$hit_attribute_type <- rules[[i]]$hit_attribute$type
-    temp$hit_attribute_query_string_parameter <- rules[[i]]$hit_attribute$query_string_parameter
-    temp$operator <- rules[[i]]$operator
-    temp$matches <- paste(rules[[i]]$matches[[1]], collapse = ',')
-    accumulator <- rbind.fill(accumulator, temp, row.names = NULL)
-    rm(temp)
+  gmcr <- function(response_row){
+    #Pull out first level
+    mkt_channel_rules <- response_row$marketing_channel_rules[[1]]
+    response_row$marketing_channel_rules <- NULL
+    #Group together first level
+    parsed <- cbind(response_row, mkt_channel_rules, row.names = NULL)
+    
+    #Pull out second level
+    channel_value <- parsed$channel_value
+    parsed$channel_value <- NULL
+    #Group together second level
+    parsed <- cbind(parsed, channel_value, row.names = NULL)
+    
+    #Pull out third level
+    rules <- parsed$rules
+    parsed$rules <- NULL
+    
+    parsed$i <- row.names(parsed)
+    
+    accumulator <- data.frame()
+    for(i in 1:length(rules)){
+      temp <- as.data.frame(rules[[i]]$rule_id)
+      names(temp) <- c("rule_id")
+      temp$i <- i
+      temp$hit_attribute_type <- rules[[i]]$hit_attribute$type
+      temp$hit_attribute_query_string_parameter <- rules[[i]]$hit_attribute$query_string_parameter
+      temp$operator <- rules[[i]]$operator
+      temp$matches <- paste(rules[[i]]$matches[[1]], collapse = ',')
+      accumulator <- rbind.fill(accumulator, temp, row.names = NULL)
+      rm(temp)
+    }
+    
+    parsed <- merge(parsed, accumulator, by = "i")
+    parsed$i <- NULL
+    
+    return(parsed)
+  }
+  
+  #With row-level parser defined above, iterate over rows
+  df <- data.frame()
+  for(i in 1:nrow(response)){
+    row <- response[i,]
+    parsedresult <- gmcr(row)
+    df <- rbind.fill(df, parsedresult)
+    rm(row, parsedresult)
   }
 
-  parsed <- merge(parsed, accumulator, by = "i")
-  parsed$i <- NULL
-
-
-  return(parsed)
-
+  return(df)
 
 }

@@ -10,4 +10,9 @@ test_that("Validate GetMarketingChannelRules using legacy credentials", {
   #Validate returned value is a data.frame
   expect_is(mcr, "data.frame")
   
+  mcr2 <- GetMarketingChannelRules(c("zwitchdev", "zwitchjulia"))
+  
+  #Validate returned value is a data.frame
+  expect_is(mcr2, "data.frame")
+  
 })
