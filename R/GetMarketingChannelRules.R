@@ -66,7 +66,7 @@ GetMarketingChannelRules <- function(reportsuite.ids) {
       temp$hit_attribute_type <- rules[[i]]$hit_attribute$type
       temp$hit_attribute_query_string_parameter <- rules[[i]]$hit_attribute$query_string_parameter
       temp$operator <- rules[[i]]$operator
-      temp$matches <- paste(rules[[i]]$matches[[1]], collapse = ',')
+      temp$matches <- rules[[i]]$matches
       accumulator <- rbind.fill(accumulator, temp, row.names = NULL)
       rm(temp)
     }
@@ -85,6 +85,19 @@ GetMarketingChannelRules <- function(reportsuite.ids) {
     df <- rbind.fill(df, parsedresult)
     rm(row, parsedresult)
   }
+  
+  #Such an ugly hack to format misc typed column
+  clean <- function(x){
+    if(length(x) == 0){
+      ""
+    } else if(length(x) > 1) {
+      paste(x, collapse = ", ")
+    } 
+    else {
+      x
+    }
+  }
+  df$matches <- llply(df$matches, clean)
 
   return(df)
 
