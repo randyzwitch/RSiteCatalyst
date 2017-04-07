@@ -1,3 +1,14 @@
+RSiteCatalyst 1.4.12
+=================
+
+* Fixed issue with GetLogin function adding selected_ims_group_list parameter to response
+
+* Fixed issue with ViewProcessingRules where nested rules threw errors (#214)
+
+* Fixed issue with GetMarketingChannelRules where nested rules threw errors, matches column duplicated values across rows (#180)
+
+* Added ability to use a segment in QueueDataWarehouse function, which was previously implemented incorrectly (#216)
+
 RSiteCatalyst 1.4.11
 =================
 
