@@ -49,7 +49,7 @@ with or without temporal aggregation. Due API limitations, only one segment can 
 }
 \details{
 The QueueDataWarehouse function allows to access to Data WareHouse data
-and returns either a json or send a csv to a ftp server.
+and returns either json or sends a csv to a ftp server.
 
 Because of the Reporting API structure, this function requests the
 report, then, if \code{enqueueOnly=FALSE}, checks the reporting queue to see if the report is completed,
@@ -61,6 +61,8 @@ an error message. When \code{enqueueOnly=TRUE} and no ftp server is set, the rep
 using the reportId returned by the QueueDataWarehouse function.
 
 API limitations:
+https://marketing.adobe.com/developer/documentation/data-warehouse/r-report-2
+
 A single segment is supported. Multiple segments are not supported.
 
 The following element properties are not supported in Data Warehouse reports:
