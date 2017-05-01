@@ -20,6 +20,9 @@ Other internal: \code{\link{GetEndpoint}},
   \code{\link{GetUsageLog}}, \code{\link{ParseDW}},
   \code{\link{ParseFallout}}, \code{\link{ParseOvertime}},
   \code{\link{ParseRanked}}, \code{\link{ParseSummary}},
-  \code{\link{ParseTrended}}
+  \code{\link{ParseTrended}}, \code{\link{call.Get_base}},
+  \code{\link{collapse_simple_listcol}},
+  \code{\link{collapse_simple_target}},
+  \code{\link{split_segment_ret}}
 }
 \keyword{internal}

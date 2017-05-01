@@ -1,0 +1,33 @@
+structure(list(id = "s300000520_582ca0d2e4b0a4d9dc2936ac", name = "Yaws TLV", 
+    description = "", reportSuiteID = "elsevier-kn-prod", owner = "w.zhang", 
+    definition = structure(list(container = structure(list(type = "hits", 
+        rules = list(structure(list(name = c("Content ID (Products)", 
+        NA), element = c("product", NA), operator = c("equals", 
+        NA), value = c("kn:kt009ZN4T3", NA), container = structure(list(
+            type = c(NA, "hits"), operator = c(NA, "or"), rules = list(
+                NULL, structure(list(name = c("Content ID (Products)", 
+                NA), element = c("product", NA), operator = c("equals", 
+                NA), value = c("kn:kt009ZN4S1", NA), container = structure(list(
+                  type = c(NA, "hits"), operator = c(NA, "or"
+                  ), rules = list(NULL, structure(list(name = c("Content ID (Products)", 
+                  NA), element = c("product", NA), operator = c("equals", 
+                  NA), value = c("kn:kt005XW892", NA), container = structure(list(
+                    type = c(NA, "hits"), rules = list(NULL, 
+                      structure(list(name = "Content ID (Products)", 
+                        element = "product", operator = "equals", 
+                        value = "kn:kt005XW8A1"), .Names = c("name", 
+                      "element", "operator", "value"), class = "data.frame", row.names = 1L))), .Names = c("type", 
+                  "rules"), class = "data.frame", row.names = 1:2)), .Names = c("name", 
+                  "element", "operator", "value", "container"
+                  ), class = "data.frame", row.names = 1:2))), .Names = c("type", 
+                "operator", "rules"), class = "data.frame", row.names = 1:2)), .Names = c("name", 
+                "element", "operator", "value", "container"), class = "data.frame", row.names = 1:2))), .Names = c("type", 
+        "operator", "rules"), class = "data.frame", row.names = 1:2)), .Names = c("name", 
+        "element", "operator", "value", "container"), class = "data.frame", row.names = 1:2)), 
+        operator = "or"), .Names = c("type", "rules", "operator"
+    ), row.names = 16L, class = "data.frame")), .Names = "container", row.names = 16L, class = "data.frame"), 
+    compatibility = "reportsAndAnalytics, adHocAnalysis, dataWarehouse", 
+    shares = list(structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame")), 
+    tags = NA_character_, favorite = FALSE, modified = "2016-12-07 10:24:58"), .Names = c("id", 
+"name", "description", "reportSuiteID", "owner", "definition", 
+"compatibility", "shares", "tags", "favorite", "modified"), row.names = 16L, class = "data.frame")

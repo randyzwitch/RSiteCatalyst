@@ -1,0 +1,18 @@
+structure(list(id = "cm300000520_57bbb21bec83505f3c442b1d", name = "Row_Count", 
+    reportSuiteID = "elsevier-kn-prod", owner = "w.zhang", definition = structure(list(
+        `function` = "count-rows", parameters = list(list()), 
+        metric = NA_character_, description = "Row Count", calculatedMetric = structure(list(
+            metric = NA_character_, description = NA_character_, 
+            `function` = NA_character_, parameters = list(NULL), 
+            calculatedMetric = structure(list(metric = NA_character_, 
+                description = NA_character_), .Names = c("metric", 
+            "description"), row.names = 21L, class = "data.frame"), 
+            segments = list(NULL)), .Names = c("metric", "description", 
+        "function", "parameters", "calculatedMetric", "segments"
+        ), row.names = 21L, class = "data.frame"), segments = list(
+            NULL)), .Names = c("function", "parameters", "metric", 
+    "description", "calculatedMetric", "segments"), row.names = 21L, class = "data.frame"), 
+    compatibility = "fullyProcessedData", shares = list(structure(list(), .Names = character(0), row.names = integer(0), class = "data.frame")), 
+    modified = "2016-08-22 19:17:00"), .Names = c("id", "name", 
+"reportSuiteID", "owner", "definition", "compatibility", "shares", 
+"modified"), row.names = 21L, class = "data.frame")

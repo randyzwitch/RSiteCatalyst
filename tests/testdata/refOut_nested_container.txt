@@ -1,0 +1,18 @@
+structure(list(res = structure(list(type = "hits", operator = "or", 
+    rules.name = c("Content ID (Products)", NA), rules.element = c("product", 
+    NA), rules.operator = c("equals", NA), rules.value = c("kn:kt009ZN4T3", 
+    NA)), .Names = c("type", "operator", "rules.name", "rules.element", 
+"rules.operator", "rules.value")), res = structure(list(type = "hits", 
+    operator = "or", rules.name = c("Content ID (Products)", 
+    NA), rules.element = c("product", NA), rules.operator = c("equals", 
+    NA), rules.value = c("kn:kt009ZN4S1", NA)), .Names = c("type", 
+"operator", "rules.name", "rules.element", "rules.operator", 
+"rules.value")), res = structure(list(type = "hits", operator = "or", 
+    rules.name = c("Content ID (Products)", NA), rules.element = c("product", 
+    NA), rules.operator = c("equals", NA), rules.value = c("kn:kt005XW892", 
+    NA)), .Names = c("type", "operator", "rules.name", "rules.element", 
+"rules.operator", "rules.value")), res = structure(list(type = "hits", 
+    rules.name = "Content ID (Products)", rules.element = "product", 
+    rules.operator = "equals", rules.value = "kn:kt005XW8A1"), .Names = c("type", 
+"rules.name", "rules.element", "rules.operator", "rules.value"
+))), .Names = c("res", "res", "res", "res"))
