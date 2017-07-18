@@ -40,8 +40,10 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
   
   assign("SC.Credentials", list(key=key, secret=secret),  envir = AdobeAnalytics)  
   
-  if(company==''&&auth.method=='OAUTH2') {
-    stop("ERROR: You must specify a company if using the OAUTH2 auth method.")
+  if(auth.method=='OAUTH2') {
+    if(company==''){
+      stop("ERROR: You must specify a company if using the OAUTH2 auth method.")
+    }
   } else {
     company <- str_split_fixed(key, ":", 2)[2]
   }
