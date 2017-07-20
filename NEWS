@@ -1,3 +1,8 @@
+RSiteCatalyst 1.4.13
+=================
+
+* Fixed issue with OAUTH2 authentication (#223)
+
 RSiteCatalyst 1.4.12
 =================
 

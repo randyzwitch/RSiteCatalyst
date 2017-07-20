@@ -17,3 +17,4 @@ tests_v1.3.R
 willem-debugging/
 
 docs/index_cache/*
+.httr-oauth
