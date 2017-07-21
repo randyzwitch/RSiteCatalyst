@@ -35,27 +35,27 @@ test_that("Validate QueueDataWarehouse using legacy credentials", {
   # #Validate returned value is a data.frame
   # expect_is(qdw, "data.frame")
   
-  dwresult <- QueueDataWarehouse("zwitchdev",
-                                 "2014-01-01",
-                                 "2017-02-02",
-                                 c("visits", "pageviews"),
-                                 c("page", "browser"),
-                                 date.granularity = 'hour',
-                                 enqueueOnly=FALSE
-  )
-  
-  expect_equal(nrow(dwresult), 303510)
-  
-  dwresult2 <- QueueDataWarehouse("zwitchdev",
-                                  "2014-01-01",
-                                  "2017-02-02",
-                                  c("visits", "pageviews"),
-                                  c("page", "browser"),
-                                  date.granularity = 'hour',
-                                  segment.id = '54adfe3de4b02df70be5ea08',
-                                  enqueueOnly=FALSE
-  )
-  
-  expect_equal(nrow(dwresult2), 56898)
+  # dwresult <- QueueDataWarehouse("zwitchdev",
+  #                                "2014-01-01",
+  #                                "2017-02-02",
+  #                                c("visits", "pageviews"),
+  #                                c("page", "browser"),
+  #                                date.granularity = 'hour',
+  #                                enqueueOnly=FALSE
+  # )
+  # 
+  # expect_equal(nrow(dwresult), 303510)
+  # 
+  # dwresult2 <- QueueDataWarehouse("zwitchdev",
+  #                                 "2014-01-01",
+  #                                 "2017-02-02",
+  #                                 c("visits", "pageviews"),
+  #                                 c("page", "browser"),
+  #                                 date.granularity = 'hour',
+  #                                 segment.id = '54adfe3de4b02df70be5ea08',
+  #                                 enqueueOnly=FALSE
+  # )
+  # 
+  # expect_equal(nrow(dwresult2), 56898)
 
 })

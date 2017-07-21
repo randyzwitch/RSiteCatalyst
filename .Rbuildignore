@@ -6,3 +6,4 @@ travis-tool.sh
 docs
 .nojekyll
 ^appveyor\.yml$
+.httr-oauth
