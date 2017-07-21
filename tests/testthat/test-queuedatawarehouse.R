@@ -23,7 +23,6 @@ test_that("Validate QueueDataWarehouse using legacy credentials", {
   #Validate returned value is numeric id
   expect_is(report.id, "numeric")
   
-<<<<<<< HEAD
   #Return answer to console
   # qdw <- QueueDataWarehouse("zwitchdev",
   #                                   "2016-11-01",
