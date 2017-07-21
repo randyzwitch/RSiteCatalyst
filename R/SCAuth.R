@@ -40,8 +40,10 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
   
   assign("SC.Credentials", list(key=key, secret=secret),  envir = AdobeAnalytics)  
   
-  if(company==''&&auth.method=='OAUTH2') {
-    stop("ERROR: You must specify a company if using the OAUTH2 auth method.")
+  if(auth.method=='OAUTH2') {
+    if(company==''){
+      stop("ERROR: You must specify a company if using the OAUTH2 auth method.")
+    }
   } else {
     company <- str_split_fixed(key, ":", 2)[2]
   }
@@ -80,15 +82,16 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
         stop(sc.cred$error_description)
       }
 
-      scc <- list(endpoint.url=endpoint.url,
-                               auth.method=auth.method,
-                               access_token=sc.cred$access_token,
-                               scope=sc.cred$scope,
-                               client_id=sc.cred$client_id,
-                               expires=sc.cred$expires,
-                               debug = debug.mode,
-                               locale = locale
-                               )
+      scc <- list(
+        endpoint.url = endpoint.url,
+        auth.method = auth.method,
+        access_token = sc.cred$credentials$access_token,
+        scope = sc.cred$credentials$scope,
+        client_id = sc.cred$app$key,
+        expires = sc.cred$credentials$expires_in,
+        debug = debug.mode,
+        locale = locale
+      )
       
       assign("SC.Credentials", scc, envir = AdobeAnalytics)
 
