@@ -163,6 +163,8 @@ RSiteCatalyst is provided under the [MIT License](https://tldrlegal.com/license/
 
 ### Release Notes {.toc-ignore}
 
+- [1.4.13](http://randyzwitch.com/rsitecatalyst-version-1-4-13-release-notes/)
+- [1.4.11/1.4.12](http://randyzwitch.com/rsitecatalyst-version-1-4-12-release-notes/)
 - [1.4.10](http://randyzwitch.com/rsitecatalyst-version-1-4-10-release-notes/)
 - [1.4.9](http://randyzwitch.com/rsitecatalyst-bulk-download-version-1-4-9-release-notes/)
 - [1.4.8](http://randyzwitch.com/rsitecatalyst-version-1-4-8-release-notes/)
