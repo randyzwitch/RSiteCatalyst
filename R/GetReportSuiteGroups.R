@@ -29,10 +29,20 @@ GetReportSuiteGroups <- function(reportsuite.id) {
   #Set encoding to utf-8 as well; if someone wanted to do base64 they are out of luck
   request.body$locale <- unbox(AdobeAnalytics$SC.Credentials$locale)
   request.body$elementDataEncoding <- unbox("utf8")
-
+  
   response <- ApiRequest(body=toJSON(request.body),func.name="Permissions.GetReportSuiteGroups")
-  r_ <- cbind(response$rsid, response$site_title, response$all_report_suite_access_group_list)
-  r_ <- rename(r_, replace = c("response$rsid" = "rsid", "response$site_title" = "site_title"))
-  return(r_)
+  
+  r_ <- cbind(response$rsid, response$site_title, response$all_report_suite_access_group_list[,c("group_name","description")])
+  names(r_) <- c("rsid","site_title","group_name","group_description")
+
+  if(length(response$groups)>0){
+    g_ <- cbind(response$rsid, response$site_title, response$groups)
+    names(g_) <- c("rsid","site_title","group_name","group_description")
+    r_ <- rbind(r_, g_)
+  }
+  
+  r_$rsid <- as.character(r_$rsid)
+
+    return(r_)
 
 }
