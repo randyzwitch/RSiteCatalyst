@@ -160,9 +160,12 @@ RSiteCatalyst is provided under the [MIT License](https://tldrlegal.com/license/
 +----------------------------+----------------------------------+
 | Johann De Boer               | [GitHub](https://github.com/jdeboer)   LinkedIn   [Twitter](https://twitter.com/johannux)          |
 +----------------------------+----------------------------------+
+| leocwlau               | [GitHub](https://github.com/leocwlau)   LinkedIn   Twitter       |
++----------------------------+----------------------------------+
 
 ### Release Notes {.toc-ignore}
 
+- [1.4.14](http://randyzwitch.com/rsitecatalyst-version-1-4-14-release-notes/)
 - [1.4.13](http://randyzwitch.com/rsitecatalyst-version-1-4-13-release-notes/)
 - [1.4.11/1.4.12](http://randyzwitch.com/rsitecatalyst-version-1-4-12-release-notes/)
 - [1.4.10](http://randyzwitch.com/rsitecatalyst-version-1-4-10-release-notes/)
