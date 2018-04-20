@@ -76,6 +76,9 @@ SCAuth <- function(key, secret, company='', token.file="", auth.method="legacy",
 
       sc.app <- oauth_app("RSiteCatalyst", key, secret)
       sc.cred <- oauth2.0_token(sc.api, sc.app, scope="ReportSuite Report Company")
+      if(nchar(sc.cred$credentials$access_token) < 100){
+        sc.cred <- sc.cred$refresh()
+      }
 
       if(!is.null(sc.cred$error)) {
         print(paste("ERROR:",sc.cred$error))
