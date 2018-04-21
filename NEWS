@@ -1,3 +1,10 @@
+RSiteCatalyst 1.4.15
+=================
+
+* Updated OAuth authentication to refresh token if <100 characters (#237 provided by GitHub user leocwlau)
+
+* Added GetGroup method (#237/#238 provided by GitHub user leocwlau)
+
 RSiteCatalyst 1.4.14
 =================
 
