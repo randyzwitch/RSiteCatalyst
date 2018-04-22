@@ -1,7 +1,7 @@
 Package: RSiteCatalyst
 Type: Package
 Title: R Client for Adobe Analytics API V1.4
-Version: 1.4.14.20180421
+Version: 1.4.15
 Date: 2018-04-21
 Author: Willem Paling, Randy Zwitch & Jowanza Joseph
 Maintainer: Randy Zwitch <rzwitch+rsitecatalyst@gmail.com>
