@@ -71,7 +71,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="css/rmarkdown.css" />
+<link rel="stylesheet" href="css/rmarkdown.css" type="text/css" />
 
 </head>
 
@@ -94,8 +94,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -104,14 +110,74 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -229,9 +295,9 @@ div.tocify {
 
 <p>RSiteCatalyst is an R package for accessing the Adobe Analytics API. The focus of this package are analysts looking for a convenient, programmatic way for accessing their website data using the power of R.</p>
 <hr />
-<section id="getting-started" class="level2">
+<div id="getting-started" class="section level2">
 <h2><strong>Getting Started</strong></h2>
-<section id="installation" class="level3">
+<div id="installation" class="section level3">
 <h3>Installation</h3>
 <p>RSiteCatalyst can be installed from CRAN as follows:</p>
 <pre class="r"><code>install.packages(&quot;RSiteCatalyst&quot;, type = &quot;source&quot;)</code></pre>
@@ -239,12 +305,12 @@ div.tocify {
 <p><img src="images/web-services-access.png" /></p>
 <p>Additionally, you will either need to obtain your Web Services Credentials or register an OAuth2 application, which will be discussed in detail in the Authentication section.</p>
 <hr />
-</section>
-<section id="authentication" class="level3">
+</div>
+<div id="authentication" class="section level3">
 <h3>Authentication</h3>
 <p>Regardless of whether you choose the ‘legacy’ method for authentication or the newer OAuth2 method, the API will return the same data. Which method you choose depends on your company security requirements, familiarity with OAuth2 or your application-specific details.</p>
-<section id="legacy-wsse-span-classglyphicon-glyphicon-link" class="level4 toc-ignore">
-<h4>Legacy (WSSE) <a href="https://marketing.adobe.com/developer/documentation/authentication-1/using-web-service-credentials-2">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+<div id="legacy-wsse" class="section level4 toc-ignore">
+<h4>Legacy (WSSE) <a href="https://marketing.adobe.com/developer/documentation/authentication-1/using-web-service-credentials-2"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>The ‘legacy’ method of authenticating with the Adobe Analytics API requires knowing your <u>User Name</u> and <u>Shared Secret</u>, which can be obtained from the same <code>User Management -&gt; Users -&gt; Access</code> menu in the Admin panel where Web Services Access is granted.</p>
 <p>With the <u>User Name</u> and <u>Shared Secret</u> values, you can start the authentication process in RSiteCatalyst through the <code>SCAuth()</code> function:</p>
 <pre class="r"><code>library(RSiteCatalyst)
@@ -258,16 +324,16 @@ SCAuth(&quot;username:company&quot;, &quot;cd1d234dee56e8202da6f7d3213eb1ef&quot
 <pre class="r"><code>GetReportSuites()</code></pre>
 <pre><code>## Error in ApiRequest(func.name = &quot;Company.GetReportSuites&quot;) : 
 ##  ERROR: Bad Request  -  Unable to validate authentication.</code></pre>
-</section>
-<section id="oauth2-span-classglyphicon-glyphicon-link" class="level4 toc-ignore">
-<h4>OAuth2 <a href="https://marketing.adobe.com/developer/documentation/authentication-1/auth-overview-1#concept_4646CEC9CE5E4698A936D84B90A2CD0C">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="oauth2" class="section level4 toc-ignore">
+<h4>OAuth2 <a href="https://marketing.adobe.com/developer/documentation/authentication-1/auth-overview-1#concept_4646CEC9CE5E4698A936D84B90A2CD0C"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>TBD</p>
 <hr />
-</section>
-</section>
-<section id="tips-and-tricks" class="level3">
+</div>
+</div>
+<div id="tips-and-tricks" class="section level3">
 <h3>Tips and Tricks</h3>
-<section id="saving-credentials-to-.renviron" class="level4 toc-ignore">
+<div id="saving-credentials-to-.renviron" class="section level4 toc-ignore">
 <h4>1. Saving credentials to .Renviron</h4>
 <p>While not secure <em>per se</em>, to avoid putting your User Name and Shared Secret in the clear inside of an R script, you can place your credentials in the <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html">.Renviron</a> environment file. This file is loaded each time R is loaded, setting global environment variables.</p>
 <pre class="r"><code>USER=&quot;username:company&quot;
@@ -275,12 +341,10 @@ SECRET=&quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;</code></pre>
 <p>Again, this is not truly ‘secure’, it is just security-through-obscurity. If you use this method, your <code>SCAuth()</code> call now becomes the following:</p>
 <pre class="r"><code>library(RSiteCatalyst)
 SCAuth(Sys.getenv(&quot;USER&quot;), Sys.getenv(&quot;SECRET&quot;))</code></pre>
-<pre><code>## Warning in strptime(x, fmt, tz = &quot;GMT&quot;): unknown timezone &#39;zone/tz/2018c.
-## 1.0/zoneinfo/America/New_York&#39;</code></pre>
 <pre><code>## [1] &quot;Credentials Saved in RSiteCatalyst Namespace.&quot;</code></pre>
 <p>Not enough to stop a truly determined hacker, but enough so that credentials aren’t checked into version control or copy-pasted/shared across users.</p>
-</section>
-<section id="running-getreportsuites-at-the-beginning-of-a-session" class="level4 toc-ignore">
+</div>
+<div id="running-getreportsuites-at-the-beginning-of-a-session" class="section level4 toc-ignore">
 <h4>2. Running GetReportSuites() at the beginning of a session</h4>
 <p>One of the best use cases of RSiteCatalyst is accessing large amounts of data, whether that means running reports for a long time period or for many report suites at one time.</p>
 <p>By running <code>GetReportSuites()</code> at the beginning of a session, not only do you get a quick refresher of the report suites contained in your Adobe Analytics, but you have a vector that you can pass to other RSiteCatalyst functions:</p>
@@ -292,13 +356,13 @@ rs</code></pre>
 <pre class="r"><code># Pass the list of report suite ids, not the whole data frame
 props &lt;- GetProps(rs$rsid)</code></pre>
 <hr />
-</section>
-</section>
-</section>
-<section id="contributing" class="level2">
+</div>
+</div>
+</div>
+<div id="contributing" class="section level2">
 <h2><strong>Contributing</strong></h2>
 <p>RSiteCatalyst is a community-driven, open-source effort, not an official package from Adobe. As such, bug fixes and improvements rely on a vibrant community of users and developers contributing their free time and resources.</p>
-<section id="issues" class="level3 toc-ignore">
+<div id="issues" class="section level3 toc-ignore">
 <h3>Issues</h3>
 <p>If you encounter a bug when using RSiteCatalyst, please use the <a href="https://github.com/randyzwitch/RSiteCatalyst/issues">Issues</a> section of the <a href="https://github.com/randyzwitch/RSiteCatalyst/">RSiteCatalyst GitHub repository</a> to report your issue. When reporting an issue, please include as much information as possible, preferably a reproducible code example. The following information is also valuable for troubleshooting:</p>
 <pre><code>* R version
@@ -306,23 +370,23 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 * RSiteCatalyst version (please upgrade to newest version on CRAN before reporting a bug)
 * Environment (RStudio, R command line, cron, etc.)</code></pre>
 <p>While <a href="https://cran.r-project.org/">CRAN</a> requires a valid email address for package submission, personalized help via the maintainer email address is not feasible and will not receive a response.</p>
-</section>
-<section id="feature-requests" class="level3 toc-ignore">
+</div>
+<div id="feature-requests" class="section level3 toc-ignore">
 <h3>Feature Requests</h3>
 <p>While RSiteCatalyst has near feature parity with the Adobe Analytics API Explorer on an <em>analytics/data retrieval</em> basis, this package intentionally does not provide lower-level features such as creating or deleting report suites, uploading SAINT classifications or other ‘development’ type features. While these types of features <em>may</em> be accepted into the package with a pull request of sufficient breadth and quality, they will not be a focus of the core developers.</p>
 <p>If there is analytics functionality desired that is currently available in the Adobe Analytics API but not in RSiteCatalyst, please create an <a href="https://github.com/randyzwitch/RSiteCatalyst/issues">issue</a> on the <a href="https://github.com/randyzwitch/RSiteCatalyst/">RSiteCatalyst GitHub repository</a>, linking to the appropriate section of the Adobe Analytics API documentation. An explanation of your business goals and expected business value will go a long way towards convincing a volunteer to add the functionality.</p>
-</section>
-<section id="submiting-a-pull-request" class="level3 toc-ignore">
+</div>
+<div id="submiting-a-pull-request" class="section level3 toc-ignore">
 <h3>Submiting A Pull Request</h3>
 <p>Of course, if you’d like to have a feature added AND submit a pull request to <a href="https://github.com/randyzwitch/RSiteCatalyst/">RSiteCatalyst GitHub repository</a>, the likelihood of seeing the feature added increases dramatically!</p>
 <p>RSiteCatalyst is provided under the <a href="https://tldrlegal.com/license/mit-license">MIT License</a>. Before contributing, please be sure you agree with the terms of the MIT license. All contributions merged into RSiteCatalyst become part of the MIT-licensed package whole; contributions with different license terms desired will not be accepted.</p>
-</section>
-<section id="contributors" class="level3 toc-ignore">
+</div>
+<div id="contributors" class="section level3 toc-ignore">
 <h3>Contributors</h3>
 <table style="width:89%;">
 <colgroup>
-<col style="width: 40%" />
-<col style="width: 48%" />
+<col width="40%" />
+<col width="48%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -364,13 +428,13 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <td><div class="line-block"><a href="https://github.com/jdeboer">GitHub</a> LinkedIn <a href="https://twitter.com/johannux">Twitter</a></div></td>
 </tr>
 <tr class="odd">
-<td>leocwlau | [Gi</td>
-<td>tHub](<a href="https://github.com/leocwlau" class="uri">https://github.com/leocwlau</a>) LinkedIn Twitter</td>
+<td>leocwlau</td>
+<td><div class="line-block"><a href="https://github.com/leocwlau">GitHub</a> LinkedIn Twitter</div></td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="release-notes" class="level3 toc-ignore">
+</div>
+<div id="release-notes" class="section level3 toc-ignore">
 <h3>Release Notes</h3>
 <ul>
 <li><a href="http://randyzwitch.com/rsitecatalyst-version-1-4-14-release-notes/">1.4.14</a></li>
@@ -391,14 +455,15 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <li><a href="http://randyzwitch.com/rsitecatalyst-version-1-1-release-notes/">1.1</a></li>
 </ul>
 <hr />
-</section>
-</section>
-<section id="examples" class="level2">
+</div>
+</div>
+<div id="examples" class="section level2">
 <h2><strong>Examples</strong></h2>
 <p>The following examples are blog posts and examples written by members of the community. No validation has been performed that the code examples contained within work for current and all future versions of RSiteCatalyst; coordinate with the author of the post should you find out-of-date code.</p>
-<section id="business-analytics" class="level4 toc-ignore">
+<div id="business-analytics" class="section level4 toc-ignore">
 <h4>Business Analytics</h4>
 <ul>
+<li><a href="http://yourlifeindata.com/2018/04/04/getting-started-with-adobe-analytics-and-alteryx/">GETTING STARTED WITH ADOBE ANALYTICS AND ALTERYX</a></li>
 <li><a href="http://33sticks.com/rsitecatalyst-market-basket-analysis-adobe-analytics/">Market Basket Analysis With Adobe Analytics And RSiteCatalyst</a></li>
 <li><a href="http://chrisnart.blogspot.com/2014/03/date-based-cohort-analysis-for-adobe.html">Date Based Cohort Analysis for Adobe SiteCatalyst using R</a></li>
 <li><a href="http://randyzwitch.com/rsitecatalyst-k-means-clustering/">Clustering Search Keywords Using K-Means Clustering</a></li>
@@ -407,10 +472,11 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <li><a href="https://dabblingwithdata.wordpress.com/2017/01/05/retrieving-adobe-sitecatalyst-data-with-r/">Retrieving Adobe SiteCatalyst data with R</a></li>
 <li><a href="http://rpubs.com/rohitgossain/data-mining-web-analytics">Data Mining on Web Analytics Data</a></li>
 </ul>
-</section>
-<section id="implementation-automation" class="level4 toc-ignore">
+</div>
+<div id="implementation-automation" class="section level4 toc-ignore">
 <h4>Implementation / Automation</h4>
 <ul>
+<li><a href="https://www.youtube.com/watch?v=-wUB0aplnik">Build Adobe Analytics SDR in R using RSiteCatalyst and Tidyverse (video)</a></li>
 <li><a href="http://analyticsblog.mecglobal.it/en/analytics-tools/adobe-sitecatalyst-api-in-r/">Adobe Sitecatalyst API and R: how to integrate reports with the SAINT classification file</a></li>
 <li><a href="http://www.cardinalpath.com/automating-your-life-with-adobe-analytics-api-data-and-r/">AUTOMATING YOUR LIFE WITH ADOBE ANALYTICS API DATA AND R</a></li>
 <li><a href="http://randyzwitch.com/rsitecatalyst-adobe-analytics-python/">Calling RSiteCatalyst From Python</a></li>
@@ -421,8 +487,8 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <li><a href="http://www.madridgeekgirls.es/rsitecatalyst-o-como-conectar-r-con-sitecatalyst-de-adobe/">RSiteCatalyst o cómo conectar R con SiteCatalyst de Adobe</a></li>
 <li><a href="http://randyzwitch.com/adobe-clickstream-data-feed-self-service-admin-panel/">Self-Service Adobe Analytics Data Feeds!</a></li>
 </ul>
-</section>
-<section id="visualization" class="level4 toc-ignore">
+</div>
+<div id="visualization" class="section level4 toc-ignore">
 <h4>Visualization</h4>
 <ul>
 <li><a href="http://randyzwitch.com/rsitecatalyst-d3-network-graphs/">Visualizing Website Structure With Network Graphs</a></li>
@@ -431,8 +497,8 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <li><a href="http://www.ryanpraski.com/real-time-reporting-adobe-analytics-api-tutorial/">Real-Time Reporting Adobe Analytics API Tutorial</a></li>
 <li><a href="http://analyticsdemystified.com/adobe-analytics/r-adobe-analytics-two-dimensions-many-metrics-part-1-3">R AND ADOBE ANALYTICS: TWO DIMENSIONS, MANY METRICS – PART 1 OF 3</a></li>
 </ul>
-</section>
-<section id="general" class="level4 toc-ignore">
+</div>
+<div id="general" class="section level4 toc-ignore">
 <h4>General</h4>
 <ul>
 <li><a href="https://blogs.adobe.com/digitalmarketing/analytics/playing-hits-summit-2014-filtered-metrics-error-monitoring/">Playing the Hits at Summit 2014: Filtered Metrics, Error Monitoring, and More</a></li>
@@ -440,58 +506,58 @@ props &lt;- GetProps(rs$rsid)</code></pre>
 <li><a href="https://earlconf.com/london/download/?id=cxp1j">Transforming a Museum to be data-driven using R</a></li>
 </ul>
 <hr />
-</section>
-</section>
-<section id="admin-metadata-functions-span-classglyphicon-glyphicon-link" class="level2">
-<h2><strong>Admin / Metadata Functions</strong> <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/admin-api">&lt;span class=“glyphicon glyphicon-link”</span></a></h2>
+</div>
+</div>
+<div id="admin-metadata-functions" class="section level2">
+<h2><strong>Admin / Metadata Functions</strong> <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/admin-api"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h2>
 <p>With a few exceptions, most of the Admin/Metadata functions take a report suite or a list of report suites as arguments and return the settings for a given report. These settings will mostly correspond with what administrators can see in the Adobe Analytics interface.</p>
-<section id="cancelreport-span-classglyphicon-glyphicon-link" class="level4">
-<h4>CancelReport <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-cancel">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+<div id="cancelreport" class="section level4">
+<h4>CancelReport <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-cancel"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Cancels a previously submitted report request, and removes it from the processing queue.</p>
 <pre class="r"><code>CancelReport(12345678)</code></pre>
-</section>
-<section id="getactivation-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetActivation <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getactivation-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getactivation" class="section level4">
+<h4>GetActivation <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getactivation-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the activation status for each of the specified report suites.</p>
 <pre class="r"><code>GetActivation(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title activation
 ## 1   zwitchdev ZwitchCorp Dev       TRUE
 ## 2 zwitchjulia Julia Bloggers       TRUE</code></pre>
-</section>
-<section id="getaxlestartdate-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetAxleStartDate <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getaxlestartdate">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getaxlestartdate" class="section level4">
+<h4>GetAxleStartDate <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getaxlestartdate"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the date a report suite was migrated from SiteCatalyst 14 to axle processing (version 15).</p>
 <pre class="r"><code>GetAxleStartDate(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title axle_start_date
 ## 1   zwitchdev ZwitchCorp Dev      2014-02-20
 ## 2 zwitchjulia Julia Bloggers      2015-01-10</code></pre>
-</section>
-<section id="getbasecurrency-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetBaseCurrency <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbasecurrency-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getbasecurrency" class="section level4">
+<h4>GetBaseCurrency <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbasecurrency-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves a list of supported currency codes for each of the specified report suites.</p>
 <pre class="r"><code>GetBaseCurrency(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title base_currency
 ## 1   zwitchdev ZwitchCorp Dev           USD
 ## 2 zwitchjulia Julia Bloggers           USD</code></pre>
-</section>
-<section id="getbaseurl-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetBaseURL <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbaseurl-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getbaseurl" class="section level4">
+<h4>GetBaseURL <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbaseurl-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the base URL assigned to each of the specified report suites.</p>
 <pre class="r"><code>GetBaseURL(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title                     base_url
 ## 1   zwitchdev ZwitchCorp Dev   http://www.randyzwitch.com
 ## 2 zwitchjulia Julia Bloggers http://www.juliabloggers.com</code></pre>
-</section>
-<section id="getbookmarks-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetBookmarks <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbookmarks-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getbookmarks" class="section level4">
+<h4>GetBookmarks <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbookmarks-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves a list of bookmarks for the authenticated user. Parameters folder_limit and folder_offset are optional, and only necessary if the total bookmark count exceeds 500, which is the limit. Use them to select a certain range of folders out of the entire set.</p>
 <pre class="r"><code>GetBookmarks()</code></pre>
 <pre><code>##      folder_name folder_id   owner bookmark_name bookmark_id      rsid
 ## 1     TestFolder   2444942 rzwitch  TestBookmark    28473595 zwitchdev
 ## 2 Another Folder   2444946 rzwitch         Test2    28473698 zwitchdev</code></pre>
-</section>
-<section id="getcalculatedmetrics-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetCalculatedMetrics <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcalculatedmetrics-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getcalculatedmetrics" class="section level4">
+<h4>GetCalculatedMetrics <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcalculatedmetrics-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the calculated metrics assigned to each of the specified report suites.</p>
 <pre class="r"><code>gcm &lt;- GetCalculatedMetrics(rs$rsid)
 head(gcm)</code></pre>
@@ -501,9 +567,9 @@ head(gcm)</code></pre>
 ##   decimal_places formula_id    type
 ## 1              0  f:1089420 numeric
 ## 2              0  f:1091439 numeric</code></pre>
-</section>
-<section id="getclassifications-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetClassifications <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getclassifications-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getclassifications" class="section level4">
+<h4>GetClassifications <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getclassifications-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves a list of classifications (associated with the specified element) for each of the specified report suites.</p>
 <pre class="r"><code>gcl &lt;- GetClassifications(rs$rsid)
 head(gcl)</code></pre>
@@ -528,9 +594,9 @@ head(gcl)</code></pre>
 ## 4           NA div_mult_1_221
 ## 5           NA div_mult_3_221
 ## 6           NA div_mult_2_223</code></pre>
-</section>
-<section id="getclickmapreporting-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetClickMapReporting <a href="">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getclickmapreporting" class="section level4">
+<h4>GetClickMapReporting <a href=""><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <pre class="r"><code>gcmr &lt;- GetClickMapReporting(rs$rsid)
 head(gcmr)</code></pre>
 <pre><code>##        rsid allow_configuration all_clickmap_enabled
@@ -554,17 +620,17 @@ head(gcmr)</code></pre>
 ## 4      Carts
 ## 5 Cart Views
 ## 6     Clicks</code></pre>
-</section>
-<section id="getcustomcalendar-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetCustomCalendar <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcustomcalendar-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getcustomcalendar" class="section level4">
+<h4>GetCustomCalendar <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcustomcalendar-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the custom calendar for each of the specified report suites.</p>
 <pre class="r"><code>GetCustomCalendar(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title calendar_type
 ## 1   zwitchdev ZwitchCorp Dev     gregorian
 ## 2 zwitchjulia Julia Bloggers     gregorian</code></pre>
-</section>
-<section id="getdashboards-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetDashboards <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdashboards-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getdashboards" class="section level4">
+<h4>GetDashboards <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdashboards-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves all the dashboards for the authenticated web services user, with bookmarks included. Parameters dashboard_limit and dashboard_offset are optional, and only necessary if the total bookmark count exceeds 500, which is the limit. Use them to select a certain range of bookmarks out of the entire set.</p>
 <pre class="r"><code>gdb &lt;- GetDashboards()
 head(gdb)</code></pre>
@@ -589,41 +655,41 @@ head(gdb)</code></pre>
 ## 4                  &lt;NA&gt;    0    0       1       1  TRUE   FALSE  TRUE
 ## 5                  &lt;NA&gt;    0    1       1       1 FALSE   FALSE  TRUE
 ## 6                  &lt;NA&gt;    0    2       1       1  TRUE   FALSE  TRUE</code></pre>
-</section>
-<section id="getdatawarehousedisplay-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetDataWarehouseDisplay <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdatawarehousedisplay">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getdatawarehousedisplay" class="section level4">
+<h4>GetDataWarehouseDisplay <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdatawarehousedisplay"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Returns if data warehouse is enabled for the requested report suites.</p>
 <pre class="r"><code>GetDataWarehouseDisplay(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title data_warehouse_display
 ## 1   zwitchdev ZwitchCorp Dev all-logins-have-access
 ## 2 zwitchjulia Julia Bloggers all-logins-have-access</code></pre>
-</section>
-<section id="getdefaultpage-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetDefaultPage <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdefaultpage-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getdefaultpage" class="section level4">
+<h4>GetDefaultPage <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdefaultpage-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the default page for each of the specified report suites.</p>
 <pre class="r"><code>GetDefaultPage(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title default_page
 ## 1   zwitchdev ZwitchCorp Dev             
 ## 2 zwitchjulia Julia Bloggers</code></pre>
-</section>
-<section id="getdiscoverenabled-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetDiscoverEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdiscoverenabled">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getdiscoverenabled" class="section level4">
+<h4>GetDiscoverEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdiscoverenabled"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Returns whether ad hoc analysis (formerly Discover) is enabled for the requested report suites.</p>
 <pre class="r"><code>GetDiscoverEnabled(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title discover_enabled
 ## 1   zwitchdev ZwitchCorp Dev             TRUE
 ## 2 zwitchjulia Julia Bloggers             TRUE</code></pre>
-</section>
-<section id="getecommerce-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetEcommerce <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getecommerce-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getecommerce" class="section level4">
+<h4>GetEcommerce <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getecommerce-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the commerce level for each of the specified report suites.</p>
 <pre class="r"><code>GetEcommerce(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title ecommerce
 ## 1   zwitchdev ZwitchCorp Dev      TRUE
 ## 2 zwitchjulia Julia Bloggers      TRUE</code></pre>
-</section>
-<section id="getelements-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetElements <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getelements">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getelements" class="section level4">
+<h4>GetElements <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getelements"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves a list of possible valid elements for a report.</p>
 <pre class="r"><code>elem &lt;- GetElements(rs$rsid)
 head(elem)</code></pre>
@@ -641,9 +707,9 @@ head(elem)</code></pre>
 ## 4                NA zwitchdev
 ## 5                NA zwitchdev
 ## 6                NA zwitchdev</code></pre>
-</section>
-<section id="getevars-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetEvars <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getevars-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getevars" class="section level4">
+<h4>GetEvars <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getevars-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the commerce variables for each of the specified report suites.</p>
 <pre class="r"><code>evar &lt;- GetEvars(rs$rsid)
 head(evar)</code></pre>
@@ -661,9 +727,9 @@ head(evar)</code></pre>
 ## 4                      1 most_recent_last                TRUE    zwitchdev
 ## 5                      1 most_recent_last                TRUE    zwitchdev
 ## 6                      1 most_recent_last                TRUE    zwitchdev</code></pre>
-</section>
-<section id="getfeed-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetFeed <a href="https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeed">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getfeed" class="section level4">
+<h4>GetFeed <a href="https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeed"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Gets configuration details for a specific feed, including feed status, FTP delivery location, and the data columns that are included in the feed.</p>
 <pre class="r"><code>feed &lt;- GetFeed(1111111)
 head(feed)</code></pre>
@@ -682,9 +748,9 @@ head(feed)</code></pre>
 ## 4   ftp.somewhere.com        /                country
 ## 5   ftp.somewhere.com        /              date_time
 ## 6   ftp.somewhere.com        /                 domain</code></pre>
-</section>
-<section id="getfeeds-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetFeeds <a href="https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeeds">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getfeeds" class="section level4">
+<h4>GetFeeds <a href="https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeeds"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Returns a list of data feeds for the specified report suites, including delivery status.</p>
 <pre class="r"><code>GetFeeds(rs$rsid)</code></pre>
 <pre><code>##  feed_id      rsid interval   timezone                    name
@@ -693,9 +759,9 @@ head(feed)</code></pre>
 ## 1 ftp.somewhere.com        /
 ##                                                       activity
 ## 1 29786961, 2016-09-15 04:00:00, 2016-09-16 04:00:00, delivered</code></pre>
-</section>
-<section id="getfunctions-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetFunctions <a href="https://marketing.adobe.com/developer/documentation/segments-1-4/calculated-metrics">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getfunctions" class="section level4">
+<h4>GetFunctions <a href="https://marketing.adobe.com/developer/documentation/segments-1-4/calculated-metrics"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <pre class="r"><code>gf &lt;- GetFunctions()
 head(gf)</code></pre>
 <pre><code>##                       id                            name
@@ -719,17 +785,17 @@ head(gf)</code></pre>
 ## 4                  x, y include-zeros    &lt;NA&gt;
 ## 5               column1                  &lt;NA&gt;
 ## 6 condition, then, else                  &lt;NA&gt;</code></pre>
-</section>
-<section id="getgeosegmentation-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetGeoSegmentation <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getgeosegmentation">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getgeosegmentation" class="section level4">
+<h4>GetGeoSegmentation <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getgeosegmentation"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the geography segmentation for the requested report suites.</p>
 <pre class="r"><code>GetGeoSegmentation(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title geo_segmentation vista_enabled
 ## 1   zwitchdev ZwitchCorp Dev             TRUE         FALSE
 ## 2 zwitchjulia Julia Bloggers             TRUE         FALSE</code></pre>
-</section>
-<section id="getgroups-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetGroups <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getgroups-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getgroups" class="section level4">
+<h4>GetGroups <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getgroups-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves a list of a company’s permission groups.</p>
 <pre class="r"><code>gg &lt;- GetGroups()
 head(gg)</code></pre>
@@ -747,9 +813,9 @@ head(gg)</code></pre>
 ## 4                                                                                                                                                                                                                                                                                                                   Access to Analysis Workspace
 ## 5                                                                                                                                                                                                                                                                                                             Access to the Current Data Reports
 ## 6                                                                                                                                                                                                                                                                                                    Administrator Access to Adobe Mobile App UI</code></pre>
-</section>
-<section id="getinternalurlfilters-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetInternalURLFilters <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getinternalurlfilters-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getinternalurlfilters" class="section level4">
+<h4>GetInternalURLFilters <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getinternalurlfilters-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the internal URL filters for each of the specified report suites.</p>
 <pre class="r"><code>GetInternalURLFilters(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title internal_url_filters
@@ -757,33 +823,33 @@ head(gg)</code></pre>
 ## 2   zwitchdev ZwitchCorp Dev      randyzwitch.com
 ## 3 zwitchjulia Julia Bloggers  www.randyzwitch.com
 ## 4 zwitchjulia Julia Bloggers      randyzwitch.com</code></pre>
-</section>
-<section id="getipaddressexclusions-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetIPAddressExclusions <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getipaddressexclusions-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getipaddressexclusions" class="section level4">
+<h4>GetIPAddressExclusions <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getipaddressexclusions-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Returns a list of IP addresses excluded from website tracking for each of the specified report suites.</p>
 <pre class="r"><code>GetIPAddressExclusions(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title
 ## 1   zwitchdev ZwitchCorp Dev
 ## 2 zwitchjulia Julia Bloggers</code></pre>
-</section>
-<section id="getipobfuscation-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetIPObfuscation <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getipobfuscation-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getipobfuscation" class="section level4">
+<h4>GetIPObfuscation <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getipobfuscation-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the IP Address Obfuscation setting for each of the specified report suites.</p>
 <pre class="r"><code>GetIPObfuscation(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title ip_obfuscation
 ## 1   zwitchdev ZwitchCorp Dev           none
 ## 2 zwitchjulia Julia Bloggers           none</code></pre>
-</section>
-<section id="getkeyvisitors-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetKeyVisitors <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getkeyvisitors-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getkeyvisitors" class="section level4">
+<h4>GetKeyVisitors <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getkeyvisitors-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves a list of key visitors for each of the specified report suites.</p>
 <pre class="r"><code>GetKeyVisitors(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title key_visitors
 ## 1   zwitchdev ZwitchCorp Dev             
 ## 2 zwitchjulia Julia Bloggers</code></pre>
-</section>
-<section id="getlistvariables-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetListVariables <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlistvariables-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getlistvariables" class="section level4">
+<h4>GetListVariables <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlistvariables-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the list variables for the requested report suites.</p>
 <pre class="r"><code>GetListVariables(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title            name allocation_type enabled
@@ -807,17 +873,17 @@ head(gg)</code></pre>
 ## 4           never
 ## 5           never
 ## 6           never</code></pre>
-</section>
-<section id="getlocalization-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetLocalization <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlocalization-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getlocalization" class="section level4">
+<h4>GetLocalization <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlocalization-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the localization (multi-byte character) settings for each of the specified report suites.</p>
 <pre class="r"><code>GetLocalization(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title localization
 ## 1   zwitchdev ZwitchCorp Dev         TRUE
 ## 2 zwitchjulia Julia Bloggers         TRUE</code></pre>
-</section>
-<section id="getlogin-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetLogin <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlogin-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getlogin" class="section level4">
+<h4>GetLogin <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlogin-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves information about the specified user account.</p>
 <pre class="r"><code>GetLogin(&quot;rzwitch&quot;)</code></pre>
 <pre><code>##    login first_name last_name title             email phone_number
@@ -826,17 +892,17 @@ head(gg)</code></pre>
 ## 1     TRUE                FALSE   FALSE                              
 ##                                                                                                                                                                                         group_names
 ## 1 All Report Access,Ad Hoc Analysis License Users,Report Builder,Web Service Access,All Report Access,Discover License Users,Current Data Users,Reports &amp; Analytics Access,Analysis Workspace Access</code></pre>
-</section>
-<section id="getmarketingchannelexpiration-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetMarketingChannelExpiration <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannelexpiration-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getmarketingchannelexpiration" class="section level4">
+<h4>GetMarketingChannelExpiration <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannelexpiration-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Returns the currently defined Marketing Channel expiration dates for the specified report suites.</p>
 <pre class="r"><code>GetMarketingChannelExpiration(rs$rsid)</code></pre>
 <pre><code>##          rsid days
 ## 1   zwitchdev   30
 ## 2 zwitchjulia   30</code></pre>
-</section>
-<section id="getmarketingchannelrules-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetMarketingChannelRules <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannelrules-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getmarketingchannelrules" class="section level4">
+<h4>GetMarketingChannelRules <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannelrules-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Returns the currently defined Marketing Channel rules for the specified report suites.</p>
 <pre class="r"><code>gmcrs &lt;- GetMarketingChannelRules(&quot;zwitchdev&quot;)
 head(gmcrs)</code></pre>
@@ -868,9 +934,9 @@ head(gmcrs)</code></pre>
 ## 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 ## 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   r-bloggers.com,badhessian.org
 ## 6 facebook.com,linkedin.com,twitter.com,plus.google.com,orkut.com,friendster.com,livejournal.com,blogspot.com,wordpress.com,friendfeed.com,myspace.com,digg.com,reddit.com,stumbleupon.com,twine.com,yelp.com,mixx.com,delicious.com,tumblr.com,disqus.com,intensedebate.com,plurk.com,slideshare.net,backtype.com,netvibes.com,mister-wong.com,diigo.com,flixster.com,youtube.com,vimeo.com,12seconds.tv,zooomr.com,identi.ca,jaiku.com,flickr.com,imeem.com,dailymotion.com,photobucket.com,fotolog.com,smugmug.com,classmates.com,myyearbook.com,mylife.com,tagged.com,brightkite.com,ning.com,bebo.com,hi5.com,yuku.com,cafemom.com,xanga.com</code></pre>
-</section>
-<section id="getmarketingchannels-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetMarketingChannels <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannels-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getmarketingchannels" class="section level4">
+<h4>GetMarketingChannels <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannels-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Returns the currently defined Marketing Channels for the specified report suites.</p>
 <pre class="r"><code>gmc &lt;- GetMarketingChannels(rs$rsid)
 head(gmc)</code></pre>
@@ -888,9 +954,9 @@ head(gmc)</code></pre>
 ## 4                 0                       FALSE
 ## 5                 0                       FALSE
 ## 6                 0                        TRUE</code></pre>
-</section>
-<section id="getmetrics-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetMetrics <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getmetrics">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getmetrics" class="section level4">
+<h4>GetMetrics <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getmetrics"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves a list of possible valid elements for a report.</p>
 <pre class="r"><code>metrics &lt;- GetMetrics(rs$rsid)
 head(metrics)</code></pre>
@@ -908,9 +974,9 @@ head(metrics)</code></pre>
 ## 4    &lt;NA&gt; zwitchdev
 ## 5    &lt;NA&gt; zwitchdev
 ## 6    &lt;NA&gt; zwitchdev</code></pre>
-</section>
-<section id="getmobileappreporting-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetMobileAppReporting <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmobileappreporting">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getmobileappreporting" class="section level4">
+<h4>GetMobileAppReporting <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmobileappreporting"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the Mobile Application Tracking settings for the requested report suites.</p>
 <pre class="r"><code>GetMobileAppReporting(rs$rsid)</code></pre>
 <pre><code>##   allow_configuration all_lifecycle_enabled all_messaging_v1_enabled
@@ -921,25 +987,25 @@ head(metrics)</code></pre>
 ## 1                FALSE                 0                    0
 ##   deeplink_enabled places_enabled all_messaging_core_enabled
 ## 1            FALSE          FALSE                      FALSE</code></pre>
-</section>
-<section id="getpaidsearchdetection-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetPaidSearchDetection <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getpaidsearchdetection">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getpaidsearchdetection" class="section level4">
+<h4>GetPaidSearchDetection <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getpaidsearchdetection"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the paid search settings for each of the specified report suites.</p>
 <pre class="r"><code>GetPaidSearchDetection(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title search_engine query_string operator
 ## 1   zwitchdev ZwitchCorp Dev       ::any::           ps contains
 ## 2 zwitchjulia Julia Bloggers       ::any::           ps contains</code></pre>
-</section>
-<section id="getpermanenttraffic-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetPermanentTraffic <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getpermanenttraffic-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getpermanenttraffic" class="section level4">
+<h4>GetPermanentTraffic <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getpermanenttraffic-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the permanent traffic settings for each of the specified report suites.</p>
 <pre class="r"><code>GetPermanentTraffic(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title submit_date   login start_date hits_per_day
 ## 1   zwitchdev ZwitchCorp Dev  2015-01-12 rzwitch 2015-01-19          600
 ## 2 zwitchjulia Julia Bloggers  2015-01-10 rzwitch 2015-01-11          300</code></pre>
-</section>
-<section id="getpreviousservercalls-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetPreviousServerCalls <a href="">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getpreviousservercalls" class="section level4">
+<h4>GetPreviousServerCalls <a href=""><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <pre class="r"><code>GetPreviousServerCalls(rs$rsid)</code></pre>
 <pre><code>##          rsid average_server_calls peak_day_server_calls_date
 ## 1   zwitchdev         0.0000000000                 1969-12-31
@@ -947,9 +1013,9 @@ head(metrics)</code></pre>
 ##   peak_day_server_calls
 ## 1                     0
 ## 2                     0</code></pre>
-</section>
-<section id="getprivacysettings-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetPrivacySettings <a href="">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getprivacysettings" class="section level4">
+<h4>GetPrivacySettings <a href=""><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <pre class="r"><code>GetPrivacySettings(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title inferred_optout_non_mobile
 ## 1   zwitchdev ZwitchCorp Dev                          0
@@ -957,9 +1023,9 @@ head(metrics)</code></pre>
 ##   inferred_optout_mobile
 ## 1                      0
 ## 2                      0</code></pre>
-</section>
-<section id="getprops-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetProps <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getprops">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getprops" class="section level4">
+<h4>GetProps <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getprops"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the props (traffic variables) for the specified report suites.</p>
 <pre class="r"><code>props &lt;- GetProps(rs$rsid)
 head(props)</code></pre>
@@ -984,16 +1050,16 @@ head(props)</code></pre>
 ## 4                            NA           &lt;NA&gt;    zwitchdev
 ## 5                            NA              ,    zwitchdev
 ## 6                            NA              ,    zwitchdev</code></pre>
-</section>
-<section id="getqueue-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetQueue <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getqueue-2">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getqueue" class="section level4">
+<h4>GetQueue <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getqueue-2"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Returns a list of reports in a company’s report queue.</p>
 <pre class="r"><code>GetQueue()</code></pre>
 <pre><code>## [1] &quot;There are no reports in the Report Queue&quot;</code></pre>
 <pre><code>## list()</code></pre>
-</section>
-<section id="getrealtimereport-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetRealTimeReport <a href="">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getrealtimereport" class="section level4">
+<h4>GetRealTimeReport <a href=""><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>‘source’ parameter present and set to ‘realtime’. Note that Real-Time reports do not have to be queued, they can run immediately using Report.Run.</p>
 <pre class="r"><code>GetRealTimeReport(&quot;zwitchdev&quot;, &quot;instances&quot;)</code></pre>
 <pre><code>##                        name year month day hour minute instances
@@ -1009,9 +1075,9 @@ head(props)</code></pre>
 ## 10 2017-03-03T16:21:40-0500 2017     3   3   16     21         0
 ## 11 2017-03-03T16:26:40-0500 2017     3   3   16     26         0
 ## 12 2017-03-03T16:31:40-0500 2017     3   3   16     31         1</code></pre>
-</section>
-<section id="getrealtimesettings-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetRealTimeSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getrealtimesettings">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getrealtimesettings" class="section level4">
+<h4>GetRealTimeSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getrealtimesettings"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Returns the metrics that are configured to provide real time data.</p>
 <pre class="r"><code>GetRealTimeSettings(&quot;zwitchdev&quot;)</code></pre>
 <pre><code>##        rsid     site_title          name min_granularity ui_report
@@ -1022,18 +1088,18 @@ head(props)</code></pre>
 ## 1 instances             prop2 searchenginekeyword         geocountry
 ## 2 instances             prop2 searchenginekeyword         geocountry
 ## 3 instances              page searchenginekeyword         geocountry</code></pre>
-</section>
-<section id="getreportdescription-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetReportDescription <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportdescription">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getreportdescription" class="section level4">
+<h4>GetReportDescription <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportdescription"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the name, associated report type, and report description for the supplied bookmark ID. This report description can then be used to retrieve report data via the Report API. An error is returned for unsupported bookmark types.</p>
 <pre class="r"><code>GetReportDescription(&quot;15625765&quot;)</code></pre>
 <pre><code>##           name reportType reportSuiteID   dateFrom     dateTo
 ## 1 TestBookmark   overtime     zwitchdev 2017-03-01 2017-03-31
 ##   dateGranularity                           metrics
 ## 1             day pageviews, visits, uniquevisitors</code></pre>
-</section>
-<section id="getreportsuitegroups-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetReportSuiteGroups <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuitegroups-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getreportsuitegroups" class="section level4">
+<h4>GetReportSuiteGroups <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuitegroups-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves a list of permission groups assigned to the specified report suite.</p>
 <pre class="r"><code>GetReportSuiteGroups(&quot;zwitchdev&quot;)</code></pre>
 <pre><code>##        rsid     site_title groupid        group_name
@@ -1042,9 +1108,9 @@ head(props)</code></pre>
 ## 1 Access to all Report Suites, Dimensions, Metrics, Channel Reports, Anomaly Detection, Current Data, Analysis Workspace, My Recommended Reports and Dashboard Reportlets
 ##   type
 ## 1    0</code></pre>
-</section>
-<section id="getreportsuites-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetReportSuites <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getreportsuites" class="section level4">
+<h4>GetReportSuites <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves all report suites associated with the requesting company.</p>
 <pre class="r"><code>GetReportSuites()</code></pre>
 <pre><code>##                       rsid     site_title virtual
@@ -1052,15 +1118,15 @@ head(props)</code></pre>
 ## 2              zwitchjulia Julia Bloggers      NA
 ## 3         vrs_zwitch0_vrs1   zwitchdevVRS    TRUE
 ## 4 vrs_zwitch0_zwitchdevvrs  zwitchdevVRS2    TRUE</code></pre>
-</section>
-<section id="getscheduledspike-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetScheduledSpike <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getscheduledspike-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getscheduledspike" class="section level4">
+<h4>GetScheduledSpike <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getscheduledspike-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the scheduled traffic increase settings for the specified report suites.</p>
 <pre class="r"><code>GetScheduledSpike(rs$rsid)</code></pre>
 <pre><code>## [1] &quot;No scheduled spikes For This Report Suite&quot;</code></pre>
-</section>
-<section id="getsegments-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetSegments <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getsegments-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getsegments" class="section level4">
+<h4>GetSegments <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getsegments-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the segments that are available in one or more report suites.</p>
 <pre class="r"><code>segments &lt;- GetSegments(rs$rsid)
 head(segments)</code></pre>
@@ -1078,17 +1144,17 @@ head(segments)</code></pre>
 ## 4               FALSE     FALSE    zwitchdev
 ## 5               FALSE     FALSE    zwitchdev
 ## 6               FALSE     FALSE  zwitchjulia</code></pre>
-</section>
-<section id="getsitetitle-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetSiteTitle <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getsitetitle-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getsitetitle" class="section level4">
+<h4>GetSiteTitle <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getsitetitle-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the site title (friendly name) for each of the specified report suites.</p>
 <pre class="r"><code>GetSiteTitle(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title
 ## 1   zwitchdev ZwitchCorp Dev
 ## 2 zwitchjulia Julia Bloggers</code></pre>
-</section>
-<section id="getsuccessevents-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetSuccessEvents <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getevents">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getsuccessevents" class="section level4">
+<h4>GetSuccessEvents <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getevents"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the success events for each of the specified report suites.</p>
 <pre class="r"><code>events &lt;- GetSuccessEvents(rs$rsid)
 head(events)</code></pre>
@@ -1113,55 +1179,55 @@ head(events)</code></pre>
 ## 4         enabled
 ## 5         enabled
 ## 6         enabled</code></pre>
-</section>
-<section id="gettemplate-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetTemplate <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettemplate-2">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="gettemplate" class="section level4">
+<h4>GetTemplate <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettemplate-2"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the creation template for each of the specified report suites.</p>
 <pre class="r"><code>GetTemplate(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title       template
 ## 1   zwitchdev ZwitchCorp Dev             NA
 ## 2 zwitchjulia Julia Bloggers ZwitchCorp Dev</code></pre>
-</section>
-<section id="gettimestampenabled-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetTimeStampEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="gettimestampenabled" class="section level4">
+<h4>GetTimeStampEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <pre class="r"><code>GetTimeStampEnabled(c(&quot;zwitchdev&quot;, &quot;zwitchjulia&quot;))</code></pre>
 <pre><code>##          rsid timestampenabled
 ## 1   zwitchdev            FALSE
 ## 2 zwitchjulia            FALSE</code></pre>
-</section>
-<section id="gettimezone-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetTimeZone <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="gettimezone" class="section level4">
+<h4>GetTimeZone <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the Time Zone setting for each of the specified report suites.</p>
 <pre class="r"><code>GetTimeZone(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title  time_zone
 ## 1   zwitchdev ZwitchCorp Dev US/Eastern
 ## 2 zwitchjulia Julia Bloggers US/Eastern</code></pre>
-</section>
-<section id="gettrackingserver-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetTrackingServer <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettrackingserver-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="gettrackingserver" class="section level4">
+<h4>GetTrackingServer <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettrackingserver-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Returns the tracking server and namespace for the specified report suite. Only accepts a single report suite, as all report suites within an account will have same tracking server.</p>
 <pre class="r"><code>GetTrackingServer(&quot;zwitchdev&quot;)</code></pre>
 <pre><code>##    namespace              tracking_server
 ## 1 zwitchcorp zwitchcorp.or1.sc.omtrdc.net</code></pre>
-</section>
-<section id="gettransactionenabled-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetTransactionEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettransactionenabled">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="gettransactionenabled" class="section level4">
+<h4>GetTransactionEnabled <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettransactionenabled"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the transaction ids storage enable for the requested report suites.</p>
 <pre class="r"><code>GetTransactionEnabled(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title transaction
 ## 1   zwitchdev ZwitchCorp Dev           0
 ## 2 zwitchjulia Julia Bloggers           0</code></pre>
-</section>
-<section id="getuniquevisitorvariable-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetUniqueVisitorVariable <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getuniquevisitorvariable-1">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getuniquevisitorvariable" class="section level4">
+<h4>GetUniqueVisitorVariable <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getuniquevisitorvariable-1"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves the unique visitor variable setting for the specified report suites.</p>
 <pre class="r"><code>GetUniqueVisitorVariable(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title unique_visitor_variable
 ## 1   zwitchdev ZwitchCorp Dev                ::none::
 ## 2 zwitchjulia Julia Bloggers                ::none::</code></pre>
-</section>
-<section id="getversionaccess-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetVersionAccess <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getversionaccess">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getversionaccess" class="section level4">
+<h4>GetVersionAccess <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getversionaccess"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves version access for the company of the authenticated user.</p>
 <pre class="r"><code>GetVersionAccess()</code></pre>
 <pre><code>##   AdobeProducts
@@ -1169,9 +1235,9 @@ head(events)</code></pre>
 ## 2          sc14
 ## 3          sc15
 ## 4          dsc2</code></pre>
-</section>
-<section id="getvideosettings-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetVideoSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvideosettings">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getvideosettings" class="section level4">
+<h4>GetVideoSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvideosettings"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Retrieves video measurement settings.</p>
 <pre class="r"><code>GetVideoSettings(rs$rsid)</code></pre>
 <pre><code>##          rsid     site_title core_enabled ad_tracking_enabled
@@ -1186,37 +1252,37 @@ head(events)</code></pre>
 ##   video_completes_event
 ## 1                    NA
 ## 2                    NA</code></pre>
-</section>
-<section id="getvirtualreportsuitesettings-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetVirtualReportSuiteSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvirtualreportsuitesettings">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getvirtualreportsuitesettings" class="section level4">
+<h4>GetVirtualReportSuiteSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvirtualreportsuitesettings"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Get definition of virtual report suite (parent report suite and segments applied)</p>
 <pre class="r"><code>GetVirtualReportSuiteSettings(&quot;vrs_zwitch0_vrs1&quot;)</code></pre>
 <pre><code>##               rsid parent_rsid segment_list
 ## 1 vrs_zwitch0_vrs1   zwitchdev   All_Visits</code></pre>
-</section>
-<section id="viewprocessingrules-span-classglyphicon-glyphicon-link" class="level4">
-<h4>ViewProcessingRules <a href="">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="viewprocessingrules" class="section level4">
+<h4>ViewProcessingRules <a href=""><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>List processing rules for a report suite, along with behaviors that define the rule.</p>
 <pre class="r"><code>#No processing rules defined
 ViewProcessingRules(&quot;zwitchdev&quot;)</code></pre>
 <pre><code>##        rsid title comment rules actions
 ## 1 zwitchdev</code></pre>
 <hr />
-</section>
-</section>
-<section id="analytics-functions-span-classglyphicon-glyphicon-link" class="level2">
-<h2><strong>Analytics Functions</strong> <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/get-started">&lt;span class=“glyphicon glyphicon-link”</span></a></h2>
+</div>
+</div>
+<div id="analytics-functions" class="section level2">
+<h2><strong>Analytics Functions</strong> <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/get-started"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h2>
 <p>The functions in this section represent the types of information a user can retrieve from the Adobe Analytics UI. However, in most cases, the API via RSiteCatalyst can retrieve more data than is displayed in the web interface.</p>
 <p>Note that because of the extensive number of keyword arguments for each function, it’s not feasible to show examples of all functionality. Please see the <a href="/#examples">Examples</a> section above or the detailed documentation within the RSiteCatalyst R manual.</p>
-<section id="buildclassificationvaluesegment-span-classglyphicon-glyphicon-link" class="level4">
-<h4>BuildClassificationValueSegment <a href="">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+<div id="buildclassificationvaluesegment" class="section level4">
+<h4>BuildClassificationValueSegment <a href=""><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Used for creating inline segments for use in Queue* functions. This is a convenience function to create the proper formatting for the required JSON object, it does not call the API itself.</p>
 <pre class="r"><code>vistor_segment &lt;- BuildClassificationValueSegment(element,
                                                   search.keywords,
                                                   classification,
                                                   search.type)</code></pre>
-</section>
-<section id="buildrealtimereportstructure" class="level4">
+</div>
+<div id="buildrealtimereportstructure" class="section level4">
 <h4>BuildRealTimeReportStructure</h4>
 <p>Selects the metrics and elements (dimensions) on which you want Real-Time reports enabled. This is a convenience function to create the proper formatting for the required JSON object, it does not call the API itself.</p>
 <p>Use the returned list from this function as argument(s) in SaveRealTimeSettings.</p>
@@ -1234,17 +1300,17 @@ report.test3 &lt;- BuildRealTimeReportStructure(report.name=&quot;test789&quot;,
                elements = c(&quot;prop2&quot;, &quot;searchenginekeyword&quot;, &quot;geocountry&quot;),
                min.granularity = &quot;5&quot;,
                ui.report=FALSE)</code></pre>
-</section>
-<section id="getreport-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetReport <a href="">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getreport" class="section level4">
+<h4>GetReport <a href=""><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <pre class="r"><code>#TBD</code></pre>
-</section>
-<section id="getreportsbyids-span-classglyphicon-glyphicon-link" class="level4">
-<h4>GetReportsByIds <a href="">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="getreportsbyids" class="section level4">
+<h4>GetReportsByIds <a href=""><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <pre class="r"><code>#TBD</code></pre>
-</section>
-<section id="queuedatawarehouse-span-classglyphicon-glyphicon-link" class="level4">
-<h4>QueueDataWarehouse <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="queuedatawarehouse" class="section level4">
+<h4>QueueDataWarehouse <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>QueueDatawarehouse is a method that can both schedule Data Warehouse reports (like in the Adobe Analytics interface), as well as return reports back in the R interface as calculated by Data Warehouse (developmental). For the most part, users should pass the <code>enqueueOnly=TRUE</code> parameters with the <code>ftp</code> parameter to send reports to the FTP.</p>
 <p>API:</p>
 <pre class="r"><code># Because report sent to FTP, returns the report.id value
@@ -1262,9 +1328,9 @@ QueueDataWarehouse(&quot;zwitchdev&quot;,
                               filename = &quot;myreport.csv&quot;)
   )</code></pre>
 <pre><code>## [1] 1661786899</code></pre>
-</section>
-<section id="queuefallout-span-classglyphicon-glyphicon-link" class="level4">
-<h4>QueueFallout <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="queuefallout" class="section level4">
+<h4>QueueFallout <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>This method generates the underlying data for a Fallout/Pathing report within Adobe Analytics. The API method supports both visits and pageviews as metrics.</p>
 <p>Adobe Analytics Interface: <img src="images/queuefallout.png" /></p>
 <p>API:</p>
@@ -1282,9 +1348,9 @@ QueueDataWarehouse(&quot;zwitchdev&quot;,
 ##                                        url visits segment.id segment.name
 ## 1      http://randyzwitch.com/r-amazon-ec2    768                        
 ## 2 http://randyzwitch.com/julia-import-data      0</code></pre>
-</section>
-<section id="queueovertime-span-classglyphicon-glyphicon-link" class="level4">
-<h4>QueueOvertime <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="queueovertime" class="section level4">
+<h4>QueueOvertime <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>This method is analogous to the “Key Metrics” report within Adobe Analytics. Note that the API method does not return the total row, just the metrics by the time breakdown.</p>
 <p>Adobe Analytics Interface: <img src="images/queueovertime.png" /></p>
 <p>API:</p>
@@ -1298,9 +1364,9 @@ QueueDataWarehouse(&quot;zwitchdev&quot;,
 ##   segment.id segment.name visits
 ## 1                            967
 ## 2                            657</code></pre>
-</section>
-<section id="queuepathing-span-classglyphicon-glyphicon-link" class="level4">
-<h4>QueuePathing <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="queuepathing" class="section level4">
+<h4>QueuePathing <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>QueuePathing is the API method that calculates the underlying data for NextPage, Fallout and other path-related reports within Adobe Analytics.</p>
 <p>Adobe Analytics Interface: <img src="images/queuepathing.png" /></p>
 <p>API:</p>
@@ -1333,9 +1399,9 @@ QueuePathing(&quot;zwitchdev&quot;,
 ## 3                        
 ## 4                        
 ## 5</code></pre>
-</section>
-<section id="queueranked-span-classglyphicon-glyphicon-link" class="level4">
-<h4>QueueRanked <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="queueranked" class="section level4">
+<h4>QueueRanked <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>QueueRanked represents the data from a ranked report within Adobe Analytics, where one or more elements is specified with no dateGranularity. Note that the API method does not return the total row, just the metrics by the breakdown(s) specified.</p>
 <p>Adobe Analytics Interface: <img src="images/queueranked.png" /></p>
 <pre class="r"><code>QueueRanked(&quot;zwitchdev&quot;, &quot;2016-10-01&quot;, &quot;2016-10-31&quot;, &quot;pageviews&quot;, &quot;page&quot;, top = 10)</code></pre>
@@ -1375,9 +1441,9 @@ QueuePathing(&quot;zwitchdev&quot;,
 ## 8                         
 ## 9                         
 ## 10</code></pre>
-</section>
-<section id="queuesummary-span-classglyphicon-glyphicon-link" class="level4">
-<h4>QueueSummary <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="queuesummary" class="section level4">
+<h4>QueueSummary <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>QueueSummary does not map to an interface report per se; rather, QueueSummary provides the total calculation row for many reports within Adobe Analytics. It is this method that will provide ’unique` calculations such as visitors, which would be incorrectly summed across an element such as page views.</p>
 <pre class="r"><code>QueueSummary(rs$rsid, &quot;2016-09-01&quot;, &quot;visits&quot;)</code></pre>
 <pre><code>## [1] &quot;Requesting URL attempt #1&quot;
@@ -1385,9 +1451,9 @@ QueuePathing(&quot;zwitchdev&quot;,
 <pre><code>##              period reportsuite url visits
 ## 1 Thu.  1 Sep. 2016   zwitchdev        294
 ## 2 Thu.  1 Sep. 2016 zwitchjulia        113</code></pre>
-</section>
-<section id="queuetrended-span-classglyphicon-glyphicon-link" class="level4">
-<h4>QueueTrended <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="queuetrended" class="section level4">
+<h4>QueueTrended <a href="https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>QueueTrended is similar to a QueueOvertime report, except instead of just having a metric by time granularity, you can specify an element to trend. One notable feature for the API method is that it removes the restriction of five element values to be trended over time (i.e. Top 5 pages over time)</p>
 <p>Adobe Analytics Interface: <img src="images/queuetrended.png" /></p>
 <p>API:</p>
@@ -1410,24 +1476,24 @@ QueuePathing(&quot;zwitchdev&quot;,
 ## 5                        
 ## 6                        
 ## 7</code></pre>
-</section>
-<section id="saverealtimesettings-span-classglyphicon-glyphicon-link" class="level4">
-<h4>SaveRealTimeSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-saverealtimesettings">&lt;span class=“glyphicon glyphicon-link”</span></a></h4>
+</div>
+<div id="saverealtimesettings" class="section level4">
+<h4>SaveRealTimeSettings <a href="https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-saverealtimesettings"><svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 512 512"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a></h4>
 <p>Selects the metrics and elements (dimensions) on which you want real time reports enabled. Realtime configuration changes take 15 minutes to be reflected in reports.</p>
 <p>WARNING: This function allows you to change the settings in your Adobe Analytics UI for all users, so be sure this is what you want to do. Additionally, submitting this function with only one report will mean other reports are deleted, you’re NOT just changing a single report.</p>
 <pre class="r"><code>SaveRealTimeSettings(reportsuite.ids = &quot;&quot;, report1 = list(),
   report2 = list(), report3 = list())</code></pre>
-</section>
-<section id="scauth" class="level4">
+</div>
+<div id="scauth" class="section level4">
 <h4>SCAuth</h4>
 <pre class="r"><code>SCAuth(&quot;username:company&quot;, &quot;cd1d234dee56e8202da6f7d3213eb1ef&quot;)</code></pre>
-</section>
-<section id="submitjsonqueuereport" class="level4">
+</div>
+<div id="submitjsonqueuereport" class="section level4">
 <h4>SubmitJsonQueueReport</h4>
 <p>A function for advanced users, for the case where a user feels that submitting a JSON request to the Report.Queue API endpoint would be easier than using one of the pre-defined functions from RSiteCatalyst.</p>
 <pre class="r"><code>report &lt;- SubmitJsonQueueReport(&quot;valid JSON string&quot;)</code></pre>
-</section>
-</section>
+</div>
+</div>
 
 
 

@@ -12,6 +12,10 @@ knitr::opts_chunk$set(echo = TRUE)
 cacheflag = TRUE
 ```
 
+```{r load_packages, message=FALSE, warning=FALSE, include=FALSE} 
+library(fontawesome)
+```
+
 RSiteCatalyst is an R package for accessing the Adobe Analytics API. The focus of this package are analysts looking for a convenient, programmatic way for accessing their website data using the power of R.
 
 ---
@@ -35,7 +39,7 @@ Additionally, you will either need to obtain your Web Services Credentials or re
 
 Regardless of whether you choose the 'legacy' method for authentication or the newer OAuth2 method, the API will return the same data. Which method you choose depends on your company security requirements, familiarity with OAuth2 or your application-specific details.
 
-#### Legacy (WSSE) [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/authentication-1/using-web-service-credentials-2) {.toc-ignore}
+#### Legacy (WSSE) [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/authentication-1/using-web-service-credentials-2) {.toc-ignore}
 
 The 'legacy' method of authenticating with the Adobe Analytics API requires knowing your <u>User Name</u> and <u>Shared Secret</u>, which can be obtained from the same `User Management -> Users -> Access` menu in the Admin panel where Web Services Access is granted.
 
@@ -67,7 +71,7 @@ GetReportSuites()
 ##  ERROR: Bad Request  -  Unable to validate authentication.
 ```
 
-#### OAuth2 [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/authentication-1/auth-overview-1#concept_4646CEC9CE5E4698A936D84B90A2CD0C) {.toc-ignore}
+#### OAuth2 [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/authentication-1/auth-overview-1#concept_4646CEC9CE5E4698A936D84B90A2CD0C) {.toc-ignore}
 
 TBD
 
@@ -154,13 +158,13 @@ RSiteCatalyst is provided under the [MIT License](https://tldrlegal.com/license/
 +----------------------------+----------------------------------+
 | Shashi Khatri              | [GitHub](https://github.com/mrshashi)   LinkedIn   Twitter          |
 +----------------------------+----------------------------------+
-| Diego Villuendas Pellicero | [GitHub](https://github.com/dieguico)   LinkedIn   [Twitter](https://twitter.com/dieguico)          |
+| Diego Villuendas Pellicero | [GitHub](https://github.com/dieguico)   LinkedIn   [Twitter](https://twitter.com/dieguico)     |
 +----------------------------+----------------------------------+
 | Jason Morgan               | [GitHub](https://github.com/framingeinstein)   LinkedIn   Twitter          |
 +----------------------------+----------------------------------+
-| Johann De Boer               | [GitHub](https://github.com/jdeboer)   LinkedIn   [Twitter](https://twitter.com/johannux)          |
+| Johann De Boer               | [GitHub](https://github.com/jdeboer)   LinkedIn   [Twitter](https://twitter.com/johannux)    |
 +----------------------------+----------------------------------+
-| leocwlau               | [GitHub](https://github.com/leocwlau)   LinkedIn   Twitter       |
+| leocwlau                    | [GitHub](https://github.com/leocwlau)   LinkedIn   Twitter    |
 +----------------------------+----------------------------------+
 
 ### Release Notes {.toc-ignore}
@@ -190,6 +194,7 @@ The following examples are blog posts and examples written by members of the com
 
 #### Business Analytics {.toc-ignore}
 
+* [GETTING STARTED WITH ADOBE ANALYTICS AND ALTERYX](http://yourlifeindata.com/2018/04/04/getting-started-with-adobe-analytics-and-alteryx/)
 * [Market Basket Analysis With Adobe Analytics And RSiteCatalyst](http://33sticks.com/rsitecatalyst-market-basket-analysis-adobe-analytics/)
 * [Date Based Cohort Analysis for Adobe SiteCatalyst using R](http://chrisnart.blogspot.com/2014/03/date-based-cohort-analysis-for-adobe.html)
 * [Clustering Search Keywords Using K-Means Clustering](http://randyzwitch.com/rsitecatalyst-k-means-clustering/)
@@ -199,6 +204,7 @@ The following examples are blog posts and examples written by members of the com
 * [Data Mining on Web Analytics Data](http://rpubs.com/rohitgossain/data-mining-web-analytics)
 
 #### Implementation / Automation {.toc-ignore}
+* [Build Adobe Analytics SDR in R using RSiteCatalyst and Tidyverse (video)](https://www.youtube.com/watch?v=-wUB0aplnik)
 * [Adobe Sitecatalyst API and R: how to integrate reports with the SAINT classification file](http://analyticsblog.mecglobal.it/en/analytics-tools/adobe-sitecatalyst-api-in-r/)
 * [AUTOMATING YOUR LIFE WITH ADOBE ANALYTICS API DATA AND R](http://www.cardinalpath.com/automating-your-life-with-adobe-analytics-api-data-and-r/)
 * [Calling RSiteCatalyst From Python](http://randyzwitch.com/rsitecatalyst-adobe-analytics-python/)
@@ -225,11 +231,11 @@ The following examples are blog posts and examples written by members of the com
 
 ---
 
-## **Admin / Metadata Functions** [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/admin-api)
+## **Admin / Metadata Functions** [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/admin-api)
 
 With a few exceptions, most of the Admin/Metadata functions take a report suite or a list of report suites as arguments and return the settings for a given report. These settings will mostly correspond with what administrators can see in the Adobe Analytics interface.
 
-#### CancelReport [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-cancel)
+#### CancelReport [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-cancel)
 
 Cancels a previously submitted report request, and removes it from the processing queue.
 
@@ -237,7 +243,7 @@ Cancels a previously submitted report request, and removes it from the processin
 CancelReport(12345678)
 ```
 
-#### GetActivation [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getactivation-1)
+#### GetActivation [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getactivation-1)
 
 Retrieves the activation status for each of the specified report suites.
 
@@ -245,7 +251,7 @@ Retrieves the activation status for each of the specified report suites.
 GetActivation(rs$rsid)
 ```
 
-#### GetAxleStartDate [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getaxlestartdate)
+#### GetAxleStartDate [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getaxlestartdate)
 
 Retrieves the date a report suite was migrated from SiteCatalyst 14 to axle processing (version 15).
 
@@ -253,7 +259,7 @@ Retrieves the date a report suite was migrated from SiteCatalyst 14 to axle proc
 GetAxleStartDate(rs$rsid)
 ```
 
-#### GetBaseCurrency [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbasecurrency-1)
+#### GetBaseCurrency [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbasecurrency-1)
 
 Retrieves a list of supported currency codes for each of the specified report suites.
 
@@ -261,7 +267,7 @@ Retrieves a list of supported currency codes for each of the specified report su
 GetBaseCurrency(rs$rsid)
 ```
 
-#### GetBaseURL [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbaseurl-1)
+#### GetBaseURL [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbaseurl-1)
 
 Retrieves the base URL assigned to each of the specified report suites.
 
@@ -269,7 +275,7 @@ Retrieves the base URL assigned to each of the specified report suites.
 GetBaseURL(rs$rsid)
 ```
 
-#### GetBookmarks [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbookmarks-1)
+#### GetBookmarks [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getbookmarks-1)
 
 Retrieves a list of bookmarks for the authenticated user.
 Parameters folder_limit and folder_offset are optional, and only necessary if the total bookmark count exceeds 500, which is the limit. Use them to select a certain range of folders out of the entire set.
@@ -278,7 +284,7 @@ Parameters folder_limit and folder_offset are optional, and only necessary if th
 GetBookmarks()
 ```
 
-#### GetCalculatedMetrics [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcalculatedmetrics-1)
+#### GetCalculatedMetrics [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcalculatedmetrics-1)
 
 Retrieves the calculated metrics assigned to each of the specified report suites.
 
@@ -287,7 +293,7 @@ gcm <- GetCalculatedMetrics(rs$rsid)
 head(gcm)
 ```
 
-#### GetClassifications [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getclassifications-1)
+#### GetClassifications [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getclassifications-1)
 
 Retrieves a list of classifications (associated with the specified element) for each of the specified report suites.
 
@@ -296,14 +302,14 @@ gcl <- GetClassifications(rs$rsid)
 head(gcl)
 ```
 
-#### GetClickMapReporting [<span class="glyphicon glyphicon-link"</span>]()
+#### GetClickMapReporting [`r fa("link", fill = "steelblue")`]()
 
 ```{r, cache=cacheflag}
 gcmr <- GetClickMapReporting(rs$rsid)
 head(gcmr)
 ```
 
-#### GetCustomCalendar [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcustomcalendar-1)
+#### GetCustomCalendar [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getcustomcalendar-1)
 
 Retrieves the custom calendar for each of the specified report suites.
 
@@ -311,7 +317,7 @@ Retrieves the custom calendar for each of the specified report suites.
 GetCustomCalendar(rs$rsid)
 ```
 
-#### GetDashboards [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdashboards-1)
+#### GetDashboards [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdashboards-1)
 
 Retrieves all the dashboards for the authenticated web services user, with bookmarks included.
 Parameters dashboard_limit and dashboard_offset are optional, and only necessary if the total bookmark count exceeds 500, which is the limit. Use them to select a certain range of bookmarks out of the entire set.
@@ -321,7 +327,7 @@ gdb <- GetDashboards()
 head(gdb)
 ```
 
-#### GetDataWarehouseDisplay [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdatawarehousedisplay)
+#### GetDataWarehouseDisplay [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdatawarehousedisplay)
 
 Returns if data warehouse is enabled for the requested report suites.
 
@@ -329,7 +335,7 @@ Returns if data warehouse is enabled for the requested report suites.
 GetDataWarehouseDisplay(rs$rsid)
 ```
 
-#### GetDefaultPage [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdefaultpage-1)
+#### GetDefaultPage [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdefaultpage-1)
 
 Retrieves the default page for each of the specified report suites.
 
@@ -337,7 +343,7 @@ Retrieves the default page for each of the specified report suites.
 GetDefaultPage(rs$rsid)
 ```
 
-#### GetDiscoverEnabled [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdiscoverenabled)
+#### GetDiscoverEnabled [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getdiscoverenabled)
 
 Returns whether ad hoc analysis (formerly Discover) is enabled for the requested report suites.
 
@@ -345,7 +351,7 @@ Returns whether ad hoc analysis (formerly Discover) is enabled for the requested
 GetDiscoverEnabled(rs$rsid)
 ```
 
-#### GetEcommerce [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getecommerce-1)
+#### GetEcommerce [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getecommerce-1)
 
 Retrieves the commerce level for each of the specified report suites.
 
@@ -353,7 +359,7 @@ Retrieves the commerce level for each of the specified report suites.
 GetEcommerce(rs$rsid)
 ```
 
-#### GetElements [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getelements)
+#### GetElements [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getelements)
 
 Retrieves a list of possible valid elements for a report.
 
@@ -362,7 +368,7 @@ elem <- GetElements(rs$rsid)
 head(elem)
 ```
 
-#### GetEvars [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getevars-1)
+#### GetEvars [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getevars-1)
 
 Retrieves the commerce variables for each of the specified report suites.
 
@@ -371,7 +377,7 @@ evar <- GetEvars(rs$rsid)
 head(evar)
 ```
 
-#### GetFeed [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeed)
+#### GetFeed [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeed)
 
 Gets configuration details for a specific feed, including feed status, FTP delivery location, and the data columns that are included in the feed.
 
@@ -397,7 +403,7 @@ head(feed)
 ## 6   ftp.somewhere.com        /                 domain
 ```
 
-#### GetFeeds [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeeds)
+#### GetFeeds [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/data-feeds/r-getfeeds)
 
 Returns a list of data feeds for the specified report suites, including delivery status.
 
@@ -413,14 +419,14 @@ GetFeeds(rs$rsid)
 ## 1 29786961, 2016-09-15 04:00:00, 2016-09-16 04:00:00, delivered
 ```
 
-#### GetFunctions [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/segments-1-4/calculated-metrics)
+#### GetFunctions [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/segments-1-4/calculated-metrics)
 
 ```{r, cache=cacheflag}
 gf <- GetFunctions()
 head(gf)
 ```
 
-#### GetGeoSegmentation [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getgeosegmentation)
+#### GetGeoSegmentation [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getgeosegmentation)
 
 Retrieves the geography segmentation for the requested report suites.
 
@@ -428,7 +434,7 @@ Retrieves the geography segmentation for the requested report suites.
 GetGeoSegmentation(rs$rsid)
 ```
 
-#### GetGroups [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getgroups-1)
+#### GetGroups [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getgroups-1)
 
 Retrieves a list of a company's permission groups.
 
@@ -437,7 +443,7 @@ gg <- GetGroups()
 head(gg)
 ```
 
-#### GetInternalURLFilters [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getinternalurlfilters-1)
+#### GetInternalURLFilters [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getinternalurlfilters-1)
 
 Retrieves the internal URL filters for each of the specified report suites.
 
@@ -445,7 +451,7 @@ Retrieves the internal URL filters for each of the specified report suites.
 GetInternalURLFilters(rs$rsid)
 ```
 
-#### GetIPAddressExclusions [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getipaddressexclusions-1)
+#### GetIPAddressExclusions [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getipaddressexclusions-1)
 
 Returns a list of IP addresses excluded from website tracking for each of the specified report suites.
 
@@ -453,7 +459,7 @@ Returns a list of IP addresses excluded from website tracking for each of the sp
 GetIPAddressExclusions(rs$rsid)
 ```
 
-#### GetIPObfuscation [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getipobfuscation-1)
+#### GetIPObfuscation [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getipobfuscation-1)
 
 Retrieves the IP Address Obfuscation setting for each of the specified report suites.
 
@@ -461,7 +467,7 @@ Retrieves the IP Address Obfuscation setting for each of the specified report su
 GetIPObfuscation(rs$rsid)
 ```
 
-#### GetKeyVisitors [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getkeyvisitors-1)
+#### GetKeyVisitors [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getkeyvisitors-1)
 
 Retrieves a list of key visitors for each of the specified report suites.
 
@@ -469,7 +475,7 @@ Retrieves a list of key visitors for each of the specified report suites.
 GetKeyVisitors(rs$rsid)
 ```
 
-#### GetListVariables [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlistvariables-1)
+#### GetListVariables [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlistvariables-1)
 
 Retrieves the list variables for the requested report suites.
 
@@ -477,7 +483,7 @@ Retrieves the list variables for the requested report suites.
 GetListVariables(rs$rsid)
 ```
 
-#### GetLocalization [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlocalization-1)
+#### GetLocalization [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlocalization-1)
 
 Retrieves the localization (multi-byte character) settings for each of the specified report suites.
 
@@ -485,7 +491,7 @@ Retrieves the localization (multi-byte character) settings for each of the speci
 GetLocalization(rs$rsid)
 ```
 
-#### GetLogin [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlogin-1)
+#### GetLogin [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getlogin-1)
 
 Retrieves information about the specified user account.
 
@@ -501,7 +507,7 @@ GetLogin("rzwitch")
 ## 1 All Report Access,Ad Hoc Analysis License Users,Report Builder,Web Service Access,All Report Access,Discover License Users,Current Data Users,Reports & Analytics Access,Analysis Workspace Access
 ```
 
-#### GetMarketingChannelExpiration [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannelexpiration-1)
+#### GetMarketingChannelExpiration [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannelexpiration-1)
 
 Returns the currently defined Marketing Channel expiration dates for the specified report suites.
 
@@ -509,7 +515,7 @@ Returns the currently defined Marketing Channel expiration dates for the specifi
 GetMarketingChannelExpiration(rs$rsid)
 ```
 
-#### GetMarketingChannelRules [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannelrules-1)
+#### GetMarketingChannelRules [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannelrules-1)
 
 Returns the currently defined Marketing Channel rules for the specified report suites.
 
@@ -518,7 +524,7 @@ gmcrs <- GetMarketingChannelRules("zwitchdev")
 head(gmcrs)
 ```
 
-#### GetMarketingChannels [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannels-1)
+#### GetMarketingChannels [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmarketingchannels-1)
 
 Returns the currently defined Marketing Channels for the specified report suites.
 
@@ -527,7 +533,7 @@ gmc <- GetMarketingChannels(rs$rsid)
 head(gmc)
 ```
 
-#### GetMetrics [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getmetrics)
+#### GetMetrics [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getmetrics)
 
 Retrieves a list of possible valid elements for a report.
 
@@ -536,7 +542,7 @@ metrics <- GetMetrics(rs$rsid)
 head(metrics)
 ```
 
-#### GetMobileAppReporting [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmobileappreporting)
+#### GetMobileAppReporting [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getmobileappreporting)
 
 Retrieves the Mobile Application Tracking settings for the requested report suites.
 
@@ -544,7 +550,7 @@ Retrieves the Mobile Application Tracking settings for the requested report suit
 GetMobileAppReporting(rs$rsid)
 ```
 
-#### GetPaidSearchDetection [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getpaidsearchdetection)
+#### GetPaidSearchDetection [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getpaidsearchdetection)
 
 Retrieves the paid search settings for each of the specified report suites.
 
@@ -552,7 +558,7 @@ Retrieves the paid search settings for each of the specified report suites.
 GetPaidSearchDetection(rs$rsid)
 ```
 
-#### GetPermanentTraffic [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getpermanenttraffic-1)
+#### GetPermanentTraffic [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getpermanenttraffic-1)
 
 Retrieves the permanent traffic settings for each of the specified report suites.
 
@@ -560,19 +566,19 @@ Retrieves the permanent traffic settings for each of the specified report suites
 GetPermanentTraffic(rs$rsid)
 ```
 
-#### GetPreviousServerCalls [<span class="glyphicon glyphicon-link"</span>]()
+#### GetPreviousServerCalls [`r fa("link", fill = "steelblue")`]()
 
 ```{r, cache=cacheflag}
 GetPreviousServerCalls(rs$rsid)
 ```
 
-#### GetPrivacySettings [<span class="glyphicon glyphicon-link"</span>]()
+#### GetPrivacySettings [`r fa("link", fill = "steelblue")`]()
 
 ```{r, cache=cacheflag}
 GetPrivacySettings(rs$rsid)
 ```
 
-#### GetProps [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getprops)
+#### GetProps [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getprops)
 
 Retrieves the props (traffic variables) for the specified report suites.
 
@@ -581,7 +587,7 @@ props <- GetProps(rs$rsid)
 head(props)
 ```
 
-#### GetQueue [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getqueue-2)
+#### GetQueue [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-getqueue-2)
 
 Returns a list of reports in a company's report queue.
 
@@ -589,7 +595,7 @@ Returns a list of reports in a company's report queue.
 GetQueue()
 ```
 
-#### GetRealTimeReport [<span class="glyphicon glyphicon-link"</span>]()
+#### GetRealTimeReport [`r fa("link", fill = "steelblue")`]()
 
 'source' parameter present and set to 'realtime'. Note that Real-Time reports do not have to be queued, they can run immediately using Report.Run.
 
@@ -597,7 +603,7 @@ GetQueue()
 GetRealTimeReport("zwitchdev", "instances")
 ```
 
-#### GetRealTimeSettings [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getrealtimesettings)
+#### GetRealTimeSettings [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getrealtimesettings)
 
 Returns the metrics that are configured to provide real time data.
 
@@ -605,7 +611,7 @@ Returns the metrics that are configured to provide real time data.
 GetRealTimeSettings("zwitchdev")
 ```
 
-#### GetReportDescription [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportdescription)
+#### GetReportDescription [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportdescription)
 
 Retrieves the name, associated report type, and report description for the supplied bookmark ID. This report description can then be used to retrieve report data via the Report API. An error is returned for unsupported bookmark types.
 
@@ -613,7 +619,7 @@ Retrieves the name, associated report type, and report description for the suppl
 GetReportDescription("15625765")
 ```
 
-#### GetReportSuiteGroups [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuitegroups-1)
+#### GetReportSuiteGroups [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuitegroups-1)
 
 Retrieves a list of permission groups assigned to the specified report suite.
 
@@ -621,7 +627,7 @@ Retrieves a list of permission groups assigned to the specified report suite.
 GetReportSuiteGroups("zwitchdev")
 ```
 
-#### GetReportSuites [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1)
+#### GetReportSuites [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getreportsuites-1)
 
 Retrieves all report suites associated with the requesting company.
 
@@ -629,7 +635,7 @@ Retrieves all report suites associated with the requesting company.
 GetReportSuites()
 ```
 
-#### GetScheduledSpike [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getscheduledspike-1)
+#### GetScheduledSpike [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getscheduledspike-1)
 
 Retrieves the scheduled traffic increase settings for the specified report suites.
 
@@ -637,7 +643,7 @@ Retrieves the scheduled traffic increase settings for the specified report suite
 GetScheduledSpike(rs$rsid)
 ```
 
-#### GetSegments [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getsegments-1)
+#### GetSegments [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getsegments-1)
 
 Retrieves the segments that are available in one or more report suites.
 
@@ -646,7 +652,7 @@ segments <- GetSegments(rs$rsid)
 head(segments)
 ```
 
-#### GetSiteTitle [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getsitetitle-1)
+#### GetSiteTitle [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getsitetitle-1)
 
 Retrieves the site title (friendly name) for each of the specified report suites.
 
@@ -654,7 +660,7 @@ Retrieves the site title (friendly name) for each of the specified report suites
 GetSiteTitle(rs$rsid)
 ```
 
-#### GetSuccessEvents [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getevents)
+#### GetSuccessEvents [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getevents)
 
 Retrieves the success events for each of the specified report suites.
 
@@ -663,7 +669,7 @@ events <- GetSuccessEvents(rs$rsid)
 head(events)
 ```
 
-#### GetTemplate [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettemplate-2)
+#### GetTemplate [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettemplate-2)
 
 Retrieves the creation template for each of the specified report suites.
 
@@ -671,13 +677,13 @@ Retrieves the creation template for each of the specified report suites.
 GetTemplate(rs$rsid)
 ```
 
-#### GetTimeStampEnabled [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1)
+#### GetTimeStampEnabled [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1)
 
 ```{r, cache=cacheflag}
 GetTimeStampEnabled(c("zwitchdev", "zwitchjulia"))
 ```
 
-#### GetTimeZone [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1)
+#### GetTimeZone [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettimezone-1)
 
 Retrieves the Time Zone setting for each of the specified report suites.
 
@@ -685,7 +691,7 @@ Retrieves the Time Zone setting for each of the specified report suites.
 GetTimeZone(rs$rsid)
 ```
 
-#### GetTrackingServer [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettrackingserver-1)
+#### GetTrackingServer [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettrackingserver-1)
 
 Returns the tracking server and namespace for the specified report suite. Only accepts a single report suite, as all report suites within an account will have same tracking server.
 
@@ -693,7 +699,7 @@ Returns the tracking server and namespace for the specified report suite. Only a
 GetTrackingServer("zwitchdev")
 ```
 
-#### GetTransactionEnabled [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettransactionenabled)
+#### GetTransactionEnabled [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-gettransactionenabled)
 
 Retrieves the transaction ids storage enable for the requested report suites.
 
@@ -701,7 +707,7 @@ Retrieves the transaction ids storage enable for the requested report suites.
 GetTransactionEnabled(rs$rsid)
 ```
 
-#### GetUniqueVisitorVariable [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getuniquevisitorvariable-1)
+#### GetUniqueVisitorVariable [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getuniquevisitorvariable-1)
 
 Retrieves the unique visitor variable setting for the specified report suites.
 
@@ -709,7 +715,7 @@ Retrieves the unique visitor variable setting for the specified report suites.
 GetUniqueVisitorVariable(rs$rsid)
 ```
 
-#### GetVersionAccess [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getversionaccess)
+#### GetVersionAccess [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getversionaccess)
 
 Retrieves version access for the company of the authenticated user.
 
@@ -717,7 +723,7 @@ Retrieves version access for the company of the authenticated user.
 GetVersionAccess()
 ```
 
-#### GetVideoSettings [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvideosettings)
+#### GetVideoSettings [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvideosettings)
 
 Retrieves video measurement settings.
 
@@ -725,7 +731,7 @@ Retrieves video measurement settings.
 GetVideoSettings(rs$rsid)
 ```
 
-#### GetVirtualReportSuiteSettings [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvirtualreportsuitesettings)
+#### GetVirtualReportSuiteSettings [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-getvirtualreportsuitesettings)
 
 Get definition of virtual report suite (parent report suite and segments applied)
 
@@ -733,7 +739,7 @@ Get definition of virtual report suite (parent report suite and segments applied
 GetVirtualReportSuiteSettings("vrs_zwitch0_vrs1")
 ```
 
-#### ViewProcessingRules [<span class="glyphicon glyphicon-link"</span>]()
+#### ViewProcessingRules [`r fa("link", fill = "steelblue")`]()
 
 List processing rules for a report suite, along with behaviors that define the rule.
 
@@ -744,13 +750,13 @@ ViewProcessingRules("zwitchdev")
 
 ---
 
-## **Analytics Functions** [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/get-started)
+## **Analytics Functions** [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/get-started)
 
 The functions in this section represent the types of information a user can retrieve from the Adobe Analytics UI. However, in most cases, the API via RSiteCatalyst can retrieve more data than is displayed in the web interface.
 
 Note that because of the extensive number of keyword arguments for each function, it's not feasible to show examples of all functionality. Please see the [Examples](/#examples) section above or the detailed documentation within the RSiteCatalyst R manual.
 
-#### BuildClassificationValueSegment [<span class="glyphicon glyphicon-link"</span>]()
+#### BuildClassificationValueSegment [`r fa("link", fill = "steelblue")`]()
 
 Used for creating inline segments for use in Queue* functions. This is a convenience function to create the proper formatting for the required JSON object, it does not call the API itself.
 
@@ -784,19 +790,19 @@ report.test3 <- BuildRealTimeReportStructure(report.name="test789",
                ui.report=FALSE)
 ```
 
-#### GetReport [<span class="glyphicon glyphicon-link"</span>]()
+#### GetReport [`r fa("link", fill = "steelblue")`]()
 
 ```{r, cache=cacheflag}
 #TBD
 ```
 
-#### GetReportsByIds [<span class="glyphicon glyphicon-link"</span>]()
+#### GetReportsByIds [`r fa("link", fill = "steelblue")`]()
 
 ```{r, cache=cacheflag}
 #TBD
 ```
 
-#### QueueDataWarehouse [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+#### QueueDataWarehouse [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
 QueueDatawarehouse is a method that can both schedule Data Warehouse reports (like in the Adobe Analytics interface), as well as return reports back in the R interface as calculated by Data Warehouse (developmental). For the most part, users should pass the `enqueueOnly=TRUE` parameters with the `ftp` parameter to send reports to the FTP.
 
@@ -818,7 +824,7 @@ QueueDataWarehouse("zwitchdev",
   )
 ```
 
-#### QueueFallout [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+#### QueueFallout [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
 This method generates the underlying data for a Fallout/Pathing report within Adobe Analytics. The API method supports both visits and pageviews as metrics.
 
@@ -835,7 +841,7 @@ QueueFallout("zwitchdev",
                    c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"))
 ```
 
-#### QueueOvertime [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+#### QueueOvertime [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
 This method is analogous to the "Key Metrics" report within Adobe Analytics. Note that the API method does not return the total row, just the metrics by the time breakdown.
 
@@ -847,7 +853,7 @@ API:
 QueueOvertime("zwitchdev", "2016-09-07", "2016-09-13", "visits", date.granularity = "week")
 ```
 
-#### QueuePathing [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+#### QueuePathing [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
 QueuePathing is the API method that calculates the underlying data for NextPage, Fallout and other path-related reports within Adobe Analytics.
 
@@ -866,7 +872,7 @@ QueuePathing("zwitchdev",
             top = 5)
 ```
 
-#### QueueRanked [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+#### QueueRanked [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
 QueueRanked represents the data from a ranked report within Adobe Analytics, where one or more elements is specified with no dateGranularity. Note that the API method does not return the total row, just the metrics by the breakdown(s) specified.
 
@@ -877,7 +883,7 @@ Adobe Analytics Interface:
 QueueRanked("zwitchdev", "2016-10-01", "2016-10-31", "pageviews", "page", top = 10)
 ```
 
-#### QueueSummary [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+#### QueueSummary [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
 QueueSummary does not map to an interface report per se; rather, QueueSummary provides the total calculation row for many reports within Adobe Analytics. It is this method that will provide 'unique` calculations such as visitors, which would be incorrectly summed across an element such as page views.
 
@@ -885,7 +891,7 @@ QueueSummary does not map to an interface report per se; rather, QueueSummary pr
 QueueSummary(rs$rsid, "2016-09-01", "visits")
 ```
 
-#### QueueTrended [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
+#### QueueTrended [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-reporting-1-4/r-queue)
 
 QueueTrended is similar to a QueueOvertime report, except instead of just having a metric by time granularity, you can specify an element to trend. One notable feature for the API method is that it removes the restriction of five element values to be trended over time (i.e. Top 5 pages over time)
 
@@ -897,7 +903,7 @@ API:
 QueueTrended("zwitchdev", "2016-09-07", "2016-09-13", "visits", "page", selected = c("http://randyzwitch.com"))
 ```
 
-#### SaveRealTimeSettings [<span class="glyphicon glyphicon-link"</span>](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-saverealtimesettings)
+#### SaveRealTimeSettings [`r fa("link", fill = "steelblue")`](https://marketing.adobe.com/developer/documentation/analytics-administration-1-4/r-saverealtimesettings)
 
 Selects the metrics and elements (dimensions) on which you want real time reports enabled.
 Realtime configuration changes take 15 minutes to be reflected in reports.
