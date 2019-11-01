@@ -5,10 +5,10 @@
 \title{Queue a DataWarehouse Report}
 \usage{
 QueueDataWarehouse(reportsuite.id, date.from, date.to, metrics, elements,
-  classification = c(), date.granularity = "day", segment.id = "",
-  data.current = TRUE, expedite = FALSE, interval.seconds = 5,
-  max.attempts = 120, validate = TRUE, enqueueOnly = TRUE,
-  ftp = "")
+  date.granularity = "day", segment.id = "", data.current = TRUE,
+  expedite = FALSE, interval.seconds = 5, max.attempts = 120,
+  validate = TRUE, enqueueOnly = TRUE, ftp = "",
+  classification = c())
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -21,11 +21,8 @@ QueueDataWarehouse(reportsuite.id, date.from, date.to, metrics, elements,
 
 \item{elements}{List of elements to include in the report}
 
-\item{classification}{List of SAINT classifications for each element. If supplied, must be a character
-vector of length equal to elements.}
-
 \item{date.granularity}{Time granularity of the report (year/month/week/day/hour), default to 'day'. Pass
-a blank string or NA if you do not want any date granularity.}
+\code{NULL} if you do not want any time granularity.}
 
 \item{segment.id}{Id of Adobe Analytics segment to retrieve the report for}
 
@@ -43,6 +40,9 @@ a blank string or NA if you do not want any date granularity.}
 
 \item{ftp}{FTP client parameters, only used if enqueueOnly=TRUE. Double check ftp parameters before requesting
 a long report.}
+
+\item{classification}{List of SAINT classifications for each element. If supplied, must be a character
+vector of length equal to elements.}
 }
 \value{
 Data frame or report id, if enqueueOnly is TRUE
@@ -60,7 +60,7 @@ Because of the Reporting API structure, this function requests the
 report, then, if \code{enqueueOnly=FALSE}, checks the reporting queue to see if the report is completed,
 and when the report returns as "done" pulls the report from the API (if ftp is not defined).
 This checking process will occur up to the specified number of times (default 120),
-with a delay between status checks (default 10 seconds). If the report does not
+with a delay between status checks (default 5 seconds). If the report does not
 return as "done" or a "delivery_complete" after the number of tries have completed, the function will return
 an error message. When \code{enqueueOnly=TRUE} and no ftp server is set, the report can be retrieved with Report.Get
 using the reportId returned by the QueueDataWarehouse function.

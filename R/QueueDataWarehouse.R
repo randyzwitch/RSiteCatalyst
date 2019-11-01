@@ -5,7 +5,7 @@
 #' report, then, if \code{enqueueOnly=FALSE}, checks the reporting queue to see if the report is completed,
 #' and when the report returns as "done" pulls the report from the API (if ftp is not defined).
 #' This checking process will occur up to the specified number of times (default 120),
-#' with a delay between status checks (default 10 seconds). If the report does not
+#' with a delay between status checks (default 5 seconds). If the report does not
 #' return as "done" or a "delivery_complete" after the number of tries have completed, the function will return
 #' an error message. When \code{enqueueOnly=TRUE} and no ftp server is set, the report can be retrieved with Report.Get
 #' using the reportId returned by the QueueDataWarehouse function.
@@ -47,10 +47,8 @@
 #' @param date.to End date for the report (YYYY-MM-DD)
 #' @param metrics List of metrics to include in the report
 #' @param elements List of elements to include in the report
-#' @param classification List of SAINT classifications for each element. If supplied, must be a character
-#' vector of length equal to elements.
 #' @param date.granularity Time granularity of the report (year/month/week/day/hour), default to 'day'. Pass
-#' a blank string or NA if you do not want any date granularity.
+#' \code{NULL} if you do not want any time granularity.
 #' @param segment.id Id of Adobe Analytics segment to retrieve the report for
 #' @param data.current TRUE or FALSE - whether to include current data for reports that include today's date
 #' @param expedite Set to TRUE to expedite the processing of this report
@@ -60,6 +58,8 @@
 #' @param enqueueOnly only enqueue the report, don't get the data. returns report id, which you can later use to get the data
 #' @param ftp FTP client parameters, only used if enqueueOnly=TRUE. Double check ftp parameters before requesting
 #' a long report.
+#' @param classification List of SAINT classifications for each element. If supplied, must be a character
+#' vector of length equal to elements.
 #'
 #' @importFrom jsonlite toJSON unbox
 #' @importFrom utils read.csv
@@ -85,9 +85,10 @@
 #' @export
 #' 
 QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elements,
-                                   classification = c(), date.granularity='day', segment.id='',
-                                   data.current=TRUE, expedite=FALSE, interval.seconds=5, 
-                                   max.attempts=120, validate=TRUE, enqueueOnly=TRUE, ftp='') {
+                               date.granularity='day', segment.id='', data.current=TRUE,
+                               expedite=FALSE, interval.seconds=5, max.attempts=120, 
+                               validate=TRUE, enqueueOnly=TRUE, ftp='',
+                               classification = c()) {
   
   if(enqueueOnly == TRUE && ftp == '') {
     stop("FTP credentials need to be specified when enqueueOnly = TRUE")
@@ -103,19 +104,12 @@ QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elem
   report.description$reportDescription$dateFrom <- unbox(date.from)
   report.description$reportDescription$dateTo <- unbox(date.to)
   report.description$reportDescription$reportSuiteID <- unbox(reportsuite.id)
-  
-  # no date granularity handling; we need to remove this arg from description so
-  #  set to NULL and Filter out later
-  if(date.granularity == "" || is.na(date.granularity)) {
-    date.granularity <- NULL
-  }
   report.description$reportDescription$dateGranularity <- unbox(date.granularity)
   
   #Hack in locale, every method calls ApiRequest so this hopefully works
   #Set encoding to utf-8 as well; if someone wanted to do base64 they are out of luck
   report.description$reportDescription$locale <- unbox(AdobeAnalytics$SC.Credentials$locale)
   report.description$reportDescription$elementDataEncoding <- unbox("utf8")
-  
   
   #If segment is null, apply the standard segment unbox function
   #report.description$reportDescription$segments <- unbox(segment.id)
@@ -142,7 +136,7 @@ QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elem
     id = elements
   )
   # if supplied, classification must be equal in length to elements
-  # handle scenarios where classification is supplied blank string, NA, 
+  # handle scenarios where classification is supplied as blank string, NA, 
   #  or a mix thereof
   classification_clean <- as.character(classification)
   classification_clean[is.na(classification_clean)] <- ""
@@ -166,11 +160,7 @@ QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elem
   if(enqueueOnly==TRUE){
     report.description$reportDescription$ftp <- unbox(data.frame(ftp))
   }
-  
-  # filter out NULL; currently only applicable if user does not want any
-  #  date granularity
-  report.description <- Filter(function(x) !is.null(x), report.description)
-  
+
   #RZ: Override enqueueOnly here so that report id always returned
   #Then, based on what user actually passed, determine whether it was an FTP report or console
   report.id <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate,enqueueOnly=TRUE,format=format)
