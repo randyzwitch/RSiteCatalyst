@@ -1,5 +1,9 @@
 language: r
-warnings_are_errors: true
+r:
+- oldrel
+- release
+- devel
+warnings_are_errors: false
 sudo: false
 os:
 - linux
@@ -7,9 +11,9 @@ os:
 cache: packages
 env:
   global:
-  - secure: fiyGwDpuFeKotrOqSsRpHr8f3eAjK3pfUBoW7PIqa4rAzuvPR2Ft2j/a2EvsuPlXwxsb7i9pjtbSBXIHoLngCEJ6kDNOCPeKCLNGW8SEWImQC18ThNcCOrD8rdgdON3IeZbS0mWWJqfK6CUELeuZAEt2pqlmLa+0TrNKPW8PTls=
-  - secure: Uvjp8cUwYrzVmEVTh36PG10VdEy+uLl6Nx/h47/semGooGO3VjU43ZLrliZ2dTPEQ/7mYuHibte9zpvVV3CE0Ia0xmqqSSzmREwUNVFdQwPFcfUGaZdz6r6sM/9FFksmO4EuD0R5ehbFHz3CJbO+ZXgJAHcItDNmF2fbJL8VdM8=
   - NOT_CRAN="true"
-  - secure: n8M2/NfsjK4mALkanOmC3qz+4L5HsyGRZ7cbYJ0ThtWFJVdJVUdiV/chFXFwtVJNO46zTw2+M0PdRV75R0ZQtFo09tw62swXwbnA5BtDeOv/M8skRO6KhYzjYuCrBweKDv+fHlK3h9ia6jOyrdjVgmckDaqI2DTVIETzTapTowg=
-  - secure: M/7JgQWLiZDgRb7qsT9STMx7MqKazBCHhznFFTrgs4AS7YXQhtiDbGOL5krZ6Nxfa/jCxdyjAtPmvqGoReS/ughVNVKX33U1yJz1Z+guuzRDvTfTszqaSv67HJS+vaWLpoWMfUVwdCnDYt5qwCz7XGGnBAt/9quS9tcnn9fCTeM=
-  - secure: DwuO9/XtPRFfoobQIAT3QCPuq5/Hm8JUxXvkyUhguiKw9vCys7OED5HoUIYx18oxaq8Ldp58KYrAKgXWjihkF/lNFtQQUlyVlHFMN6FZFlwr2ygbE2rU9O0JrwETpCoxUTOKa0i3Tju0QyWvVUzwFuNWWs2+6BLusT34+9A7UvQ=
+  - secure: rU2AhW3gXxUCMZUaDNoqIYRfXH6nDvwKXRyGhLYhbE4VtiBEzj9QYYrfHGHz38bIHxuwGnSeAssccLcMawYp1T5/JEUdIAoDCKDQkamewoagR+dRiPkVJCc1zEv9ifNU8azoXVbuCklIc4+zoy0y5tX84drZnMomVmvdlVu+q6Q=
+  - secure: EnbtZv/gGahCtUMi98oA/ONHKTO9iCVpNnkeUax8P3uFH57TSX/lXjLHWeJvHp22XPnAuNGYf1yxJjrID1WYPUwG5raiYFa6TgQDyluIXqmlNbI5zh1T3S6MM+MfNYHdydC0OYPJ+m2jsYymyAi1EkC4JN62+zoglVYiYZWRako=
+  - secure: a4bz/RFqwzYV7dtMJ//xKq3ArAlzS1mm6rfkoNkv/7W5QW3rD0a//QpG9Z3cg0eZUn7Pp9bFalce+HvFBZCdRS3tvbIODQqE+P+fbjCd4zw20Tb2bnKWO9rfI5cR58AraaYnJ1IRnWV7Um6ZEyd07nl+j6msrHiMxzdsOmwpGWg=
+  - secure: tvxZwg3QhLFk4mpk+XrQBRGWbTbgqTQmjGxbTUISCNJQI1Tt1L3gFAUG+fdOMIcnGFign5WEAuWW1xdVG9DXETV2CxAu3sZr9F3dG8b66/fpN6Yppj8fAZTedlJSThziHp1d8ektG5xXjfqwx9i/vFzAjkJFBw3vgTQwL+6GUA0=
+  - secure: mRog5J3tZIvS3ELFGexrs84qlOUd8PJDjsLxbdOY7xtSCWqDtTLIigxLBCWrkLvl6gsdg9tj0CQye2hCLYYrVrSpdtHCDpVjIOd9tW0837koH1aoNVBDjCS9LiJy8GCXPlbGJXXHa7LtGOJvgzqTGOjWIN6e9fm/kOetO80v/Tk=

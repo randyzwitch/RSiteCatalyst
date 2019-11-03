@@ -6,21 +6,20 @@ test_that("Validate GetReportsByIds using legacy credentials", {
   SCAuth(Sys.getenv("USER", ""), Sys.getenv("SECRET", ""))
 
 aa <- QueueFallout("zwitchdev",
-                  "2015-12-01",
-                  "2016-12-31",
-                  metrics="pageviews",
-                  element="page",
-                  checkpoints=c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
-                  segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"),
-                  enqueueOnly=TRUE
+                  "2018-12-01",
+                  "2019-12-31",
+                  metrics = "pageviews",
+                  element = "page",
+                  checkpoints = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
+                  segment.id = c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"),
+                  enqueueOnly = TRUE
                   )
 
 bb <- QueueRanked("zwitchdev",
-                       date.from = "2016-04-01",
-                       date.to = "2016-04-20",
+                       date.from = "2019-04-01",
+                       date.to = "2019-04-20",
                        metrics = "pageviews",
                        elements = c("page", "sitesection", "browser") ,
-                       segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"),
                        enqueueOnly = TRUE
 )
 
