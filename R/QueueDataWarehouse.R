@@ -90,10 +90,14 @@ QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elem
                                validate=TRUE, enqueueOnly=TRUE, ftp='',
                                classification = c()) {
   
-  if(enqueueOnly == TRUE & ftp == '') {
-    stop("FTP credentials need to be specified when enqueueOnly = TRUE")
+  # checks are intentionally light; goal is to avoid not-very-helpful default error
+  # messages under these likely scenarios
+  if(enqueueOnly) {
+    if(!is.list(ftp) || length(ftp) == 0L) {
+      stop("FTP credentials need to be specified when enqueueOnly = TRUE")
+    }
   }
-  
+
   #RZ: move this out of public function interface
   format <- 'csv'
   
