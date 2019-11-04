@@ -2,11 +2,11 @@ language: r
 r:
 - oldrel
 - release
+- devel
 warnings_are_errors: true
 sudo: false
 os:
 - linux
-- osx
 cache: packages
 env:
   global:

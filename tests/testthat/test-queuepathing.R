@@ -6,10 +6,10 @@ test_that("Validate QueuePathing using legacy credentials", {
   SCAuth(Sys.getenv("USER", ""), Sys.getenv("SECRET", ""))
 
   aa <- QueuePathing("zwitchdev",
-                     "2016-08-01",
-                     "2016-12-31",
-                     metric="pageviews",
-                     element="page",
+                     "2019-08-01",
+                     "2019-12-31",
+                     metric = "pageviews",
+                     element = "page",
                      c("::anything::", "::anything::", "::anything::", "::exited::")
   )
 
@@ -20,12 +20,12 @@ test_that("Validate QueuePathing using legacy credentials", {
 
 
   bb <- QueuePathing("zwitchdev",
-                     "2016-08-01",
-                     "2016-12-31",
-                     metric="pageviews",
-                     element="page",
+                     "2019-08-01",
+                     "2019-12-31",
+                     metric = "pageviews",
+                     element = "page",
                      c("::anything::", "::anything::", "::anything::", "::exited::"),
-                     segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
+                     segment.id = c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
 
   )
 
@@ -35,12 +35,12 @@ test_that("Validate QueuePathing using legacy credentials", {
 
 
   cc <- QueuePathing("zwitchdev",
-                     "2016-08-01",
-                     "2016-12-31",
-                     metric="pageviews",
-                     element="page",
+                     "2019-08-01",
+                     "2019-12-31",
+                     metric = "pageviews",
+                     element = "page",
                      c("::anything::", "::anything::", "::anything::", "::exited::"),
-                     segment.id="5433e4e6e4b02df70be4ac63"
+                     segment.id = "5433e4e6e4b02df70be4ac63"
   )
 
 
@@ -48,12 +48,12 @@ test_that("Validate QueuePathing using legacy credentials", {
   expect_is(cc, "data.frame")
 
   dd <- QueuePathing("zwitchdev",
-                     "2016-08-01",
-                     "2016-12-31",
-                     metric="pageviews",
-                     element="page",
+                     "2019-08-01",
+                     "2019-12-31",
+                     metric = "pageviews",
+                     element = "page",
                      c("::anything::", "::anything::", "::anything::", "::exited::"),
-                     segment.id="5433e4e6e4b02df70be4ac63",
+                     segment.id = "5433e4e6e4b02df70be4ac63",
                      enqueueOnly = TRUE
   )
 

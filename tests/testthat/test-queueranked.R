@@ -7,24 +7,24 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #Top 50 pages
   aa <- QueueRanked("zwitchdev",
-                    "2016-01-01",
-                    "2016-12-31",
+                    "2019-01-01",
+                    "2019-12-31",
                     "pageviews",
                     "page",
-                    top="50",
-                    start="1")
+                    top = "50",
+                    start = "1")
 
   #Validate returned value is a data.frame
   expect_is(aa, "data.frame")
 
   #Next 50 pages
   bb <- QueueRanked("zwitchdev",
-                    "2016-01-01",
-                    "2016-12-31",
+                    "2019-01-01",
+                    "2019-12-31",
                     "pageviews",
                     "page",
-                    top="50",
-                    start="51")
+                    top = "50",
+                    start = "51")
 
   #Validate returned value is a data.frame
   expect_is(bb, "data.frame")
@@ -32,11 +32,11 @@ test_that("Validate QueueRanked using legacy credentials", {
   #Two specific pages
   #Visits and pageviews metric
   cc <- QueueRanked("zwitchdev",
-                    "2016-01-01",
-                    "2016-12-31",
+                    "2019-01-01",
+                    "2019-12-31",
                     c("visits", "pageviews"),
                     "page",
-                    selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data")
+                    selected = c("https://randyzwitch.com/r-amazon-ec2", "https://randyzwitch.com/julia-import-data")
   )
 
   #Validate returned value is a data.frame
@@ -45,11 +45,11 @@ test_that("Validate QueueRanked using legacy credentials", {
   #Two specific pages - "Home Page" and "Search Results"
   #Visits and pageviews metric, Social Visitors, Current Data
   dd <- QueueRanked("zwitchdev",
-                    "2016-01-01",
-                    "2016-12-31",
+                    "2019-01-01",
+                    "2019-12-31",
                     c("visits", "pageviews"),
                     "page",
-                    selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
+                    selected = c("https://randyzwitch.com/creating-stacked-bar-chart-seaborn", "https://randyzwitch.com"),
                     segment.id = "5433e4e6e4b02df70be4ac63",
                     data.current = "1")
 
@@ -57,10 +57,10 @@ test_that("Validate QueueRanked using legacy credentials", {
   expect_is(dd, "data.frame")
 
   ee <- QueueRanked("zwitchdev",
-                         date.from = "2016-04-01",
-                         date.to = "2016-04-20",
+                         date.from = "2019-01-01",
+                         date.to = "2019-12-31",
                          metrics = "pageviews",
-                         elements = c("page", "sitesection")
+                         elements = c("page")
   )
 
 
@@ -68,10 +68,10 @@ test_that("Validate QueueRanked using legacy credentials", {
   expect_is(ee, "data.frame")
 
   ff <- QueueRanked("zwitchdev",
-                         date.from = "2016-04-01",
-                         date.to = "2016-04-20",
+                         date.from = "2019-01-01",
+                         date.to = "2019-12-31",
                          metrics = "pageviews",
-                         elements = c("page", "sitesection", "browser")
+                         elements = c("page", "browser")
   )
 
 
@@ -80,26 +80,26 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #Top 50 pages, 2 segments
   gg <- QueueRanked("zwitchdev",
-                    "2016-01-01",
-                    "2016-12-31",
+                    "2019-01-01",
+                    "2019-12-31",
                     "pageviews",
                     "page",
-                    top="50",
-                    start="1",
-                    segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
+                    top = "50",
+                    start = "1",
+                    segment.id = c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(gg, "data.frame")
 
-  #Next 50 pages, 2 segments
+  #Next pages, 2 segments
   hh <- QueueRanked("zwitchdev",
-                    "2016-01-01",
-                    "2016-12-31",
+                    "2019-01-01",
+                    "2019-12-31",
                     "pageviews",
                     "page",
-                    top="50",
-                    start="51",
-                    segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
+                    top = "2",
+                    start = "3",
+                    segment.id = c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
   #Validate returned value is a data.frame
   expect_is(hh, "data.frame")
@@ -107,12 +107,12 @@ test_that("Validate QueueRanked using legacy credentials", {
   #Two specific pages, 2 segments
   #Visits and pageviews metric
   ii <- QueueRanked("zwitchdev",
-                    "2016-01-01",
-                    "2016-12-31",
+                    "2019-01-01",
+                    "2019-12-31",
                     c("visits", "pageviews"),
                     "page",
-                    selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
-                    segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
+                    selected = c("https://randyzwitch.com/creating-stacked-bar-chart-seaborn", "https://randyzwitch.com"),
+                    segment.id = c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
   )
 
   #Validate returned value is a data.frame
@@ -121,12 +121,12 @@ test_that("Validate QueueRanked using legacy credentials", {
   #Two specific pages - "Home Page" and "Search Results"
   #Visits and pageviews metric, 2 segments, Current Data
   jj <- QueueRanked("zwitchdev",
-                    "2016-01-01",
-                    "2016-12-31",
+                    "2019-01-01",
+                    "2019-12-31",
                     c("visits", "pageviews"),
                     "page",
-                    selected = c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
-                    segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"),
+                    selected = c("https://randyzwitch.com/creating-stacked-bar-chart-seaborn", "https://randyzwitch.com"),
+                    segment.id = c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"),
                     data.current = "1")
 
   #Validate returned value is a data.frame
@@ -134,11 +134,11 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   # 2 segments added to ee test
   kk <- QueueRanked("zwitchdev",
-                         date.from = "2016-04-01",
-                         date.to = "2016-04-20",
+                         date.from = "2019-01-01",
+                         date.to = "2019-12-31",
                          metrics = "pageviews",
-                         elements = c("page", "sitesection") ,
-                         segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
+                         elements = c("page", "browser") ,
+                         segment.id = c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
   )
 
 
@@ -147,11 +147,11 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   #2 segments added to ff
   ll <- QueueRanked("zwitchdev",
-                         date.from = "2016-04-01",
-                         date.to = "2016-04-20",
+                         date.from = "2019-01-01",
+                         date.to = "2019-12-31",
                          metrics = "pageviews",
-                         elements = c("page", "sitesection", "browser") ,
-                         segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
+                         elements = c("page", "browser") ,
+                         segment.id = c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08")
   )
 
 
@@ -160,11 +160,11 @@ test_that("Validate QueueRanked using legacy credentials", {
 
   # test enqueueOnly returns valid report id
   mm <- QueueRanked("zwitchdev",
-                         date.from = "2016-04-01",
-                         date.to = "2016-04-20",
+                         date.from = "2019-01-01",
+                         date.to = "2019-12-31",
                          metrics = "pageviews",
-                         elements = c("page", "sitesection", "browser") ,
-                         segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"),
+                         elements = c("page", "browser") ,
+                         segment.id = c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"),
                          enqueueOnly = TRUE
   )
 
