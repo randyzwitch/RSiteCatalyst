@@ -7,11 +7,11 @@ test_that("Validate QueueDataWarehouse using legacy credentials", {
 
   #FTP test
   report.id <- QueueDataWarehouse("zwitchdev",
-                                    "2016-11-01",
-                                    "2016-11-07",
+                                    "2019-11-01",
+                                    "2019-11-07",
                                     c("visits", "pageviews"),
                                     c("page"),
-                                    enqueueOnly=TRUE,
+                                    enqueueOnly = TRUE,
                                     ftp = list(host = Sys.getenv("FTP", ""),
                                                port = "21",
                                                directory = "/DWtest/",
@@ -22,7 +22,7 @@ test_that("Validate QueueDataWarehouse using legacy credentials", {
 
   #Validate returned value is numeric id
   expect_is(report.id, "numeric")
-  
+
   #Return answer to console
   # qdw <- QueueDataWarehouse("zwitchdev",
   #                                   "2016-11-01",
@@ -31,10 +31,10 @@ test_that("Validate QueueDataWarehouse using legacy credentials", {
   #                                   c("page"),
   #                                   enqueueOnly=FALSE
   # )
-  # 
+  #
   # #Validate returned value is a data.frame
   # expect_is(qdw, "data.frame")
-  
+
   # dwresult <- QueueDataWarehouse("zwitchdev",
   #                                "2014-01-01",
   #                                "2017-02-02",
@@ -43,9 +43,9 @@ test_that("Validate QueueDataWarehouse using legacy credentials", {
   #                                date.granularity = 'hour',
   #                                enqueueOnly=FALSE
   # )
-  # 
+  #
   # expect_equal(nrow(dwresult), 303510)
-  # 
+  #
   # dwresult2 <- QueueDataWarehouse("zwitchdev",
   #                                 "2014-01-01",
   #                                 "2017-02-02",
@@ -55,7 +55,7 @@ test_that("Validate QueueDataWarehouse using legacy credentials", {
   #                                 segment.id = '54adfe3de4b02df70be5ea08',
   #                                 enqueueOnly=FALSE
   # )
-  # 
+  #
   # expect_equal(nrow(dwresult2), 56898)
 
 })

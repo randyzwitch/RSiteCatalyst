@@ -6,52 +6,53 @@ test_that("Validate QueueFallout using legacy credentials", {
   SCAuth(Sys.getenv("USER", ""), Sys.getenv("SECRET", ""))
 
   aa <- QueueFallout("zwitchdev",
-                     "2016-08-01",
-                     "2016-12-31",
-                     metric="pageviews",
-                     element="page",
-                     c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"))
+                     "2019-08-01",
+                     "2019-12-31",
+                     metric = "pageviews",
+                     element = "page",
+                     c("https://randyzwitch.com/creating-stacked-bar-chart-seaborn", "https://randyzwitch.com")
+                     )
 
 
   #Validate returned value is a data.frame
   expect_is(aa, "data.frame")
 
 
-bb <-QueueFallout("zwitchdev",
-                  "2016-08-01",
-                  "2016-12-31",
-                  metrics="pageviews",
-                  element="page",
-                  checkpoints=c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
-                  segment.id=c("5433e4e6e4b02df70be4ac63"))
+  bb <- QueueFallout("zwitchdev",
+                     "2019-08-01",
+                     "2019-12-31",
+                     metrics = "pageviews",
+                     element = "page",
+                     checkpoints = c("https://randyzwitch.com/creating-stacked-bar-chart-seaborn", "https://randyzwitch.com"),
+                     segment.id = c("5433e4e6e4b02df70be4ac63"))
 
 
-#Validate returned value is a data.frame
-expect_is(bb, "data.frame")
+  #Validate returned value is a data.frame
+  expect_is(bb, "data.frame")
 
 
-cc <-QueueFallout("zwitchdev",
-                  "2016-08-01",
-                  "2016-12-31",
-                  metrics="pageviews",
-                  element="page",
-                  checkpoints=c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
-                  segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
+  cc <- QueueFallout("zwitchdev",
+                     "2019-08-01",
+                     "2019-12-31",
+                     metrics = "pageviews",
+                     element = "page",
+                     checkpoints = c("https://randyzwitch.com/creating-stacked-bar-chart-seaborn", "https://randyzwitch.com"),
+                     segment.id = c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"))
 
-#Validate returned value is a data.frame
-expect_is(cc, "data.frame")
+  #Validate returned value is a data.frame
+  expect_is(cc, "data.frame")
 
-dd <- QueueFallout("zwitchdev",
-                  "2016-08-01",
-                  "2016-12-31",
-                  metrics="pageviews",
-                  element="page",
-                  checkpoints=c("http://randyzwitch.com/r-amazon-ec2", "http://randyzwitch.com/julia-import-data"),
-                  segment.id=c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"),
-                  enqueueOnly=TRUE
-                  )
+  dd <- QueueFallout("zwitchdev",
+                    "2019-08-01",
+                    "2019-12-31",
+                    metrics = "pageviews",
+                    element = "page",
+                    checkpoints = c("https://randyzwitch.com/creating-stacked-bar-chart-seaborn", "https://randyzwitch.com"),
+                    segment.id = c("5433e4e6e4b02df70be4ac63","54adfe3de4b02df70be5ea08"),
+                    enqueueOnly = TRUE
+                    )
 
-#Validate returned value is numeric
-expect_is(dd, "numeric")
+  #Validate returned value is numeric
+  expect_is(dd, "numeric")
 
 })
