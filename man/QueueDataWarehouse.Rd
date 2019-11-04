@@ -7,7 +7,8 @@
 QueueDataWarehouse(reportsuite.id, date.from, date.to, metrics, elements,
   date.granularity = "day", segment.id = "", data.current = TRUE,
   expedite = FALSE, interval.seconds = 5, max.attempts = 120,
-  validate = TRUE, enqueueOnly = TRUE, ftp = "")
+  validate = TRUE, enqueueOnly = TRUE, ftp = "",
+  classification = c())
 }
 \arguments{
 \item{reportsuite.id}{Report suite id}
@@ -20,7 +21,8 @@ QueueDataWarehouse(reportsuite.id, date.from, date.to, metrics, elements,
 
 \item{elements}{List of elements to include in the report}
 
-\item{date.granularity}{Time granularity of the report (year/month/week/day/hour), default to 'day'}
+\item{date.granularity}{Time granularity of the report (year/month/week/day/hour), default to 'day'. Pass
+\code{NULL} if you do not want any time granularity.}
 
 \item{segment.id}{Id of Adobe Analytics segment to retrieve the report for}
 
@@ -38,6 +40,9 @@ QueueDataWarehouse(reportsuite.id, date.from, date.to, metrics, elements,
 
 \item{ftp}{FTP client parameters, only used if enqueueOnly=TRUE. Double check ftp parameters before requesting
 a long report.}
+
+\item{classification}{List of SAINT classifications for each element. If supplied, must be a character
+vector of length equal to elements.}
 }
 \value{
 Data frame or report id, if enqueueOnly is TRUE
@@ -45,7 +50,7 @@ Data frame or report id, if enqueueOnly is TRUE
 \description{
 A QueueDataWarehouse report is a report where metrics are
 retrieved, broken down by an unlimited number of elements such as page, eVar, prop, etc, and
-with or without temporal aggregation. Due API limitations, only one segment can be used if needed.
+with or without temporal aggregation.
 }
 \details{
 The QueueDataWarehouse function allows to access to Data WareHouse data
@@ -55,15 +60,21 @@ Because of the Reporting API structure, this function requests the
 report, then, if \code{enqueueOnly=FALSE}, checks the reporting queue to see if the report is completed,
 and when the report returns as "done" pulls the report from the API (if ftp is not defined).
 This checking process will occur up to the specified number of times (default 120),
-with a delay between status checks (default 10 seconds). If the report does not
+with a delay between status checks (default 5 seconds). If the report does not
 return as "done" or a "delivery_complete" after the number of tries have completed, the function will return
 an error message. When \code{enqueueOnly=TRUE} and no ftp server is set, the report can be retrieved with Report.Get
 using the reportId returned by the QueueDataWarehouse function.
 
-API limitations:
-https://marketing.adobe.com/developer/documentation/data-warehouse/r-report-2
+Data Warehouse documentation:
+https://docs.adobe.com/content/help/en/analytics/export/data-warehouse/data-warehouse.html
 
-A single segment is supported. Multiple segments are not supported.
+Data Warehouse (1.4) API documentation:
+https://github.com/AdobeDocs/analytics-1.4-apis/blob/master/docs/reporting-api/data_warehouse.md
+
+Multiple segments are supported as long as they are compatible with Data Warehouse.
+
+Classifications are supported, and if supplied, must be equal in length to elements. Pad out classifications
+with either a blank string or NA if and as necessary. 
 
 The following element properties are not supported in Data Warehouse reports:
     - selected
