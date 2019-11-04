@@ -12,27 +12,27 @@
 #'
 #' API limitations:
 #' https://marketing.adobe.com/developer/documentation/data-warehouse/r-report-2
-#' 
+#'
 #' A single segment is supported. Multiple segments are not supported.
-#' 
+#'
 #' The following element properties are not supported in Data Warehouse reports:
 #'     - selected
 #'     - search
 #'     - top
 #'     - startingWith
 #'     - sortBy
-#'     
+#'
 #' Calculated metrics are not supported.
-#' 
+#'
 #' Results for data warehouse reports can be accessed in two ways: directly through the API and
 #' through FTP delivery. Email delivery is not supported.
-#' 
-#' All data warehouse results are paged in chunks of 20 MB. Add "page": to \code{Report.Get} 
+#'
+#' All data warehouse results are paged in chunks of 20 MB. Add "page": to \code{Report.Get}
 #' to determine the page returned. If no page is specified then the first page is returned.
 #'
 #' @description A QueueDataWarehouse report is a report where metrics are
 #' retrieved, broken down by an unlimited number of elements such as page, eVar, prop, etc, and
-#' with or without temporal aggregation. Due API limitations, only one segment can be used if needed. 
+#' with or without temporal aggregation. Due API limitations, only one segment can be used if needed.
 #'
 #' @title Queue a DataWarehouse Report
 #'
@@ -74,81 +74,81 @@
 #'                             )
 #'}
 #' @export
-#' 
+#'
 QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elements,
                                date.granularity='day', segment.id='', data.current=TRUE,
                                expedite=FALSE, interval.seconds=5, max.attempts=120,
                                validate=TRUE, enqueueOnly=TRUE, ftp='') {
-  
-  if(enqueueOnly == TRUE && ftp == '') {
+
+  if (enqueueOnly == TRUE & ftp == '') {
     stop("FTP credentials need to be specified when enqueueOnly = TRUE")
   }
-  
+
   #RZ: move this out of public function interface
   format <- 'csv'
-  
+
   # build JSON description
   # we have to use unbox to force jsonlite not put strings into single-element arrays
   report.description <- c()
-  report.description$reportDescription <- c(data.frame(matrix(ncol=0, nrow=1)))
+  report.description$reportDescription <- c(data.frame(matrix(ncol = 0, nrow = 1)))
   report.description$reportDescription$dateFrom <- unbox(date.from)
   report.description$reportDescription$dateTo <- unbox(date.to)
   report.description$reportDescription$reportSuiteID <- unbox(reportsuite.id)
   report.description$reportDescription$dateGranularity <- unbox(date.granularity)
-  
+
   #Hack in locale, every method calls ApiRequest so this hopefully works
   #Set encoding to utf-8 as well; if someone wanted to do base64 they are out of luck
   report.description$reportDescription$locale <- unbox(AdobeAnalytics$SC.Credentials$locale)
   report.description$reportDescription$elementDataEncoding <- unbox("utf8")
-  
-  
+
+
   #If segment is null, apply the standard segment unbox function
   #report.description$reportDescription$segments <- unbox(segment.id)
-  
-  if(as.list(segment.id)[1]==''){
+
+  if (as.list(segment.id)[1] == '') {
     #report.description$reportDescription$segment_id <- unbox(segment.id)
     report.description$reportDescription$segments <- unbox(segment.id)
   }
   #If segment is not null, treat it like a list of metrics.
   else{
     report.description$reportDescription$segments <- data.frame( id = segment.id)
-    
+
   }
-  
-  if(expedite==TRUE) {
+
+  if (expedite == TRUE) {
     report.description$reportDescription$expedite <- unbox(expedite)
   }
   report.description$reportDescription$metrics = data.frame(id = metrics)
-  
+
   report.description$reportDescription$metrics = data.frame(id = metrics)
   report.description$reportDescription$elements <- data.frame(id = elements)
-  
+
   report.description$reportDescription$source <- unbox("warehouse")
-  
-  if(enqueueOnly==TRUE){
+
+  if (enqueueOnly == TRUE) {
     report.description$reportDescription$ftp <- unbox(data.frame(ftp))
   }
-  
+
   #RZ: Override enqueueOnly here so that report id always returned
   #Then, based on what user actually passed, determine whether it was an FTP report or console
-  report.id <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds=interval.seconds,max.attempts=max.attempts,validate=validate,enqueueOnly=TRUE,format=format)
-  
+  report.id <- SubmitJsonQueueReport(toJSON(report.description),interval.seconds = interval.seconds,max.attempts = max.attempts,validate = validate,enqueueOnly = TRUE,format = format)
+
   #This hack pages over results until an error occurs, which Adobe signals as end of results
-  if(enqueueOnly==FALSE){
+  if (enqueueOnly == FALSE) {
     result <- data.frame()
     counter <- 1
     keepgoing <- TRUE
-    while (keepgoing){
+    while (keepgoing) {
       temp <- tryCatch(
-        GetReport(report.id, 
+        GetReport(report.id,
                   interval.seconds = interval.seconds,
                   max.attempts = max.attempts,
-                  format = format, 
+                  format = format,
                   print.attempts = TRUE,
-                  page = counter), 
+                  page = counter),
         error = function(w) data.frame()
       )
-      if(nrow(temp) > 0){
+      if (nrow(temp) > 0) {
         result <- rbind.fill(result, temp)
         rm(temp)
         counter <- counter + 1
@@ -158,7 +158,7 @@ QueueDataWarehouse <- function(reportsuite.id, date.from, date.to, metrics, elem
     }
     return(result)
   }
-  
+
   return(report.id)
-  
+
 }
