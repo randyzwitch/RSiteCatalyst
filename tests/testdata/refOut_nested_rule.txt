@@ -1,0 +1,23 @@
+structure(list(res = structure(list(type = "hits", operator = "and", 
+    container.type = c("hits", "hits"), container.operator = c("or", 
+    "or"), container.exclude = c(FALSE, TRUE)), .Names = c("type", 
+"operator", "container.type", "container.operator", "container.exclude"
+)), rules = list(structure(list(name = c("Content Type [v20]", 
+"Page Name [v11]", "Content ID (Products)", "Content ID (Products)", 
+"Content ID (Products)", "Content ID (Products)", "Content ID (Products)", 
+"Content ID (Products)", "Content ID (Products)", "Content ID (Products)"
+), element = c("evar20", "evar11", "product", "product", "product", 
+"product", "product", "product", "product", "product"), operator = c("equals", 
+"equals", "equals", "equals", "equals", "equals", "equals", "equals", 
+"equals", "equals"), value = c("kn-itable-viewer:scope-full", 
+"kn:view:itable:other:19 viewer page for interactive tables", 
+"kn:kpDIPPRPF7", "kn:kpKCTE000X", "kn:kpYCPDCECD", "kn:kpYHPPHC0B", 
+"kn:kpYHPCE007", "kn:kpYHTPPCC4", "kn:kpYHTPHC09", "kn:kpYTPCHE02"
+)), .Names = c("name", "element", "operator", "value"), class = "data.frame", row.names = c(NA, 
+10L)), structure(list(name = c("Page Name [v11]", "Page Name [v11]", 
+"Page Name [v11]"), element = c("evar11", "evar11", "evar11"), 
+    operator = c("equals", "equals", "equals"), value = c("kn:search tools:browse:toc:2.5 table of contents page", 
+    "kn:search tools:general search:other:4 knovel search page", 
+    "kn:account tools:personalization:tools:28 myknovel page"
+    )), .Names = c("name", "element", "operator", "value"), class = "data.frame", row.names = c(NA, 
+3L)))), .Names = c("res", "rules"))
